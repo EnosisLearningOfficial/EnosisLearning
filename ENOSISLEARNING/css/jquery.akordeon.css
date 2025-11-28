@@ -1,0 +1,131 @@
+﻿.akordeon
+{
+    width: 816px;
+    border: solid 1px #d4d4d4;
+    color: #333333;
+    font-family: Arial;
+    font-size: 12px;
+}
+.akordeon-item
+{
+    position: relative;
+}
+.akordeon-item .akordeon-item-head
+{
+    background-position: 0% 0%;
+    height: 28px;
+    /* Old browsers */
+	color: #42a9ca; font-size: 14px;
+    padding-top: 4px;
+    background-image: -o-linear-gradient(#545353, #17181A);
+    background-repeat: repeat;
+    background-attachment: scroll;
+}
+.akordeon-item .akordeon-item-body
+{
+    background: #fafafa; /* Old browsers */
+    /*background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#424242), to(#303030));
+    background-image: -moz-linear-gradient(#424242, #303030);
+    background-image: -webkit-linear-gradient(#424242, #303030);
+    background-image: -o-linear-gradient(#424242, #303030);
+    background: -ms-linear-gradient(#424242, #303030);
+    background: linear-gradient(#424242, #303030);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#424242', endColorstr='#303030',GradientType=0 );*/ /* IE6-9 */ /* min-height: 100px;     padding: 10px;*/
+    border-bottom: none;
+    overflow: hidden;
+}
+.akordeon-icon
+{
+    background-position: 0% 0%;
+    width: 24px;
+    height: 20px;
+    /* Old browsers */
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    padding: 0;
+    margin-left: 10px;
+    margin-top: 0;
+    float: left;
+    cursor: pointer;
+    behavior: url(PIE.htc);
+    background-image: -o-linear-gradient(#6f8eb1, #6683a3);
+/* IE6-9 */
+    /* position: absolute;     left: -8px;       top:14px;*/
+    margin-right: 0;
+    margin-bottom: 0;
+    background-color: #6683a3;
+    background-repeat: repeat;
+    background-attachment: scroll;
+}
+.akordeon-heading
+{
+    float: left;
+    padding-left: 10px;
+    padding-top: 0px;
+    font-weight: normal;
+      color: #B9B9B5;
+      font-family:SourceSansPro-Regular
+}
+.akordeon-icon span
+{
+    color: #ffffff;
+    font-size: 26px;
+    position: absolute;
+    left: 15px;
+    top: -8px;
+    text-align: center;
+}
+.akordeon-item.expanded .akordeon-icon span
+{
+    top: -9px;
+}
+.akordeon-item-head-container
+{
+    width: 100%;
+    position: absolute;
+    left: -8px;
+    cursor: pointer;
+}
+
+.akordeon-item.expanded .akordeon-item-body
+{
+    border-top: solid 1px #d4d4d4;
+}
+.akordeon-item.expanded .akordeon-heading
+{
+    color: #545353; font-size: 14px;font-family:SourceSansPro-Semibold;text-shadow: 1px 1px 1px #BFBCBC;
+}
+
+.akordeon-item.expanded .akordeon-item-head
+{
+   	background-image: -o-linear-gradient(#545353, #17181A);
+    }
+.akordeon-item-content
+{
+    padding: 10px;
+    min-height: 120px;
+    height: 180px;
+	line-height:22px;
+    overflow:auto;
+}
+.akordeon-border-bottom
+{
+    border-bottom: solid 1px #d4d4d4;
+}
+.akordeon-border-top
+{
+    border-top: solid 1px #d4d4d4;
+}
+.akordeon-item.expanded .akordeon-item-body.akordeon-border-bottom
+{
+    border-bottom: solid 1px #d4d4d4 !important;
+}
+.akordeon-item-content .courseitem{ width:295px; font-family:arial; font-size:13px; color:#617284; margin-right:10px;}
+.akordeon-item-content .btn{ width:122px; font-family:arial; font-size:13px; color:#617284; margin-right:10px;
+} 
+.akordeon-item-content .akordeon-btn{height:35px; background:url(../images/download.png) no-repeat; margin:0; padding:0; line-height:13px; text-align:center; padding-top:4px;} 
+
+.akordeon-btn a{text-decoration:none; color: #545353;}
+
+.bold-txt{font-family:"Arial Black";}

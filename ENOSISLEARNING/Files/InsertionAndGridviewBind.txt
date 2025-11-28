@@ -1,0 +1,185 @@
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="StudentManagementApplication.Default" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
+      crossorigin="anonymous"/>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+        <h2 class="text-primary" align="center">Registration Form</h2>
+
+        <asp:TextBox ID="txtid" placeholder="Id" CssClass="form-control mb-2" style="width:30%;" runat="server" />
+
+
+        <asp:RequiredFieldValidator ID ="RequiredFieldValidator1" ErrorMessage="Required" ControlToValidate="txtName" runat="server" ForeColor="Red" SetFocusOnError="true" Display="Dynamic"/>
+        <asp:TextBox ID="txtName" runat="server" CssClass="form-control" placeholder="Name" style="width:30%;"/>
+
+
+        <asp:RequiredFieldValidator ID ="RequiredFieldValidator2" ErrorMessage="Required" ControlToValidate="txtEmail" runat="server" ForeColor="Red" SetFocusOnError="true" Display="Dynamic"/>
+        <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control mt-2" placeholder="Email" style="width:30%;"/>
+        <asp:RegularExpressionValidator ErrorMessage="Invalid Email" ControlToValidate="txtEmail" runat="server" ForeColor="Red" SetFocusOnError="true" Display="Dynamic" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"/>
+
+
+            <asp:TextBox ID="txtPassword" runat="server" CssClass="form-control mt-2" TextMode="Password" ForeColor="Red" SetFocusOnError="true" Display="Dynamic" placeholder="Password" style="width:30%;"></asp:TextBox>
+            <asp:RequiredFieldValidator ID="rfvPassword" runat="server"
+                ControlToValidate="txtPassword" ErrorMessage="Password is required." ForeColor="Red"></asp:RequiredFieldValidator>
+            <asp:RegularExpressionValidator ID="revPassword" runat="server"
+                ControlToValidate="txtPassword"
+                ErrorMessage="Password must be at least 6 chars and include a number."
+                ValidationExpression="^(?=.*\d).{6,}$" ForeColor="Red"></asp:RegularExpressionValidator>
+
+
+                 <asp:TextBox ID="txtConfirm" runat="server" CssClass="form-control mt-2" TextMode="Password" style="width:30%;" placeholder="Confirm Password"></asp:TextBox>
+            <asp:CompareValidator ErrorMessage="Password Doesn.t Match" ControlToValidate="txtConfirm" oreColor="Red" SetFocusOnError="true" Display="Dynamic" ControlToCompare="txtPassword" runat="server" />
+
+
+            <asp:TextBox ID="txtAge" runat="server" CssClass="form-control mt-2"  style="width:30%;" placeholder="Age"></asp:TextBox>
+        <asp:RangeValidator ErrorMessage="Age must be between 18 to 30" ControlToValidate="txtAge" runat="server" MaximumValue="30" MinimumValue="18"/>
+
+        <asp:ValidationSummary runat="server" ForeColor="Red"/>
+
+        <asp:DropDownList ID="courseDrp" runat="server" CssClass="form-select" style="width:30%;">
+            <asp:ListItem Value=""  Text="Select Course" />
+            <asp:ListItem Value="C" Text="C" />
+            <asp:ListItem Value="C++" Text="C++" />
+            <asp:ListItem Value="C#" Text="C#" />
+        </asp:DropDownList>
+
+        <asp:FileUpload ID="Resume" runat="server" CssClass="mt-2"/>
+        <br />
+        <asp:Button ID="btnSave" runat="server" Text="Submit" CssClass="btn btn-success mt-2" OnClick="btnSave_Click"/>
+
+        <asp:Button ID="btnUpdate" runat="server" Text="Update" CssClass="btn btn-warning mt-2"/>
+
+        <asp:Button ID="btnDelete" runat="server" Text="Delete" CssClass="btn btn-danger mt-2"/>
+
+        <asp:GridView ID="StudentGrv" runat="server" CssClass="table table-bordered mt-2"></asp:GridView>
+
+        <asp:Label ID="lblmsg" runat="server" />
+    </form>
+</body>
+</html>
+
+
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace StudentManagementApplication
+{
+    public partial class Default : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if(!IsPostBack)
+            {
+                BindGrid();
+            }
+        }
+
+        protected void btnSave_Click(object sender, EventArgs e)
+        {
+            //Check if all validation pass
+            try
+            {
+                if (Page.IsValid)
+                {
+                    //get values from form
+                    string name = txtName.Text;
+                    string email = txtEmail.Text;
+                    string password = txtPassword.Text.Trim();
+                    //string txtage = txtAge.Text.Trim();
+                    int age = Convert.ToInt32(txtAge.Text);
+                    string course = courseDrp.SelectedValue;
+
+                    //File upload Handling
+                    string resumepath = "";
+                    if (Resume.HasFile)
+                    {
+                        string fileName = System.IO.Path.GetFileName(Resume.FileName);
+                        resumepath = "~/Resume/" + fileName; //sav in project folder Resume
+                        Resume.SaveAs(Server.MapPath(resumepath));
+                    }
+                    string ConnectionString = "Data Source=DESKTOP-MPE7G61;Initial Catalog=StudentDB;Integrated Security=true;";
+                    using (SqlConnection Conn = new SqlConnection(ConnectionString))
+                    {
+                        string query = "Insert into StudentRecords(Name,Email,Password,Age,Course,Resume)values(@Name,@Email,@Password,@Age,@Course,@Resume)";
+                        using (SqlCommand cmd = new SqlCommand(query, Conn))
+                        {
+                            cmd.Parameters.AddWithValue("@Name", name);
+                            cmd.Parameters.AddWithValue("@Email", email);
+                            cmd.Parameters.AddWithValue("@Password", password);
+                            cmd.Parameters.AddWithValue("@Age", age);
+                            cmd.Parameters.AddWithValue("@Course", course);
+                            cmd.Parameters.AddWithValue("@Resume", resumepath);
+                            Conn.Open();
+                            int rows = cmd.ExecuteNonQuery();
+                            if (rows > 0)
+                            {
+                                // Success
+                                //Response.Write("<script>alert('Registration Successful!');</script>");
+                                lblmsg.Text = "Record Inserted Successfully";
+                                ClearForm();
+                            }
+                            else
+                            {
+                                // Success
+                                Response.Write("<script>alert('Registration Failed!');</script>");
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                lblmsg.Text = ex.Message;
+            }
+        }
+        void ClearForm()
+        {
+            txtName.Text = string.Empty;
+            txtEmail.Text = string.Empty;
+            txtPassword.Text = string.Empty;
+            txtConfirm.Text = string.Empty;
+            txtAge.Text = string.Empty;
+            courseDrp.Text = string.Empty;
+        }
+
+        void BindGrid()
+        {
+            string ConnectionString = "Data Source=DESKTOP-MPE7G61;Initial Catalog=StudentDB;Integrated Security=true;";
+            try
+            {
+                using (SqlConnection Conn = new SqlConnection(ConnectionString))
+                {
+                    string query = "select * from StudentRecords";
+                    using (SqlCommand cmd = new SqlCommand(query, Conn))
+                    {
+                        using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
+                        {
+                            DataTable dt = new DataTable();
+                            sda.Fill(dt);
+                            StudentGrv.DataSource = dt;
+                            StudentGrv.DataBind();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                lblmsg.Text = ex.Message;
+            }
+        }
+    }
+}

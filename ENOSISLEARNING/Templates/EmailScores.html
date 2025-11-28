@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        .clickme {
+       
+            padding: 8px 20px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #FF0040;
+            color: #FFFFFF;
+        }
+    </style>
+</head>
+<body>
+  
+    <table align="center">
+        <tr>
+            <td align="center">
+                <img src="https://www.enosislearning.com/Images/enosislogo.png" height="80" width="250" />
+            </td>
+        </tr>
+        <tr style="text-align: center">
+            <td>
+                <div class="main-logo"> 
+                    <img src="https://www.enosislearning.com/Images/results.png" height="200" />
+                </div>
+            </td>
+        </tr>
+        <tr align="center">
+            <td>
+                
+
+                <!--<h2>Welcome!</h2>-->
+                <h4 style="color:#F39224">Dear {CANDIDATENAME}, Please find the results of the Assessments Given By You at enosislearning</h4>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr align="center">
+            <td>
+                <table cellpadding='5' cellspacing='0' style='border: 1px solid #ccc;font-size: 10pt;font-family:Arial'>
+
+                    <tr style="height:40px">
+                        <th style='background-color: #B8DBFD;border: 1px solid #ccc;width:80px'>CANDIDATENAME</th>
+                        <th style='background-color: #B8DBFD;border: 1px solid #ccc;width:70px'>COURSENAME</th>
+
+                        <th style='background-color: #B8DBFD;border: 1px solid #ccc;width:70px'>TESTTYPE</th>
+                        <th style='background-color: #B8DBFD;border: 1px solid #ccc;width:70px'>TAKENBY</th>
+                        <th style='background-color: #B8DBFD;border: 1px solid #ccc;width:70px'>DATE</th>
+                        <th style='background-color: #B8DBFD;border: 1px solid #ccc;width:220px'>FEEDBACK</th>
+                        <th style='background-color: #B8DBFD;border: 1px solid #ccc;width:50px'>SCORE</th>
+                        <th style='background-color: #B8DBFD;border: 1px solid #ccc;width:50px'>OUTOF</th>
+                    </tr>
+                    <tr style="height:40px;font-size: 9pt;">
+                        <th style='border: 1px solid #ccc;width:80px'>{CANDIDATENAME}</th>
+                        <th style='border: 1px solid #ccc;width:70px'>{COURSENAME}</th>
+
+                        <th style='border: 1px solid #ccc;width:70px'>{TESTTYPE}</th>
+                        <th style='border: 1px solid #ccc;width:70px'>{TAKENBY}</th>
+                        <th style='border: 1px solid #ccc;width:70px'>{DATE}</th>
+                        <th style='border: 1px solid #ccc;width:220px'>{FEEDBACK}</th>
+                        <th style='border: 1px solid #ccc;width:50px;color:red'>{SCORE}</th>
+                        <th style='border: 1px solid #ccc;width:50px;color:red'>{OUTOF}</th>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr align="center">
+            <td>
+                <h4>
+                    <p>You can also view the results by visiting the url <a class="clickme" href="https://www.enosislearning.com/Candidate.aspx?ID={CANDID}&CNAME={C_NAME}">
+    CLICK TO VIEW DETAIL RESULTS
+</a></p>
+                    Warm Regards <br />
+                    Enosis Assessment Team
+                </h4>
+</td>
+        </tr>
+
+        <tr align="center">
+            <td>
+                <div class="main-logo">
+                    <a href="https://api.whatsapp.com/send?phone=+917757012052&text=Hello">
+                        <img src="https://i0.wp.com/www.smartparent.in/wp-content/uploads/2018/06/Whatsapp-Icon.png" height="50" width="50" />
+                    </a>
+                    <a href="https://www.instagram.com/enosislearning/">
+                        <img src="https://www.enosislearning.com/img/Instagram_icon.png" height="50" width="50" />
+                    </a>
+                    <a href="https://www.twitter.com/Enosislearning">
+                        <img src="https://imagepng.org/wp-content/uploads/2018/08/twitter-icone.png" height="45" width="50" />
+                    </a>
+                    <!--<a href="https://www.google.com/#">
+                        <img src="https://maxcdn.icons8.com/Share/icon/color/Logos/google_plus1600.png" height="50" width="50" />
+                    </a>-->
+
+                    <a href="http://www.linkedin.com/company/2762062?trk=tyah">
+                        <img src="https://th.bing.com/th/id/Rc3fcc390427d68b89647e834adf7fc87?rik=1DsHadbNB1JOtQ&riu=http%3a%2f%2fpngimg.com%2fuploads%2flinkedIn%2flinkedIn_PNG27.png&ehk=ApJ%2fweXG28ukIgc0cm1ymZWvYcRJosABXALGrqXztRQ%3d&risl=&pid=ImgRaw" height="50" width="50" />
+                    </a>
+                </div>
+            </td>
+        </tr>
+        
+    </table>
+</body>
+</html>

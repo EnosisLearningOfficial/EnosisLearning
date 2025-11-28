@@ -1,0 +1,128 @@
+<%@ Page Title="" Language="C#" MasterPageFile="~/Admin_Master.Master" AutoEventWireup="true" CodeBehind="WebForm4.aspx.cs" Inherits="ENOSISLEARNING.EmailManager" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+    <script src="Scripts/jquery-3.4.1.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+
+   
+</asp:Content>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
+  <form id="form1" runat="server" >
+        <div>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th class="text-center">
+       <b><asp:Label ID="Lblemail" runat="server" Text="Email Id" ></asp:Label></b> 
+                       </th>
+                    </tr>
+                </thead>
+                <tr>
+
+            <td class="text-center">
+          <asp:TextBox ID="TxtMail" runat="server" placeholder="Search Email" TextMode="Email"></asp:TextBox>
+           <asp:Button ID="Btnsearch" runat="server" Text="Search" OnClick="Btnsearch_Click" Cssclass="btn-success"/>
+           <asp:Button ID="Btnclear" runat="server" Text="Clear"  CssClass="bg-warning" ForeColor="White" OnClick="Btnclear_Click"/>
+          </td>
+
+           <td>
+         <asp:Button ID="Btncompose" runat="server" Text="Compose Email" OnClick="Btncompose_Click" Width="140px" Cssclass="btn-primary" />
+         </td>
+        </tr>
+            </table>
+            
+          
+            <!-- Modal Dialog -->
+    <div class="modal fade" id="mymodal" data-backdrop="false" role="dialog">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                 <h4 class="modal-title">Add New Email</h4> 
+                 <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <div class="modal-body">
+
+            <b><asp:Label ID="Label1" runat="server" Text="Email Sender"></asp:Label></b>
+               <asp:TextBox ID="txtname" CssClass="form-control"  runat="server" TextMode="Email" />
+
+            <b><asp:Label ID="Label2" runat="server" Text="Sender Password"></asp:Label></b>
+                <asp:TextBox ID="TextBox1" CssClass="form-control" runat="server" TextMode="Password" />
+
+               <b><asp:Label ID="Label3" runat="server" Text="Mail To"></asp:Label></b>
+               <asp:TextBox ID="TextBox3"  CssClass="form-control" runat="server" TextMode="Email"/>
+
+              <b><asp:Label ID="Label4" runat="server" Text="Subject"></asp:Label></b>
+                 <asp:TextBox ID="TextBox4" runat="server" CssClass="form-control"></asp:TextBox>
+
+               <b><asp:Label ID="Label5" runat="server" Text="Message"></asp:Label></b>
+                 <asp:TextBox ID="TextBox5" runat="server" TextMode="MultiLine" Rows="4" CssClass="form-control"></asp:TextBox>
+                 
+               <b><asp:Label ID="Label6" runat="server" Text="Attachments"></asp:Label></b>
+                  <asp:FileUpload ID="FileUpload1" runat="server" CssClass="form-control" />
+                  
+                 </div>
+                 <div class="modal-footer">
+                 <asp:Button ID="BtnSend" runat="server" Text="Send" OnClick="BtnSend_Click" Width="110px" Cssclass="btn-primary"/>
+                 </div>
+             </div>
+        </div>
+    </div>
+    </div>
+     <center><asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" DataKeyNames="id" OnRowEditing="GridView1_RowEditing" OnRowCancelingEdit="GridView1_RowCancelingEdit" OnRowUpdating="GridView1_RowUpdating" OnRowDeleting="GridView1_RowDeleting"
+         CssClass="table table-hover  table-hover text-center" HeaderStyle-BackColor="#BFCFFF" AlternatingRowStyle-BackColor="MintCream" >
+              <Columns>
+
+                  <asp:TemplateField HeaderText="Mail TO" HeaderStyle-CssClass="text-center" HeaderStyle-Font-Bold="true">
+                         <ItemTemplate>
+                    <asp:Label ID="lblmailto" Text='<%#Eval("Mail_To") %>' runat="server"/>
+                         </ItemTemplate>
+                         <EditItemTemplate>
+                             <asp:TextBox ID="txtmailto" Text='<%#Eval("Mail_To") %>' runat="server"/>
+                         </EditItemTemplate>
+                         </asp:TemplateField>
+
+                  <asp:TemplateField HeaderText="Subject" HeaderStyle-CssClass="text-center" HeaderStyle-Font-Bold="true">
+                         <ItemTemplate>
+                  <asp:Label ID="lblsubject" Text='<%#Eval("Subject") %>' runat="server"/>
+                         </ItemTemplate>
+                         <EditItemTemplate>
+                             <asp:TextBox ID="txtsubject" Text='<%#Eval("Subject") %>' runat="server"/>
+                         </EditItemTemplate>
+                         </asp:TemplateField>
+
+                  <asp:TemplateField HeaderText="Message" HeaderStyle-CssClass="text-center" HeaderStyle-Font-Bold="true">
+                         <ItemTemplate>
+                             <asp:Label ID="lblmessage" Text='<%#Eval("Message") %>' runat="server"/>
+                         </ItemTemplate>
+                         <EditItemTemplate>
+                      <asp:TextBox ID="txtmessage" Text='<%#Eval("Message") %>' runat="server"/>
+                         </EditItemTemplate>
+                         </asp:TemplateField>
+                 
+
+                  <asp:TemplateField HeaderText="Action" HeaderStyle-CssClass="text-center" HeaderStyle-Font-Bold="true">
+                         <ItemTemplate>
+                             <asp:Button ID="Edit" runat="server" Text="Edit" CommandName="Edit"  CssClass="bg-success" ForeColor="White"/>
+                             <asp:Button ID="Delete" runat="server" Text="Delete"  CommandName="Delete" CssClass="bg-danger" ForeColor="White"/>
+                         </ItemTemplate>
+
+                         <EditItemTemplate>
+                             <asp:Button ID="Update" runat="server" Text="Update" CommandName="Update" CssClass="bg-purple" ForeColor="White"/>
+                             <asp:Button ID="Cancel" runat="server" Text="Cancel" CommandName="Cancel" CssClass="bg-secondary" ForeColor="White"/>
+                         </EditItemTemplate>
+                     </asp:TemplateField>
+              </Columns>
+            </asp:GridView></center>
+      </form>
+    <p>
+   <center> <asp:Label ID="Label7" runat="server" Text="Label"></asp:Label></center>
+   </p>
+</asp:Content>
+
+
+=========Tutorials

@@ -1,0 +1,207 @@
+//single inheritance 
+
+#include <iostream>
+using namespace std;
+
+class Animal//parent class 
+{
+public:
+    void eat()//member function 
+	{ 
+	cout << "Eating..." << endl; 
+	}
+};
+
+class Dog : public Animal 
+{
+public:
+    void bark() 
+	{ 
+	cout << "Barking..." << endl; 
+	}
+};
+
+int main() 
+{
+    Dog d;//object created by Derived class
+    
+    d.eat();   // Inherited from Animal
+    d.bark();  // Defined in Dog
+    return 0;
+}
+
+
+//Multiple inheritance
+#include <iostream>
+using namespace std;
+
+class Engine 
+{
+public:
+    void start() 
+	
+	{ 
+	cout << "Engine starting..." << endl; 
+	}
+};
+
+class Wheels 
+{
+public:
+    void rotate() 
+	{ 
+	cout << "Wheels rotating..." << endl; 
+	}
+};
+
+class Car : public Engine, public Wheels 
+{
+public:
+    void drive() 
+	{ 
+	cout << "Car is driving..." << endl; 
+	}
+};
+
+int main() 
+{
+    Car c;
+    c.start();
+    c.rotate();
+    c.drive();
+    return 0;
+}
+
+
+//multilevel inheritance
+#include <iostream>
+using namespace std;
+
+class Animal 
+{
+public:
+    void eat() 
+	{ 
+	cout << "Eating..." << endl; 
+	}
+};
+
+class Dog : public Animal 
+{
+public:
+    void bark() 
+	{ 
+	cout << "Barking..." << endl; 
+	}
+};
+
+class Puppy : public Dog 
+{
+public:
+    void weep() 
+	{ 
+	cout << "Weeping..." << endl; 
+	}
+};
+
+int main() 
+{
+    Puppy p;
+    p.eat();   // From Animal
+    p.bark();  // From Dog
+    p.weep();  // From Puppy
+    return 0;
+}
+
+
+//Hierachical Inheritance
+#include <iostream>
+using namespace std;
+
+class Animal 
+{
+public:
+    void eat() 
+	{ 
+	cout << "Eating..." << endl; 
+	}
+};
+
+class Dog : public Animal 
+{
+public:
+    void bark() 
+	{ 
+	cout << "Barking..." << endl; 
+	}
+};
+
+class Cat : public Animal 
+{
+public:
+    void meow() 
+	{ 
+	cout << "Meowing..." << endl; 
+	}
+};
+
+int main() 
+{
+    Dog d;
+    Cat c;
+	d.eat();
+    d.bark();
+    c.eat();
+    c.meow();
+    return 0;
+}
+
+//Hybrid Inheritance
+#include <iostream>
+using namespace std;
+
+class Vehicle 
+{
+public:
+    void fuel() 
+	{ 
+	cout << "Fueling vehicle..." << endl; 
+	}
+};
+
+class Engine 
+{
+public:
+    void start() 
+	{ 
+	cout << "Engine starting..." << endl; 
+	}
+};
+
+class Car : public Vehicle 
+{
+public:
+    void drive() 
+	{ 
+	cout << "Car driving..." << endl; 
+	}
+};
+
+class HybridCar : public Car, public Engine
+ {
+public:
+    void mode() 
+	{ 
+	cout << "Switching modes..." << endl; 
+	}
+};
+
+int main() 
+{
+    HybridCar h;
+    h.fuel();  
+    h.start(); 
+    h.drive();
+    h.mode();
+    return 0;
+}

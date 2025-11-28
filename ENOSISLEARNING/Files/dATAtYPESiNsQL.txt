@@ -1,0 +1,58 @@
+Data Types in SQL
+1. Numeric Data Types
+-----------------------------------------------------
+1.INT ---->  Stores whole numbers (e.g., 10, 5000)
+2.BIGINT ----> Stores very large whole numbers
+3.SMALLINT ----> Stores small-range whole numbers.
+4.TINYINT ----> Stores very small whole numbers (0–255).
+5.DECIMAL(p,s) ----> Exact decimal values; p = total digits, s = digits after decimal.
+6.NUMERIC(p,s) ------> Same as DECIMAL; exact precision.
+7.FLOAT----> Approximate decimals (not exact).
+8.REAL -----> Similar to FLOAT, approximate values.
+
+
+
+2.String / Character Data Types
+-----------------------------------------------------
+1.CHAR(N) -----> Fixed-length string (exact length).
+2.VARCHAR(N) -----> Variable-length string (up to n characters). Most commonly used.
+3.TEXT -----> Large text data, variable length.
+4.NVARCHAR(N)-----> Supports Unicode characters (e.g., Hindi, Marathi, emojis).
+5.NTEXT -----> Large Unicode text (deprecated).
+
+
+3.Date & Time Data Types
+-----------------------------------------------------
+1.DATE ---->Stores only date (YYYY-MM-DD).
+2.TIME---->Stores only time (HH:MM:SS).
+3.DATETIME---->Stores date + time.
+4.DATETIME2 --->Improved version of DATETIME with more accuracy.
+5.SMALLDATETIME---->Less precise date/time.
+6.TIMESTAMP---->Auto-generated unique number when a row is changed.
+
+
+
+4.Binary Data Types
+-----------------------------------------------------
+1.BINARY(N)------>Fixed-length binary data.
+2.VARBINARY(n)---->Variable-length binary data.
+3.IMAGE ---->Stores large binary data (deprecated).
+
+
+
+5.Boolean Data Types
+------------------------------------------------------
+1.BIT------>Stores 0 or 1 (used as TRUE/FALSE).
+
+
+6.Misc / Special Data Types
+-------------------------------------------------------
+1.UUID / UNIQUEIDENTIFIER---->Stores a unique ID like: A234-98F2-...
+2.JSON---->Stores JSON data (MySQL / PostgreSQL).
+3.XML------>Stores XML formatted data.
+4.ENUM----->Stores a predefined list of values (MySQL).
+5.SET------>Stores multiple values from a predefined list (MySQL).
+
+
+
+

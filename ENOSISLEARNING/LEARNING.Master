@@ -1,0 +1,678 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="LEARNING.master.cs" Inherits="ENOSISLEARNING.LEARNING" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+
+
+	<meta name="google-site-verification" content="KnQfNrAPpBDPoKQQyBwjlFT6H0UoZoT7B_0Kq7uJDtY" />
+
+    <link rel="canonical" href="https://www.enosislearning.com" />
+    <link rel="icon" type="image/ico" href="images/favicon.ico" />
+  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+   <title>Enosis Learning</title>
+   <link rel="stylesheet" type="text/css" href="css/bootstrap-min.css" />
+   <link rel="stylesheet" type="text/css" href="css/main1.css" />
+   <link rel="stylesheet" type="text/css" href="css/course.css"/>
+   <link href="Styles/client_style.css" rel="stylesheet" />
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+   <link rel="stylesheet" href="css/font-awesome.min.css" />
+   <script type="text/javascript" src="Scripts/jquery-1.11.3.min.js"></script>
+   <script type="text/javascript" src="Scripts/bootstrap.min.js"></script>
+
+    
+
+   
+  
+
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics  24/7/2020-->
+<script  src="https://www.googletagmanager.com/gtag/js?id=UA-35962033-1"></script>
+
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-35962033-1');
+</script>
+
+    <style>
+        *
+        {
+            margin:0px;
+            padding:0px;
+            box-sizing:border-box;
+        }
+        .fa, .fas, .far, .fal, .fab {
+    font-family: "Font Awesome 6 Free" !important;
+}
+
+.top-strip
+{
+    background:#F9FAFB; 
+    border-bottom:1px solid #ddd;
+    font-size:16px;
+    height:35px;
+   
+}
+.list-inline a,i
+{
+     color:#4A5565;
+}
+ .top-strip li
+ {
+     margin-top:10px;
+ }
+ .navbar-brand {
+    display: inline-block;
+    line-height: 1.2;
+    padding: 10px 15px;
+}
+
+.brand-slogan {
+    color: #555;
+    font-size: 1.0123rem;
+    letter-spacing: 0.3px;
+    display: block;
+    color:#124170;
+}
+
+
+
+.navbar-brand span
+{
+    font-size:23px;
+}
+.footer {
+  background-color: #124170;
+  color: #ddd;
+  padding: 40px 20px 20px;
+
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.footer-col {
+  flex: 1 1 220px; /* responsive */
+  min-width: 200px;
+}
+
+.footer h5 {
+  text-transform: uppercase;
+  margin-bottom: 15px;
+  font-size: 16px;
+  color: #fff;
+}
+
+.footer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer ul li {
+  margin-bottom: 8px;
+}
+
+.footer a {
+  color: #ddd;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer a:hover {
+  color: orange;
+}
+
+.footer p {
+  margin: 5px 0;
+}
+
+.social a {
+  display: inline-block;
+  margin-right: 10px;
+  font-weight: bold;
+  font-size: 18px;
+  color: #ddd;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.social a:hover {
+  color: orange;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 20px;
+  border-top: 1px solid #444;
+  padding-top: 15px;
+  font-size: 14px;
+  color: #aaa;
+}
+.nav li
+{
+     margin-top:10px;
+     font-size:15px;
+     font-weight:900;
+}
+.text-right .list-inline
+{
+    margin:0px 0;
+}
+.social
+{
+    margin:auto;
+}
+        /* typical phone screen resolution */
+        @media only screen and (max-width : 836px) {
+            .top-strip
+            {
+                height:10vh;
+            }
+            .top-strip li
+            {
+                margin-top:10px;
+            }
+        }
+        @media only screen and (min-width:437px) (max-width : 667px) {
+            .top-strip
+            {
+                height:10vh;
+            }
+            .top-strip li
+            {
+                margin-top:10px;
+            }
+        }
+        /* landscape orientation */
+        @media only screen and (min-width : 375px) and (max-width : 667px) and (orientation : landscape) {
+        }
+        /* portrait orientation */
+        @media only screen and (min-width : 375px) and (max-width : 436px) and (orientation : portrait) {
+             .top-strip
+             {
+                 height:13vh;
+             }
+             .top-strip li
+             {
+                 margin-top:8px;
+             }
+        }
+        @media only screen and (min-width : 399px) and (max-width : 435px) and (orientation : portrait) {
+             .top-strip
+             {
+                 height:13vh;
+             }
+             .top-strip li
+             {
+                 margin-top:8px;
+             }
+        }
+        @media only screen and (min-width : 290px) and (max-width : 398px) and (orientation : portrait) {
+             .top-strip
+             {
+                 height:18vh;
+             }
+             .top-strip li
+             {
+                 margin-top:8px;
+             }
+        }
+        /* Force show toggler in tablet screens (<= 991px) */
+@media (max-width: 991px) {
+  .navbar-header {
+    float: none;
+  }
+  .navbar-toggle {
+    display: block;
+  }
+  .navbar-collapse {
+    border-top: 1px solid #ddd;
+  }
+  .navbar-collapse.collapse {
+    display: none !important;
+  }
+  .navbar-collapse.collapse.in {
+    display: block !important;
+  }
+  .navbar-nav {
+    float: none !important;
+  }
+  .navbar-nav > li {
+    float: none;
+  }
+}
+
+        .navar-header
+        {
+              background: linear-gradient(135deg, #004d7a, #008793, #00bf72);
+        }
+    </style> 
+    <asp:ContentPlaceHolder ID="head" runat="server">
+
+    </asp:ContentPlaceHolder>
+
+</head>
+<body>
+<form data-toggle="validator" id="form1" runat="server">
+<%-- Modal --%>
+    <div id="myModal" class="modal fade" tabindex="-1" role="dialog">
+<div class="modal-dialog modal-sm">
+<div class="modal-content">
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+<h2 class="modal-title" style="color:#000 !important; top: 0px!important;">Request For Demo</h2>
+<h6 style="color:red!important" runat="server" id="head6"></h6>
+</div>
+
+<div class="modal-body">
+<div class="form-horizontal">
+<div class="form-group">
+<div class="col-xs-12">
+<asp:TextBox CssClass="form-control my-form-control" ID="txtUserName" placeholder="Enter Full Name" runat="server" />
+</div>
+</div>
+<div class="form-group">
+<div class="col-xs-12">
+<asp:TextBox CssClass="form-control my-form-control" ID="txtEmailId" placeholder="Enter Your Email Id" runat="server" />
+</div>
+</div>
+<div class="form-group">
+<div class="col-xs-12">
+<asp:TextBox CssClass="form-control my-form-control" ID="txtUserContactNo" placeholder="Enter Your Mobile No" runat="server" />
+</div>
+</div>
+<div class="form-group">
+<div class="col-xs-12">
+<asp:DropDownList CssClass="form-control my-form-control" ID="drpDCourse" runat="server">
+
+
+
+</asp:DropDownList>
+</div>
+</div>
+</div>
+</div>
+<div class="modal-footer">
+<asp:Button ID="btnSend" OnClick="btnSend_Click" CausesValidation="false" Text="Send" runat="server" class="btn btn-primary" />
+<button type="button" class="btn btn-default" data-dismiss="modal" style="background-color:#f89d0d">Cancel</button>
+
+</div>
+</div>
+</div>
+</div>
+    <%-- Main Container --%>
+<!-- Top Strip -->
+<div class="top-strip">
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Left links -->
+      <div class="col-xs-8 col-sm-8 col-md-8">
+         <ul class="list-inline">
+          <li><a href="EnosisJobs.aspx"><i class="fa fa-regular fa-file-text-o"></i> Apply For Internship</a></li>
+          <li><a href="EnosisJobs.aspx"><i class="fa fa-solid fa-arrow-trend-up"></i> Apply For Job</a></li>
+          <li><a href="SubmitResume.aspx"><i class="fa fa-thin fa-file-import"></i> Upload Resume</a></li>
+          <li><a href="#myModal" data-toggle="modal"><i class="fa fa-light fa-play"></i> Request For Demo</a></li>
+        </ul>
+      </div>
+      <!-- Right links -->
+      <div class="col-sm-4 text-right">
+        <ul class="list-inline">
+          <li><a href="tel:7750712052"><i class="fa fa-phone"></i> 7750712052</a></li>
+          <li><a href="login.aspx"><i class="fa fa-user"></i> Log-in</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Main Navbar -->
+<nav class="navbar navbar-default navbar-static-top" style="background:#fff;">
+  <div class="container-fluid">
+
+    <!-- Logo and toggle for mobile -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mainNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+        <!-- Brand + Slogan -->
+  <a class="navbar-brand" href="index.aspx" style="line-height:1.2;">
+    <span style="color:blue;font-weight:bold;">enosis</span>
+    <span style="color:orange;font-weight:bold;">learning</span><br>
+    <small class="brand-slogan">Creating Software Professionals</small>
+  </a>
+    </div>
+
+    <!-- Navbar Links -->
+    <div class="collapse navbar-collapse" id="mainNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="index.aspx">HOME</a></li>
+
+        <!-- Courses Dropdown -->
+        <li class="dropdown">
+          <a href="courses.aspx" class="dropdown-toggle" data-toggle="dropdown">COURSES <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+                 <li data-course="5" class="menu-item">
+                    <a href="dot-net-training-in-pune.aspx"><span class="menu-icon">💻</span>Full Stack .Net Contents</a>
+                </li>
+                <li data-course="20" class="menu-item" >
+                    <a href="java-training-in-pune.aspx"><span class="menu-icon">☕</span>Full Stack Java Contents</a>
+                </li>
+                <li data-course="29" class="menu-item">
+                    <a href="data-analytics-trainig-in-pune.aspx"><span class="menu-icon">📊</span>Data Analytics Contents</a>
+                </li>
+                <li data-course="30" class="menu-item">
+                    <a href="dot-net-core-training-pune.aspx"><span class="menu-icon">⚙️</span>.Net Core Contents</a>
+                </li>
+                <li data-course="6" class="menu-item">
+                    <a href="Sql-training-in-pune.aspx"><span class="menu-icon">🗄️</span>SQL Server Contents</a>
+                </li>
+                <li data-course="25" class="menu-item">
+                    <a href="power-bi-training-in-pune.aspx"><span class="menu-icon">📈</span>Power BI Contents</a>
+                </li>
+                <li data-course="1" class="menu-item">
+                    <a href="c-training-in-pune.aspx"><span class="menu-icon">🔤</span>C Language Contents</a>
+                </li>
+                <li data-course="2" class="menu-item">
+                    <a href="c-plus-plus-training-in-pune.aspx"><span class="menu-icon">🔢</span>C++ Language Contents</a>
+                </li>
+                <li data-course="8" class="menu-item">
+                    <a href="web-designing-training-in-pune.aspx"><span class="menu-icon">🎨</span>Web Designing Contents</a>
+                </li>
+          </ul>
+        </li>
+
+        <li><a href="Tutorials.aspx">TUTORIALS</a></li>
+        <li><a href="Assignments.aspx">ASSIGNMENTS</a></li>
+
+        <!-- Interview Dropdown -->
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">INTERVIEW Q&amp;A <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+           <li class="dropdown-item" id="list"><a href="Interview_Questions.aspx?lag=C" ><span class="dropdown-icon"  style="position:relative;left:-10px;">🔤</span>C Language</a></li>
+           <li class="dropdown-item"><a href="Interview_Questions.aspx?lag=CPP" ><span class="dropdown-icon" style="position:relative;left:-10px;">🔢</span>C++ Language</a></li>
+                <li class="dropdown-item"><a href="Interview_Questions.aspx?lag=JAVA" ><span class="dropdown-icon" style="position:relative;left:-10px;">☕</span>Java Language</a></li>
+                <li class="dropdown-item"><a href="Interview_Questions.aspx?lag=ASP.NET"><span class="dropdown-icon" style="position:relative;left:-10px;">🌐</span>ASP.Net</a></li>
+                <li class="dropdown-item"><a href="Interview_Questions.aspx?lag=CSHARP" ><span class="dropdown-icon" style="position:relative;left:-10px;">💻</span>CSharp.Net</a></li>
+                <li class="dropdown-item"><a href="Interview_Questions.aspx?lag=MVC" ><span class="dropdown-icon" style="position:relative;left:-10px;">⚙️</span>ASP.NET MVC</a></li>
+                <li class="dropdown-item"><a href="Interview_Questions.aspx?lag=SQLSERVER" ><span class="dropdown-icon" style="position:relative;left:-10px;">🗄️</span>SQL SERVER</a></li>
+                <li class="dropdown-item"><a href="Interview_Questions.aspx?lag=SSIS" ><span class="dropdown-icon" style="position:relative;left:-10px;">📂</span>SSIS</a></li>
+                <li class="dropdown-item"><a href="Interview_Questions.aspx?lag=SSRS" "><span class="dropdown-icon" style="position:relative;left:-10px;">📊</span>SSRS</a></li>
+                <li class="dropdown-item"><a href="Interview_Questions.aspx?lag=SSAS" ><span class="dropdown-icon" style="position:relative;left:-10px;">📈</span>SSAS</a></li>
+                <li class="dropdown-item"><a href="Interview_Questions.aspx?lag=POWERBI" ><span class="dropdown-icon" style="position:relative;left:-10px;">📉</span>POWER BI</a></li>
+                <li class="dropdown-item"><a href="Interview_Questions.aspx?lag=MANUALTESTING"><span class="dropdown-icon" style="position:relative;left:-10px;">🧪</span>Manual Testing</a></li>
+                <li class="dropdown-item"><a href="Interview_Questions.aspx?lag=SELENIUM"><span class="dropdown-icon" style="position:relative;left:-10px;">🤖</span>Selenium Testing</a></li>
+                <li class="dropdown-item"><a href="Interview_Questions.aspx?lag=WEBDESIGNING"><span class="dropdown-icon" style="position:relative;left:-10px;">🎨</span>Web Designing</a></li>
+          </ul>
+        </li>
+
+        <!-- Knowledgebase Dropdown -->
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-readonly="true">KNOWLEDGEBASE <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            
+        <li class="dropdown-item"> <a href="SqlServerKnowledgeBase.aspx"><span class="dropdown-icon">🗄️</span> SQL SERVER</a></li>
+        <li class="menu-item2" ><a href="PowerBIKnowledgeBase.aspx"><span class="dropdown-icon">📉</span> POWER BI</a></li>
+        <li class="dropdown-item"><a href="CSharpKnowledgeBase.aspx"><span class="dropdown-icon">💻</span> CSHARP</a></li>
+
+        <li class="dropdown-item""><a href="Asp.NetKnowledgeBase.aspx"><span class="dropdown-icon">🌐</span> ASP.NET</a></li>
+        <li class="dropdown-item"><a href="Asp.NetMVCKnowledgeBase.aspx"><span class="dropdown-icon">⚙️</span> ASP.NET MVC</a></li>
+        <li class="dropdown-item"><a href="EFKnowledgeBase.aspx"><span class="dropdown-icon">📘</span> ENTITY FRAMEWORK</a></li>
+
+        <li class="dropdown-item"><a href="WebAPIKnowledgeBase.aspx"><span class="dropdown-icon">🔗</span> WEB API</a></li>
+        <li class="dropdown-item"><a href="JQUERYKnowledgeBase.aspx"><span class="dropdown-icon">⚡</span> JQUERY</a></li>
+        <li class="dropdown-item"><a href="AngularKnowledgeBase.aspx"><span class="dropdown-icon">🅰️</span> ANGULAR JS</a></li>
+
+        <li class="dropdown-item"><a href="CSharpKnowledgeBase.aspx"><span class="dropdown-icon">🎨</span> WEB DESIGNING</a></li>
+          </ul>
+        </li>
+
+        <li><a href="QuestionPapers.aspx">QUESTION PAPERS</a></li>
+        <li><a href="Articles.aspx">ARTICLES</a></li>
+        <li><a href="DownLoads.aspx">DOWNLOADS</a></li>
+        <li><a href="clients.aspx">CLIENTS</a></li>
+        <li><a href="FAQ.aspx">FAQ</a></li>
+
+        <!-- Books Dropdown -->
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">BOOKS <span class="caret"></span></a>
+          <ul class="dropdown-menu" style="margin-left:-10rem;">
+                <li class="dropdown-item" ><a href="C++ProgrammingBook.aspx"><span class="dropdown-icon">🔢</span>CPP PROGRMMING BOOK</a></li>
+                <li class="dropdown-item"><a href="ASP.NETBook.aspx"><span class="dropdown-icon">🌐</span>ASP.NET PROGRMMING BOOK</a></li>
+                <li class="dropdown-item"><a href="JavaBook.aspx"><span class="dropdown-icon">☕</span>JAVA PROGRMMING BOOK</a></li>
+                <li class="dropdown-item"><a href="ADVANCEJAVABook.aspx"><span class="dropdown-icon">☕</span>ADVANCE JAVA PROGRMMING BOOK</a></li>
+                <li class="dropdown-item"><a href="CProgrammingBook.aspx"><span class="dropdown-icon">🔤</span>C PROGRMMING BOOK</a></li>
+                <li class="dropdown-item"><a href="CSharpBook.aspx"><span class="dropdown-icon">💻</span>CSHARP.NET PROGRMMING BOOK</a></li>
+          </ul>
+        </li>
+        <li><a href="contact.aspx">CONTACT</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <%-- Content Place holder --%>
+<div>
+<asp:ContentPlaceHolder ID="ContentPlaceHolder1"  runat="server">
+</asp:ContentPlaceHolder>
+</div>
+   <%-- Content Place holder --%>
+    <%-- Footer Start --%>
+<!-- 🔹 Modern Footer (4 Columns) -->
+<footer class="footer">
+  <div class="footer-container" style="background-color:#124170;">
+
+    <!-- Column 1 : Courses -->
+    <div class="footer-col">
+      <h5>Course Contents</h5>
+      <ul>
+        <li><a href="c-training.aspx">C</a></li>
+        <li><a href="c++-training.aspx">C++</a></li>
+        <li><a href="FullStack-Java-Training.aspx">Full Stack Java</a></li>
+        <li><a href="FullStack-.Net-Training.aspx">Full Stack .Net</a></li>
+        <li><a href=".Net_Core-Training.aspx">.Net Core</a></li>
+        <li><a href="sql-server-training.aspx">SQL Server</a></li>
+        <li><a href="power-bi-training.aspx">Power BI</a></li>
+        <li><a href="Data-Analytics-Training.aspx">Data Analytics</a></li>
+        <li><a href="web-designing-course.aspx">Web Designing</a></li>
+      </ul>
+    </div>
+
+    <!-- Column 2 : Interview QnA (left side) -->
+    <div class="footer-col">
+      <h5>Interview Questions</h5>
+      <ul>
+        <li><a href="Interview_Questions.aspx?lag=C">C</a></li>
+        <li><a href="Interview_Questions.aspx?lag=CPP">C++</a></li>
+        <li><a href="Interview_Questions.aspx?lag=JAVA">Java</a></li>
+        <li><a href="Interview_Questions.aspx?lag=ADVANCEDJAVA">Advanced Java</a></li>
+        <li><a href="Interview_Questions.aspx?lag=CSHARP">C# .Net</a></li>
+        <li><a href="Interview_Questions.aspx?lag=ASP.NET">ASP.Net</a></li>
+        <li><a href="Interview_Questions.aspx?lag=MVC">ASP.Net MVC</a></li>
+        <li><a href="Interview_Questions.aspx?lag=WCF">WCF</a></li>
+      </ul>
+    </div>
+
+    <!-- Column 3 : Interview QnA (right side) -->
+    <div class="footer-col">
+      <h5>Interview Questions</h5>
+      <ul>
+        <li><a href="Interview_Questions.aspx?lag=SQLSERVER">SQL Server</a></li>
+        <li><a href="Interview_Questions.aspx?lag=SSIS">SSIS</a></li>
+        <li><a href="Interview_Questions.aspx?lag=SSRS">SSRS</a></li>
+        <li><a href="Interview_Questions.aspx?lag=SSAS">SSAS</a></li>
+        <li><a href="Interview_Questions.aspx?lag=POWERBI">Power BI</a></li>
+        <li><a href="Interview_Questions.aspx?lag=MANUALTESTING">Software Testing</a></li>
+        <li><a href="Interview_Questions.aspx?lag=SELENIUM">Selenium</a></li>
+        <li><a href="Interview_Questions.aspx?lag=WEBDESIGNING">Web Designing</a></li>
+      </ul>
+    </div>
+
+    <!-- Column 4 : Quick Links + Contact -->
+    <div class="footer-col">
+      <h5>Quick Links</h5>
+      <ul>
+        <li><a href="index.aspx">Home</a></li>
+        <li><a href="About.aspx">About Us</a></li>
+        <li><a href="index.aspx#crousel">View Courses</a></li>
+        <li><a href="Enosis_Learning_sitemap.html">Site Map</a></li>
+        <li><a href="SampleResumes.aspx">Sample Resumes</a></li>
+        <li><a href="SubmitResume.aspx">Upload Resume</a></li>
+        <li><a href="Feedback_Form.aspx">Feedback</a></li>
+      </ul>
+
+      <h5>Contact</h5>
+        <a href="tel:7757012052"> <p>📞 7757012051 | 7757012052</p></a>
+        <a href="mailto:courses@enosislearning.com"> <p>✉️ courses@enosislearning.com</p></a>
+      <div class="social">
+        <a href="http://facebook.com">F</a>
+        <a href="http://linkedin.com">in</a>
+        <a href="http://twitter.com">T</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Copyright -->
+  <div class="footer-bottom">
+    <small>© 2025  <span style="color:blue;font-weight:bold;">enosis</span>
+    <span style="color:orange;font-weight:bold;">learning</span> | All Rights Reserved</small>
+  </div>
+</footer>
+    <%-- Footer End --%>
+</form>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // Toggler click
+        function toggleMenu() {
+            document.getElementById("navMenu").classList.toggle("show");
+        }
+
+        // Dropdown click (mobile only)
+        document.querySelectorAll(".dropdown > a").forEach(item => {
+            item.addEventListener("click", function (e) {
+                if (window.innerWidth <= 991) {
+                    e.preventDefault();
+                    let menu = this.nextElementSibling;
+
+                    // Close other open dropdowns
+                    document.querySelectorAll(".dropdown-menu").forEach(sub => {
+                        if (sub !== menu) sub.style.display = "none";
+                    });
+
+                    // Toggle current one
+                    menu.style.display = (menu.style.display === "block") ? "none" : "block";
+                }
+            });
+        });
+    </script>
+    <script>
+        var str = location.href.toLowerCase();
+        $("#nav li").each(function () {
+            if (str.indexOf($(this).attr("href"))) {
+                $("li.active").removeClass("active");
+                $(this).parent().addClass("active");
+            }
+        });
+        $("li.active").parents().each(function () {
+            if ($(this).is("li")) {
+                $(this).addClass("active");
+            }
+        });
+    </script>
+  
+    <script type="text/javascript">
+        var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+        (function () {
+            var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/577546b4b3a070fc728e3b40/default';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
+    </script>
+    <script>
+        $('ul.nav li.dropdown').hover(function () {
+            $(this).find('.dropdown-menu').stop(true, true).fadeIn();
+        }, function () {
+            $(this).find('.dropdown-menu').stop(true, true).fadeOut();
+        });
+    </script>
+    <script>
+        document.querySelectorAll('.dropdown > a.dropdown-toggle').forEach(function (el) {
+            el.addEventListener('click', function (e) {
+                if (!this.nextElementSibling.classList.contains('show')) {
+                    window.location.href = this.getAttribute('href');
+                }
+            });
+        });
+    </script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const menuItems = document.querySelectorAll("li[data-course]");
+
+        menuItems.forEach(item => {
+            const courseId = item.getAttribute("data-course");
+            const link = item.querySelector("a");
+
+            if (courseId && link) {
+                link.addEventListener("click", function (e) {
+                    e.preventDefault(); // Stop default navigation
+
+                    // Send AJAX request to set session
+                    fetch('SetCourseSession.aspx', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ courseId: courseId })
+                    })
+                        .then(response => {
+                            if (response.ok) {
+                                // Redirect to the page after session is set
+                                window.location.href = link.getAttribute("href");
+                            } else {
+                                console.error("Failed to set session.");
+                            }
+                        })
+                        .catch(error => console.error("Error:", error));
+                });
+            }
+        });
+    });
+</script>
+    <script>
+        $(document).ready(function () {
+            // Remove old active
+            $(".navbar-nav li").removeClass("active");
+
+            // Current page URL
+            var currentPage = window.location.pathname.toLowerCase();
+
+            // Check all <a> links
+            $(".navbar-nav li a").each(function () {
+                var linkPage = $(this).attr("href").toLowerCase();
+
+                if (currentPage.indexOf(linkPage) !== -1) {
+                    $(this).parent().addClass("active");
+                }
+            });
+            $(".navbar-nav li.active").closest(".dropdown").addClass("active");
+        });
+    </script>
+</body>
+</html>

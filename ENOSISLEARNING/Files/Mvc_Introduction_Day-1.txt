@@ -1,0 +1,109 @@
+//Model class
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace MvcTutorialDemo.Models
+{
+    public class Student
+    {
+        public int StudentID { get; set; }
+
+        public string Name { get; set; }
+
+        public string Email { get; set; }
+
+        public string Course { get; set; }
+    }
+}
+
+
+//Controller Class
+
+using MvcTutorialDemo.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+
+namespace MvcTutorialDemo.Controllers
+{
+    public class StudentController : Controller
+    {
+        // GET: Student
+        public ActionResult Index()
+        {
+            var students = new List<Student>
+            {
+                new Student{StudentID = 1,Name = "Abhijeet Roy",Email="email@gmail.conm",Course="Dot Net"},
+                new Student{StudentID = 2,Name = "Roy",Email="email@gmail.conm",Course="Dot Net"}
+            };
+            return View(students);
+        }
+
+        public ActionResult Edit()
+        {
+            var msg = "Hello Edit is Running";
+            return View(msg);
+        }
+    }
+}
+
+
+//View 
+
+@model IEnumerable<MvcTutorialDemo.Models.Student>
+
+@{
+    ViewBag.Title = "Index";
+}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.StudentID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Course)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StudentID)
+            </td> 
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Course)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.StudentID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.StudentID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.StudentID })
+            </td>
+        </tr>
+    }
+</table>

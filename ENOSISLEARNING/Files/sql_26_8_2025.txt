@@ -1,0 +1,121 @@
+---------------------------------------------------------------26-08-2025-------------
+[2]DDL (Data Definition Language) triggers :
+
+--DDL (Data Definition Language) triggers are special types of triggers in SQL Server that are executed in response to data definition events, such as creating, altering, or dropping database objects like tables, views, stored procedures, and schemas. Unlike DML triggers, which respond to changes in data (INSERT, UPDATE, DELETE), DDL triggers focus on changes to the structure of the database itself.
+
+
+--1.Create DDL Triggers:
+
+	CREATE TRIGGER trg_AfterInsert_Emp
+	ON Employee_Demo
+	AFTER INSERT
+	AS
+	BEGIN
+		INSERT INTO EmployeeLog (EmployeeID, Action)
+		SELECT Emp_ID, 'Inserted'
+		FROM inserted;
+	END;
+
+--2.Alter DDL Triggers:
+
+create or ALTER TRIGGER trg_INSTEADInsert_Employee  --or ALTER 
+ON Employee_Demo
+INSTEAD OF INSERT
+AS
+BEGIN
+    -- Example: Check if the salary is above a certain threshold before inserting
+    IF EXISTS (SELECT * FROM inserted WHERE Emp_Sal > 30000)
+    BEGIN
+        RAISERROR('Salary must be at least 30,000.', 16, 1);
+        RETURN;
+    END
+    
+    -- Proceed with the insert
+    INSERT INTO Employee_Demo (Emp_Name, Emp_Sal)
+    SELECT Emp_Name, Emp_Sal
+    FROM inserted;
+    
+    -- Log the action
+    INSERT INTO EmployeeLog (EmployeeID, Action)
+    SELECT Emp_ID, 'Inserted'
+    FROM inserted;
+END;
+
+--Attempt to insert a new employee with a salary below the threshold:
+INSERT INTO Employee_Demo (Emp_Name, Emp_Sal)
+VALUES ('Jane Smith', 25000);
+
+--If you insert a valid employee:
+INSERT INTO Employee_Demo (Emp_Name, Emp_Sal)
+VALUES ('John Doe', 35000);
+
+SELECT * from Employee_Demo
+SELECT * from EmployeeLog
+
+--3.Drop DDL Triggers:
+
+DROP TRIGGER trg_INSTEADInsert_Employee
+
+--------------------------------------------
+[3]LOGON Triggers:
+--LOGON triggers are a type of trigger in SQL Server that are executed automatically in response to a LOGON event. They allow you to define specific actions that should occur whenever a user attempts to connect to the database. LOGON triggers can be useful for enforcing security policies, auditing user logins, and controlling access to the database.
+
+--Syntax of LOGON Triggers
+CREATE TRIGGER trigger_name
+ON ALL SERVER
+FOR LOGON
+AS
+BEGIN
+    -- SQL statements to execute on logon
+END;
+
+--Example:
+CREATE TRIGGER trg_Logon
+ON ALL SERVER
+FOR LOGON
+AS
+BEGIN
+    DECLARE @CurrentHour INT = DATEPART(HOUR, GETDATE());
+
+    -- Prevent logon between 10 PM and 6 AM
+    IF @CurrentHour >= 22 OR @CurrentHour < 6
+    BEGIN
+        RAISERROR('Logins are not allowed between 10 PM and 6 AM.', 16, 1);
+        ROLLBACK;
+    END
+END;
+
+
+drop TRIGGER trg_RestrictLogon
+--------------------------------------------------------------------------
+--------Bulk Insert ----------
+--To perform a bulk insert in SQL using the provided table structure and syntax, follow these steps. Below is the complete SQL command for creating the table and using the BULK INSERT statement, along with explanations for each part of the command.
+
+--Step 1: Create the Table
+
+CREATE TABLE BulkDemo (
+    ID INT,
+    Name VARCHAR(20),
+    EmailID VARCHAR(20),
+    Gender VARCHAR(20),
+    Dept VARCHAR(12),
+    Sal INT,
+    Age INT,
+    City VARCHAR(20)
+);
+
+select * from BulkDemo
+--Step 2: Bulk Insert Command
+--Here’s the syntax for the BULK INSERT command using the specified options:
+
+BULK INSERT BulkDemo
+FROM 'D:\Maya\SQL\sql_11.30am to12.30am\datadel1.csv'
+WITH (
+    FIELDTERMINATOR = ',',  -- Specify the field terminator (comma for CSV)
+    ROWTERMINATOR = '\n',    -- Specify the row terminator (newline)
+    FIRSTROW = 2            -- Skip the header row
+);
+
+select * from BulkDemo
+truncate table BulkDemo
+--------------------------------------------------------------------------------------

@@ -1,0 +1,124 @@
+C# Files : C# provides the File class which is used to perform various operations like creating a file, opening a file, reading and writing a file etc.
+What are Files and Directory ?
+A file is a named location that can be used to store related information. For example,
+
+program.cs is a C# file that contains information about the C# program.
+
+A directory is a collection of files and subdirectories. A directory inside a directory is known as a subdirectory.
+
+C# provides a System.IO namespace that contains several classes that are used to perform operations on files and dictionaries.
+
+1.Create a File in C#
+We use the Create() method of the File class to create a new file in C#.
+The "@" in front of "C:\Program\myFile.txt" indicates this as a verbatim string. We use verbatim string to tell the compiler to ignore escape character \.
+
+
+public static void Main(string[] args)
+{
+    //path of the file that we want to create
+    string pathName = @"F:\Abhijet_Roy\MyFile\MyTextFile.txt";
+    //create a file 
+    FileStream fs = File.Create(pathName);
+    //check if file is cfeated or not
+    if (File.Exists(pathName))
+    {
+        Console.WriteLine("File created successfully at " + pathName);
+    }
+    else
+    {
+        Console.WriteLine("File creation failed");
+    }
+}
+2.Open a File
+We use the Open() method of the File class to open an existing file in C#. The method opens a FileStream on the specified file. 
+public static void Main(string[] args)
+{
+    //path of the file that we want to create
+    string pathName = @"F:\Abhijet_Roy\MyFile\MyTextFile.txt";
+    //open a file 
+    FileStream fs = File.Open(pathName,FileMode.Open);
+}
+3.Write to a File
+We use the WriteAllText() method of the File class to write to a file. The method creates a new file and writes content to that file.
+ public static void Main(string[] args)
+ {
+     //path of the file that we want to create
+     string pathName = @"F:\Abhijet_Roy\MyFile\MyTextFile.txt";
+     //write a file 
+     File.WriteAllText(pathName, "Hello World! This is my first text file.");
+ }
+
+4.Read a File in C#
+We use the ReadAllText() method of the File class to read contents of the file. The method returns a string containing all the text in the specified file.
+
+ public static void Main(string[] args)
+ {
+     //path of the file that we want to create
+     string pathName = @"F:\Abhijet_Roy\MyFile\MyTextFile.txt";
+     //read a file 
+    string readTxt = File.ReadAllText(pathName);
+     Console.WriteLine(readTxt);
+ }
+
+Serialization in C# is the process of converting an object's state into a format that can be stored, transmitted, or reconstructed later. The inverse process, converting the serialized format back into an object, is called deserialization. 
+
+using System;
+using System.IO;
+using System.Text.Json; // Requires .NET Core 3.0+ or .NET 5+
+
+// Define your class
+public class Student
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public string Course { get; set; }
+}
+
+class Program
+{
+    static void Main()
+    {
+        // Create an object
+        Student student = new Student
+        {
+            Id = 101,
+            Name = "Abhijeet Roy",
+            Course = "Full Stack .NET"
+        };
+
+        // Convert object to JSON
+        string jsonString = JsonSerializer.Serialize(student);
+
+        // Write to file
+        File.WriteAllText("student.json", jsonString);
+
+        Console.WriteLine("Object saved successfully!");
+
+        // Read back from file (optional)
+        string readData = File.ReadAllText("student.json");
+        Student loadedStudent = JsonSerializer.Deserialize<Student>(readData);
+
+        Console.WriteLine($"Loaded Student: {loadedStudent.Name}, {loadedStudent.Course}");
+    }
+}
+
+Regex In C# : Regular Expressions (Regex) are used to search, match, and manipulate text using specific patterns.
+C# provides the System.Text.RegularExpressions namespace for this.
+
+ public static void Main(string[] args)
+ {
+     string input = "Email@gmail.com";
+     string patternMobile = @"\b\d{10}\b"; // 10-digit numbers
+     string pattern = @"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b";
+     string inputMobile = "6543210";
+
+     bool isMatch = Regex.IsMatch(input, pattern);
+     bool isMatch2 = Regex.IsMatch(inputMobile, patternMobile);
+     Console.WriteLine(isMatch ? "valid Email" : "Invalid email");
+     Console.WriteLine(isMatch2 ? "valid Mobile" : "Invalid Mobile");
+
+     //Replace Text
+     string text = "I love C#. C# is powerful.";
+     string replaced = Regex.Replace(text, "C#", "JAVA");
+     Console.WriteLine(replaced);
+ }

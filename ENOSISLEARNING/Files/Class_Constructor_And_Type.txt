@@ -1,0 +1,297 @@
+1.Encaptulation
+	1.Class and Object
+		1.Data members - scope,Security
+		2.Access Specifiers - public,private,protected
+
+
+/*Structure oeiented programming : structure - helps us to create user defined data types.
+
+ OOPS Concept(Object Oriented Programming System) :- 
+ 1.Data Abstraction:only shows the essential features without including any other background details or any other explaianation.
+ 2.Data Encaptualtion : Class : it is a blueprint of any program...
+ : And Objects 
+
+*/
+
+
+#include<iostream>
+using namespace std;
+class Student //Define Class
+{
+  private:
+  int ID;//Data Members
+  string Name;
+  string Course;
+  string Age;
+
+  //Member Functions
+  public:
+  void SetData()
+  {
+    cout<<"Enter Id :-"<<endl;
+    cin>>ID;
+    cout<<"Enter Name :-"<<endl;
+    cin>>Name;
+    cout<<"Enter Course :-"<<endl;
+    cin>>Course;
+    cout<<"Enter Age :-"<<endl;
+    cin>>Age;
+  }
+  void ShowData()
+  {
+    cout<<"Your Id Is:- "<<ID<<endl;
+    cout<<"Your Name Is:- "<<Name<<endl;
+    cout<<"Your Course Is:- "<<Course<<endl;
+    cout<<"Your Age Is:- "<<Age<<endl;
+  }
+};
+int main()
+{
+  Student s1,s2;
+  s1.SetData();
+  s1.ShowData();
+  s2.SetData();
+  s2.ShowData();
+   return 0;
+}
+
+
+//Objects using Arrays and Loop//
+#include<iostream>
+using namespace std;
+class Student //Define Class
+{
+  private:
+  int ID;//Data Members
+  string Name;
+  string Course;
+  string Age;
+
+  //Member Functions
+  public:
+  void SetData()
+  {
+    cout<<"Enter Id :-"<<endl;
+    cin>>ID;
+    cout<<"Enter Name :-"<<endl;
+    cin>>Name;
+    cout<<"Enter Course :-"<<endl;
+    cin>>Course;
+    cout<<"Enter Age :-"<<endl;
+    cin>>Age;
+  }
+  void ShowData()
+  {
+    cout<<"Your Id Is:- "<<ID<<endl;
+    cout<<"Your Name Is:- "<<Name<<endl;
+    cout<<"Your Course Is:- "<<Course<<endl;
+    cout<<"Your Age Is:- "<<Age<<endl;
+  }
+};
+int main()
+{
+  //ArraysOf Objects
+  //Using Loop
+  Student s1[3];
+  for(int i=0;i<3;i++)
+  {
+     s1[i].SetData();1
+  }
+  for(int i=0;i<3;i++)
+  {
+    s1[i].ShowData();
+  }
+   return 0;
+} 
+
+
+//Constructor : 
+1.Constructor is a Special Member method of a class.
+2.Constructor does not have any return type.
+3.But,However Constructor can take parameters.
+4.Constructor have same name as the class name.
+5.Constructor auomatically calls whenever we create an object.
+
+//1.Default Constructor
+#include<iostream>
+using namespace std;
+class Student //Define Class
+{
+  private:
+  int ID;//Data Members
+  string Name;
+  string Course;
+  string Age;
+
+  //Member Functions
+  public:
+  void SetData()
+  {
+    cout<<"Enter Id :-"<<endl;
+    cin>>ID;
+    cout<<"Enter Name :-"<<endl;
+    cin>>Name;
+    cout<<"Enter Course :-"<<endl;
+    cin>>Course;
+    cout<<"Enter Age :-"<<endl;
+    cin>>Age;
+  }
+  void ShowData()
+  {
+    cout<<"Your Id Is:- "<<ID<<endl;
+    cout<<"Your Name Is:- "<<Name<<endl;
+    cout<<"Your Course Is:- "<<Course<<endl;
+    cout<<"Your Age Is:- "<<Age<<endl;
+  }
+
+  //Default Constructor,Parameterless Constructor
+  public:
+  Student()
+  {
+    cout<<"Constructor is Calling...!";
+    cout<<"Enter Id :-"<<endl;
+    cin>>ID;
+    cout<<"Enter Name :-"<<endl;
+    cin>>Name;
+    cout<<"Enter Course :-"<<endl;
+    cin>>Course;
+    cout<<"Enter Age :-"<<endl;
+    cin>>Age;
+  }
+};
+int main()
+{
+  Student s1,s2;//Constructor Calls automatically
+  s1.ShowData();
+  s2.ShowData();
+   return 0;
+}
+
+
+//2.Parameterized Constructor
+#include<iostream>
+using namespace std;
+class Student //Define Class
+{
+  private:
+  int ID;//Data Members
+  string Name;
+  string Course;
+  string Age;
+
+  //Member Functions
+  public:
+  void SetData()
+  {
+    cout<<"Enter Id :-"<<endl;
+    cin>>ID;
+    cout<<"Enter Name :-"<<endl;
+    cin>>Name;
+    cout<<"Enter Course :-"<<endl;
+    cin>>Course;
+    cout<<"Enter Age :-"<<endl;
+    cin>>Age;
+  }
+  void ShowData()
+  {
+    cout<<"Your Id Is:- "<<ID<<endl;
+    cout<<"Your Name Is:- "<<Name<<endl;
+    cout<<"Your Course Is:- "<<Course<<endl;
+    cout<<"Your Age Is:- "<<Age<<endl;
+  }
+
+  //Parameterized Constructor
+  public:
+  Student(int i,string n,string c,string a)
+  {
+    ID = i;
+    Name = n;
+    Course = c;
+    Age = a;
+  }
+};
+int main()
+{
+  Student s1 = Student(1,"XYZ","C++","13");
+  s1.ShowData();
+   return 0;
+}
+
+//3.Copy Constructor
+
+
+//4.Constructor Overloading
+
+#include<iostream>
+using namespace std;
+class Student //Define Class
+{
+  private:
+  int ID;//Data Members
+  string Name;
+  string Course;
+  string Age;
+
+  //Member Functions
+  public:
+  void SetData()
+  {
+    cout<<"Enter Id :-"<<endl;
+    cin>>ID;
+    cout<<"Enter Name :-"<<endl;
+    cin>>Name;
+    cout<<"Enter Course :-"<<endl;
+    cin>>Course;
+    cout<<"Enter Age :-"<<endl;
+    cin>>Age;
+  }
+  void ShowData()
+  {
+    cout<<"Your Id Is:- "<<ID<<endl;
+    cout<<"Your Name Is:- "<<Name<<endl;
+    cout<<"Your Course Is:- "<<Course<<endl;
+    cout<<"Your Age Is:- "<<Age<<endl;
+  }
+
+  //Constructor Overloading
+
+  //Default Constructor,Parameterless Constructor
+  public:
+  Student()
+  {
+    cout<<"Constructor is Calling...!";
+    cout<<"Enter Id :-"<<endl;
+    cin>>ID;
+    cout<<"Enter Name :-"<<endl;
+    cin>>Name;
+    cout<<"Enter Course :-"<<endl;
+    cin>>Course;
+    cout<<"Enter Age :-"<<endl;
+    cin>>Age;
+  }
+
+  //Parameterized Constructor
+  public:
+  Student(int i,string n,string c,string a)
+  {
+    ID = i;
+    Name = n;
+    Course = c;
+    Age = a;
+  }
+};
+int main()
+{
+  Student s1 = Student(1,"XYZ","C++","13");
+  s1.ShowData();
+   return 0;
+}
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,73 @@
+Entity FrameWork In MVC :- An ORM Framework : 
+application(Types(Classes)) <--> {ORM} <--> (Database)
+
+1.Entity Framework is an ORM FrameWork that asp.net MVC application can use.
+2.EDM(Entity Data Model) : it is a conceptual model that describes the entites(tables) and the associations they participate in an application.
+3.EDM is a set of concepts that describe the structure data.
+4.EDM is a model that describes entities and the relationships between them.
+5.EDM allows you to handle data access logic by programming against entities without having to worry about the structure of the underlying data store and how to connect with it.
+6.Entity FrameWork eliminates the need to write most of the data-access code that otherwise need to be written.
+7.It is an enhancement to ADO.Net that gives developers an automated mechanism for accessing and storing the data in the database.
+8.Using Entity FrameWork, developers issue queries using LINQ(Language integrated Queries),then retrive and manipulate data as strongly type objects.
+There are 3 types of Approaches in Entity Framework
+
+1.Code First Approach - > In the code first approach the entity framework creates database object based on model classes that we can create to represent application data.
+2.Is the most common approach implemented in asp.net MVC framework.
+3.Allows you to develope your application by coding model classes and properties and delegates the process of creating the database objects to the Entity FrameWork.
+
+3.The Code First approach allows us to define your own model by creating custom classes.
+
+4.Then we can create database based on the Models.
+
+//Step 1 : -Create Model Class : it is a blueprint of Database table.
+ public class Visitors
+ {
+     [Key]
+     public int Id { get; set; } // Primary Key
+
+     [Required]
+     public string Name { get; set; }
+
+     [Required, EmailAddress]
+     public string Email { get; set; }
+
+     [Required]
+     public string Message { get; set; }
+
+     [Required]
+     public DateTime DateOfVisit { get; set; }
+ }
+
+
+
+//Step 2:-Create Connection String
+ <connectionStrings>
+   <add name="MyConnection" connectionString="Server=DESKTOP-MPE7G61;Database=Visitors;Trusted_Connection=True;" providerName="System.Data.SqlClient" />
+ </connectionStrings>
+
+
+//Step 3: - In Step 2 we have to use DbContext class.it is a heart of of the Entity Framework.this class maps the database table and handles the CRUD OPeration.
+Create DbContext Class
+
+public class AppDbContext : DbContext
+{
+    public AppDbContext() : base("name=MyConnection") { }
+    DbSet<Visitors> visitors { get; set; }
+}
+
+//Step 4 :Enable Migration(Package Console Manager)
+Enable-Migration
+
+//Step 5: Creation Migration
+Add-Migration
+
+//Step 6:- Update-Database
+
+
+
+
+
+
+
+2.Database First Approach
+3.Model First Approach

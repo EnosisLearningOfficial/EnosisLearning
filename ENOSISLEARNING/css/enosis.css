@@ -1,0 +1,14 @@
+﻿
+/*.grid {
+    width: 100%;
+    max-height: 50rem;
+    background-color: red;
+    margin-top: -15px;
+    overflow: auto;
+    scrollbar-width: none;*/ /* Firefox */
+    /*-ms-overflow-style: none;*/ /* IE 10+ */
+/*}
+.grid::-webkit-scrollbar {
+    display: none;*/ /* Chrome, Safari */
+/*}*/
+

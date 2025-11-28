@@ -1,0 +1,13 @@
+--Pages Names--
+1.MyAdmin.Master
+2.StudentMaster.Master
+3.Login.aspx
+4.Logout.aspx
+5.Batchinfo.aspx 	
+6.BatchesDetails.aspx 
+7.NewBatchSheetDetails.aspx
+8.Dashboard.aspx
+9.Result.aspx
+10.Fee.aspx
+11.Attendence.aspx
+12.BatchApproval.aspx

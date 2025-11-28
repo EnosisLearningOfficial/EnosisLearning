@@ -1,0 +1,691 @@
+Web Designing 8\n
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title>
+
+</title><meta charset="utf-8" /><meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" /><meta name="description" /><meta name="author" />
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.ico" />
+  
+    <!-- Custom CSS -->
+    <link href="../Layout_file/libs/flot/css/float-chart.css" rel="stylesheet" />
+    <!-- Custom CSS -->
+    <link href="../Layout_file/css/style.min.css" rel="stylesheet" />
+   
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+    
+        
+       <script type="text/javascript">
+           function SearchText() {
+               $(".autosuggest").autocomplete({
+                   source: function (request, response) {
+                       $.ajax({
+                           type: "POST",
+                           contentType: "application/json; charset=utf-8",
+                           url: "EnosisRegistration.aspx/GetAutoCompleteData",
+                           data: "{'username':'" + document.getElementById('txtReferBy').value + "'}",
+                           dataType: "json",
+                           success: function (data) {
+                               response(data.d);
+                           },
+                           error: function (result) {
+                               alert("Error");
+                           }
+                       });
+                   }
+               });
+           }
+           $(document).ready(function () {
+
+               SearchText();
+           
+            $('#ContentPlaceHolder1_chkFresher').change(function () {
+                if ($(this).is(":checked")) {
+                   
+                    $('#ContentPlaceHolder1_trExpc1').css("display", "none")
+                    $('#ContentPlaceHolder1_trExpc2').css("display", "none")
+                    $('#ContentPlaceHolder1_trComp1').css("display", "none")
+                    $('#ContentPlaceHolder1_trComp2').css("display", "none")
+                  
+                    $('#ContentPlaceHolder1_drpExpYears').removeAttr('required');
+                    $('#ContentPlaceHolder1_txtCompanyName').removeAttr('required');
+
+                }
+                else {
+
+                    $('#ContentPlaceHolder1_trExpc1').css("display", "block")
+                    $('#ContentPlaceHolder1_trExpc2').css("display", "block")
+                    $('#ContentPlaceHolder1_trComp1').css("display", "block")
+                    $('#ContentPlaceHolder1_trComp2').css("display", "block")
+
+                    $('#ContentPlaceHolder1_trExp').show();
+                    $('#ContentPlaceHolder1_trComp').show();
+                   
+                }
+
+            });
+
+            $("#ContentPlaceHolder1_txtDOB").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                showOn: 'button',
+                buttonImageOnly: true,
+                buttonImage: 'images/calendar.png'
+
+            });
+            
+                $('[id*=ContentPlaceHolder1_drpCourses]').multiselect({
+                    includeSelectAllOption: true
+                });
+               
+
+           });
+        </script>
+
+    <style>
+        body {
+        background-color:#fff;
+        }
+        .hide-div {
+            display: none;
+        }
+        .add-candidate {
+            height: 34px;
+            margin: 0 auto;
+            background: url(images/employee-details-main-h.png) repeat-x;
+            line-height: 32px;
+            padding-left: 20px;
+            font-family: arial;
+            font-size: 14px;
+            font-weight: bold;
+            color: #368aff;       
+         }
+        .add-candidate h5{
+          padding:10px;
+          color:#1C71BB;
+          font-weight:bold;
+          font-family:15px!important;  
+        }
+        .registration_tabl h5 {
+          padding:0px 0px;
+          color:#1C71BB;
+          font-weight:bold;
+          font-family:17px;  
+        }
+        .myhr {
+        margin-top: 20px!important;
+        margin-bottom:0px!important;
+        border: 0;
+        border-top: 2px solid #069;
+        }
+        input[type="radio"], input[type="checkbox"] {
+        margin: 7px 0 0 0;
+        line-height: normal;
+        }
+       
+    </style>
+    <link href="css/jquery-ui.css" rel="Stylesheet" type="text/css" />
+    
+    <script type="text/javascript">
+        $(function () {
+           
+        });
+    </script>
+    <style>
+        .ui-datepicker-trigger {
+            margin: -2px 0 0 -25px;
+            width:23px;
+            height:23px;
+            border-radius: 3px;
+        }
+
+        .registration_tabl
+        {
+            width:80%;
+            margin:10px auto;
+            border:1px solid lightgrey;
+        }
+       .heading {
+    position: relative;
+    font-weight: 600;
+    margin-bottom: 0px;
+    background: #173151;
+    color: white;
+    height: 30px;
+    padding: 0px 10px;
+    font-size: 25px;
+        margin-left: 10px;
+}
+        .myform
+        {
+            border:1px solid lightgrey;
+            padding:0px;
+            margin-left:10px;
+        }
+    </style>
+</head>
+<body>
+
+
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+        <header class="topbar" data-navbarbg="skin5">
+            <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+                <div class="navbar-header" data-logobg="skin5">
+                    <!-- This is for the sidebar toggle which is visible on mobile only -->
+                    <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
+                    <!-- ============================================================== -->
+                    <!-- Logo -->
+                    <!-- ============================================================== -->
+                    <a class="navbar-brand" href="index.aspx">
+                        <!-- Logo icon -->
+                        <b class="logo-icon p-l-10">
+                            <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
+                            <!-- Dark Logo icon -->
+                            <img src="images/favicon.ico" width="30" height="30" alt="homepage" class="light-logo" />
+                           
+                        </b>
+                        <!--End Logo icon -->
+                         <!-- Logo text -->
+                        <span class="logo-text">
+                             <!-- dark Logo text -->
+                           
+                            
+                        </span>
+                        <!-- Logo icon -->
+                        <!-- <b class="logo-icon"> -->
+                            <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
+                            <!-- Dark Logo icon -->
+                            <!-- <img src="../../assets/images/logo-text.png" alt="homepage" class="light-logo" /> -->
+                            
+                        <!-- </b> -->
+                        <!--End Logo icon -->
+                    </a>
+                    <!-- ============================================================== -->
+                    <!-- End Logo -->
+                    <!-- ============================================================== -->
+                    <!-- ============================================================== -->
+                    <!-- Toggle which is visible on mobile only -->
+                    <!-- ============================================================== -->
+                    <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i class="ti-more"></i></a>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End Logo -->
+                <!-- ============================================================== -->
+                <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
+                    <!-- ============================================================== -->
+                    <!-- toggle and nav items -->
+                    <!-- ============================================================== -->
+                    <ul class="navbar-nav float-left mr-auto">
+                        <li class="nav-item d-none d-md-block"><a class="nav-link sidebartoggler waves-effect waves-light" href="javascript:void(0)" data-sidebartype="mini-sidebar"><img src="Layout_file/images/menusideicon.png" alt="img" width="30" height="30" /></a></li>
+                        <!-- ============================================================== -->
+                       
+                    </ul>
+                    <!-- ============================================================== -->
+                    <!-- Right side toggle and nav items -->
+                    <!-- ============================================================== -->
+                    <ul class="navbar-nav float-right">
+                       
+
+                        <!-- ============================================================== -->
+                        <!-- User profile and search -->
+                        <!-- ============================================================== -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../Layout_file/images/users/1.jpg" alt="user" class="rounded-circle" width="31"/></a>
+                            <div class="dropdown-menu dropdown-menu-right user-dd animated">
+                                
+                              
+                                <a href="Login.aspx" id="hyperlogin" class="dropdown-item"><i class="fa fa-power-off m-r-5 m-l-5"></i> <span id="login">Login</span> </a>
+                                <div class="dropdown-divider"></div>
+                               
+                            </div>
+                        </li>
+                        <!-- ============================================================== -->
+                        <!-- User profile and search -->
+                        <!-- ============================================================== -->
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- ============================================================== -->
+        <!-- End Topbar header -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <aside class="left-sidebar" data-sidebarbg="skin5">
+            <!-- Sidebar scroll-->
+            <div class="scroll-sidebar">
+                <!-- Sidebar navigation-->
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav" class="p-t-30">
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="SearchCandidate.aspx" aria-expanded="false">
+                            <img src="Layout_file/images/student.png" width="30" height="30" /><span class="hide-menu"> Candidate</span></a></li>
+
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="Question_Status.aspx" aria-expanded="false"><img src="Layout_file/images/question.png" width="25" height="25" /><span class="hide-menu">  Questions </span></a>
+                          
+                        </li>
+                       
+                       
+                      
+                      
+                    </ul>
+                </nav>
+                <!-- End Sidebar navigation -->
+            </div>
+            <!-- End Sidebar scroll-->
+        </aside>
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+         <div class="container-fluid ">
+                   <form method="post" action="./EnosisRegistration.aspx?Id=5584" onsubmit="javascript:return WebForm_OnSubmit();" id="form1" enctype="multipart/form-data">
+<div class="aspNetHidden">
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__LASTFOCUS" id="__LASTFOCUS" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwULLTIwMzQ2ODU1NzgPFgIeBlJFU1VNRQUPa2F2aXRhMTk5Mi5kb2N4FgJmD2QWBgIFDxYCHgdWaXNpYmxlaGQCBw8WAh4EaHJlZgUMfi9Mb2dpbi5hc3B4FgICAQ8PFgIeBFRleHQFBUxvZ2luZGQCCQ8WAh4HZW5jdHlwZQUTbXVsdGlwYXJ0L2Zvcm0tZGF0YRYCAgEPZBYQAgEPDxYCHwMFKVRoZSBnaXZlbiBwYXRoJ3MgZm9ybWF0IGlzIG5vdCBzdXBwb3J0ZWQuZGQCFQ8QDxYGHg1EYXRhVGV4dEZpZWxkBQpDT1VSU0VOQU1FHg5EYXRhVmFsdWVGaWVsZAUIQ09VUlNFSUQeC18hRGF0YUJvdW5kZ2QQFRQBQwNDKysHQyAmIEMrKwpDU0hBUlAuTkVUB0FTUC5ORVQKU1FMIFNFUlZFUhxDU0hBUlAuTkVULEFTUC5ORVQsU1FMU0VSVkVSDVdlYiBEZXNpZ25pbmcEU1NJUwRTU1JTBFNTQVMETVNCSQtBU1AuTkVUIE1WQwRKQVZBDk1BTlVBTCBURVNUSU5HCFNFTEVOSVVNDEFEVkFOQ0UtSkFWQQ1DT01QTEVURSBKQVZBCFBPV0VSLUJJDUNPTVBMRVRFIC5ORVQVFAExATIBMwE0ATUBNgE3ATgCMTECMTICMTMCMTQCMTcCMjACMjECMjICMjMCMjQCMjUCMjYUKwMUZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2cWAQIHZAIXDw8WAh8BZ2RkAhkPDxYCHwFnZGQCJw8QDxYGHwUFBE5BTUUfBgUCSUQfB2dkEBUcBVMuUy5DBUguUy5DA0IuQQZCLkFyY2gDQkNBA0JCQQVCLkNvbQRCLkVkA0JEUwNCSE0IQi5QaGFybWEEQi5TYwlCLlRlY2gvQkUDTExCBE1CQlMHRGlwbG9tYQNNQ00CTUEGTS5BcmNoBU0uQ29tBE0uRWQITS5QaGFybWEDTVNDBk0uVGVjaAhNQkEvUEdETQNNQ0ECTVMKUEcgRGlwbG9tYRUcATEBMgEzATQBNQE2ATcBOAE5AjEwAjExAjEyAjEzAjE0AjE1AjE2AjE3AjE4AjE5AjIwAjIxAjIyAjIzAjI0AjI1AjI2AjI3AjI4FCsDHGdnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dkZAIvDxAPFgIeB0NoZWNrZWRnZGRkZAIzDxYCHwFoFgYCAQ8QD2QWAh4IcmVxdWlyZWQFBWZhbHNlZBYBZmQCAw8QZGQWAWZkAgUPD2QWAh8JBQVmYWxzZWQCNQ9kFgICAw8PFgQfAwUwPGkgY2xhc3M9IglmYSBmYS1kb3dubG9hZCI+PC9pPiAga2F2aXRhMTk5Mi5kb2N4HgtOYXZpZ2F0ZVVybAUZfi9SZXN1bWVzL2thdml0YTE5OTIuZG9jeGRkGAEFHl9fQ29udHJvbHNSZXF1aXJlUG9zdEJhY2tLZXlfXxYGBSBjdGwwMCRDb250ZW50UGxhY2VIb2xkZXIxJHJiTWFsZQUgY3RsMDAkQ29udGVudFBsYWNlSG9sZGVyMSRyYk1hbGUFImN0bDAwJENvbnRlbnRQbGFjZUhvbGRlcjEkcmJGZU1hbGUFJGN0bDAwJENvbnRlbnRQbGFjZUhvbGRlcjEkZHJwQ291cnNlcwUkY3RsMDAkQ29udGVudFBsYWNlSG9sZGVyMSRjaGtGcmVzaGVyBSZjdGwwMCRDb250ZW50UGxhY2VIb2xkZXIxJGNoa1BsYWNlbWVudFojwfMhtvc5Oa2Btfz7WYql3j+5mU+TWIGOTDXIK59R" />
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['form1'];
+if (!theForm) {
+    theForm = document.form1;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="/WebResource.axd?d=rNmKZRm6BszbxBR3khYwkCktMGkiqZ-IfbZ8_XAgKnXLDjSDnCbSZTRQAnL6oOmYyWkjaZ8wwRIpZyqZb-VmunN1wmqMjv4DgBciv7kiV1g1&amp;t=636983559241335545" type="text/javascript"></script>
+
+
+<script type="text/javascript">
+//<![CDATA[
+alert('Web Designing 8\n');//]]>
+</script>
+
+<script src="/WebResource.axd?d=crsFSLAJrO_wmRSxZDjFXwcmCk7vAhcPgut44brbrhiM8rl7Azk3p1r2Mqqc842LUuHcJU0LNFIiRalmyGR7aCgoj_L78-dw89lxeJGhr9w1&amp;t=636983559241335545" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+function WebForm_OnSubmit() {
+if (typeof(ValidatorOnSubmit) == "function" && ValidatorOnSubmit() == false) return false;
+return true;
+}
+//]]>
+</script>
+
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="0C94E97A" />
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="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" />
+</div>
+  
+        
+    
+
+          
+
+                
+                      <h4 class="heading">Registration Form</h4>
+                        <div class="card myform">
+                         
+                                <div class="card-body">
+                                                            <span id="ContentPlaceHolder1_lblError" style="color:Red;background-color:Yellow;">The given path's format is not supported.</span>
+                                     
+                                     <h4 class="card-title">Please fill the details to complete the Registration</h4>
+
+                                         <div class="form-group row">
+                                        <label for="fname" class="col-sm-2 text-right control-label col-form-label">Name :</label>
+                                        <div class="col-sm-4">
+                                         
+                                        <input name="ctl00$ContentPlaceHolder1$txtName" type="text" value="kavita" id="ContentPlaceHolder1_txtName" class="form-control" required="true" />
+                                        </div>
+                              
+                                        <label for="lname" class="col-sm-2 text-right control-label col-form-label">Gender :</label>
+                                        <div class="col-sm-4">
+                                         
+                                           <input id="ContentPlaceHolder1_rbMale" type="radio" name="ctl00$ContentPlaceHolder1$Gender" value="rbMale" /><label for="ContentPlaceHolder1_rbMale">Male</label>
+                                                 
+
+                                                   <input id="ContentPlaceHolder1_rbFeMale" type="radio" name="ctl00$ContentPlaceHolder1$Gender" value="rbFeMale" checked="checked" /><label for="ContentPlaceHolder1_rbFeMale">FeMale</label>
+                                     
+                                        </div>
+                                    </div>
+                                          <div class="form-group row">
+                                        <label for="fname" class="col-sm-2 text-right control-label col-form-label">D.O.B :</label>
+                                        <div class="col-sm-4">
+                                         <input name="ctl00$ContentPlaceHolder1$txtDOB" type="text" value="11/02/1988" id="ContentPlaceHolder1_txtDOB" class="form-control" placeholder="dd/MM/yyyy" required="true" />
+                                       <span id="ContentPlaceHolder1_redob" style="color:Red;visibility:hidden;">Please enter valid DOB Format(dd/MM/YYYY)</span>
+                                        </div>
+                                    
+                                        <label for="fname" class="col-sm-2 text-right control-label col-form-label">MobileNo : </label>
+                                        <div class="col-sm-4">
+                                        
+                                       <input name="ctl00$ContentPlaceHolder1$txtMobileNo" type="text" value="1234567890" id="ContentPlaceHolder1_txtMobileNo" class="form-control" required="true" />
+<span id="ContentPlaceHolder1_RegularExpressionValidator1" class="valid" style="display:none;">Enter 10 digits mobile number</span>
+                                        </div>
+                                    </div>
+                                        <div class="form-group row">
+                                        <label for="fname" class="col-sm-2 text-right control-label col-form-label">Email :</label>
+                                        <div class="col-sm-4">
+                                        
+                                     <input name="ctl00$ContentPlaceHolder1$txtEmail" type="text" value="kavita@gmail.com" id="ContentPlaceHolder1_txtEmail" class="form-control" required="true" /> 
+<span id="ContentPlaceHolder1_regEmail" class="valid" style="display:none;">Please insert valid email ID</span> 
+                                        </div>
+                                  
+                                        <label for="fname" class="col-sm-2 text-right control-label col-form-label">Course :</label>
+                                        <div class="col-sm-4">
+                                        
+                                  <select size="4" name="ctl00$ContentPlaceHolder1$drpCourses" multiple="multiple" onchange="javascript:setTimeout(&#39;__doPostBack(\&#39;ctl00$ContentPlaceHolder1$drpCourses\&#39;,\&#39;\&#39;)&#39;, 0)" id="ContentPlaceHolder1_drpCourses" class="select2 form-control m-t-15" style="height: 36px;width: 100%;">
+	<option value="1">C</option>
+	<option value="2">C++</option>
+	<option value="3">C &amp; C++</option>
+	<option value="4">CSHARP.NET</option>
+	<option value="5">ASP.NET</option>
+	<option value="6">SQL SERVER</option>
+	<option value="7">CSHARP.NET,ASP.NET,SQLSERVER</option>
+	<option selected="selected" value="8">Web Designing</option>
+	<option value="11">SSIS</option>
+	<option value="12">SSRS</option>
+	<option value="13">SSAS</option>
+	<option value="14">MSBI</option>
+	<option value="17">ASP.NET MVC</option>
+	<option value="20">JAVA</option>
+	<option value="21">MANUAL TESTING</option>
+	<option value="22">SELENIUM</option>
+	<option value="23">ADVANCE-JAVA</option>
+	<option value="24">COMPLETE JAVA</option>
+	<option value="25">POWER-BI</option>
+	<option value="26">COMPLETE .NET</option>
+
+</select>
+<span id="ContentPlaceHolder1_lblFees" class="col-form-label">Total Fees</span>
+<input name="ctl00$ContentPlaceHolder1$txtTotalFees" type="text" value="8000" id="ContentPlaceHolder1_txtTotalFees" class="form-control" />
+                                        </div>
+                                    </div>
+                                        <div class="form-group row">
+                                        <label for="fname" class="col-sm-2 text-right control-label col-form-label">Software Skills :</label>
+                                        <div class="col-sm-4">
+                              <input name="ctl00$ContentPlaceHolder1$txtSkills" type="text" value="c#" id="ContentPlaceHolder1_txtSkills" class="form-control" required="true" /> 
+                                        </div>
+                                 
+                                        <label for="fname" class="col-sm-2 text-right control-label col-form-label">Address : </label>
+                                        <div class="col-sm-4">
+                             <input name="ctl00$ContentPlaceHolder1$txtAddress" type="text" value="Pune" id="ContentPlaceHolder1_txtAddress" class="form-control" required="true" />
+                                        </div>
+                                    </div>
+
+                                  <div class="form-group row">
+                                        <label for="fname" class="col-sm-2 text-right control-label col-form-label">Location :</label>
+                                        <div class="col-sm-4">
+                             <input name="ctl00$ContentPlaceHolder1$txtLocation" type="text" value="Dhanori" id="ContentPlaceHolder1_txtLocation" class="form-control" required="true" />
+                                        </div>
+                                  
+                                        <label for="fname" class="col-sm-2 text-right control-label col-form-label">City :</label>
+                                        <div class="col-sm-4">
+                             <input name="ctl00$ContentPlaceHolder1$txtCity" type="text" value="PUNE" id="ContentPlaceHolder1_txtCity" class="form-control" required="true" />
+                                        </div>
+                                    </div>
+
+
+                                      <div class="form-group row">
+                                        <label for="fname" class="col-sm-2 text-right control-label col-form-label">Pincode :</label>
+                                        <div class="col-sm-4">
+                             <input name="ctl00$ContentPlaceHolder1$txtPinCode" type="text" value="411015" id="ContentPlaceHolder1_txtPinCode" class="form-control" required="true" />
+                                
+                                                    </div>
+                                    
+                                        <label for="fname" class="col-sm-2 text-right control-label col-form-label">Highest Qualification :</label>
+                                        <div class="col-sm-4">
+                             <select name="ctl00$ContentPlaceHolder1$drpQualifications" id="ContentPlaceHolder1_drpQualifications" class="select2 form-control custom-select" required="true" style="width: 100%; height:36px;">
+	<option value="1">S.S.C</option>
+	<option value="2">H.S.C</option>
+	<option value="3">B.A</option>
+	<option value="4">B.Arch</option>
+	<option value="5">BCA</option>
+	<option value="6">BBA</option>
+	<option selected="selected" value="7">B.Com</option>
+	<option value="8">B.Ed</option>
+	<option value="9">BDS</option>
+	<option value="10">BHM</option>
+	<option value="11">B.Pharma</option>
+	<option value="12">B.Sc</option>
+	<option value="13">B.Tech/BE</option>
+	<option value="14">LLB</option>
+	<option value="15">MBBS</option>
+	<option value="16">Diploma</option>
+	<option value="17">MCM</option>
+	<option value="18">MA</option>
+	<option value="19">M.Arch</option>
+	<option value="20">M.Com</option>
+	<option value="21">M.Ed</option>
+	<option value="22">M.Pharma</option>
+	<option value="23">MSC</option>
+	<option value="24">M.Tech</option>
+	<option value="25">MBA/PGDM</option>
+	<option value="26">MCA</option>
+	<option value="27">MS</option>
+	<option value="28">PG Diploma</option>
+
+</select>
+                                        </div>
+                                    </div>
+
+
+                                      <div class="form-group row">
+                                        <label for="fname" class="col-sm-2 text-right control-label col-form-label">Year of Passing: </label>
+                                        <div class="col-sm-4">
+                        <select name="ctl00$ContentPlaceHolder1$drpPassingYears" id="ContentPlaceHolder1_drpPassingYears" class="select2 form-control m-t-15" required="true" style="height: 36px;width: 100%;">
+	<option selected="selected" value="1992">1992</option>
+	<option value="1995">1995</option>
+	<option value="1996">1996</option>
+	<option value="1997">1997</option>
+	<option value="1998">1998</option>
+	<option value="1999">1999</option>
+	<option value="2000">2000</option>
+	<option value="2001">2001</option>
+	<option value="2002">2002</option>
+	<option value="2003">2003</option>
+	<option value="2004">2004</option>
+	<option value="2005">2005</option>
+	<option value="2006">2006</option>
+	<option value="2007">2007</option>
+	<option value="2008">2008</option>
+	<option value="2009">2009</option>
+	<option value="2010">2010</option>
+	<option value="2011">2011</option>
+	<option value="2012">2012</option>
+	<option value="2013">2013</option>
+	<option value="2014">2014</option>
+	<option value="2015">2015</option>
+	<option value="2016">2016</option>
+	<option value="2017">2017</option>
+	<option value="2018">2018</option>
+	<option value="2019">2019</option>
+
+</select>
+                                        </div>
+                                   
+                                        <label for="fname" class="col-sm-2 text-right control-label col-form-label">Percentage :</label>
+                                        <div class="col-sm-4">
+                             <input name="ctl00$ContentPlaceHolder1$txtPercentage" type="text" value="71" id="ContentPlaceHolder1_txtPercentage" class="form-control" required="true" />
+                             </div>
+                                    </div>
+                                      <div class="form-group row">
+                                        <label for="fname" class="col-sm-2 text-right control-label col-form-label">Coordinator Name :</label>
+                                        <div class="col-sm-4">
+                           <select name="ctl00$ContentPlaceHolder1$drpCoordinator" id="ContentPlaceHolder1_drpCoordinator" class="select2 form-control m-t-15" style="height: 36px;width: 100%;">
+	<option selected="selected" value="OTHERS">SELECT</option>
+	<option value="ASHVINI">ASHVINI</option>
+	<option value="DILLIP">DILLIP</option>
+	<option value="YOJANA">YOJANA</option>
+
+</select>
+                             </div>
+                           
+                                        <label for="fname" class="col-sm-2 text-right control-label col-form-label">Refered By :</label>
+                                        <div class="col-sm-4">
+                            <input type="text" id="txtReferBy"  class="autosuggest form-control"  />
+                             </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="fname" class="col-sm-2 text-right control-label col-form-label">Fresher :</label>
+                                        <div class="col-sm-4">
+                            <span required="true"><input id="ContentPlaceHolder1_chkFresher" type="checkbox" name="ctl00$ContentPlaceHolder1$chkFresher" checked="checked" onclick="javascript:setTimeout(&#39;__doPostBack(\&#39;ctl00$ContentPlaceHolder1$chkFresher\&#39;,\&#39;\&#39;)&#39;, 0)" /><label for="ContentPlaceHolder1_chkFresher">Tick If You are a Fresher</label></span>
+                             </div>
+                                    
+                                        <label for="fname" class="col-sm-2 text-right control-label col-form-label">Require Placement :</label>
+                                        <div class="col-sm-4">
+                           <span required="true"><input id="ContentPlaceHolder1_chkPlacement" type="checkbox" name="ctl00$ContentPlaceHolder1$chkPlacement" checked="checked" /><label for="ContentPlaceHolder1_chkPlacement">Placement Required</label></span>
+                             </div>
+                                    </div>
+                                         
+
+                                         <div id="ContentPlaceHolder1_trResume" class="form-group row">
+                                        <label for="fname" class="col-sm-2 text-right control-label col-form-label">Resume :</label>
+                                        <div class="col-sm-4">
+                                <input type="file" name="ctl00$ContentPlaceHolder1$fResume" id="ContentPlaceHolder1_fResume" />
+                                         
+                                            <a id="ContentPlaceHolder1_hykResume" class="btn btn-primary" href="Resumes/kavita1992.docx" style="margin-top:-25px; float:right"><i class="	fa fa-download"></i>  kavita1992.docx</a>
+                             </div>
+                                    </div>
+
+        
+
+
+           </div>
+         
+                             
+
+      
+     
+      <div class="border-top">
+                         <div class="text-lg-right card-body" style="padding: 0.25rem;" >  
+                                    <input type="submit" name="ctl00$ContentPlaceHolder1$btnSubmit" value="Save" onclick="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$ContentPlaceHolder1$btnSubmit&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, false))" id="ContentPlaceHolder1_btnSubmit" class="btn btn-info bton r-btn" />&nbsp;&nbsp;
+ 
+<input type="submit" name="ctl00$ContentPlaceHolder1$btnReset" value="Reset" id="ContentPlaceHolder1_btnReset" class=" btn btn-info bton r-btn" />
+
+                                    </div>
+          </div>
+          
+                           </div> 
+   
+        <script src="Scripts/jquery-1.8.2.js"></script>
+
+    
+          
+<script type="text/javascript">
+//<![CDATA[
+var Page_Validators =  new Array(document.getElementById("ContentPlaceHolder1_redob"), document.getElementById("ContentPlaceHolder1_RegularExpressionValidator1"), document.getElementById("ContentPlaceHolder1_regEmail"));
+//]]>
+</script>
+
+<script type="text/javascript">
+//<![CDATA[
+var ContentPlaceHolder1_redob = document.all ? document.all["ContentPlaceHolder1_redob"] : document.getElementById("ContentPlaceHolder1_redob");
+ContentPlaceHolder1_redob.controltovalidate = "ContentPlaceHolder1_txtDOB";
+ContentPlaceHolder1_redob.errormessage = "Please enter valid DOB Format(dd/MM/YYYY)";
+ContentPlaceHolder1_redob.evaluationfunction = "RegularExpressionValidatorEvaluateIsValid";
+ContentPlaceHolder1_redob.validationexpression = "(0[1-9]|[12][0-9]|3[01])[/](0[1-9]|1[012])[/]\\d{4}";
+var ContentPlaceHolder1_RegularExpressionValidator1 = document.all ? document.all["ContentPlaceHolder1_RegularExpressionValidator1"] : document.getElementById("ContentPlaceHolder1_RegularExpressionValidator1");
+ContentPlaceHolder1_RegularExpressionValidator1.controltovalidate = "ContentPlaceHolder1_txtMobileNo";
+ContentPlaceHolder1_RegularExpressionValidator1.errormessage = "Enter 10 digits mobile number";
+ContentPlaceHolder1_RegularExpressionValidator1.display = "Dynamic";
+ContentPlaceHolder1_RegularExpressionValidator1.evaluationfunction = "RegularExpressionValidatorEvaluateIsValid";
+ContentPlaceHolder1_RegularExpressionValidator1.validationexpression = "[0-9]{10}";
+var ContentPlaceHolder1_regEmail = document.all ? document.all["ContentPlaceHolder1_regEmail"] : document.getElementById("ContentPlaceHolder1_regEmail");
+ContentPlaceHolder1_regEmail.controltovalidate = "ContentPlaceHolder1_txtEmail";
+ContentPlaceHolder1_regEmail.display = "Dynamic";
+ContentPlaceHolder1_regEmail.evaluationfunction = "RegularExpressionValidatorEvaluateIsValid";
+ContentPlaceHolder1_regEmail.validationexpression = "\\w+([-+.\']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
+//]]>
+</script>
+
+
+<script type="text/javascript">
+//<![CDATA[
+
+var Page_ValidationActive = false;
+if (typeof(ValidatorOnLoad) == "function") {
+    ValidatorOnLoad();
+}
+
+function ValidatorOnSubmit() {
+    if (Page_ValidationActive) {
+        return ValidatorCommonOnSubmit();
+    }
+    else {
+        return true;
+    }
+}
+        //]]>
+</script>
+</form>
+         </div>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+        
+         
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page wrapper  -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+  
+            <!-- All Jquery -->
+    <!-- ============================================================== -->
+
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="../Layout_file/libs/popper.js/dist/umd/popper.min.js"></script>
+    <script src="../Layout_file/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../Layout_file/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+    <script src="../Layout_file/extra-libs/sparkline/sparkline.js"></script>
+    <!--Wave Effects -->
+    <script src="../Layout_file/js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="../Layout_file/js/sidebarmenu.js"></script>
+    <!--Custom JavaScript -->
+    <script src="../Layout_file/js/custom.min.js"></script>
+
+    <!-- Charts js Files -->
+    <script src="../Layout_file/libs/flot/excanvas.js"></script>
+    <script src="../Layout_file/libs/flot/jquery.flot.js"></script>
+    <script src="../Layout_file/libs/flot/jquery.flot.pie.js"></script>
+    <script src="../Layout_file/libs/flot/jquery.flot.time.js"></script>
+    <script src="../Layout_file/libs/flot/jquery.flot.stack.js"></script>
+    <script src="../Layout_file/libs/flot/jquery.flot.crosshair.js"></script>
+    <script src="../Layout_file/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
+    <script src="../Layout_file/js/pages/chart/chart-page-init.js"></script>
+</body>
+</html>

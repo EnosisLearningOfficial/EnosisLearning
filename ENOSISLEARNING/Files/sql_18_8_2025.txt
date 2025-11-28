@@ -1,0 +1,635 @@
+---------------------------------------------------18-08-2025------------------------
+--Three Tables of joins 
+--1st table
+CREATE TABLE Categories (
+    CategoryID INT PRIMARY KEY,
+    CategoryName VARCHAR(255) NOT NULL,
+    Description TEXT        --2gb unlimitade data store
+);
+select * from Products
+
+--"2nd table" 
+CREATE TABLE Products (
+    ProductID INT PRIMARY KEY,
+    ProductName VARCHAR(255) NOT NULL,
+    CategoryID INT,
+    Price DECIMAL(10, 2),
+    FOREIGN KEY (CategoryID) REFERENCES Categories(CategoryID)  -- Assuming you have a Categories table
+);
+
+--"3rd table"
+CREATE TABLE Sales (
+    SaleID INT PRIMARY KEY,
+    ProductID INT,
+    QuantitySold INT,
+    SaleDate DATETIME,
+    TotalAmount DECIMAL(10, 2),
+    FOREIGN KEY (ProductID) REFERENCES Products(ProductID)  -- Links to Products table
+);
+-- Inserting sample sales records into the Sales table
+INSERT INTO Sales (SaleID, ProductID, QuantitySold, SaleDate, TotalAmount) 
+VALUES
+(1, 1, 5, '2024-11-01', 250.00),  
+(2, 2, 3, '2024-11-02', 180.00),  
+(3, 3, 2, '2024-11-03', 120.00),  
+(4, 4, 10, '2024-11-04', 500.00); 
+
+
+select * from Categories
+
+
+--1. INNER JOIN:
+SELECT 
+    c.CategoryName,
+    p.ProductName,
+    p.Price,
+    s.QuantitySold,
+    s.SaleDate,
+    s.TotalAmount
+FROM 
+    Categories c
+INNER JOIN 
+    Products p ON c.CategoryID = p.CategoryID
+INNER JOIN 
+    Sales s ON p.ProductID = s.ProductID;
+-----------------------------------
+--2. LEFT JOIN (or LEFT OUTER JOIN)
+SELECT 
+    c.CategoryID as C_CategoryID,
+    c.CategoryName as c_CategoryName,
+    p.ProductName as p_ProductName,
+    p.Price as p_Price,
+    s.QuantitySold as  s_QuantitySold,
+    s.SaleDate as s_SaleDate,
+    s.TotalAmount as  s_TotalAmount
+FROM 
+    Categories c
+LEFT JOIN 
+    Products p ON c.CategoryID = p.CategoryID
+LEFT JOIN 
+    Sales s ON p.ProductID = s.ProductID;
+-------------------------------
+--3. RIGHT JOIN (or RIGHT OUTER JOIN)
+SELECT 
+    c.CategoryName,
+    p.ProductName,
+    p.Price,
+    s.QuantitySold,
+    s.SaleDate,
+    s.TotalAmount
+FROM 
+    Categories c
+RIGHT JOIN 
+    Products p ON c.CategoryID = p.CategoryID
+RIGHT JOIN 
+    Sales s ON p.ProductID = s.ProductID;
+---------------------------------------
+--4. FULL JOIN (or FULL OUTER JOIN)
+SELECT 
+    c.CategoryName,
+    p.ProductName,
+    p.Price,
+    s.QuantitySold,
+    s.SaleDate,
+    s.TotalAmount
+FROM 
+    Categories c
+FULL OUTER JOIN 
+    Products p ON c.CategoryID = p.CategoryID
+FULL OUTER JOIN 
+    Sales s ON p.ProductID = s.ProductID;
+---------------------------------------
+--5. CROSS JOIN
+SELECT 
+    c.CategoryName,
+    p.ProductName,
+    p.Price,
+    s.QuantitySold,
+    s.SaleDate,
+    s.TotalAmount
+FROM 
+    Categories c
+CROSS JOIN 
+    Products p
+CROSS JOIN 
+    Sales s;
+-------------------------------------------
+--6. SELF JOIN
+SELECT 
+    p1.ProductName AS Product1,
+    p2.ProductName AS Product2,
+    p1.Price AS Price1,
+    p2.Price AS Price2
+FROM 
+    Products p1
+JOIN 
+    Products p2 ON p1.CategoryID = p2.CategoryID AND p1.ProductID != p2.ProductID;
+
+
+--=====================  Advanced SQL QUERIES[Set operations]==========================
+--Set operations are used to combine the results of two or more SELECT queries. These operations allow you to perform logical set operations, such as union, intersection, or difference, on the results of multiple queries. 
+--The main set operations in SQL are:
+Union
+union all
+Intersect
+except
+
+---------------------------•	UNION------------------------------------------------
+--UNION: Combines results and removes duplicates.
+--Union:The set union from both subqueries without duplicates. All of the rows from both operands are taken into account. Duplicate entries in the result are eliminated.
+--Syntax:
+
+    SELECT Column_Name_1, Column_Name_2 ...., Column_NameN FROM Table_Name_1  
+    UNION   
+    SELECT Column_Name1, Column_Name_2 ...., Column_Name_N FROM Table_Name_2  
+    UNION ....... UNION  
+    SELECT Column_Name1, Column_Name_2 ...., Column_Name_N FROM Table_Name_N ;  
+
+    CREATE TABLE Old_Employee  
+    (  
+    Employee_Id INT NOT NULL,   
+    Employee_Name Varchar (40),  
+    Emp_Age INT,  
+    Emp_Salary INT  
+    ); 
+	
+	    CREATE TABLE New_Employee  
+    (  
+    Employee_Id INT NOT NULL,   
+    Employee_Name Varchar (40),  
+    Emp_Age INT,  
+    Emp_Salary INT  
+    );  
+
+	INSERT INTO Old_Employee (Employee_Id, Employee_Name, Emp_Age, Emp_Salary) VALUES (101, 'Akhil', 28, 25000),  
+    (102, 'Abhay', 27, 26000),  
+    (103, 'Sorya', 26, 29000),  
+    (104, 'Abhishek', 27, 26000),  
+    (105, 'Ritik', 26, 29000),  
+    (106, 'Yash', 29, 28000);  
+
+	 INSERT INTO New_Employee (Employee_Id, Employee_Name, Emp_Age, Emp_Salary) VALUES (201, 'Jack', 28, 45000),  
+    (202, 'Berry', 29, 35000),  
+    (105, 'Ritik', 26, 29000),  
+    (203, 'Shyam', 27, 26000),  
+    (204, 'Ritika', 28, 38000),  
+    (106, 'Yash', 29, 28000);  
+
+    SELECT * FROM Old_Employee;  
+	SELECT * FROM New_Employee; 
+
+--Example:
+SELECT Employee_Id, Employee_Name, Emp_Age 
+FROM Old_Employee 
+UNION 
+SELECT Employee_Id, Employee_Name, Emp_Age
+FROM New_Employee;
+
+	SELECT * FROM Old_Employee
+	UNION 
+	SELECT * FROM New_Employee
+
+--Where Clause with the UNION operator
+--The WHERE clause can also be used with UNION operator to filter the records from one or both tables.
+
+--Syntax of UNION with WHERE clause
+    SELECT Column_Name_1, Column_Name_2 ...., Column_NameN FROM Table_Name_1 [WHERE condition]    
+    UNION   
+    SELECT Column_Name1, Column_Name_2 ...., Column_Name_N FROM Table_Name_2 [WHERE condition];  
+
+--example:
+    SELECT * FROM Old_Employee WHERE Emp_Salary >= 29000
+	UNION
+	SELECT * FROM New_Employee WHERE Emp_Salary >= 29000;
+	
+	SELECT * FROM Old_Employee;
+	SELECT * FROM New_Employee;
+
+---------------------------•	UNION ALL------------------------------------------------
+--UNION ALL: Combines results, including duplicates.
+--UnionAll: from both subqueries. All of the rows from both operands are taken into account
+--Syntax of UNION ALL Set operator:
+
+  SELECT Column_Name_1, Column_Name_2 ...., Column_Name_N FROM Table_Name_1 [WHERE condition]    
+  UNION ALL  
+  SELECT Column_Name_1, Column_Name_2 ...., Column_Name_N FROM Table_Name_2 [WHERE condition];  
+
+--Example of UNION ALL
+SELECT Employee_Id, Employee_Name, Emp_Age, Emp_Salary 
+FROM Old_Employee 
+UNION ALL 
+SELECT Employee_Id, Employee_Name, Emp_Age, Emp_Salary 
+FROM New_Employee;
+
+---------------------------•	Intersection---------------------------------------
+--INTERSECT: Shows common results between two queries.--Inner join
+--Intersection:The intersection from both subqueries without duplicates. All of the rows that appear in both operands are accounted for in the result. Duplicate entries in the result are eliminated.
+--Syntax
+SELECT column_name FROM table1  
+INTERSECT  
+SELECT column_name FROM table2;  
+
+--Example
+SELECT * FROM Old_Employee   
+INTERSECT  
+SELECT * FROM New_Employee  ;
+
+SELECT * FROM Old_Employee;
+SELECT * FROM New_Employee; 
+
+---------------------------•	EXCEPT----------------------------------------------
+--EXCEPT: Shows results from the first query not found in the second.
+--EXCEPT keyword is an operator that is used to retrieve distinct rows from the left query result set that are not present in the right query result set in a given query.
+--Returns rows from the first query that are not present in the second query.
+
+--Example
+SELECT Employee_Id, Employee_Name, Emp_Age, Emp_Salary 
+FROM Old_Employee 
+EXCEPT 
+SELECT Employee_Id, Employee_Name, Emp_Age, Emp_Salary 
+FROM New_Employee;
+
+SELECT * FROM Old_Employee;
+SELECT * FROM New_Employee;
+
+drop table Old_Employee;
+drop table New_Employee;
+--======================================================================================
+
+---------------------------•	SUB-QUERIES------------------------------------------
+--Subqueries in SQL are queries nested inside another query. They can be used in various contexts, such as in SELECT, INSERT, UPDATE, and DELETE statements. 
+--Important Rule:
+--A subquery can be placed in a number of 
+--SQL clauses like WHERE clause, 
+--FROM clause, 
+--HAVING clause.
+--You can use Subquery with SELECT, UPDATE, INSERT, DELETE statements along with the operators like =, <, >, >=, <=, IN, BETWEEN, etc.
+--A subquery is a query within another query. 
+--The outer query is known as the main query, and the inner query is known as a subquery.
+--Subqueries are on the right side of the comparison operator.
+--A subquery is enclosed in parentheses.
+--In the Subquery, ORDER BY command cannot be used. 
+--But GROUP BY command can be used to perform the same function as ORDER BY command.
+
+
+CREATE TABLE EMPLOYEE2 (  
+     emp_id int identity,  
+     fullname varchar(65),  
+     occupation varchar(45),  
+     gender varchar(30),  
+     salary int,  
+     country varchar(55)  
+    );  
+
+	INSERT INTO EMPLOYEE2(fullname, occupation, gender, salary, country)  
+    VALUES ('John Doe', 'Writer', 'Male', 62000, 'USA'),  
+    ('Mary Greenspan', 'Freelancer', 'Female', 55000, 'India'),  
+    ('Grace Smith', 'Scientist', 'Male', 85000, 'USA'),  
+    ('Mike Johnson', 'Manager', 'Male', 250000, 'India'),  
+    ('Todd Astel', 'Business Analyst', 'Male', 42000, 'India'),  
+    ('Sara Jackson', 'Engineer', 'Female', 65000, 'UK'),  
+    ('Nancy Jackson', 'Writer', 'Female', 55000, 'UK'),  
+    ('Rose Dell', 'Engineer', 'Female', 58000, 'USA'),  
+    ('Elizabeth Smith', 'HR', 'Female', 55000, 'UK'),  
+    ('Peter Bush', 'Engineer', 'Male', 42000, 'USA');  
+
+	truncate table EMPLOYEE2
+
+--1. Subquery in a SELECT Statement
+--Example: Find all employees with a salary greater than the average salary of all employees.
+
+SELECT fullname, salary 
+FROM EMPLOYEE2 
+WHERE salary > (SELECT AVG(salary) FROM EMPLOYEE2);
+
+select * from EMPLOYEE2
+
+--2. Subquery in an INSERT Statement
+--Example: Insert a new employee with a salary higher than the highest-paid employee.
+
+INSERT INTO EMPLOYEE2 (fullname, occupation, gender, salary, country)
+VALUES ('ADI Johnson', 'Developer', 'Male', 
+        (SELECT MAX(salary) FROM EMPLOYEE2) + 10000, 'Canada');
+
+select * from EMPLOYEE2
+
+--3. Subquery in an UPDATE Statement
+--Example: Increase the salary of all female employees to be 10% higher than the average salary of female employees.
+
+UPDATE EMPLOYEE2 
+SET salary = salary * 1.10 
+WHERE gender = 'Female' 
+AND salary > (SELECT AVG(salary) FROM EMPLOYEE2 WHERE gender = 'Female'); --57600
+
+select * from EMPLOYEE2
+
+--4. Subquery in a DELETE Statement
+--Example: Delete employees whose salary is less than the salary of the employee named 'Mike Johnson'.
+
+DELETE FROM EMPLOYEE2 
+WHERE salary < (SELECT salary FROM EMPLOYEE2 WHERE fullname = 'Mike Johnson');
+
+select * from EMPLOYEE2
+
+drop table EMPLOYEE2
+--=================================================================================
+------------------------Window Functions In SQL-------------------------------
+--Window functions are a powerful set of functions that allow you to perform calculations across a set of rows related to the current row. These functions are used in conjunction with the OVER() clause, which defines the window or partition for the function to operate over.
+
+--Types of Window Functions:
+[1]. Aggregate Window Functions
+[2]. Ranking Window Functions
+[3]. Offset Window Functions
+
+--[1]. Aggregate Window Functions:
+COUNT(): Counts the number of rows in the window.
+SUM(): Returns the sum of the values in the window.
+AVG(): Returns the average of the values in the window.
+MIN(): Returns the minimum value in the window.
+MAX(): Returns the maximum value in the window.
+
+SELECT COUNT(*)AS TotalEmployees  FROM Employee; 
+select * from Employee;
+
+--[2]. Ranking Window Functions:
+--RANK() is a window function that assigns a unique rank number to each row within a partition of a result set. The ranking is based on the order specified by the ORDER BY clause. If two rows have the same value, the RANK() function assigns them the same rank, but leaves gaps in the ranking sequence for the next rows.
+
+		1.ROW_NUMBER(): 
+		2.RANK():
+		3.DENSE_RANK():
+---------------------------•	1.ROW_NUMBER Window Functions-----------------
+--The ROW_NUMBER() function in SQL is a window function that assigns a unique sequential integer to rows within a result set. The numbering starts at 1 for the first row and increments by 1 for each subsequent row. This function is often used for pagination, ordering, and identifying duplicates.
+ROW_Number
+--It assigns the sequential rank number to each unique record.
+
+
+CREATE TABLE Persons (    
+  person_name varchar(45) NOT NULL,    
+  product varchar(45) DEFAULT NULL,    
+  country varchar(25) DEFAULT NULL,  
+  price float,  
+  years int NOT NULL    
+);  
+
+INSERT INTO Persons (person_name, product, country, price, years)     
+VALUES ('Steffen', 'Computer', 'USA', 20000.00, 2018),     
+('Joseph', 'Laptop', 'India', 35000.00, 2016),     
+('Kevin', 'TV', 'USA', 15000.00, 2016),     
+('Thompson', 'Mobile', 'France', 12500.00, 2017),   
+('Donald', 'Laptop', 'England', 30000.00, 2018),    
+('Joseph', 'Mobile', 'India', 18000.00, 2018),    
+('Matthew', 'Desktop', 'France', 22000.00, 2017),     
+('Antonio', 'Mouse', 'England', 1200.00, 2016);  
+
+-- Simple ROW_NUMBER() Example
+select * from Persons
+
+--Example: Using ROW_NUMBER()
+
+--Scenario: You want to assign a row number to each person based on their price in descending order.
+
+SELECT 
+    person_name, 
+    product, 
+    country, 
+    price, 
+    years, 
+    ROW_NUMBER() OVER (ORDER BY price DESC) AS RowNum 
+FROM Persons;
+
+SELECT
+	person_name, 
+    product, 
+	ROW_NUMBER() OVER (ORDER BY price DESC) AS RowNum ,
+    country, 
+    price, 
+    years
+FROM Persons;
+
+
+select * from Persons
+---------------------------------------------------
+
+drop table Persons
+---------------•	2.RANK Window Functions------------------------------
+RANK
+--It assigns the rank number to each row in a partition. It skips the number for similar values.
+--The RANK Function in SQL Server is a kind of Ranking Function. 
+--This function will assign the number to each row within the partition of an output. 
+--It always works with the OVER() clause.
+--It assigns a rank to each row based on the ORDER BY clause.
+--It always assigns a rank to rows, starting with one 
+
+--2. Using RANK()
+--Scenario: You want to rank the entries based on the city alphabetically. If two entries have the same city, they will receive the same rank, but the next rank will skip a number.
+--SQL Query for RANK():
+
+CREATE TABLE rank_demo (  
+    first_name VARCHAR(60),  
+    last_name VARCHAR(40),  
+    city VARCHAR(30)  
+);   
+
+INSERT INTO rank_demo (first_name, last_name, city)         
+VALUES ('Luisa', 'Evans', 'Texas'),         
+('Paul', 'Ward', 'Alaska'),         
+('Peter', 'Bennett', 'California'),      
+('Carlos', 'Patterson', 'New York'),         
+('Rose', 'Huges', 'Florida'),    
+('Marielia', 'Simmons', 'Texas'),  
+('Antonio', 'Butler', 'New York'),         
+('Diego', 'Cox', 'California');  
+
+select * from rank_demo
+
+
+--Syntax:
+RANK() OVER (
+    [PARTITION BY partition_expression]
+    ORDER BY order_expression
+)
+
+--Example
+SELECT 
+    first_name, 
+    last_name, 
+    city, 
+    RANK() OVER (ORDER BY city) AS CityRank 
+FROM rank_demo;
+
+--Explanation:
+
+    RANK() OVER (ORDER BY city): This function ranks the rows based on the city column in alphabetical order.
+    Rows with the same city will have the same rank, but the next rank will be incremented by the number of rows that shared the same rank.
+
+-------------------------------  3.Dense_RANK Window Functions------------------------
+--It assigns the rank number to each row in a partition. It does not skip the number for similar values.
+--1. Using DENSE_RANK()
+
+--Scenario: Now, you want to rank the entries based on the city alphabetically, but you want the ranks to be consecutive without any gaps.
+--SQL Query for DENSE_RANK():
+--Here’s the syntax for the DENSE_RANK() function in SQL, along with an explanation of its components:
+
+--Syntax:
+DENSE_RANK() OVER (
+    [PARTITION BY partition_expression]
+    ORDER BY order_expression [ASC|DESC]
+)
+
+--Example
+SELECT 
+    first_name, 
+    last_name, 
+    city, 
+    DENSE_RANK() OVER (ORDER BY city) AS CityDenseRank 
+FROM rank_demo;
+
+select * from rank_demo
+
+    DENSE_RANK(): This function calculates the rank of each row within a partition of a result set, with no gaps in ranking when there are ties.
+
+    OVER: This clause defines the window (or set of rows) to which the DENSE_RANK() function is applied.
+
+    PARTITION BY: This optional clause divides the result set into partitions to which the DENSE_RANK() function is applied. If not specified, the function considers the entire result set as a single partition.
+
+    ORDER BY: This clause specifies the order in which the rows are ranked. It is required for the DENSE_RANK() function.
+
+    ASC | DESC: Optional keywords that specify the sorting order:
+        ASC: Sorts in ascending order (default).
+        DESC: Sorts in descending order.
+
+
+------------------•[3]	OFFSET & FETCH Window Functions----------------------
+--OFFSET-FETCH
+
+-- The OFFSET and FETCH clauses in SQL are used for pagination, allowing you to skip a specific number of rows and then return a certain number of rows.
+
+-- Example: Using OFFSET and FETCH
+
+  truncate table EMPLOYEE2
+	select * from EMPLOYEE2
+
+	INSERT INTO EMPLOYEE2(fullname, occupation, gender, salary, country)  
+    VALUES ('John Doe', 'Writer', 'Male', 62000, 'USA'),  
+    ('Mary Greenspan', 'Freelancer', 'Female', 55000, 'India'),  
+    ('Grace Smith', 'Scientist', 'Male', 85000, 'USA'),  
+    ('Mike Johnson', 'Manager', 'Male', 250000, 'India'),  
+    ('Todd Astel', 'Business Analyst', 'Male', 42000, 'India'),  
+    ('Sara Jackson', 'Engineer', 'Female', 65000, 'UK'),  
+    ('Nancy Jackson', 'Writer', 'Female', 55000, 'UK'),  
+    ('Rose Dell', 'Engineer', 'Female', 58000, 'USA'),  
+    ('Elizabeth Smith', 'HR', 'Female', 55000, 'UK'),  
+    ('Peter Bush', 'Engineer', 'Male', 42000, 'USA');  
+
+
+--Syntax:
+SELECT emp_id, fullname, occupation, salary 
+FROM EMPLOYEE2 
+ORDER BY emp_id 
+OFFSET 4 ROWS       -- Skip the first 4 rows
+FETCH NEXT 3 ROWS ONLY;  -- Return the next 3 rows
+
+select * from EMPLOYEE2
+
+
+-------------------
+SELECT emp_id ,fullname, occupation, salary 
+FROM EMPLOYEE2 
+ORDER BY emp_id 
+OFFSET 0 ROWS 
+FETCH NEXT 3 ROWS ONLY;  -- Returns the first 3 employees
+
+select * from EMPLOYEE2
+------------------------
+
+select * from EMPLOYEE2
+truncate table EMPLOYEE2
+
+SELECT fullname, occupation, salary 
+FROM EMPLOYEE2 
+ORDER BY emp_id 
+OFFSET 8 ROWS 
+FETCH NEXT 3 ROWS ONLY;  -- Returns the next 3 employees
+
+select * from EMPLOYEE2
+----------------------------
+--To skip the first five records from the EMPLOYEE2 table and return the rest, you can use the OFFSET clause. Here’s how you can write that query:
+
+SELECT emp_id, fullname, occupation, salary 
+FROM EMPLOYEE2 
+ORDER BY emp_id 
+OFFSET 5 ROWS;  -- Skip the first 5 rows
+
+select * from EMPLOYEE2
+-----------------------
+--If you want to limit the number of records returned after skipping the first five, you can add the FETCH clause. For example, to return the next 10 records after skipping the first five:
+
+SELECT emp_id, fullname, occupation, salary 
+FROM EMPLOYEE2 
+ORDER BY emp_id 
+OFFSET 5 ROWS 
+FETCH NEXT 10 ROWS ONLY;  -- Return the next 10 rows
+
+select * from EMPLOYEE2
+
+
+
+
+---------------------------•	ROLLUP And CUBE-------------------------------------
+--generates a result set that shows aggregates for a hierarchy of values in the selected columns.
+--The ROLLUP clause in SQL Server is an extension of the grouping set operator.
+--ROLLUP clause to aggregates different groups with subtotals and grand totals.
+
+--Syntax
+    SELECT column_lists,  
+    aggregate_function (column_name)  
+    FROM table_name  
+    GROUP BY ROLLUP (column_names);  
+
+
+	--Example:
+     CREATE TABLE EMPLOYEE2 (  
+     emp_id int identity,  
+     fullname varchar(65),  
+     occupation varchar(45),  
+     gender varchar(30),  
+     salary int,  
+     country varchar(55)  
+    );  
+
+	INSERT INTO EMPLOYEE2(fullname, occupation, gender, salary, country)  
+    VALUES ('John Doe', 'Writer', 'Male', 62000, 'USA'),  
+    ('Mary Greenspan', 'Freelancer', 'Female', 55000, 'India'),  
+    ('Grace Smith', 'Scientist', 'Male', 85000, 'USA'),  
+    ('Mike Johnson', 'Manager', 'Male', 250000, 'India'),  
+    ('Todd Astel', 'Business Analyst', 'Male', 42000, 'India'),  
+    ('Sara Jackson', 'Engineer', 'Female', 65000, 'UK'),  
+    ('Nancy Jackson', 'Writer', 'Female', 55000, 'UK'),  
+    ('Rose Dell', 'Engineer', 'Female', 58000, 'USA'),  
+    ('Elizabeth Smith', 'HR', 'Female', 55000, 'UK'),  
+    ('Peter Bush', 'Engineer', 'Male', 42000, 'USA');  
+
+--1. Using ROLLUP
+
+The ROLLUP function generates a result set that includes subtotals for each group and a grand total. For example, if you want to get the total salary by occupation and then a grand total, you can write:
+
+SELECT occupation, 
+SUM(salary) AS total_salary
+FROM EMPLOYEE2
+GROUP BY ROLLUP(occupation);
+
+select * from EMPLOYEE2
+
+--2. Using CUBE
+
+The CUBE function generates all possible combinations of the specified columns. If you want to get the total salary by occupation and country, you can write:
+
+--CUBE generates a result set that shows aggregates for all combinations of values in the selected columns.
+
+SELECT occupation, 
+       country, 
+       SUM(salary) AS total_salary
+FROM EMPLOYEE2
+GROUP BY CUBE(occupation, country);
+
+select * from EMPLOYEE2

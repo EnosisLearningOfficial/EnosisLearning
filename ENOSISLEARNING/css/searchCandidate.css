@@ -1,0 +1,324 @@
+﻿
+/*@font-face {
+    font-family: 'Roboto_light';
+    src:url(../fonts/Roboto-Regular.ttf);
+}
+@font-face {
+    font-family: 'Roboto_bold';
+		src:url(../fonts/Roboto-Medium.ttf);
+}
+
+body {
+  color: #666666;
+  font-family: 'Roboto-Light';
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}*/
+@font-face {
+    font-family: SourceSansPro-Semibold;
+    src:url(/fonts/SourceSansPro-Semibold.otf);
+}
+@font-face {
+    font-family: SourceSansPro-Regular;
+    src:url(/fonts/SourceSansPro-Regular.otf);
+}
+.heading {
+    font-family:SourceSansPro-Semibold;
+    color: #135D97;
+    text-align: center;
+}
+.add-btn {
+    float: right;
+    padding: 5px;
+}
+/* Login */
+.pen-title{
+	padding-top:8%
+}
+.login-form-module {
+    position: relative;
+    background: #E8E8E8;
+    max-width: 280px;
+    width: 100%;
+    box-shadow: 0 0 10px #6F6868;
+    margin: 0 auto;
+}
+.login-wrpr {
+    float: left;
+    width: 100%;
+    background-color: #E8E8E8;
+}
+.login-wrpr-headind {
+    background-color: #135D97;
+    padding: 10px 0;
+}
+.login-wrpr h2 {
+    margin: 0;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1;
+    text-align: center;
+		font-size: 25px;
+    text-transform: uppercase;
+		font-family:SourceSansPro-Semibold;
+}
+.logi-filed-wrpr {
+	    padding: 30px;
+    float: left;
+    width: 100%;
+}
+.login-form-module input {
+    outline: none;
+    display: block;
+    width: 100%;
+    border: 1px solid #d9d9d9;
+    margin: 0 0 20px;
+    padding: 10px 0 10px 30px;
+    box-sizing: border-box;
+    font-weight: 400;
+	font-family:SourceSansPro-Regular;
+}
+.user-icon{
+        background-image: url(../images/user-icon.png);
+    background-repeat: no-repeat;
+    background-size: 25px;
+    background-position: 5px 6px;
+}
+input.user-icon:focus {
+		color: #09C;
+    background-image: url(../images/user-icon-focus.png);
+    background-repeat: no-repeat;
+    background-size: 25px;
+    background-position: 5px 6px;
+}
+.pass-icon{
+    background-image: url(../images/pass-icon.png);
+    background-repeat: no-repeat;
+    background-size: 25px;
+    background-position: 5px 6px;
+}
+.mail-icon{
+        background-image: url(../images/mail-icon.png);
+    background-repeat: no-repeat;
+    background-size: 25px;
+    background-position: 5px 6px;
+}
+input.mail-icon:focus {
+		color: #09C;
+    background-image: url(../images/mail-icon-focus.png);
+    background-repeat: no-repeat;
+    background-size: 25px;
+    background-position: 5px 6px;
+}
+input.pass-icon:focus {
+		color: #09C;
+    background-image: url(../images/pass-icon-focus.png);
+    background-repeat: no-repeat;
+    background-size: 25px;
+    background-position: 5px 6px;
+}
+input.login-user-name {
+    float: left;
+    width: 90%;
+    margin-left: 5%;
+    height: 42px;
+    border: 2px solid #5E94AA;
+    padding: 0 30px;
+    font-size: 14px;
+}
+.login-form-module button {
+    text-align: center;
+    cursor: pointer;
+    background: #135D97;
+    border: 0;
+		width:100%;
+    padding: 10px 15px;
+    color: #ffffff;
+		font-family:SourceSansPro-Regular;
+}
+.login-btn, #login_btn {
+    background-color: #135D97;
+		margin:10px;
+    width: 100%;
+    text-align: center;
+	padding: 10px 15px;
+    color: #ffffff;
+		font-family:SourceSansPro-Regular;
+		margin:0
+}
+.login-form-module button:focus, .login-form-module button:hover, .login-form-module button:active, #login_btn:hover, #login_btn:focus, #login_btn:active {
+	outline:none;
+    background-color: #1B7CC7;
+	text-decoration:none
+}
+.forgot-pass {
+    margin-top: 10px;
+    float: left;
+}
+/* Footer */
+/*.footer {
+    background-color: #135D97;
+    color: #fff;
+    padding: 7px;
+    position: absolute;
+    top: 95%;
+		width:100%;
+}
+.footer p{
+	margin:0
+}*/
+/* Header */
+.header {
+background-color: #135d97;
+    border-bottom: 4px solid #0287c9;
+}
+.call{
+	float:right;
+}
+.call ul{
+	padding:0;
+	margin:0
+}
+.call ul li{
+	list-style:none;
+	display:inline-block;
+}
+.call ul li p {
+	color: #fff;
+	font-weight: 400;
+	font-size: 16px;
+  padding: 5px 0 0 0;
+	margin:0
+}
+img.user-icon-inner {
+    width: 20px;
+    height: 20px;
+    float: left;
+}
+.call ul li p a{
+	color:#fff;
+}
+.my-navbar {
+    background-color: #135D97;
+}
+.my-navbar a{
+	color:#fff
+}
+.my-navbar .nav a.active{
+	color:#fff;
+	background-color:#1B7CC7
+}
+.my-navbar .nav li{
+	margin-right:1px
+}
+/* List Start */
+section.list {
+    padding-top: 15px;
+}
+section.list .heading h2 {
+    float: left;
+    margin: 0 0 15px 0;
+		color:#5CB85C;
+}
+.my-table-wrpr{
+	    border: 1px solid #04729A;
+    padding: 0;
+}
+.my-table {
+	/*margin:0;*/
+    margin: 10px auto 10px auto;
+}
+.my-table thead {
+    background-color: #135D97;
+    color: #fff;
+
+}
+ .my-table thead th {
+    border: 1px solid #D2D1D1;
+    padding:8px 5px!important;
+    }
+.my-table thead tr th {
+    padding: 3px;
+    font-family: SourceSansPro-Semibold;
+    font-weight: normal;		
+}
+.my-table tbody tr td {
+    padding: 3px;
+	cursor: pointer;
+    font-family: SourceSansPro-Regular;
+    font-size: 12px;
+    /*font-size: 10px;*/
+    text-align: center;
+}
+/* Administration Processes and Status */
+.table-contnt-center thead tr th, .table-contnt-center tbody tr td {
+    text-align: center;
+}
+/* Progress */
+.progress-step {
+    padding: 40px 0;
+}
+.step-wrpr {
+    float: left;
+    width: 20%;
+    text-align: center;
+}
+.step-wrpr p {
+    text-align: center;
+    margin: 0;
+}
+.circle {
+    width: 80px;
+    background-color: #98D091;
+    border-radius: 100%;
+    margin-left: 33%;
+    padding: 25px 0;
+    color: #fff;
+    font-size: 20px;
+		font-weight: bold;		
+}
+.circle span a {
+    color: #fff;
+    font-size: 20px;
+    text-align: left;
+}
+span.line-left {
+    height: 5px;
+    color: #98D091;
+    width: 33%;
+    float: left;
+    background-color: #98D091;
+    position: relative;
+    left: 67%;
+    top: -60px;
+}
+.line-right{
+       height: 5px;
+    color: #98D091;
+    width: 33%;
+    float: left;
+    background-color: #98D091;
+    position: relative;
+    left: 0;
+    top: 38px;
+}
+/* User */
+.user {
+    padding:0;
+}
+/* Employee */
+.em-rwr-view img {
+    float: left;
+    width: 100%;
+}
+.pi-chart-wrpr h4 {
+    text-align: left;
+}
+.pi-chart-wrpr img {
+    width: 100%;
+    height: 210px;
+    margin-bottom: 40px;
+}
+

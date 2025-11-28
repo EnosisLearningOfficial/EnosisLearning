@@ -1,0 +1,50 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.ConstrainedExecution;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace NewPoect
+{
+    //internal class Car
+    //{
+    //    string model = "Tesla";
+
+    //    static void Main(string[] args)
+    //    {
+    //        Car cr = new Car();
+    //        Console.WriteLine("Car Model: " + cr.model);
+    //        Console.ReadLine();
+    //    }
+    //}
+
+
+
+
+    //internal class Car
+    //{
+    //    string model = "Tesla";
+
+    //    static void Main(string[] args)
+    //    {
+    //        Car cr = new Car();
+    //        Console.WriteLine("Car Model: " + cr.model);
+    //        Console.ReadLine();
+    //    }
+    //}
+
+
+
+
+    class StatementsExample
+    {
+        static void Main()
+        {
+            int a = 5, b = 10;
+            int sum = a + b;
+            Console.WriteLine("Sum: " + sum);
+        }
+    }
+
+}

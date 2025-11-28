@@ -1,0 +1,24 @@
+<html>
+    <head>
+        <!-- We cann Add External links,file,or we can write internal css and Javascript -->
+         <title>My Index Page</title>
+    </head>
+    <body>
+        this is my body part
+
+        <!-- Inside body tag we can also write javascript -->
+    </body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    this is my main body
+</body>
+</html>     
+

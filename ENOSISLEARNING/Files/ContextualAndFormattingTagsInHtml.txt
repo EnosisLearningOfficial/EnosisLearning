@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- Heading Tag -->
+     <h1 title="This is my heading tag" align="center">This is a heading tag..</h1>
+     <h2>This is h2</h2>
+     <h3>This is h3</h3>
+     <h4>This is h4</h4>
+     <h5>This is h5</h5>
+     <h6>This is h6</h6>
+
+     <!-- Paragraph tag -->
+      <p>This is a paragraph tag..!</p>
+      <h1>This is my heading</h1>
+      <p title="this is my paragraph" align="center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore excepturi delectus iusto odio ratione libero voluptatibus aliquam expedita. Adipisci voluptates repudiandae pariatur error doloribus quis quibusdam debitis quidem similique placeat!
+      <b>Lorem ipsum dolor</b> sit amet consectetur adipisicing elit. Tempore excepturi delectus iusto odio ratione libero voluptatibus aliquam expedita. Adipisci voluptates repudiandae pariatur error doloribus quis quibusdam <strong>debitis quidem similique placeat!</strong>
+      <i>sit amet consectetur adipisicing elit.</i> Tempore excepturi delectus iusto odio ratione libero voluptatibus aliquam expedita. Adipisci voluptates <em>repudiandae pariatur error doloribus quis quibusdam </em>
+      </p>
+
+      <p>X<sup>2</sup>2ab<sup>2</sup></p>
+
+      <p>H<sub>2</sub>SO<sub>4</sub></p>
+
+      <!-- Self-Closing tags -->
+       <hr/>
+
+
+       <!-- Break tag -->
+        <br>
+        <h1>h1 betwen two br tags</h1>
+        <br>
+
+        <!-- Hyperlink - >  Anchor tag -->
+         <a href="about.html" target="_blank">Click Me...!</a>
+
+         <a href="https://www.google.com/">Go to google..!</a>
+
+         <a href="tel:9089786756">Call Me 9089786756</a>
+
+         <a href="mailto:013roy@gmail.com">Mail Us :013roy@gmail.com</a>
+</body>
+</html>

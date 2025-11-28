@@ -1,0 +1,217 @@
+// sealed class BaseClass
+////class BaseClass
+//{
+//    public void Show1()
+//    {
+//        Console.WriteLine("Method of Base Class..");
+//    }
+//}
+//class DerivedClass : BaseClass
+//{
+//    public void Show2()
+//    {
+//        Console.WriteLine("Method of Derived Class..");
+//    }
+//}
+//class Program
+//{
+//    static void Main(string[] args)
+//    {
+//        DerivedClass dc = new DerivedClass();
+//        dc.Show1();
+//        Console.ReadLine();
+//    }
+//}
+
+
+
+
+//static class product
+//{
+//    public static int ProductId;//datatype initialization
+//    public static string ProductName;
+//    public static int ProductPrice;
+//    static product()
+//    {
+//        ProductId = 111;
+//        ProductName = "car";
+//        ProductPrice = 50000;
+//    }
+//    public static void getProductDetails()
+//    {
+//        Console.WriteLine("Prpduvt id= {0}", ProductId);
+//        Console.WriteLine("Prpduvt name= {0}", ProductName);
+//        Console.WriteLine("Prpduvt price= {0}", ProductPrice);
+//    }
+//}
+////class items : product
+////{
+////}
+//class Program
+//{
+//    static void Main(string[] args)
+//    {
+//        // product p = new product();
+//        product.getProductDetails();
+//        Console.ReadLine();
+//    }
+//}
+
+
+
+
+
+
+//public class Calculator
+//{
+//    public int Add(int a, int b)
+//    {
+//        return a + b;
+//    }
+//    public int Add(int a, int b, int c)
+//    {
+//        return a + b;
+//    }
+
+
+//    public double Add(double a, double b)
+//    {
+//        return a + b;
+//    }
+//}
+//class Program
+//{
+//    static void Main()
+//    {
+//        Calculator calc = new Calculator();
+//        Console.WriteLine(calc.Add(5, 10)); // Calls int Add
+//        Console.WriteLine(calc.Add(5.5, 10.5)); // Calls double Add
+//        Console.ReadKey();
+//    }
+//}
+
+
+
+
+//class Point
+//{
+//    public int X { get; set; }
+//    public int Y { get; set; }
+
+//    // Constructor
+//    public Point(int x, int y)
+//    {
+//        X = x;
+//        Y = y;
+//    }
+
+//    // Overloading the + operator
+//    public static Point operator +(Point a, Point b)
+//    {
+//        return new Point(a.X + b.X, a.Y + b.Y);
+//    }
+
+//    // For printing
+//    public override string ToString()
+//    {
+//        return $"({X}, {Y})";
+//    }
+//}
+//class Program
+//{
+//    static void Main()
+//    {
+//        Point p1 = new Point(2, 3);
+//        Point p2 = new Point(4, 5);
+//        Point result = p1 + p2;
+//        Console.WriteLine($"Result of adding points: {result}");
+//        Console.ReadKey();
+//    }
+//}
+
+
+
+//public class Animal
+//{
+//    public virtual void Speak()
+//    {
+//        Console.WriteLine("Animal speaks");
+//    }
+//}
+
+//public class Dog : Animal
+//{
+//    public override void Speak()
+//    {
+//        Console.WriteLine("Dog barks");
+//    }
+//}
+
+//public class Cat : Animal
+//{
+//    public override void Speak()
+//    {
+//        Console.WriteLine("Cat meows");
+//    }
+//}
+
+//class Program
+//{
+//    static void Main()
+//    {
+//        Animal animal;
+
+//        animal = new Dog();
+//        animal.Speak(); // Outputs: Dog barks
+
+//        animal = new Cat();
+//        animal.Speak(); // Outputs: Cat meows
+//        Console.ReadKey();
+//    }
+//}
+
+
+
+//class Person
+//{
+//    // Private field (data hidden)
+//    private string name;
+
+//    // Public property to access 'name'
+//    public string Name
+//    {
+//        get { return name; }
+//        set { name = value; }
+//    }
+
+//    // Method to display name
+//    public void DisplayInfo()
+//    {
+//        Console.WriteLine("Name: " + name);
+//    }
+//}
+//class Program
+//{
+//    static void Main()
+//    {
+//        Person person = new Person();
+//        person.Name = "Alice";   // Setting the name via public property
+//        person.DisplayInfo();    // Output: Name: Alice
+//        Console.ReadKey();
+//    }
+//}
+
+
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        string fruit1 = null;//"Apple";
+        string fruit2 = "Banana";
+        string fruit3 = "Mango";
+        string result = fruit1 ?? fruit2 ?? fruit3;
+        Console.WriteLine(result);
+        Console.ReadLine();
+    }
+}

@@ -1,0 +1,88 @@
+
+    //class Program
+    //{
+    //    static void MyMethod()
+    //    {
+    //        Console.WriteLine("I just got executed!");
+    //    }
+
+    //    static void Main(string[] args)
+    //    {
+    //        MyMethod();
+    //        MyMethod();
+    //        MyMethod();
+    //        MyMethod();
+    //        Console.ReadLine();
+    //    }
+    //}
+
+
+    //class Program
+    //{
+    //    public int FindMax(int num1, int num2)
+    //    {
+    //        /* local variable declaration */
+    //        int result;
+
+    //        if (num1 > num2)
+    //            result = num1;
+    //        else
+    //            result = num2;
+
+    //        return result;
+    //    }
+    //    static void Main(string[] args)
+    //    {
+    //        /* local variable definition */
+    //        int a = 100;
+    //        int b = 200;
+    //        int ret;
+
+    //        // Create an instance of the NumberManipulator class
+    //        Program nm = new Program();
+
+    //        // Calling the FindMax method using the instance
+    //        ret = nm.FindMax(a, b);
+
+    //        Console.WriteLine("Max value is : {0}", ret);
+    //        Console.ReadLine();
+    //    }
+
+
+    //}
+
+
+
+    class Program
+    {
+        Public static void MyMethod(string fname)
+        {
+            Console.WriteLine(fname + " Refsnes");
+        }
+
+        static void Main(string[] args)
+        {
+            MyMethod("Liam");
+            MyMethod("Jenny");
+            MyMethod("Anja");
+        }
+    }
+
+
+
+
+
+class Program
+    {
+        Public static void MyMethod(string fname, int age)
+        {
+            Console.WriteLine(fname + " is " + age);
+        }
+
+        static void Main(string[] args)
+        {
+            MyMethod("Liam", 5);
+            MyMethod("Jenny", 8);
+            MyMethod("Anja", 31);
+        }
+    }

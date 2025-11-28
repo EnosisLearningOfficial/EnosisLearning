@@ -1,0 +1,271 @@
+Keyword: they are the resrved words which have spcecific meaning and work.
+
+Tokens: the smallest individual unit in a prigram is called token.
+
+1.Data Types:
+	1.Characters - A-Z, a-z 
+		1.Character Constant - single Character enclosed with single Quotation.---'A','a'
+		2.String Constant- sequence of characters enclosed with double qutation.---"XYZ","xyz","09876"
+		per character 1 byte
+
+ public static void Main(string[] args)
+ {
+     string Name = "Enosis Learning";
+     char Grade = 'A';
+     Console.WriteLine("Welcome To " +Name);
+     Console.WriteLine("Your Grade is " +Grade);
+ }
+
+	2.Integers :a whole number without any decimal point,fractional point or exponentia point. 0-9---int--2-4byte
+public static void Main(string[] args)
+{
+    int number = 42;
+    Console.WriteLine("Given integer value is :- "+number);
+}
+	3.Double or Floating Point : a whole number with  decimal point,fractional point or exponentia point.
+
+ public static void Main(string[] args)
+ {
+     double number = 42.12;
+     Console.WriteLine("Given Double value is :- "+number);
+ }
+
+	4.Boolean - true,false;
+
+public static void Main(string[] args)
+{
+    int age = 16;
+    bool isAdult = age >= 18;
+    Console.WriteLine("Values assigned in Bool Variable :- "+ isAdult);
+}
+
+	5.Void - non return data type -- null 
+
+//Variable Initialization -- int num = 10;
+//Variable Declarations -  int num;
+
+
+
+//Input Methods
+Console.ReadLine()
+
+
+ public static void Main(string[] args)
+ {
+     int age = 16;//Initialization of variable age
+     string Name;//Declaration of variable Name
+     Console.WriteLine("Enter your Name: ");
+     Name = Console.ReadLine();
+     Console.WriteLine("Your Name is :- "+Name);
+
+ }
+
+
+//Convertion Method: tehere are two types of conversion methods
+1.Convert.ToInt32
+2.Convert.ToDouble32
+3.Parse Method 
+
+
+  public static void Main(string[] args)
+  {
+      int age;//Declaration of variable Roll
+      string Name;//Declaration of variable Roll
+      double Salary;
+      int num;
+      Console.WriteLine("Enter your Name: ");
+      Name = Console.ReadLine();
+      Console.WriteLine("Enter your Age: ");
+      age = Convert.ToInt32(Console.ReadLine());
+      Console.WriteLine("Enter your Salary: ");
+      Salary = Convert.ToDouble(Console.ReadLine());
+      Console.WriteLine("Enter num value:-");
+      num = int.Parse(Console.ReadLine());
+      Console.WriteLine("Your Name is :- " + Name);
+      Console.WriteLine("Your Age is :- " + age);
+      Console.WriteLine("Your Salary is :- " + Salary);
+      Console.WriteLine("Parsed value of num is :- " + num);
+
+  }
+
+
+
+a+b---> where a is an operand and + is an Operator
+//Operators -  1.Unary Operator : 1.increament or decreament operator(++/--)
+				1.Prefix --- ++i
+				2.Postfix----i++
+		2.Binary Operator : 1.Arithmetic Operator(+,-,*,/,%)
+				    2.Relational Operator(>,<,>=,<=,==,!=)
+				    3.Logical Operator(&&,||,!)
+					Logical AND(&&)-->
+		3.Ternary Operator(Conditional Operator) : (Condition) ? statement 1 : statemet 2 
+
+
+
+
+
+Statements
+1.Sequential Statement
+2.Condiational Statement
+	1.Simple if()
+	if(Condition)
+	{
+		//statements
+	}
+int a = 100, b = 200;
+if(a>b)
+{
+    Console.WriteLine("A is Greater...");
+}
+if(b>a)
+{
+    Console.WriteLine("B is Greater...");
+}
+
+	2.if-else
+	if()
+	{
+
+	//st
+	
+	}
+	else
+	{
+	//st
+	}
+ int a = 1000, b = 2000;
+ if(a>b)
+ {
+     Console.WriteLine("A is Greater...");
+ }
+ else
+ {
+     Console.WriteLine("B is Greater...");
+ }
+
+//Odd Even
+ int a = 13;
+ if(a%2==0)
+ {
+     Console.WriteLine("Even Number...");
+ }
+ else
+ {
+     Console.WriteLine("Odd Number...");
+ }
+
+	3.else-if ladder
+ int a = 400;
+ int b = 400;
+ int c = 400;
+ if(a>b && a>c)
+ {
+     Console.WriteLine("A");
+ }
+ else if(b>a && b>c)
+ {
+     Console.WriteLine("B");
+ }
+ else if(c>a && c>b)
+ {
+     Console.WriteLine("C");
+ }
+ else
+ {
+     Console.WriteLine("Equal");
+ }
+
+	4.Nested If
+	if()
+	{
+	  if()
+           {
+	   }
+	}
+
+int age = 30;
+int exp = 7;
+if(age>=18 && age<=30)
+{
+    if(exp>=5)
+    {
+        Console.WriteLine("You are Eligible...!");
+    }
+}  
+
+	5.Nested If-Else
+
+if()
+{
+    if ()
+    {
+
+
+    }
+    else
+    {
+
+    }
+
+}
+else
+{
+    if ()
+    {
+
+
+    }
+    else
+    {
+
+    }
+}
+
+int a = 300;
+int b = 10;
+int c = 39000;
+if(a>b)
+{
+    if (a>c)
+    {
+        Console.WriteLine("A");
+
+    }
+    else
+    {
+        Console.WriteLine("C");
+    }
+
+}
+else
+{
+    if (b>c)
+    {
+        Console.WriteLine("B");
+
+    }
+    else
+    {
+        Console.WriteLine("C");
+    }
+}
+
+1.Swap two numbers using third variable.
+2.Swap two numbers without using third variable.
+3.Find Given value is positive or negative.
+4.find given value is number or character.
+5.Write a C# program using else-if ladder to calculate a student’s grade according to the marks:
+int marks;
+input - > marks
+
+90 – 100 : A+
+
+80 – 89 : A
+
+70 – 79 : B
+
+60 – 69 : C
+
+50 – 59 : D
+
+Below 50 : Fail

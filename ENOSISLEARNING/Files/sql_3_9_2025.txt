@@ -1,0 +1,75 @@
+CREATE TABLE [dbo].[TaskManager](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[EName] [varchar](30) NULL,
+	[TaskName] [varchar](40) NULL,
+	[StartDate] [date] NULL,
+	[EndDate] [date] NULL,
+	[Status] [varchar](50) NULL,
+	[Comment] [varchar](100) NULL,
+	[FileDetails] [varchar](max) NULL,
+	[Details] [varchar](150) NULL,
+	[USERNAME] [varchar](100) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+
+===========================================================================
+CREATE TABLE [dbo].[AuditTaskManager](
+	[AuditID] [int] IDENTITY(1,1) NOT NULL,
+	[EmployeeID] [int] NULL,
+	[Action] [varchar](50) NULL,
+	[ActionDate] [datetime] NULL,
+	[USERNAME] [varchar](100) NULL,
+	[EName] [varchar](300) NULL,
+	[TaskName] [varchar](200) NULL,
+	[StartDate] [date] NULL,
+	[EndDate] [date] NULL,
+	[Status] [varchar](200) NULL,
+	[Comment] [varchar](200) NULL,
+	[Details] [varchar](500) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[AuditID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+
+===========================================================================
+CREATE TRIGGER [dbo].[trg_AuditTaskManager_INSERT]    --add
+ON [dbo].[TaskManager]
+AFTER INSERT
+AS
+BEGIN
+    -- Insert into AuditTaskManager
+    INSERT INTO AuditTaskManager (EmployeeID, Action, ActionDate,USERNAME,EName,TaskName,StartDate,EndDate,Status,Comment,Details)
+    SELECT i.id, 'INSERT', GETDATE(), USERNAME, EName, TaskName, StartDate, EndDate, Status, Comment, Details
+    FROM INSERTED i;
+END;
+
+======================================================================
+CREATE TRIGGER [dbo].[trg_AuditTaskManager_UPDATE]
+ON [dbo].[TaskManager]
+AFTER UPDATE
+AS
+BEGIN
+    -- Insert into AuditTaskManager
+    INSERT INTO AuditTaskManager (EmployeeID, Action, ActionDate, USERNAME, EName, TaskName, StartDate, EndDate, Status, Comment, Details)
+    SELECT i.id, 'UPDATE', GETDATE(), USERNAME, EName, TaskName, StartDate, EndDate, Status, Comment, Details
+    FROM INSERTED i;
+END;
+==============================================================
+CREATE TRIGGER [dbo].[trg_AuditTaskManager_DELETE]
+ON [dbo].[TaskManager]
+AFTER DELETE
+AS
+BEGIN
+    -- Insert into AuditTaskManager
+    INSERT INTO AuditTaskManager (EmployeeID, Action, ActionDate, USERNAME, EName, TaskName, StartDate, EndDate, Status, Comment, Details)
+    SELECT d.id, 'DELETE', GETDATE(), USERNAME, EName, TaskName, StartDate, EndDate, Status, Comment, Details
+    FROM DELETED d;
+END;

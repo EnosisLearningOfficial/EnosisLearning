@@ -1,0 +1,309 @@
+Collections In c# : In c# collections are classes that provides an easy way to work with the group of objects.
+System.Collections.Generic
+classes provide the implementation of strongly type entites like list and stack etc.
+1.Loosely Type
+2.Strongly Type
+Types of C# Collections Classes
+1.System.Collections.Generic : this class help us to create a generic collection.in this we store type campatible data elements.This collection doesn't allow us to store different type of elements.
+	1.List Class(List<T>) : it is a class that multiple objects of the same data type that can be accesses using an index.
+	List<int> number = new List<int>();//Declaration
+	List<int> number = new List<int>(){1,2,3};//Initialization
+
+class Program
+{       
+    public static void Main(string[] args)
+    {
+       //Create a list 
+       List<string> Subject = new List<string>();//Declaration
+       List<string> Subjects = new List<string>() {"English","Math" };//Initialization
+
+        //Access the List Elements
+        Console.WriteLine("The first Element of the list is :- " + Subjects[0]);
+        Console.WriteLine("The second Element of the list is :- " + Subjects[1]);
+
+        //iterate the list
+        for (int i = 0; i < Subjects.Count; i++)
+        {
+            Console.WriteLine(Subjects[i]);
+        }
+    }
+}
+
+//Basic Operations on list
+1.Add Elements
+ class Program
+ {       
+     public static void Main(string[] args)
+     {
+        //Create a list 
+        List<string> Subject = new List<string>();//Declaration
+        List<string> Subjects = new List<string>() {"English","Math" };//Initialization
+          //Add list item                                                             //add subject
+         Subject.Add("Python");
+         Subject.Add("C++");
+         Subject.Add("C#");
+         for (int i = 0; i < Subject.Count; i++)
+         {
+             Console.WriteLine(Subject[i]);
+         }
+     }
+ }
+2.Insert elements
+class Program
+{       
+    public static void Main(string[] args)
+    {
+       //Create a list 
+       List<string> Subject = new List<string>();//Declaration
+       List<string> Subjects = new List<string>() {"English","Math" };//Initialization
+         //Insert list item                                                             
+        Subjects.Insert(1,"Science");
+        for (int i = 0; i < Subjects.Count; i++)
+        {
+            Console.WriteLine(Subjects[i]);
+        }
+    }
+}
+3.Remove elements
+	1.Remove()
+	class Program
+{       
+    public static void Main(string[] args)
+    {
+       //Create a list 
+       List<string> Subject = new List<string>();//Declaration
+       List<string> Subjects = new List<string>() {"English","Math","Science","Geography","History","Math" };//Initialization
+        //Remove list item
+        Subjects.Remove("Math");
+        for (int i = 0; i < Subjects.Count; i++)
+        {
+            Console.WriteLine(Subjects[i]);
+        }
+    }
+}
+	2.RemoveAt()
+class Program
+{       
+    public static void Main(string[] args)
+    {
+       //Create a list 
+       List<string> Subject = new List<string>();//Declaration
+       List<string> Subjects = new List<string>() {"English","Math","Science","Geography","History","Math" };//Initialization
+        //RemoveAt
+        Subjects.RemoveAt(5);
+        for (int i = 0; i < Subjects.Count; i++)
+        {
+            Console.WriteLine(Subjects[i]);
+        }
+    }
+}
+2.System.Collections;
+	1.ArrayList :  in c# arraylist stores element of multiple data types whose size can be change dynamically.
+  class Program
+ {       
+     public static void Main(string[] args)
+     {
+         //Create a ArrayList 
+         ArrayList Student = new ArrayList();//Declaration
+         ArrayList Students = new ArrayList() {1,"Abhi",32,"Pune" };//Initialization
+         foreach (var i in Students)
+         {
+             Console.WriteLine(i);
+         }
+     }
+ }
+
+//Basic Operations on an ArrayList
+1.Add
+ public static void Main(string[] args)
+ {
+     //Create a ArrayList 
+     ArrayList Student = new ArrayList();//Declaration
+     ArrayList Students = new ArrayList() {1,"Abhi",32,"Pune" };//Initialization
+     //Add ArrayList
+     Student.Add(2);
+     Student.Add("Mukesh");
+     Student.Add(23);
+     Student.Add("Delhi");
+     foreach (var i in Student)
+     {
+         Console.WriteLine(i);
+     }
+ }
+2.Change
+ public static void Main(string[] args)
+ {
+     //Create a ArrayList 
+     ArrayList Student = new ArrayList();//Declaration
+     ArrayList Students = new ArrayList() {1,"Abhi",32,"Pune" };//Initialization
+     //Add ArrayList
+     Student.Add(2);
+     Student.Add("Mukesh");
+     Student.Add(23);
+     Student.Add("Delhi");
+     //Cahnge the value of an element
+     Student[3] = "Mumbai";
+     foreach (var i in Student)
+     {
+         Console.WriteLine(i);
+     }
+ }
+3.Remove
+public static void Main(string[] args)
+{
+    //Create a ArrayList 
+    ArrayList Student = new ArrayList();//Declaration
+    ArrayList Students = new ArrayList() {1,"Abhi",32,"Pune" };//Initialization
+    //Add ArrayList
+    Student.Add(2);
+    Student.Add("Mukesh");
+    Student.Add(23);
+    Student.Add("Delhi");
+    //Remove
+    Student.Remove("Mukesh");
+    Students.RemoveAt(1);
+    Students.RemoveRange(0,2);
+    foreach (var i in Student)
+    {
+        Console.WriteLine(i);
+    }
+    foreach (var i in Students)
+    {
+        Console.WriteLine(i);
+    }
+}
+
+3.Stack<T> : it is a generic class that arranges the elements of a specified data type using Last In First Out(LIFO) principles.
+	1.Push();
+	2.Pop();
+	3.Peek()
+ public static void Main(string[] args)
+ {
+     //Create a Stack<T> 
+     Stack<int> Numbers = new Stack<int>();//Declaration
+
+     //Add Stack<T>
+     Numbers.Push(1);
+     Numbers.Push(2);
+     Numbers.Push(3);
+     Numbers.Push(4);
+     Numbers.Push(5);
+     Numbers.Push(6);
+
+     //Remove
+     Numbers.Pop();
+
+     //Peek
+     Console.WriteLine("Peeked Value:-" + Numbers.Peek());
+     foreach (var i in Numbers)
+     {
+         Console.WriteLine(i);
+     }
+ }
+4.Queue :it is a generic class that arranges the elements of a specified data type using First In First Out(FIFO) principles.
+1.Enqueue
+2.Dequeue
+        public static void Main(string[] args)
+        {
+            //Create a Queue<T> 
+            Queue<int> Numbers = new Queue<int>();//Declaration
+
+            //Add Queue<T>
+            Numbers.Enqueue(1);
+            Numbers.Enqueue(2);
+            Numbers.Enqueue(3);
+            Numbers.Enqueue(4);
+            Numbers.Enqueue(5);
+            Numbers.Enqueue(6);
+
+            //Remove
+            Numbers.Dequeue();
+
+            //Peek
+            Console.WriteLine("Peeked Value:-" + Numbers.Peek());
+            foreach (var i in Numbers)
+            {
+                Console.WriteLine(i);
+            }
+        }
+5.SortedList : it is a non-generic collection that contains key/value pair where keys are sorted in an order.
+1.Add
+2.Access
+3.Change
+4.Remove(key),RemoveAt(index)
+public static void Main(string[] args)
+{
+    //Create a SortedList 
+    SortedList Numbers = new SortedList();//Declaration
+
+    //Add SortedList
+    Numbers.Add(1,101);
+    Numbers.Add(2,"Abhijeet");
+    Numbers.Add(3,32);
+    Numbers.Add(4,"Pune");
+
+    //Remove
+    Numbers.Remove(1);
+    //RemoveAt
+    Numbers.RemoveAt(1);
+    //Peek
+    foreach (var i in Numbers)
+    {
+        Console.WriteLine(i);
+    }
+}
+
+6.HashTable : it is a non-generic collection that contains key/value pair where keys that arranged based on hashcode of the key.
+1.Add
+2.Access
+3.Change
+4.Remove
+public static void Main(string[] args)
+{
+    //Create a Hashtale 
+    Hashtable Numbers = new Hashtable();//Declaration
+
+    //Add SortedList
+    Numbers.Add("Name", "Abhijeet");
+    Numbers.Add("RollNumber", 101);
+    Numbers.Add("Address", "Pune");
+    //Change
+    Numbers["Address"] = "Mumbai";
+    //Remove
+    Numbers.Remove("Address");
+    //RemoveAt
+
+    //Peek
+    foreach (var i in Numbers)
+    {
+        Console.WriteLine(i);
+    }
+    Console.WriteLine(Numbers["RollNumber"]);
+}
+
+7.Dictionary : it is a generic collection that consist of elements as key/value pair that are not sorted in an order.
+1.Add
+2.Access
+3.Change
+4.Remove
+ public static void Main(string[] args)
+ {
+     //Create a Hashtale 
+     Dictionary<int, int> Numbers= new Dictionary<int, int>();//Declaration
+
+     //Add SortedList
+     Numbers.Add(1, 100);
+     Numbers.Add(2, 101);
+     Numbers.Add(3, 103);
+     Numbers.Add(4, 104);
+     Numbers.Add(5, 105);
+     //Change
+     Numbers[1] = 500;
+     //Remove
+     Numbers.Remove(1);
+     foreach (var i in Numbers)
+     {
+         Console.WriteLine(i);
+     }
+     //Console.WriteLine(Numbers[1]);
+ }

@@ -1,0 +1,204 @@
+Encaptulation: 
+1.Class and Objects
+2.Constructor and Destructor
+3.Properties : In C# properties are class members that provide a mechansim to read write and compute the value of private field.They are the fundamental part of encaptulation.one of the pillar of OOPS Programming.
+
+What are Properties : it is a class member that provides a controlled way to accss the value of a private field.
+There are two accessor they named as---
+1.Getter(to return the value)
+2.Setter(to assign a value)
+Why use Properties?
+1.Encaptulation:Hide internal data and control how it is accesses/Modified.
+2.Validation:Perform Checks before setting value.
+3.Flexibility:Logic can change internally without affecting external code.
+    class Program
+    {
+        public class Add
+        {
+            //Private Data Mmbers
+            private int num1;
+
+            ////Properties for the private data members
+            public int Num1
+            {
+                get { return num1; }
+                set 
+                {
+                    if (num1 <= 0)
+                    {
+                        Console.WriteLine("Negative values are not allowed...!");
+                    }
+                    else
+                    {
+                        num1 = value;
+                    }
+                }
+            }
+        };
+        public static void Main(string[] args)
+        {
+           Add a = new Add();
+           a.Num1 = -10; //Negative values are not allowed...!
+        }
+    }
+}
+//Types Of Properties:-
+1.Auto-Implemented Properties: A property where a compiler automatically creates a private ,annonymous backing field.no logic is added in get or set.
+    class Program
+    {
+        public class Add
+        {
+            //Auto Implemented Property
+            public string FirstName { get; set; }
+        };
+        public static void Main(string[] args)
+        {
+           Add a = new Add();
+           a.FirstName = "ABC"; //Negative values are not allowed...!
+            Console.WriteLine(a.FirstName);
+        }
+    }
+}
+
+When To use : 
+1.when you don't need extra logic during get or set.
+2.for simple data container,models.
+
+
+2.Properties With Backing Field : a property that uses a private field to store data and the get/set  accessor include custom logic.
+class Program
+{
+    public class Add
+    {
+        //Properties With Backing Field
+        private int Age;
+        public int age
+        {
+            get { return Age; }
+            set {
+                if (value >= 0)
+                {
+                    Age = value;
+                }
+                else
+                {
+                    Console.WriteLine("Age cannot be negative");
+                }
+            }
+        }
+    }
+    public static void Main(string[] args)
+    {
+       Add a = new Add();
+        a.age = -10;
+    }
+}
+
+3.Read-Only Properties : a property that have only get accessor.it can return a fixed value or calculated.
+class Program
+{
+    public class Add
+    {
+        private readonly DateTime Createdate = DateTime.Now; 
+        //Read-Only Properties
+        public DateTime createdate
+        {
+            get { return Createdate; }
+        }
+        public void show()
+        {
+            Console.WriteLine("Created Date: " + createdate);
+        }
+    }
+    public static void Main(string[] args)
+    {
+       Add a = new Add();
+        a.show();
+    }
+}
+
+when to use
+1.for values that should not be changed after initialization.
+2.For Calculated vakues that dont need storage.
+
+4.Write-Only Properties :   a property that have only set accessor.it can be written to not read.
+class Program
+{
+    public class Add
+    {
+        private  string Password;
+        //Write-Only Properties
+       public string password
+        {
+            set
+            {
+                Password = Hash(value);
+            }
+        }
+        public void SetPassword(string value)
+        {
+            password = value;
+        }
+        public string Hash(string value)
+        {
+            // Hashing logic here
+            Password = "hashed_" + value; // Placeholder for actual hashing logic
+           return Password;
+        }
+        public void DisplayPassword()
+        {
+            Console.WriteLine("Hashed Password: " + Password);
+        }
+    }
+    public static void Main(string[] args)
+    {
+       Add a = new Add();
+        a.SetPassword("ABCD");
+        a.DisplayPassword();
+    }
+}
+
+5.Static Properties : a property that belongs to the type itself,not to an instance of the class
+class Program
+{
+    public class Add
+    {
+        private  int MaxUser;
+        //Static Properties
+        public static int maxuser { get; } = 100;
+    }   
+    public class Add2
+    {
+       int MaxUser = Add.maxuser;
+    }
+
+    public static void Main(string[] args)
+    {
+       Add a = new Add(); 
+    }
+}
+
+when to use : 
+1.For values or setting shared across all instances.
+
+6.Init-Only Property : a property that can be set only during object initialization,not after.
+ class Program
+ {
+     public class Add
+     {
+         private  int MaxUser;
+         //Init-Only Property
+         public  int maxuser { get; init; }
+     }   
+     public static void Main(string[] args)
+     {
+        Add a = new Add { maxuser = 100};//Set value during Initialization
+        a.maxuser = 200; //Set value after Initialization raises error
+     }
+ }
+
+when to use :
+1.for immutable objects where values should be assiged once.
+
+
+

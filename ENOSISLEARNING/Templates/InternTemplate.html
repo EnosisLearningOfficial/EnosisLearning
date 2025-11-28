@@ -1,0 +1,120 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+     <link rel="stylesheet" type="text/css" href="css/bootstrap-min.css" />
+    <link rel="stylesheet" type="text/css" href="css/main1.css" />
+    <link rel="stylesheet" type="text/css" href="css/demo.css"/>
+    
+
+    <script type="text/javascript" src="Scripts/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="Scripts/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="calltoaction">
+<div class="container-fluid">
+<div class="logo fl-lt mar1">
+<a href="index.aspx"><span class="enosis">enosis </span><span class="lrning">learning</span><br />
+<span class="creatng">Creating Software Professionals</span></a>
+</div>
+<div class="contact fl-rt demo">
+<div class="pull-right">
+                           
+<div class="menu-btn">
+<a href="Intern.aspx" class="upld-resume">Apply For Internship</a>
+<p>|</p>
+<a href="EnosisJobs.aspx" class="upld-resume">Apply For Job</a>
+<p>|</p>
+<a href="SubmitResume.aspx" class="upld-resume">Upload Your Resume</a>
+                                
+                                                      
+                                
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog">
+<div class="modal-dialog modal-sm">
+<div class="modal-content">
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+<h2 class="modal-title" style="color: #617284!important; top: 0px!important;">Request For Demo</h2>
+</div>
+
+<div class="modal-body">
+<div class="form-horizontal">
+<div class="form-group">
+<div class="col-xs-12">
+<asp:TextBox CssClass="form-control my-form-control" ID="txtUserName" placeholder="Enter Full Name" runat="server" />
+</div>
+</div>
+<div class="form-group">
+<div class="col-xs-12">
+<asp:TextBox CssClass="form-control my-form-control" ID="txtEmailId" placeholder="Enter Your Email Id" runat="server" />
+</div>
+</div>
+<div class="form-group">
+<div class="col-xs-12">
+<asp:TextBox CssClass="form-control my-form-control" ID="txtUserContactNo" placeholder="Enter Your Mobile No" runat="server" />
+</div>
+</div>
+<div class="form-group">
+<div class="col-xs-12">
+<asp:DropDownList CssClass="form-control my-form-control" ID="drpDCourse" runat="server">
+<asp:ListItem Value="0" Text="Please Select Course" />
+<asp:ListItem Value="1" Text="C Language" />
+<asp:ListItem Value="2" Text="C++ Language" />
+<asp:ListItem Value="3" Text="C# Language" />
+<asp:ListItem Value="4" Text="Java Language" />
+<asp:ListItem Value="5" Text="Advanced .NET" />
+<asp:ListItem Value="6" Text="Software Testing" />
+<asp:ListItem Value="7" Text="Web Designing" />
+<asp:ListItem Value="8" Text="Asp.Net MVC" />
+<asp:ListItem Value="9" Text="SQL Server" />
+<asp:ListItem Value="10" Text="Selenium" />
+<asp:ListItem Value="11" Text="Advance Java" />
+<asp:ListItem Value="12" Text="MSBI" />
+
+</asp:DropDownList>
+<%--<asp:Label ID="lblmsg" runat="server"  /> --%>
+</div>
+</div>
+</div>
+</div>
+<div class="modal-footer">
+<asp:Button ID="Button9" OnClick="btnSend_Click" Text="Send" runat="server" class="btn btn-primary" />
+<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+</div>
+</div>
+<div class="clearfix"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="clearfix"></div>
+</div>
+<nav class="navbar my-navbar">
+<!-- Brand and toggle get grouped for better mobile display -->
+<div class="navbar-header">
+<button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+<span class="sr-only">Toggle navigation</span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</button>
+</div>
+<!-- Collection of nav links and other content for toggling -->
+                   
+</nav>
+<!---Banner Div Start Here-->
+</div>
+<div>
+<span style = "font-family:Arial;font-size:10pt">
+Dear <b>{FirstName}</b>,<br /><br />
+<h4> Thanks for Applying at Enosis Learning. Your Application have been submitted successfully.</h4>
+<br /> Your Registration Id is {RegNo} Which you can use for further communication if any.
+<br /> If you want to change any information, you can click on the url below :
+<br /> {Url}
+<br /><br />
+Thanks<br />
+Enosis Recruitment Team
+</div>
+</body>
+</html>

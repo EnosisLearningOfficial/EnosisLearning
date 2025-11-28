@@ -1,0 +1,214 @@
+
+    // Example: Inspecting Methods of a Class Using Reflection
+
+    //public class Person
+    //{
+    //    public string Name { get; set; }
+
+    //    public void SayHello()
+    //    {
+    //        Console.WriteLine("Hello, my name is " + Name);
+    //    }
+    //}
+    //class Program
+    //{
+    //    static void Main()
+    //    {
+    //        // Get type of Person class
+    //        Type type = typeof(Person);
+
+    //        // Display all public properties
+    //        Console.WriteLine("Properties:");
+    //        foreach (PropertyInfo prop in type.GetProperties())
+    //        {
+    //            Console.WriteLine(prop.Name);
+    //        }
+
+    //        // Create instance of Person dynamically
+    //        object personInstance = Activator.CreateInstance(type);
+
+    //        // Set the Name property using reflection
+    //        PropertyInfo nameProp = type.GetProperty("Name");
+    //        nameProp.SetValue(personInstance, "Alice");
+
+    //        // Call SayHello method
+    //        MethodInfo method = type.GetMethod("SayHello");
+    //        method.Invoke(personInstance, null);
+    //        Console.ReadKey();
+    //    }
+    //}
+
+
+
+
+    //Example of Properties:
+
+    //class Person
+    //{
+    //    // Private field to store the value
+    //    private string name;
+
+    //    // Property to encapsulate the private field
+    //    public string Name
+    //    {
+    //        get
+    //        {
+    //            return name; // Returns the value of the private field
+    //        }
+    //        set
+    //        {
+    //            name = value; // Assigns a value to the private field
+    //        }
+    //    }
+    //}
+    //class Program
+    //{
+    //    static void Main()
+    //    {
+    //        Person person = new Person();
+
+    //        // Using the property to set the value
+    //        person.Name = "Manisha Sing";
+
+    //        // Using the property to get the value
+    //        Console.WriteLine("Name: " + person.Name);
+    //        Console.ReadLine();
+    //    }
+    //}
+
+
+
+
+
+
+
+
+    //Example of Indexers:	
+
+    //class Student
+    //{
+    //    private string[] names = new string[5]; // Internal array to hold names
+    //    // Indexer definition
+    //    public string this[int index]
+    //    {
+    //        get
+    //        {
+    //            if (index >= 0 && index < names.Length)
+    //            {
+    //                return names[index];
+    //            }
+    //            throw new IndexOutOfRangeException("Invalid index");
+    //        }
+    //        set
+    //        {
+    //            if (index >= 0 && index < names.Length)
+    //            {
+    //                names[index] = value;
+    //            }
+    //            else
+    //            {
+    //                throw new IndexOutOfRangeException("Invalid index");
+    //            }
+    //        }
+    //    }
+    //}
+    //class Program
+    //{
+    //    static void Main()
+    //    {
+    //        Student student = new Student();
+    //        // Using the indexer to set values
+    //        student[0] = "Mansi";
+    //        student[1] = "Rohini";
+    //        student[2] = "Meera Gujar";
+
+    //        // Using the indexer to get values
+    //        Console.WriteLine("Student at index 0: " + student[0]);
+    //        Console.WriteLine("Student at index 2: " + student[2]);
+
+    //        // Uncommenting the following line will throw an exception
+    //        // Console.WriteLine(student[5]);
+    //        Console.ReadLine();
+    //    }
+    //}
+
+
+
+
+    //The following example demonstrates overloaded indexers −
+
+    //class IndexedNames
+    //{
+    //    private string[] namelist = new string[size];
+    //    static public int size = 10;
+    //    public IndexedNames()
+    //    {
+    //        for (int i = 0; i < size; i++)
+    //        {
+    //            namelist[i] = "N. A.";
+    //        }
+    //    }
+    //    public string this[int index]
+    //    {
+
+    //        get
+    //        {
+    //            string tmp;
+
+    //            if (index >= 0 && index <= size - 1)
+    //            {
+    //                tmp = namelist[index];
+    //            }
+    //            else
+    //            {
+    //                tmp = "";
+    //            }
+
+    //            return (tmp);
+    //        }
+    //        set
+    //        {
+    //            if (index >= 0 && index <= size - 1)
+    //            {
+    //                namelist[index] = value;
+    //            }
+    //        }
+    //    }
+
+    //    public int this[string name]
+    //    {
+    //        get
+    //        {
+    //            int index = 0;
+
+    //            while (index < size)
+    //            {
+    //                if (namelist[index] == name)
+    //                {
+    //                    return index;
+    //                }
+    //                index++;
+    //            }
+    //            return index;
+    //        }
+    //    }
+    //    static void Main(string[] args)
+    //    {
+    //        IndexedNames names = new IndexedNames();
+    //        names[0] = "Zara";
+    //        names[1] = "Riz";
+    //        names[2] = "Nuha";
+    //        names[3] = "Asif";
+    //        names[4] = "Davinder";
+    //        names[5] = "Sunil";
+    //        names[6] = "Rubic";
+    //        //using the first indexer with int parameter
+    //        for (int i = 0; i < IndexedNames.size; i++)
+    //        {
+    //            Console.WriteLine(names[i]);
+    //        }
+    //        //using the second indexer with the string parameter
+    //        Console.WriteLine(names["Nuha"]);
+    //        Console.ReadKey();
+    //    }
+    //}

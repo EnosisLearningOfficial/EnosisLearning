@@ -1,0 +1,88 @@
+1.Polymorphisms
+	1.Compile-Time Polymorphism(Method/Function Overloading) : this is occurs when multiple methods have same name with different function signature(type,number or order).The method that gets called determined at Compile Time.
+Use : To perform a similar action in different ways depending on input parameters.
+When it use : -
+1. To perform a similar action in different ways
+2. Logic remain similar , but inputs may vary.
+ public class A { 
+ 
+     public int Add()
+     {
+         Console.WriteLine("Enter two values:-");
+         int a = Convert.ToInt32(Console.ReadLine());
+         int b = Convert.ToInt32(Console.ReadLine());
+         return a + b;
+     }
+
+     //Method Overloading
+     public double Add(double a , double d)
+     {
+         return a + d;
+     }
+     public int Add(int a, int b, int c)
+     {
+         return a + b + c;
+     }
+ };
+
+
+ public static void Main(string[] args)
+ {
+   A a = new A();
+     Console.WriteLine(a.Add(10,20,30));
+ }
+		
+		2.Constructor Overloading
+
+ public A()
+ {
+    Console.WriteLine("Enter teo values:-");
+     int a = Convert.ToInt32(Console.ReadLine());
+     int b = Convert.ToInt32(Console.ReadLine());
+     Console.WriteLine(a+b);
+ }
+ public A(int a, int b)
+ {
+     Console.WriteLine(a+b);
+ }
+
+public static void Main(string[] args)
+{
+  A a = new A(10,30);
+}
+	2. Run-time Polymorphism(Method Overriding) : Run-time Polymorphism(Method Overriding) ocuurs when a base class defines a method as virtual and a derived class overirdes it using the override keyword.The decision about which method to call is made at runtime based on the actual object.
+Use : to allow derived classes to customize or extend behaviour of class methods.
+When it use : 1.you are using inheritance, and behaviour should be diffrent for different derived types.
+2.You want to extensible and reusable code.
+3.you need dynamic behaviour depending on the object type at runtime.
+  public class A
+  {
+      public virtual void Fun()
+      {
+          Console.WriteLine("A.Fun() is Calling...!");
+      }
+  };
+  public class B : A
+  {
+      public override void Fun()
+      {
+          Console.WriteLine("B.Fun() is Calling...!");
+      }
+  };
+  public class C : A
+  {
+      public override void Fun()
+      {
+          Console.WriteLine("C.Fun() is Calling...!");
+      }
+  };
+  public static void Main(string[] args)
+  {
+      A a = new A();
+      B b = new B();
+      A ab = new B(); // Upcasting
+      ab.Fun(); // Which Fun() is Calling ?
+  }
+  
+
+

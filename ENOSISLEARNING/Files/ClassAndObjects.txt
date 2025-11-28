@@ -1,0 +1,241 @@
+        //Data Types
+        /*
+            1.Character constant - 'A','a' - char a = 'a'
+            2.string constant - "string"  - string name = "XYZ"
+
+            3.Integers - (0-9) - int number = 10;
+
+            4.float - float pi = 3.14;
+            5.double - double raius = 4.56;
+            6.Boolean - bool toggle = true/false;
+            7.void - null /non return type
+
+
+        //Statements//
+            1.Sequential statement
+            2.Conditional statements
+
+            1.Simple if()
+            2.if-else
+            3.else-if ladder
+            4.Nested if()
+            5.Nested if-else
+
+            if(condition)
+            {
+                //statements
+            }
+            
+
+             if(condition)
+            {
+                //statements
+            }
+            else
+            {
+                  //statements
+            }
+
+
+            if(condition)
+            {
+                //statements
+            }
+            else if()
+            {
+                  //statements
+            }
+            else if()
+            {
+                  //statements
+            }
+            else
+            {
+                   //statements
+            }   
+
+
+            if()
+            {
+                if()
+                {
+                
+                }
+            }
+
+            
+
+            if()
+            {
+                if()
+                {
+                
+                }
+                else
+                {
+
+                }
+            }
+            else
+            {
+                if()
+                {
+                
+                }
+                else
+                {
+
+                }
+            }
+           //////////////////////////////////
+           3.switch case statements
+            switch(a single integer)
+            {
+                case 1 : 
+                       // statements//
+                break;
+                default :
+                        // statements//
+            }
+            
+
+
+        //////////////////////////////////////
+            4.Looping statements
+            1.while(condition)
+            {
+                 //Statements
+                i++/i--;
+            }
+
+            2.do
+              {
+                   //Statements
+                   i++/i--;
+              }while(condition);
+
+
+            3.for(int i=1;i<=5;i++)
+            {
+                //Statements;
+            }
+            
+
+            4.foreach(int i in arr)
+              {
+                   //Statements;
+              }
+
+            5.nested loop
+
+            for()
+            {
+                for()
+                {
+
+                }
+            }
+
+
+            oops concept : OOP stands for Object-Oriented Programming.
+        OOP stands for Object-Oriented Programming.
+
+        Procedural programming is about writing procedures or methods that perform operations on the data, while object-oriented programming is about creating objects that contain both data and methods.
+
+        Object-oriented programming has several advantages over procedural programming:
+
+        OOP is faster and easier to execute
+        OOP provides a clear structure for the programs
+        OOP helps to keep the C# code DRY "Don't Repeat Yourself", and makes the code easier to maintain, modify and debug
+        OOP makes it possible to create full reusable applications with less code and shorter development time
+
+        What are Classes and Objects?
+
+         */
+
+
+
+
+using System;
+
+namespace CSharpTut
+{
+    class Student
+    {
+        //data - data members
+        //Access Specifiers//Access Modifirs//Access Level
+        //public , private,protected
+        public string? Name;
+        public int Age;
+        public int RollNo;
+        //Method - member function
+        //properties
+    }
+    class Program
+    {
+        public static void Main(string[] args)
+        {
+            Student b1 = new Student();
+            Student b2 = new Student();
+            b1.Name = "Test";
+            b1.Age = 105;
+            b1.RollNo =9001;
+            b2.Name = "Test 2";
+            b2.Age = 15;
+            b2.RollNo =901;
+            Console.WriteLine(b1.Name);
+            Console.WriteLine(b1.Age);
+            Console.WriteLine(b1.RollNo);
+            Console.WriteLine(b2.Name);
+            Console.WriteLine(b2.Age);
+            Console.WriteLine(b2.RollNo);
+        }
+    }
+}
+
+
+
+
+using System;
+
+namespace CSharpTut
+{
+    class Student
+    {
+        //data - data members
+        //Access Specifiers//Access Modifirs//Access Level
+        //public , private,protected
+        public string? Name;
+        public int Age;
+        public int RollNo;
+        //Method - member function
+        //properties
+    }
+    class Program
+    {
+        public static void Main(string[] args)
+        {
+            int num;
+            Student b1 = new Student();
+            Student b2 = new Student();
+            Console.WriteLine("Enter name :-");
+            b1.Name = Console.ReadLine();
+            Console.WriteLine("Enter Age :-");
+            b1.Age = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Enter Roll :-");
+            b1.RollNo = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Enter name :-");
+            b2.Name = Console.ReadLine();
+            Console.WriteLine("Enter Age :-");
+            b2.Age = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Enter Roll :-");
+            b2.RollNo = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Name is :- "+b1.Name);
+            Console.WriteLine("Age is :- "+b1.Age);
+            Console.WriteLine("Roll is :- "+b1.RollNo);
+            Console.WriteLine("Name is :- "+b2.Name);
+            Console.WriteLine("Age is :- "+b2.Age);
+            Console.WriteLine("Roll is :- "+b2.RollNo);
+        }
+    }
+}

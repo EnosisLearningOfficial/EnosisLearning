@@ -1,0 +1,129 @@
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CompleteControls.aspx.cs" Inherits="AspTutorial.CompleteControls" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous"/>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="container">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="display-5 text-primary">Registration Form</h5>
+                    </div>
+                    <div class="modal-body">
+                        <asp:TextBox ID="Nametxt" runat="server" placeholder="Name" CssClass="form-control"/>
+                        <asp:TextBox ID="Emailtxt" runat="server" placeholder="Email" CssClass="form-control mt-2" TextMode="Email"/>
+                        Gender:
+                       <%-- <asp:RadioButton ID="Male" Text="Male" runat="server" GroupName="Gender" />
+                        <asp:RadioButton ID="Female" Text="Female" runat="server" GroupName="Gender"/>--%>
+                        <asp:RadioButtonList ID="rblGender" runat="server" RepeatDirection="Horizontal">
+                            <asp:ListItem Text="Male" Value="Male"/>
+                            <asp:ListItem Text="Female" Value="Female"/>
+                        </asp:RadioButtonList>
+                        <asp:TextBox ID="DobTxt" runat="server" TextMode="Date" CssClass="form-control mt-2"/>
+                        <asp:DropDownList ID="CourseDrp" runat="server" CssClass="form-select">
+                            <asp:ListItem Value="0" Text="----Select Course----" />
+                            <asp:ListItem Value="C" Text="C" />
+                            <asp:ListItem Value="C++" Text="C++" />
+                            <asp:ListItem Value="C#" Text="C#" />
+                            <asp:ListItem Value="ASP" Text="ASP" />
+                        </asp:DropDownList>
+                        Skills:
+                        <asp:CheckBoxList ID="cblSkills" runat="server">
+                            <asp:ListItem Text="ASP" Value="ASP" />
+                            <asp:ListItem Text="MVC" Value="MVC" />
+                            <asp:ListItem Text="Java" Value="Java" />                         
+                        </asp:CheckBoxList>
+                        <asp:FileUpload ID="fuProfilePic" runat="server"/>
+                    </div>
+                    <div class="modal-footer">
+                         <asp:Button ID="btnSave" CssClass="btn btn-primary" Text="Submit" runat="server" OnClick="btnSave_Click"/>
+                    </div>
+                </div>
+            </div>
+            <asp:Label ID="lbmsg" runat="server" />
+        </div>
+    </form>
+</body>
+</html>
+
+
+using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.IO;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace AspTutorial
+{
+    public partial class CompleteControls : System.Web.UI.Page
+    {
+        string connectionString = "Data Source =DESKTOP-MPE7G61; Initial Catalog=AspTut2;Integrated Security=true;";
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnSave_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string skills = string.Join(",", cblSkills.Items.Cast<System.Web.UI.WebControls.ListItem>()
+                       .Where(i => i.Selected)
+                       .Select(i => i.Value)
+                       );
+                string filepath = "";
+                if (fuProfilePic.HasFile)
+                {
+                    string filename = Path.GetFileName(fuProfilePic.FileName);
+                    //filepath = Path.GetFileName(fuProfilePic.FileName);
+                    string uploadpath = Server.MapPath("~/Uploads/");
+                    if (!Directory.Exists(uploadpath))
+                    {
+                        Directory.CreateDirectory(uploadpath);
+                    }
+                    filepath = "~/Uploads/" + filename;
+                    fuProfilePic.SaveAs(uploadpath + filename);
+
+                }
+                using (SqlConnection Conn = new SqlConnection(connectionString))
+                {
+                    string query = "INSERT INTO Students(Name,Email,Gender,DOB,Course,Skills,ProfilePic)values(@Name,@Email,@Gender,@DOB,@Course,@Skills,@ProfilePic)";
+                    using (SqlCommand cmd = new SqlCommand(query, Conn))
+                    {
+                        cmd.Parameters.AddWithValue("@Name", Nametxt.Text);
+                        cmd.Parameters.AddWithValue("@Email", Emailtxt.Text);
+                        cmd.Parameters.AddWithValue("@Gender", rblGender.SelectedValue);
+                        cmd.Parameters.AddWithValue("@DOB", Convert.ToDateTime(DobTxt.Text));
+                        cmd.Parameters.AddWithValue("@Course", CourseDrp.SelectedValue);
+                        cmd.Parameters.AddWithValue("@Skills", skills);
+                        cmd.Parameters.AddWithValue("@ProfilePic", filepath);
+                        Conn.Open();
+                        int rows = cmd.ExecuteNonQuery();
+                        if (rows > 0)
+                        {
+                            lbmsg.Text = "Record Inserted Successfully...!";
+                        }
+                        else
+                        {
+                            lbmsg.Text = "Record Insertion Failed...!";
+                        }
+                        Conn.Close();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                lbmsg.Text = "Record Insertion Failed...!" +ex.Message;
+            }
+        }
+    }
+}

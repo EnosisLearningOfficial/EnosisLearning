@@ -1,0 +1,77 @@
+in C# classes and objects are the core building block of object oriented programming..
+A class provides a way to model real-world entities by grouping data and behaviour together.
+while objects represent the actual entity created from these class.
+
+class : it is a user defined type. that encaptulate data and behaviour.it contain fields,properties,methods and Constructor.
+
+Constructor:it is a special method in a class.that is automatically called when an object of the class is created.it has same name as the class.it does not have any return type but however a constructor can take parameters.and it is mainly used to initialize the object's data members.
+
+There are some types of Constructor:
+1.Default Constructor : a default constructor in c# is a constructor with no parameneters.it is automatically provided  by the compiler if no constructor in the class.it initialize numeric filds to 0.
+
+ //Default Constructor//
+ public Student()
+ {
+     Console.WriteLine("Enter Id:-");
+     Id = Convert.ToInt32(Console.ReadLine());
+     Console.WriteLine("Enter Name");
+     Name = Console.ReadLine();
+     Console.WriteLine("Enter Age:-");
+     Age = Convert.ToInt32(Console.ReadLine());
+     Console.WriteLine("Enter Address:-");
+     Address = Console.ReadLine();
+ }
+
+
+2.Parameterized Constructor: a constructor having at least one parameter is called a parameterized constructor.it can initiliz each instanceof the class to different values.
+  //Parameterized Constructor
+ public Student(int id, string name, int age,string add)
+ {
+     Id = id;
+     Name = name;
+     Age = age;
+     Address = add;
+ }
+
+public static void Main(string[] args)
+{
+    Student s1 = new Student();
+    Student s2 = new Student(2,"B",13,"B");
+    s1.ShowData();
+    s2.ShowData();
+    
+}
+
+3.Copy Constructor : a copy constructor is used to create a new object by copying the values from an existing object of the same class.usdeful when we need to duplicate an object or create a new object based on the state of another.
+ public Student(Student s)
+ {
+     Id = s.Id;
+     Name = s.Name;
+     Age = s.Age;
+     Address = s.Address;
+ }
+
+public static void Main(string[] args)
+{
+    Student s1 = new Student();
+    Student s2 = new Student(2,"B",13,"B");
+    Student s3 = new Student(s1);
+    s1.ShowData();
+    s2.ShowData();
+    s3.ShowData();
+
+}
+
+//HomeWork
+4.Private Constructor
+5.Static Constructor
+
+
+2.Destructor : it is also a member method in a class.and it is called when an onject is going to destroye.destructor have same name as the class with the sign of tilde(~).
+
+ //Destructor
+ ~Student()
+ {
+     Console.WriteLine("Destructor Called");
+ }
+

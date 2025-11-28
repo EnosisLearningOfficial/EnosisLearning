@@ -1,0 +1,112 @@
+
+
+    //using System.Diagnostics;
+    //public class Myclass
+    //{
+    //    [Conditional("DEBUG")]
+
+    //    public static void Message(string msg)
+    //    {
+    //        Console.WriteLine(msg);
+    //    }
+    //}
+
+    //class Test
+    //{
+    //    static void function1()
+    //    {
+    //        Myclass.Message("In Function 1.");
+    //        function2();
+    //    }
+
+    //    static void function2()
+    //    {
+    //        Myclass.Message("In Function 2.");
+    //    }
+
+    //    public static void Main()
+    //    {
+    //        Myclass.Message("In Main function.");
+    //        function1();
+    //        Console.ReadKey();
+    //    }
+    //}
+
+
+
+
+
+
+
+
+
+    //[Obsolete]: ATTRIBUTES IN C#
+    // Built-in Attribute Example:Obsolete
+    //class Program
+    //{
+    //    [Obsolete("Use NewMethod instead")]
+    //    static void OldMethod()
+    //    {
+    //        Console.WriteLine("Old method");
+    //    }
+
+    //    static void NewMethod()
+    //    {
+    //        Console.WriteLine("New method");
+    //    }
+
+    //    static void Main()
+    //    {
+    //        OldMethod(); // This will give a compile-time warning
+    //        NewMethod();
+    //        Console.ReadLine();
+    //    }
+    //}
+
+
+
+    //Creating Custom Attributes
+    // 1. Define a custom attribute
+
+
+
+    //[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
+    //public class MyInfoAttribute : Attribute
+    //{
+    //    public string Message { get; }
+
+    //    public MyInfoAttribute(string message)
+    //    {
+    //        Message = message;
+    //    }
+    //}
+
+    //// 2. Use the custom attribute
+    //[MyInfo("This is a sample class")]
+    //class SampleClass
+    //{
+    //    [MyInfo("This is a sample method")]
+    //    public void SayHello()
+    //    {
+    //        Console.WriteLine("Hello!");
+    //    }
+    //}
+
+    //// 3. Read the attribute using reflection
+    //class Program
+    //{
+    //    static void Main()
+    //    {
+    //        Type type = typeof(SampleClass);
+
+    //        // Get class-level attribute
+    //        var classAttr = (MyInfoAttribute)Attribute.GetCustomAttribute(type, typeof(MyInfoAttribute));
+    //        Console.WriteLine("Class Attribute: " + classAttr?.Message);
+
+    //        // Get method-level attribute
+    //        var methodInfo = type.GetMethod("SayHello");
+    //        var methodAttr = (MyInfoAttribute)Attribute.GetCustomAttribute(methodInfo, typeof(MyInfoAttribute));
+    //        Console.WriteLine("Method Attribute: " + methodAttr?.Message);
+    //        Console.ReadKey();
+    //    }
+    //}

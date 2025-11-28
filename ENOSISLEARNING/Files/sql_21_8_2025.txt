@@ -1,0 +1,352 @@
+--======================== UDF Functions In SQL========21-08-2025======================
+•	Introduction to Functions:
+--In T-SQL, functions are database objects that encapsulate reusable logic. They can take input parameters, perform operations, and return a value. Functions can be categorized into two main types: scalar functions and table-valued functions.
+
+--Understanding User-Defined Functions:
+--The purpose of a user-defined function (UDF) is to encapsulate reusable T-SQL code and return a scalar value or a table to the caller. Like stored procedures, UDFs can accept parameters, and the parameters can be accessed inside the function as variables. 
+
+---	UDFs cannot be executed by using the EXECUTE command. 
+
+---	UDFs access SQL Server data, but they cannot perform any DDL—that is, they cannot create tables, and they cannot make modifications to tables, indexes, or other objects, or change any data in permanent tables by using a DML statement. 
+
+--There are two major types of UDFs:  -------------------------------------------------------  
+  1.Scalar Functions: 
+  2.Table-Valued Functions (TVFs): 
+
+ [1] scalar function :
+--SQL scalar functions are user-defined or built-in functions that take one or more parameters and return a single value. SQL character functions are a type of scalar function used to manipulate and transform character data, such as strings.
+
+--Syntax of Function:
+Create function function_name ( Parameter1 datatype, Parameter2 datatype ) 
+RETURNS DATATYPE
+AS
+BEGIN
+STATEMENTS
+RETURN VALUE
+END 
+
+--1. Function Examples
+Create function fn_add (@n1 int, @n2 int ) returns INT
+AS
+BEGIN
+Declare @tot int
+Set @tot= @n1 + @n2
+Return @tot
+End
+
+--CALLING A FUNCTION :  
+--SYNTAX     : 
+Select  dbo.function_name(parameters)
+
+--EXAMPLE:
+Select dbo. fn_add (100,200) 
+
+--2. Example of a Scalar Function:
+--WRITE A FUNCTION TO GET THE NUMBER OF EMPLOYEES IN A DEPT
+CREATE FUNCTION FN_GETEMPCOUNT
+(
+@DEPTNAME VARCHAR(100)
+)
+RETURNS INT
+AS
+BEGIN
+DECLARE @COU INT
+SELECT @COU = COUNT(*) FROM EMPLOYEE WHERE DEPARTMENT=@DEPTNAME
+RETURN @COU
+END
+
+SELECT DBO.FN_GETEMPCOUNT('Sales') AS EMPCOUNT
+
+select * from  EMPLOYEE
+
+
+[2]Table-Valued Functions:
+--User-defined table-valued functions return a table data type. For an inline table-valued function, there is no function body; the table is the result set of a single SELECT statement. 
+
+--Syntax:
+CREATE FUNCTION function_name (@parameter1 data_type, @parameter2 data_type, ...)
+RETURNS TABLE
+AS
+RETURN
+(
+    SELECT column1, column2, ...
+    FROM table_name
+    WHERE condition
+);
+
+
+--Example:
+CREATE FUNCTION FN_GETEMP
+(
+@DEPTNAME VARCHAR(100)
+)
+RETURNS TABLE
+RETURN (SELECT * FROM EMPLOYEE WHERE DEPARTMENT = @DEPTNAME)
+
+SELECT * FROM FN_GETEMP('Sales')
+-------------------------------------------------
+Alter FUNCTION FN_GETEMP
+(
+@e_name VARCHAR(100)
+)
+RETURNS TABLE
+RETURN (SELECT * FROM EMPLOYEE WHERE e_name = @e_name)
+
+SELECT * FROM FN_GETEMP('John Doe')
+------------------------------------------------------
+Drop FUNCTION FN_GETEMP
+
+select * from EMPLOYEE
+-----------------------------------------------------------------------------------------------===============  Stored Procedures===================================================
+•	Introduction to Stored Procedures ------------------------------------------------------
+--Sored Procedure is a group of SQL statements which is saved as program which can be reused when they required.
+--Important features of stored procedures:
+--	They can be called from T-SQL code by using the EXECUTE command.
+--	You can pass data to them through input parameters, and receive data back through output parameters.
+--	 They can return result sets of queries to the client application. 
+--	 They can modify data in tables.
+
+--Syntax:
+CREATE PROCEDURE ProcedureName
+    @Parameter1 DataType,
+    @Parameter2 DataType,
+
+AS
+BEGIN
+    -- SQL statements
+END;
+
+•	Writing Stored Procedures----------------------------------------------------------------
+--Example
+CREATE TABLE Productnew
+(ProductID INT, 
+ProductName VARCHAR(100) 
+);
+
+
+CREATE TABLE ProductDescriptionnew
+(ProductID INT, 
+ProductDescription VARCHAR(800) 
+);
+
+ 
+ drop table ProductDescriptionnew
+
+INSERT INTO Productnew VALUES (680,'HL Road Frame - Black, 58')
+,(706,'HL Road Frame - Red, 58')
+,(707,'Sport-100 Helmet, Red')
+
+ 
+INSERT INTO ProductDescriptionnew VALUES (680,'Replacement mountain wheel for entry-level rider.')
+,(706,'Sturdy alloy features a quick-release hub.')
+,(707,'Aerodynamic rims for smooth riding.')
+
+drop table ProductDescriptionnew
+------------------------------
+Create PROCEDURE SP_productnew--procedure name
+as
+begin
+select * from Productnew where ProductID=706--query 
+end
+
+EXEC SP_productnew 
+
+
+select * from SP_productnew
+select * from ProductDescriptionnew
+ -----------------------------------------------------------------------------------
+ --STORED PROCEDURE EXAMPLES:
+ --Step 1 : Create a Table
+CREATE  TABLE  [STUDENTS]
+(
+	[ROLLNO]  [int]  IDENTITY(1,1)  CONSTRAINT  [PK_ROLLNO]  PRIMARY KEY,
+	[NAME]  [nvarchar](100) NULL,
+	[GENDER]  [char](1)  NULL,
+	[ENG_MARKS]  [float]  NULL,
+	[SCIENCE_MARKS]  [float]  NULL,
+	[MATHS_MARKS]  [float]  NULL
+)
+
+select * from STUDENTS
+drop table STUDENTS
+--Create a Procedure to Insert a student
+
+CREATE  PROCEDURE  SP_INSERTSTUDENTS
+(
+@STUDNAME  NVARCHAR(50),
+@GEN  CHAR(1),
+@ENG  FLOAT,
+@SCN FLOAT,
+@MATHS  FLOAT
+)
+AS
+BEGIN
+INSERT  INTO STUDENTS VALUES(@STUDNAME,@GEN,@ENG,@SCN,@MATHS)
+SELECT * FROM STUDENTS
+END
+
+EXEC SP_INSERTSTUDENTS 'SURESH','M',78,99,67
+
+EXEC SP_INSERTSTUDENTS 'Sona','F',78,99,67
+
+EXEC SP_INSERTSTUDENTS 'Mona','F',78,99,67
+----------------------
+select * from STUDENTS
+drop table STUDENTS
+----------------------------
+--Step 2: Create a Procedure to Insert a student if the students does not exists
+CREATE  PROCEDURE  SP_ADDSTUDENTS
+(
+@STUDNAME  NVARCHAR(50),
+@GEN  CHAR(1),
+@ENG  FLOAT,
+@SCN FLOAT,
+@MATHS  FLOAT
+)
+AS
+BEGIN
+DECLARE @COU  INT= 0
+SELECT   @COU=COUNT(*)  FROM  STUDENTS  WHERE NAME=@STUDNAME -- THIS WILL CHECK IF THE STUDENT IS ALREADY PRESENT
+
+IF (@COU> 0)
+BEGIN
+PRINT  'STUDENT ALREADY PRESENT, PLEASE ENTER A NEW NAME,NAME='+@STUDNAME
+END
+ELSE
+BEGIN
+INSERT  INTO STUDENTS VALUES(@STUDNAME,@GEN,@ENG,@SCN,@MATHS)
+SELECT  *  FROM  STUDENTS
+END
+END
+
+
+select * from STUDENTS
+drop table STUDENTS
+
+
+--CALLING A STORED PROCEDURE
+Exec  SP_ADDSTUDENTS  'Sonaa','M',89,76,67
+---------------------------------------------------------------------
+--Stored Procedure to Insert, Update, Delete (I/U/D)
+
+CREATE PROCEDURE ManageStudents
+    @Action VARCHAR(10),         -- 'INSERT', 'UPDATE', or 'DELETE'
+    @ROLLNO INT = NULL,          -- Required for UPDATE and DELETE
+    @NAME NVARCHAR(100) = NULL,
+    @GENDER CHAR(1) = NULL,
+    @ENG_MARKS FLOAT = NULL,
+    @SCIENCE_MARKS FLOAT = NULL,
+    @MATHS_MARKS FLOAT = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    IF @Action = 'INSERT'
+    BEGIN
+        INSERT INTO STUDENTS (NAME, GENDER, ENG_MARKS, SCIENCE_MARKS, MATHS_MARKS)
+        VALUES (@NAME, @GENDER, @ENG_MARKS, @SCIENCE_MARKS, @MATHS_MARKS);
+    END
+
+    ELSE IF @Action = 'UPDATE'
+    BEGIN
+        UPDATE STUDENTS
+        SET 
+            NAME = @NAME,
+            GENDER = @GENDER,
+            ENG_MARKS = @ENG_MARKS,
+            SCIENCE_MARKS = @SCIENCE_MARKS,
+            MATHS_MARKS = @MATHS_MARKS
+        WHERE ROLLNO = @ROLLNO;
+    END
+
+    ELSE IF @Action = 'DELETE'
+    BEGIN
+        DELETE FROM STUDENTS
+        WHERE ROLLNO = @ROLLNO;
+    END
+
+    ELSE
+    BEGIN
+        RAISERROR('Invalid Action. Use INSERT, UPDATE or DELETE.', 16, 1);
+    END
+END;
+---------------------------------------------
+SELECT  *  FROM  STUDENTS
+--CALLING A STORED PROCEDURE
+--Insert a Student
+EXEC ManageStudents 
+    @Action = 'INSERT',
+    @NAME = 'Meera',
+    @GENDER = 'F',
+    @ENG_MARKS = 85,
+    @SCIENCE_MARKS = 90,
+    @MATHS_MARKS = 95;
+-------------------------------
+SELECT  *  FROM  STUDENTS
+--Update a Student (e.g., ROLLNO = 1)
+EXEC ManageStudents 
+    @Action = 'UPDATE',
+    @ROLLNO = 1,
+    @NAME = 'Pooja',
+    @GENDER = 'F',
+    @ENG_MARKS = 88,
+    @SCIENCE_MARKS = 92,
+    @MATHS_MARKS = 96;                     
+----------------------------------------
+SELECT  *  FROM  STUDENTS
+--Delete a Student (e.g., ROLLNO = 8)
+EXEC ManageStudents 
+    @Action = 'DELETE',
+    @ROLLNO = 6;
+-----------------------------------------
+select * from STUDENTS
+--------------------------------------------------------------------------
+--Types of Stored Procedures
+
+1.	Temporary Stored procedures: The temporary stored procedures have names prefixed with the # symbol. Temporary stored procedures stored in the tempdb databases. These procedures are automatically dropped when the connection terminates between client and server. 
+  Temporary stored procedures on Microsoft SQL Server are prefixed with a pound sign #. One pound sign means that it’s temporary within the session, two pound signs ## means it’s a global temporary procedure, which can be called by any connection to the SQL server during its lifetime.
+
+2.	User Defined Stored procedure: The user defined stored procedures are created by users and stored in the current database
+
+--Example of Temporary Stored Procedure:
+CREATE PROC #SP_MULTIPLY
+(
+@N1 INT,
+@N2 INT
+)
+AS
+BEGIN
+DECLARE @T INT = @N1 * @N2
+PRINT @T
+END
+
+EXEC #SP_MULTIPLY 10,20
+
+•	Remote Stored Procedures: The remote stored procedures are procedures that are created and stored in databases on remote servers. These remote procedures can be accessed from various servers, provided the users have the appropriate permission
+•	Extended Stored Procedures: These are Dynamic-link libraries (DLL s) that are executed outside the SQL Server environment. They are identified by the prefix xp_
+
+ ---------------------------------------------------------------------------------------------
+•	Advantage of Stored Procedures:
+1.	Create DLL routines as regular Stored Procedures for any SQL Server version.
+2.	Since they use API-Request/Response formats, they are capable of running remotely.
+3.	In the case of non–SQL Server based applications, we can create gateways to tie the two programs  together.
+4.	We can interface with various applications, and this function will deliver the result set as a whole.
+----------------------------------------------------------------------------------------
+•  Disadvantages
+1.The reliability of the server may get reduced by extended stored procedures, sometimes leading to memory leaks.
+2.Granting permission to other users is mandatory - system admin reviews are a must after each update.
+3.If user data was directly appended as an input, SQL Injection may possible.
+
+--------------------------------------------------------------------------------------
+--Comparison between Stored Procedures & Functions
+--Difference between stored procedures and functions
+1.	Unlike Stored Procedure, Function returns only single value.
+2.	Unlike Stored Procedure, Function accepts only input parameters.
+3.	Unlike Stored Procedure, Function is not used to Insert, Update, Delete data in database table(s).
+
+4.	User Defined Function can have up to 1023 input parameters while a Stored Procedure can have up to 21000 input parameters.
+5.	User Defined Function canot returns XML Data Type.
+6.	User Defined Function doesnot support Exception handling.
+7.	User Defined Function can call only Extended Stored Procedure.
+8.	User Defined Function doesnot support set options like set ROWCOUNT etc.
+---------------------------------------------------------------------------------------------

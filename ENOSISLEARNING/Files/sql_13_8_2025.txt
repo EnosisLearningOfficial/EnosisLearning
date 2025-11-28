@@ -1,0 +1,205 @@
+--===========================FUNCTIONS====================13-08-2025======================
+--In SQL, a function is a predefined or user-defined operation that performs a specific task and returns a single value. Functions can be used within queries to manipulate data, such as performing calculations, transforming text, or extracting specific parts of data from a column.
+
+--There are two main types of functions in SQL:
+   -- 1.Built-in functions: 
+   -- 2.User-defined functions (UDFs): 
+
+--[1]IN-BUILT Funtions:
+--In-built functions (also known as built-in functions) in SQL are pre-defined functions that come with SQL databases. These functions are provided by the database management system (DBMS) and are ready to use for various tasks like calculations, string manipulation, date and time operations, and more.
+
+
+--IN-BUILT FUNCTIONS are broadly categorized into the following fields: 
+/*1.Aggregate Function.
+2.String Function.
+3.Date Function.
+4.Numeric Function.
+*/
+
+--[1]Aggregate Function.--------------------------------------------------------------
+--An aggregate function in SQL is a function that performs a calculation on a set of values and returns a single value. Common aggregate functions include:
+
+/*1.COUNT,
+2.SUM,
+3.AVG,
+4.MIN
+5.MAX*/
+
+--1. COUNT():
+SELECT COUNT(*)AS TotalEmployees  FROM Employee; 
+select * from Employee
+
+--2. SUM():
+SELECT SUM(salary) AS TotalSalary FROM Employee;
+select * from Employee
+
+--3. AVG()
+SELECT AVG(salary) AS AverageSalary FROM Employee;
+select * from Employee
+
+--4. MIN()
+SELECT MIN(salary) AS MinSalary FROM Employee;
+select * from Employee
+
+--5. MAX()
+SELECT MAX(salary) AS MaxSalary FROM Employee;
+select * from Employee
+
+--[2]String Function.---------------------------------------------------------------
+--String functions in SQL are used to manipulate and perform operations on string data types. They allow you to perform tasks such as concatenation, substring extraction, searching, and formatting text.
+
+--1. CONCAT():Concatenates two or more strings together.
+SELECT e_id, CONCAT(e_name, department) AS EmployeeInfo
+FROM Employee;
+
+SELECT e_id, CONCAT(e_name, ' - ', department) AS EmployeeInfo
+FROM Employee;
+
+--2. LENGTH():Returns the length of a string.
+SELECT e_id, e_name, LEN(e_name) AS NameLength
+FROM Employee;
+
+--3. UPPER() and LOWER():Converts a string to uppercase or lowercase.
+SELECT e_id, UPPER(e_name) AS UppercaseName
+FROM Employee;
+
+SELECT e_id, LOWER(e_name) AS UppercaseName
+FROM Employee;
+
+--4.REPLACE():Replaces all occurrences of a substring within a string.
+SELECT e_id, REPLACE(e_name, 'a', '@') AS ModifiedName
+FROM Employee;
+
+--[3]Date Function----------------------------------------------------
+--Date functions in SQL are used to manipulate and perform operations on date and time values. Here are some common date functions along with examples using a sample Employee table.
+
+--1. GETDATE():Returns the current date and time.
+SELECT GETDATE() AS CurrentDateTime;
+
+-- YEAR(), MONTH(), DAY():Extracts the year, month, or day from a date.
+SELECT e_id, e_name,
+       YEAR(joiningDate) AS JoiningYear,
+       MONTH(joiningDate) AS JoiningMonth,
+       DAY(joiningDate) AS JoiningDay
+FROM Employee;
+
+select * from Employee
+
+--In SQL Server, the date functions NOW(), DATEADD(), and DATEDIFF() are available, but SQL Server doesnt have a DATE_SUB() function. Instead, you use DATEADD() for both adding and subtracting time intervals.
+
+--1. GETDATE() (Equivalent to NOW() in other SQL databases)
+--In SQL Server, the function GETDATE() returns the current date and time.
+--Syntax:
+GETDATE()
+
+--Example:
+SELECT GETDATE();
+
+2. DATEADD() Function
+--The DATEADD() function adds or subtracts a specified time interval to/from a date.
+--Syntax:
+DATEADD(datepart, number, date)
+--datepart: The part of the date to add or subtract (e.g., year, month, day, hour, minute, etc.).
+--number: The number of units to add (positive value) or subtract (negative value).
+--date: The base date.
+
+--Example 1: Adding 5 days to a date
+SELECT DATEADD(day, 5, '2025-01-17');
+
+--Example 2: Subtracting 1 month from a date
+SELECT DATEADD(month, -1, '2025-01-17');
+
+3. DATEDIFF() Function
+--The DATEDIFF() function calculates the difference between two dates in terms of a specified date part (e.g., days, months, years).
+--Syntax:
+DATEDIFF(datepart, startdate, enddate)
+--datepart: The part of the date to measure the difference (e.g., day, month, year, etc.).
+--startdate: The starting date.
+--enddate: The ending date.
+
+--Example 1: Finding the difference in days between two dates
+SELECT DATEDIFF(day, '2025-01-01', '2025-01-17');
+
+--Example 2: Finding the difference in months between two dates
+SELECT DATEDIFF(month, '2024-12-01', '2025-01-17');
+
+-----------------------[4]Numeric Function.--------------------------------------
+--In SQL Server, numeric functions perform operations on numeric data types.
+
+--1.ABS() - Returns the absolute value of a number.
+select ABS(-40)
+
+--2.CEILING() - Returns the smallest integer greater than or equal to the specified number.
+Select CEILING(4.44)
+
+--3.FLOOR() - Returns the largest integer less than or equal to the specified number.
+Select FLOOR(4.44)
+
+--4.PI() -function is a built-in mathematical function that returns the value of π (pi), which is approximately 3.14159.
+Select PI() 
+Select 2*PI()
+
+--5.POWER() - Returns the result of a number raised to a specified power.
+Select POWER(2,4) --2*2*2*2
+
+--6.ROUND() - Rounds a number to a specified decimal place.
+Select ROUND(5.4566,3)   
+
+--7.Square()
+Select SQUARE(5)
+
+--8.SQRT() - Returns the square root of a number.
+Select SQRT(25)
+
+--9.ISNULL (Replace Nulls)
+--The ISNULL() function is used to replace NULL values with a specified replacement value.
+SELECT ISNULL(NULL, 0) AS ReplacedValue;
+SELECT ISNULL(NULL, 4) AS ReplacedValue;
+
+--10. Phone Number Formatting:
+SELECT FORMAT(1234567890, '(###) ###-####') AS PhoneNumber;
+SELECT FORMAT(12734567890, '(####) ###-####') AS PhoneNumber;
+
+--11.Time Formatting:
+SELECT FORMAT(GETDATE(), 'HH:mm:ss') AS TimeFormat_24,   -- 24-hour time format
+       FORMAT(GETDATE(), 'HH:ss:mm') AS TimeFormat_24,
+       FORMAT(GETDATE(), 'hh:mm:ss tt') AS TimeFormat_12; -- 12-hour time format with AM/PM
+
+--12. Date Format
+--D: Full date/time format.
+--HH: Hour (24-hour).
+--hh: Hour (12-hour).
+--mm: Minutes.
+--ss: Seconds.
+--yyyy: Four-digit year.
+--MMMM: Full month name.
+--MMM: Abbreviated month name.
+--dddd: Full day of the week name.
+
+----The FORMAT() function is used to format numeric values into a specific style or locale.
+--You can use the 'yyyy-MM-dd' or 'yyyy-MM-ddTHH:mm:ss' format to get a standardized date or datetime format, commonly used for international applications or APIs.
+
+
+--Example:
+SELECT FORMAT(GETDATE(), 'yyyy-MM-ddTHH:mm:ss') AS ISODateTime;-- Output: $1,234,567.89 (currency format)
+
+--syntax:
+--select FORMAT(value, format, culture)
+
+SELECT FORMAT(GETDATE(), 'D', 'en-US') AS LongDate;
+SELECT FORMAT(GETDATE(), 'd', 'en-US') AS ShortDate;
+SELECT FORMAT(GETDATE(), 'yyyy-MM-dd') AS CustomDate;
+SELECT FORMAT(GETDATE(), 'hh:mm tt') AS FormattedTime;
+SELECT FORMAT(GETDATE(), 'yyyy-MM-dd hh:mm tt') AS DateTimeFormatted;
+
+--The general syntax for the FORMAT function is:
+select FORMAT(value, format, culture)
+SELECT FORMAT(1234567.89, 'C', 'fr-FR') AS FormattedCurrencyFrench;
+
+SELECT FORMAT(1234567.89, 'C', 'En-US') AS FormattedCurrencyFrench;
+
+SELECT FORMAT(1234567.89, 'C', 'in-IN') AS FormattedCurrencyFrench;
+
+--value: The value to be formatted (e.g., a number or date).
+--format: A string that specifies the format to apply. For numeric values, the 'C' format specifier is used for currency formatting.
+--culture: A culture or locale identifier (e.g., 'en-US' for English (United States)).

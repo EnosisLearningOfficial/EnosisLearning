@@ -1,0 +1,168 @@
+
+    //Structure
+
+    //struct Point
+    //{
+    //    // Fields
+    //    public int X;
+    //    public int Y;
+
+    //    // Constructor
+    //    public Point(int x, int y)
+    //    {
+    //        X = x;
+    //        Y = y;
+    //    }
+    //    // Method
+    //    public void Display()
+    //    {
+    //        Console.WriteLine($"Point({X}, {Y})");
+    //    }
+    //}
+    //class Program
+    //{
+    //    static void Main()
+    //    {
+    //        // Initialize the structure using the constructor
+    //        Point p1 = new Point(10, 20);
+
+    //        // Display the point
+    //        p1.Display(); // Output: Point(10, 20)
+
+    //        // Copy the structure
+    //        Point p2 = p1;
+    //        p2.X = 30;
+
+    //        // Display original and copied points
+    //        p1.Display(); // Output: Point(10, 20)
+    //        p2.Display(); // Output: Point(30, 20)
+    //        Console.ReadKey();
+    //    }
+    //}
+
+
+
+    //    struct Books
+    //{
+    //    private string title;
+    //    private string author;
+    //    private string subject;
+    //    private int book_id;
+
+    //    public void getValues(string t, string a, string s, int id)
+    //    {
+    //        title = t;
+    //        author = a;
+    //        subject = s;
+    //        book_id = id;
+    //    }
+    //    public void display()
+    //    {
+    //        Console.WriteLine("Title : {0}", title);
+    //        Console.WriteLine("Author : {0}", author);
+    //        Console.WriteLine("Subject : {0}", subject);
+    //        Console.WriteLine("Book_id :{0}", book_id);
+    //    }
+    //};
+    //public class testStructure
+    //{
+    //    public static void Main(string[] args)
+    //    {
+    //        Books Book1 = new Books();   /* Declare Book1 of type Book */
+    //        Books Book2 = new Books();   /* Declare Book2 of type Book */
+
+    //        /* book 1 specification */
+    //        Book1.getValues("C Programming",
+    //        "Nuha Ali", "C Programming Enosis Learning", 6495407);
+
+    //        /* book 2 specification */
+    //        Book2.getValues("Telecom Billing",
+    //        "Zara Ali", "Telecom Billing Enosis Learning", 6495700);
+
+    //        /* print Book1 info */
+    //        Book1.display();
+
+    //        /* print Book2 info */
+    //        Book2.display();
+    //        Console.ReadKey();
+    //    }
+    //}
+
+
+
+
+
+    //enum Days
+    //{
+    //    Sunday,     // 0
+    //    Monday,     // 1
+    //    Tuesday,    // 2
+    //    Wednesday,  // 3
+    //    Thursday,   // 4
+    //    Friday,     // 5
+    //    Saturday    // 6
+    //}
+    //class Program
+    //{
+    //    static void Main()
+    //    {
+    //        // Using the enum
+    //        Days today = Days.Monday;
+
+    //        // Output the enum value
+    //        Console.WriteLine($"Today is: {today}"); // Output: Today is: Monday
+
+    //        // Casting to int
+    //        int dayNumber = (int)today;
+    //        Console.WriteLine($"Monday is day number: {dayNumber}"); // Output: Monday is day number: 1
+
+    //        // Setting a value from int
+    //        Days tomorrow = (Days)2;
+    //        Console.WriteLine($"Tomorrow is: {tomorrow}"); // Output: Tomorrow is: Tuesday
+    //        Console.ReadLine();
+    //    }
+    //}
+
+
+
+
+    // OPERATOR OVERLOADING
+
+    struct Point
+    {
+        public int X { get; set; }
+        public int Y { get; set; }
+
+        // Constructor
+        public Point(int x, int y)
+        {
+            X = x;
+            Y = y;
+        }
+        // Overload the + operator
+        public static Point operator +(Point p1, Point p2)
+        {
+            return new Point(p1.X + p2.X, p1.Y + p2.Y);
+        }
+        // Method to display the point
+        public void Display()
+        {
+            Console.WriteLine($"Point({X}, {Y})");
+        }
+    }
+    class Program
+    {
+        static void Main()
+        {
+            Point p1 = new Point(3, 5);
+            Point p2 = new Point(4, 7);
+
+            // Use the overloaded + operator
+            Point p3 = p1 + p2;
+
+            p1.Display(); // Output: Point(3, 5)
+            p2.Display(); // Output: Point(4, 7)
+            p3.Display(); // Output: Point(7, 12)
+            Console.ReadLine();
+        }
+    }

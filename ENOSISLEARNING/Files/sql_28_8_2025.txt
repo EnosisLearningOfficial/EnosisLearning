@@ -1,0 +1,10 @@
+--===================== Databases Backup And Restore =========28-08-2025=======
+•	Backup--------------------- 
+https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure?view=sql-server-ver16&tabs=ssms
+Right click on Databases=>Tasks=>Back Up..=>Add=>File Name=>ok=>
+
+--OLTP data is for most typical online transaction processing workloads.
+
+•	Restore--------------------
+Right click on Databases=>Restore Database=>Device...=>Add=>select db All files(*) click db_Name ok=>
+----------------------------------------------------------------------------------------------

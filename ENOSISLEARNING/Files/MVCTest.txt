@@ -1,0 +1,62 @@
+What is MVC? Explain the role of Model, View, and Controller.
+
+Write two differences between ASP.NET WebForms and ASP.NET MVC.
+
+What is Routing in MVC? Explain with an example.
+
+Differentiate between ViewBag, ViewData, and TempData.
+
+What are Strongly Typed Views? Why are they preferred over weakly typed views?
+
+Explain the ASP.NET MVC Request Life Cycle step by step.
+
+Write a short note on Razor View Engine and its advantages.
+
+MCQ: In MVC, the Controller is responsible for:
+a) Designing the user interface
+b) Handling user input and controlling flow
+c) Storing application data
+d) Configuring routing
+
+MCQ: TempData in MVC is used to store data:
+a) For one request only
+b) For multiple requests until session ends
+c) For entire application life cycle
+d) Permanently in database
+
+
+What are HTML Helpers in ASP.NET MVC? Why are they used?
+
+Differentiate between HTML Helpers and WebForm Controls.
+
+What is the difference between Standard HTML Helpers and Strongly Typed HTML Helpers?
+
+Write the syntax and purpose of the following HTML Helpers:
+
+Html.TextBox()
+
+Html.TextBoxFor()
+
+Explain the difference between Html.Label() and Html.LabelFor() with an example.
+
+What are Custom HTML Helpers? Write the steps to create one.
+
+Write a short note on Extension Method HTML Helpers with an example.
+
+MCQ: Which of the following is a Strongly Typed HTML Helper?
+a) Html.TextBox("Name")
+b) Html.TextBoxFor(m => m.Name)
+c) Html.Raw("Name")
+d) Html.Display("Name")
+
+MCQ: Which HTML Helper is used to generate a drop-down list?
+a) Html.DropDown()
+b) Html.DropDownList()
+c) Html.Select()
+d) Html.ComboBox()
+
+MCQ: HTML Helpers in MVC are implemented as:
+a) Server-side controls
+b) Extension methods of HtmlHelper class
+c) Client-side scripts
+d) Static utility classes

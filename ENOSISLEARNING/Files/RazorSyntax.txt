@@ -1,0 +1,202 @@
+Action Methods
+    A Controller class can contain one or more action methods,also known as controller action.
+ Controller Manages the flow of the application
+    it responsible for intercepting incoming request and excecuting the appropriate application code.
+    Communicates with the models of the application and selects the required view to be rendered for the request.
+    Get Data from database and specify a view that returns a response to the client.
+    these tasks are done by controller's Action Methods.
+
+  Action Methods
+        Actiond Methods are public methods in controller classes.
+        Are responsible for processing the requests that are sent to the controller.
+        Typicaly returns an ActionResult object that encaptulates the result of executing the method.
+        By Default ,it generates a response in the form of ActionResult.
+
+ActionRsult:
+            Action Result is a base class for all implementing classes that provides different types of result.
+            consist of HTML in combination with server-side and script to respond to the user.
+
+Razor View Syntax:
+            View : Provides the UI of the application to the user.
+            is uses to display content of an application and also to accept user input.
+            use modeldata to create this ui.
+            contains both HTML markup and c# code that runs on the web server.
+            view has a file extension .cshtml
+
+ Razor:
+            is a syntax based on the asp.net framework that allows creating views.
+            is simple and easy to understand for users who are fimiliar with the c#.net or vb.net programming language.
+
+
+            Razor Engine:
+                The MVC freamework uses a view engine to convert the code of a view into html markup that a browser can understand.
+
+                is used as the default view engine by the MVC framework.
+                compiles a view of your application when the view is required for the first time.
+                Delivers the compiled view for subsequent request untill you make changes to the view.
+                does not introduce a new set of programming language , but provides template markup syntax to segregate HTML markup and programming code in a view.
+
+
+@model MVCTutorial.Models.Employee
+@{
+    ViewBag.Title = "Contact";
+}
+
+<h2>Contact</h2>
+@{
+    <p>Current Time is : @DateTime.Now</p>
+    string UserName = "Abhijeet Roy";
+    <p>User's Name is :- @UserName</p>
+    int num1 = 10;
+    int num2 = 20;
+    int sum = num1 + num2;
+    <p>Sum of two values is :- @sum</p>
+    int num = -10;
+    if (num > 0)
+    {
+        <p>Given value is Positive</p>
+    }
+    else
+    {
+        <p>Given value is Negative</p>
+    }
+    int a = 10, b = 20, c = 30;
+    if (a > b && a > c)
+    {
+        <p>A is Greater</p>
+    }
+    else if (b > a && b > c)
+    {
+        <p>B is Greater</p>
+    }
+    else if (c > a && c > b)
+    {
+        <p>C is Greater</p>
+    }
+    else
+    {
+        <p>All Values are Equal</p>
+    }
+
+    if (a > b)
+    {
+        if (a > c)
+        {
+            <p>A is Greater</p>
+        }
+        else
+        {
+            <p>C is Greater</p>
+        }
+    }
+    else
+    {
+        if (b > c)
+        {
+            <p>B is Greater</p>
+        }
+        else
+        {
+            <p>C is Greater</p>
+        }
+    }
+    <h1>While</h1>
+    int i = 0;
+    while (i <= 5)
+    {
+        <li>@i</li>
+        i++;
+    }
+    <h1>Do While</h1>
+    int j = 0;
+    do
+    {
+        <li>@j</li>
+        j++;
+    } while (j <= 5);
+
+    <h1>For Loop</h1>
+
+    for (int k = 1; k <= 5; k++)
+    {
+        <li>@k</li>
+    }
+
+    string fruit = "Apple";
+    switch (fruit)
+    {
+        case "Orange":
+            <h2>Orange</h2>
+            break;
+        case "Banana":
+            <h2>Banana</h2>
+            break;
+        case "Apple":
+            <h2>Apple</h2>
+            break;
+        default:<h2>Invalid Choice</h2>
+            break;
+    }
+
+    string[] Course = { "C", "C++", "ASP", "MVC" };
+    foreach (string x in Course)
+    {
+        <ul>
+            <li>@x</li>
+        </ul>
+    }
+
+    List<string> Country = new List<string>()
+{
+        "India","China","USA","Japan"
+    };
+    foreach (string x in Country)
+    {
+        <ul>
+            <li>@x</li>
+        </ul>
+    }
+}
+
+@{ 
+    <table class="table table-bordered">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Roll</th>
+        </tr>
+       
+        <tbody>
+            <tr>
+                <td>@Model.ID</td>
+                <td>@Model.Name</td>
+                <td>@Model.Age</td>
+                <td>@Model.Roll</td>
+            </tr>
+        </tbody>
+    </table>
+}
+
+
+
+ public ActionResult Contact()
+ {
+     Employee emp = new Employee();
+     {
+        emp.ID = 101;
+        emp.Name = "Abhijeet Roy";
+        emp.Age = "32";
+        emp.Roll = "Developer";
+     };
+     return View(emp);
+ }
+
+
+ public class Employee
+ {
+     public int ID { get; set; }
+     public string Name { get; set; }
+     public string Age { get; set; }
+     public string Roll { get; set; }
+ }

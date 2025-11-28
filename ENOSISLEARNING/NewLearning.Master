@@ -1,0 +1,114 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="NewLearning.master.cs" Inherits="ENOSISLEARNING.NewLearning" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+    <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <style>
+        *{
+            font-family:arial;
+        }
+        /* CSS Document */
+        @font-face {
+        font-family: SourceSansPro-Semibold;
+        src:url(/fonts/SourceSansPro-Semibold.otf);
+        }
+        @font-face {
+        font-family: SourceSansPro-Regular;
+        src:url(/fonts/SourceSansPro-Regular.otf);
+        }
+    /* Link colors to match your Tailwind-style palette */
+    .navbar .nav-link { color: #6b7280; /* gray-600 */ }
+    .navbar .nav-link:hover,
+    .navbar .nav-link:focus { color: #0d6efd; /* primary blue */ }
+
+    /* Optional: keep similar height to your Tailwind h-16 */
+  .navbar .nav-link {
+    white-space: normal;
+    word-break: break-word;
+}
+@media (max-width: 1200px)  {
+    .navbar .nav-link {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+        font-size:0.825rem;
+    }
+}
+@media (max-width: 991px)  {
+    .container
+    {
+        width:100%;
+    }
+    .navbar .nav-link {
+        padding-left: 0.1rem;
+        padding-right: 0.1rem;
+        font-size:0.545rem;
+    }
+}
+  </style>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <nav class="navbar navbar-expand-sm bg-white shadow-sm">
+    <div class="container">
+        <!-- Logo -->
+        <a class="navbar-brand d-flex align-items-center logo" href="#">
+            <img src="Images/enosislogo.PNG" alt="Enosis Logo" class="img-fluid" style="max-height:40px;" />
+        </a>
+        <!-- Mobile Menu Button -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+                aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- Menu (desktop + mobile via collapse) -->
+        <div class="collapse navbar-collapse" id="mainNav">
+            <ul class="navbar-nav ms-auto gap-2">
+                <li class="nav-item">
+                    <a class="nav-link px-2 py-2" href="#">
+                        <i class="bi bi-mortarboard-fill me-1"></i> Apply For Internship
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link px-2 py-2" href="#">
+                        <i class="bi bi-briefcase-fill me-1"></i> Apply for Job
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link px-2 py-2" href="#">
+                        <i class="bi bi-upload me-1"></i> Upload Resume
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link px-2 py-2" href="#">
+                        <i class="bi bi-person-video3 me-1"></i> Request for Demo
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link px-2 py-2" href="tel:775701252">
+                        <i class="bi bi-telephone-fill me-1"></i> 775701252
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link px-2 py-2" href="#">
+                        <i class="bi bi-box-arrow-in-right me-1"></i> Log-In
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+        <!-- Bootstrap 5 JS (no jQuery needed) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+SQL – Basic Level Question Paper (1.5 Hours)
+Instructions:
+•	All questions are compulsory.
+•	Write queries in SQL Server syntax.
+•	Marks are indicated against each question.
+•	Total Marks: 50 | Time: 1.5 Hours
+________________________________________
+Section A – Short Answer Questions (2 Marks each, 10 Marks total)
+1.	Define the following SQL command categories with one example each:
+(a) DDL
+(b) DML
+(c) DCL
+(d) TCL
+(e) DQL
+2.	What is the difference between UNION and UNION ALL? Give an example.
+3.	List any three constraints in SQL Server with their purpose.
+4.	Differentiate between INNER JOIN and LEFT JOIN with an example.
+5.	What is the use of OFFSET & FETCH in SQL Server? Write a simple example.
+________________________________________
+Section B – Write Queries (3 Marks each, 15 Marks total)
+Consider a table:
+CREATE TABLE Employees (
+   EmpID INT PRIMARY KEY,
+   EmpName VARCHAR(50),
+   Department VARCHAR(30),
+   Salary INT,
+   HireDate DATE
+);
+6.	Write a query to display all employees hired after 01-Jan-2020.
+7.	Write a query to find the second highest salary using subquery.
+8.	Write a query to display employees from IT or HR department only.
+9.	Write a query to display average salary of each department.
+10.	Write a query using INTERSECT between two queries (Example: employees with salary > 40000 and employees from IT department).
+________________________________________
+Section C – Applied Questions (5 Marks each, 15 Marks total)
+11.	Write a query using JOINS to display employees along with their department name from another table:
+CREATE TABLE Departments (
+   DeptID INT PRIMARY KEY,
+   DeptName VARCHAR(30)
+);
+12.	Explain error handling in SQL Server with an example using TRY...CATCH.
+13.	Write a query using CASE (conditional control statement) to display employees as:
+•	"Low" if salary < 30000
+•	"Medium" if salary between 30000 and 60000
+•	"High" if salary > 60000
+________________________________________
+Section D – Long Questions (5 Marks each, 10 Marks total)
+14.	Write short notes on:
+(a) Subqueries in SQL (with example)
+(b) Loop Control Statements (WHILE loop with example)
+15.	Explain with examples:
+(a) EXCEPT operator
+(b) Window Functions (ROW_NUMBER() or RANK())
+

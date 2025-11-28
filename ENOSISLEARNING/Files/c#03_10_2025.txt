@@ -1,0 +1,474 @@
+//1. DEFAULT CONSTRUCTOR
+namespace FirstDemo
+{
+    public class Employee
+    {
+        public Employee()
+        {
+            Console.WriteLine("Default Constructor Invoked");
+        }
+        public static void Main(string[] args)
+        {
+            Employee e1 = new Employee();
+            Employee e2 = new Employee();
+            Console.ReadKey();
+        }
+    }
+
+}
+
+//2. PARAMETERIZED CONSTRUCTOR
+namespace FirstDemo
+{
+    public class Employee
+    {
+        public int id;
+        public String name;
+        public float salary;
+        public Employee(int i, String n, float s)
+        {
+            id = i;
+            name = n;
+            salary = s;
+        }
+        public void display()
+        {
+            Console.WriteLine(id + " " + name + " " + salary);
+        }
+    }
+    class TestEmployee
+    {
+        public static void Main(string[] args)
+        {
+            Employee e1 = new Employee(101, "Sonoo", 890000f);
+            Employee e2 = new Employee(102, "Mahesh", 490000f);
+            e1.display();
+            e2.display();
+            Console.ReadKey();
+
+        }
+    }
+}
+
+
+//Example of Destructor in C# 
+namespace FirstDemo
+{
+    public class Employee
+    {
+        public Employee()
+        {
+            Console.WriteLine("Constructor Invoked");
+        }
+        ~Employee()
+        {
+            Console.WriteLine("Destructor Invoked");
+        }
+    }
+    class TestEmployee
+    {
+        public static void Main(string[] args)
+        {
+            Employee e1 = new Employee();
+            Employee e2 = new Employee();
+            Console.ReadKey();
+        }
+    }
+}
+
+
+//1.Single Inheritance
+namespace FirstDemo
+{
+    class Program
+    {
+        class Parent
+        {
+            public void ParentMethod()
+            {
+                Console.WriteLine("This is the parent class method.");
+            }
+        }
+        class Child : Parent
+        {
+            public void ChildMethod()
+            {
+                Console.WriteLine("This is the child class method.");
+            }
+        }
+        static void Main(string[] args)
+        {
+            Child child = new Child();
+            child.ParentMethod(); // Accessing parent class method
+            child.ChildMethod();  // Accessing child class method
+            Console.ReadLine();
+        }
+    }
+}
+
+
+//2.Multilevel Inheritance 
+namespace FirstDemo
+{
+    class Program
+    {
+        class Grandparent
+        {
+            public void GrandparentMethod()
+            {
+                Console.WriteLine("This is the grandparent class method.");
+            }
+        }
+        class Parent : Grandparent
+        {
+            public void ParentMethod()
+            {
+                Console.WriteLine("This is the parent class method.");
+            }
+        }
+        class Child : Parent
+        {
+            public void ChildMethod()
+            {
+                Console.WriteLine("This is the child class method.");
+            }
+        }
+        static void Main(string[] args)
+        {
+            Child child = new Child();
+            child.GrandparentMethod(); // Accessing grandparent class method
+            child.ParentMethod();      // Accessing parent class method
+            child.ChildMethod();       // Accessing child class method
+            Console.ReadLine();
+        }
+    }
+}
+
+//3.Hierarchical Inheritance
+namespace FirstDemo
+{
+    class Program
+    {
+        class Parent
+        {
+            public void ParentMethod()
+            {
+                Console.WriteLine("This is the parent class method.");
+            }
+        }
+        class Child1 : Parent
+        {
+            public void Child1Method()
+            {
+                Console.WriteLine("This is the first child class method.");
+            }
+        }
+        class Child2 : Parent
+        {
+            public void Child2Method()
+            {
+                Console.WriteLine("This is the second child class method.");
+            }
+        }
+        static void Main(string[] args)
+        {
+            Child1 child1 = new Child1();
+            Child2 child2 = new Child2();
+
+            child1.ParentMethod();
+            child1.Child1Method();
+
+            child2.ParentMethod();
+            child2.Child2Method();
+            Console.ReadLine();
+        }
+    }
+}
+
+
+//4.Multiple Inheritance (Via Interfaces):
+namespace FirstDemo
+{
+    class Program
+    {
+        interface Interface1
+        {
+            void Method1();
+        }
+
+        interface Interface2
+        {
+            void Method2();
+        }
+        class Child : Interface1, Interface2
+        {
+            public void Method1()
+            {
+                Console.WriteLine("This is method 1 from Interface1.");
+            }
+
+            public void Method2()
+            {
+                Console.WriteLine("This is method 2 from Interface2.");
+            }
+        }
+        static void Main(string[] args)
+        {
+            Child child = new Child();
+            child.Method1();
+            child.Method2();
+            Console.ReadLine();
+        }
+    }
+}
+
+
+
+//5. Hybrid Inheritance
+namespace FirstDemo
+{
+    class Program
+    {
+        class Parent
+        {
+            public void ParentMethod()
+            {
+                Console.WriteLine("This is the parent class method.");
+            }
+        }
+        interface Interface1
+        {
+            void InterfaceMethod();
+        }
+        class Child : Parent, Interface1
+        {
+            public void InterfaceMethod()
+            {
+                Console.WriteLine("This is the interface method.");
+            }
+        }
+        static void Main(string[] args)
+        {
+            Child child = new Child();
+            child.ParentMethod();       // Accessing parent class method
+            child.InterfaceMethod();    // Accessing interface method
+            Console.ReadLine();
+        }
+    }
+
+}
+
+
+
+
+//EXAMPLE OF DEFINING AND USING A NAMESPACE
+using First;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using First;
+namespace First
+{
+    public class Hello
+    {
+        public void sayHello() { Console.WriteLine("Hello First Namespace"); }
+    }
+}
+namespace Second
+{
+    public class Hello
+    {
+        public void sayHello() { Console.WriteLine("Hello Second Namespace"); }
+    }
+}
+public class TestNamespace
+{
+    public static void Main()
+    {
+        First.Hello h1 = new First.Hello();
+        Second.Hello h2 = new Second.Hello();
+        h1.sayHello();
+        h2.sayHello();
+        Console.ReadKey();
+    }
+} 
+
+
+
+//EXAMPLE OF DEFINING AND USING A NAMESPACE
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using First;
+using Second;
+namespace First
+{
+    public class Hello
+    {
+        public void sayHello() { Console.WriteLine("Hello Namespace"); }
+    }
+}
+namespace Second
+{
+    public class Welcome
+    {
+        public void sayWelcome() { Console.WriteLine("Welcome Namespace"); }
+    }
+}
+public class TestNamespace
+{
+    public static void Main()
+    {
+        Hello h1 = new Hello();
+        Welcome w1 = new Welcome();
+        h1.sayHello();
+        w1.sayWelcome();
+        Console.ReadKey();
+    }
+}
+
+
+
+//Nested Namespaces
+using OuterNamespace.InnerNamespace;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+namespace OuterNamespace
+{
+    namespace InnerNamespace
+    {
+        class MyClass
+        {
+            public void DisplayMessage()
+            {
+                Console.WriteLine("Hello from InnerNamespace!");
+            }
+        }
+    }
+}
+class Program
+{
+    static void Main(string[] args)
+    {
+        MyClass myClass = new MyClass();
+        myClass.DisplayMessage();
+        Console.ReadKey();
+    }
+}
+
+
+
+//The following example demonstrates implementation of the above interface –
+namespace FirstDemo
+{
+    public interface Drawable
+    {
+        void draw();
+    }
+    public class Rectangle : Drawable
+    {
+        public void draw()
+        {
+            Console.WriteLine("drawing rectangle...");
+        }
+    }
+    public class Circle : Drawable
+    {
+        public void draw()
+        {
+            Console.WriteLine("drawing circle...");
+        }
+    }
+    public class TestInterface
+    {
+        public static void Main()
+        {
+            Drawable d;
+
+            d = new Rectangle();
+            d.draw();
+
+            d = new Circle();
+            d.draw();
+            Console.ReadKey();
+        }
+    }
+}
+
+
+
+
+
+//A sample program that explains abstract classes:
+class Program
+    {
+        abstract class person
+        {
+            public string FirstName;
+            public string LastName;
+            public int age;
+            public string PhoneNumber;
+            public abstract void PrintDetails();
+        }
+        class student: person
+        {
+            public int RollNo;
+            public int Fees;
+            public override void PrintDetails()
+            {
+                string name = this.FirstName + "" + this.LastName;
+                Console.WriteLine("Student Name is:{0}",name);
+                Console.WriteLine("Student age is:{0}", this.age);
+                Console.WriteLine("Student PhoneNumber is:{0}", this.PhoneNumber);
+                Console.WriteLine("Student RollNo is:{0}", this.RollNo);
+                Console.WriteLine("Student Fees is:{0}", this.Fees);
+            }
+        }
+        class teacher: person
+        {
+            public string qualification;
+            public int Salary;
+            public override void PrintDetails()
+            {
+                string name = this.FirstName + "" + this.LastName;
+                Console.WriteLine("Teacher Name is:{0}", name);
+                Console.WriteLine("Teacher age is:{0}", this.age);
+                Console.WriteLine("Teacher PhoneNumber is:{0}", this.PhoneNumber);
+                Console.WriteLine("Teacher qualification is:{0}", this.qualification);
+                Console.WriteLine("Teacher Salary is:{0}", this.Salary);
+            }
+        }
+static void Main(string[] args)
+        {
+            student stud = new student();
+            stud.FirstName = " Meera ";
+            stud.LastName = " Mane ";
+            stud.age = 27;
+            stud.PhoneNumber = "0867865786";
+            stud.RollNo = 111;
+            stud.Fees = 50000;
+            stud.PrintDetails();
+            Console.WriteLine("---------------------------------");
+            teacher tea = new teacher();
+            tea.FirstName = "Mansi";
+            tea.LastName = "Mane";
+            tea.age = 33;
+            tea.PhoneNumber = "0786456786";
+            tea.qualification = "MCA";
+            tea.Salary = 60000;
+            tea.PrintDetails();
+            Console.ReadLine();
+        }
+    }
+
+
+
+
+

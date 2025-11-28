@@ -1,0 +1,372 @@
+//C# Collections : In C# Collections are classes that provide an easy way to work with a group of objects.classes provide the implementation of strongly typed entities like lists, stacks etc.
+
+System.Collections.Generic classes  : The System.Collections.Generic classes help us to create a generic collection.This collection does not allow us to store different types of elements.
+
+
+1.1. List Class : The List<T> class is used to store multiple elements of the same data type that can be accessed using the indexes. We can add, insert and remove elements inside the list. Moreover, we can dynamically change the size of the list.
+
+using System;
+using System.Collections.Generic;
+namespace CSharpTut
+{
+    class  Student
+    {
+        public static void Main(string[] args)
+        {
+            //Create a list
+            List<string> subjects = new List<string>();//Declare List
+            List<string> Courses = new List<string>()//Initialize List
+            {
+                "HTML","CSS","JAVASCRIPT","C#"
+            };
+            //Access the List Elements :We can access List using index notation []
+            Console.WriteLine("Course 1 is : " + Courses[0]);
+            Console.WriteLine("Course 2 is : " + Courses[1]);
+            Console.WriteLine("Course 3 is : " + Courses[2]);
+            Console.WriteLine("Course 4 is : " + Courses[3]);
+            //Iterate the List
+            for(int i=0;i<Courses.Count;i++)
+            {
+                Console.WriteLine(Courses[i]);
+            }
+
+            foreach(string c in Courses)
+            {
+                Console.WriteLine(c);
+            }
+        }
+    }
+}
+
+
+//Basic Operations on List : The List<T> class provides various methods to perform different operations on List.
+
+1.Add Elements : To add a single element to the List, we use the Add() method of the List<T> class.
+
+class  Student
+{
+    public static void Main(string[] args)
+    {
+        //Create a list
+        List<string> subjects = new List<string>() { "HTML" };
+
+        //Add New Element in List<T>
+        subjects.Add("JAVASCRIPT");
+
+        subjects.Add("Bootstrap");
+
+        foreach (string subject in subjects)
+        {
+            Console.WriteLine(subject);
+        }
+
+    }
+}
+
+2.Insert Element in a List :To insert an element to a specified index in List, we use the Insert() method of the List<T> class.
+
+class  Student
+{
+    public static void Main(string[] args)
+    {
+        //Create a list
+        List<string> subjects = new List<string>() { "HTML","CSS","JAVASCRIPT" };
+
+        //Insert New Element element to a specified index List<T>
+        subjects.Insert(1,"Bootstrap");
+
+        foreach (string subject in subjects)
+        {
+            Console.WriteLine(subject);
+        }
+
+    }
+}
+
+3.Remove Elements from the List :We can delete one or more items from List<T> using 2 methods
+
+*Remove() - removes the first occurrence of an element from the given list.
+*RemoveAt() - removes the elements at the specified position in the list.
+ class  Student
+ {
+     public static void Main(string[] args)
+     {
+         //Create a list
+         List<string> subjects = new List<string>() { "HTML","CSS","JAVASCRIPT","Bootstrap","CSS","ASP","MVC" };
+
+
+         // remove the first occurence of "HTML" from the list
+         subjects.Remove("CSS");
+         // remove the element present at the 2nd index position
+         subjects.RemoveAt(2);
+         foreach (string subject in subjects)
+         {
+             Console.WriteLine(subject);
+         }
+
+     }
+ }
+
+
+//ArrayList : In C#, an ArrayList stores elements of multiple data types whose size can be changed dynamically.
+Create an ArrayList :To create ArrayList in C#, we need to use the System.Collections namespace.
+
+//Add ArrayList and Access ArrayList
+
+ class Student
+ {
+     public static void Main(string[] args)
+     {
+         //Create an Arraylist
+         ArrayList students = new ArrayList() { 1, "Abhijeet Roy" ,30000};//ArrayList Initialization
+
+         //Add element in ArrayList
+         students.Add("Pune");
+
+         //Access Arralist Elements
+         foreach (int i in students)
+         {
+             Console.WriteLine(i);
+         }
+      
+     }
+ }
+
+//Change Elements
+
+//Remove ArrayList Elements : C# provides methods like Remove(), RemoveAt(), RemoveRange() to remove elements from ArrayList.
+
+ class Student
+ {
+     public static void Main(string[] args)
+     {
+         //Create an Arraylist
+         ArrayList students = new ArrayList() { 1, "Abhijeet Roy" ,30000,"India"};//ArrayList Initialization
+
+         //Add element in ArrayList
+         students.Add("Pune");
+
+         //Change the value of Second Element
+         students[1] = "Abhishek Roy";
+
+         //Remove Salary from ArrayList
+         students.Remove(30000);
+         
+         //RemoveAt Salary from ArrayList
+         students.RemoveAt(2);
+
+         //RemoveRange Salary from ArrayList
+         students.RemoveRange(0,2);
+
+         //Access Arralist Elements
+         foreach (var i in students)
+         {
+             Console.WriteLine(i);
+         }
+      
+     }
+ }
+
+
+//Stack : A Stack<T> is a generic class that arranges the elements of a specified data type using Last In First Out(LIFO) principles. 
+
+Create a Stack
+
+C# Stack Methods
+C# provides 3 major Stack<T> methods. These methods are:
+
+Push() - adds element to the top of the stack
+Pop() - removes and returns an element from the top of the stack
+Peek() - returns an element from the top of the stack without removing
+
+ class Student
+ {
+     public static void Main(string[] args)
+     {
+         //Create a integer type Stack
+         Stack<int> stack1 = new Stack<int>();
+         //Create a string type Stack
+         Stack<string> stack2 = new Stack<string>();
+
+         //Add 5 elements to the stack
+         stack1.Push(10);
+         stack1.Push(20);
+         stack1.Push(30);
+         stack1.Push(40);
+         stack1.Push(50);
+
+         //Access Stack Elements
+         foreach (var i in stack1)
+         {
+             Console.WriteLine(i);
+         }
+
+         //Remove elements from the stack
+          stack1.Pop();
+
+
+         //Access Stack Elements
+         foreach (var i in stack1)
+         {
+             Console.WriteLine(i);
+         }
+
+
+         //Peek method returns the object at the top of the stack without removing it
+         Console.WriteLine("Element of Top of Stack" +stack1.Peek());
+     }
+ }
+
+4.C# Queue<T> : A Queue<T> is a generic class that arranges elements of a specified data type using First In First Out (FIFO) principles. That is, elements that are added first will be removed first.
+
+//Create a Queue in C# 
+
+queue<data_Type> queue_Name = new queue<data_Type>();
+
+C# Queue Methods :
+1.Enqueue() - adds an element to the end of the queue
+2.Dequeue() - removes and returns an element from the beginning of the queue.
+3.Peek() - returns an element from the beginning of the queue without removing
+4.Contains() : Check Whether an Element is Present Inside a Queue.We can use the Contains() method to check whether an element is present inside the queue or not.
+The method returns True if a specified element exists in the queue. If not it returns False.
+
+class Student
+{
+    public static void Main(string[] args)
+    {
+        //Create queue
+        Queue<string> List = new Queue<string>();
+
+        //Queue Enqueue() Method
+        List.Enqueue("Mumbai");
+        List.Enqueue("Pune");
+        List.Enqueue("Nagpur");
+        List.Enqueue("Kolhapur");
+        List.Enqueue("Solapur");
+        //Queue Dequeue() Method
+        string returnvalue = List.Dequeue();
+        Console.WriteLine("Removed Element is :-"+returnvalue);
+
+        //Queue Peek() Method
+        string city = List.Peek();
+        Console.WriteLine("Peeked Value from the List is :-"+city);
+        //Contains() : Check Whether an Element is Present Inside a Queue
+        Console.WriteLine(List.Contains("Kolkata"));
+        Console.WriteLine(List.Contains("Nagpur"));
+        foreach (var item in List)
+        {
+            Console.WriteLine(item);
+        }
+    }
+}
+
+5.SortedList : A SortedList is a non-generic collection that contains key/value pairs where keys are sorted in an order.
+class Student
+{
+    public static void Main(string[] args)
+    {
+        //Create SortedList
+        SortedList myList = new SortedList();
+
+        //Add Elements in SortedList
+        myList.Add(2,45);
+        myList.Add(1,"Jack Sparrow");
+        myList.Add(3,"Iron Man");
+        myList.Add(4,"Bat Man");
+        myList.Add(5,"Super Man");
+
+        //Access the SortedList Iterate through SortedList
+        Console.WriteLine("Element whose key is 1 Is :- " + myList[1]);
+        //Access the SortedList
+        for (int i = 1; i < 6; i++)
+        {
+            Console.WriteLine(myList[i]);
+        }
+        //Access the SortedList Iterate through SortedList
+        foreach (var i in myList)
+        {
+            Console.WriteLine(i);
+        }
+
+        //remove element whose key is 3
+        myList.Remove(3);
+
+        //// remove element which is present in index 
+        myList.RemoveAt(0);
+        foreach (var i in myList)
+        {
+            Console.WriteLine(i);
+        }
+    }
+}
+
+
+6.C# Hashtable : A Hashtable is a non-generic collection that stores key/value pairs that are arranged based on the hashcode of each key.
+class Student
+{
+    public static void Main(string[] args)
+    {
+        //Create a Hashtable
+        Hashtable ht = new Hashtable();
+
+        //Add Elements in Hashtable
+        ht.Add("Subject","Math");
+        ht.Add("Code",139);
+        ht.Add("Marks",100);
+        ht.Add("PassMarks",40);
+
+        //Access Hashtable Elements
+        Console.WriteLine(ht["Subject"]);
+        Console.WriteLine(ht["Code"]);
+
+        //Change Hashtable Elements
+        ht["Marks"] = 80;
+
+        //Remove Hashtable Elements
+        ht.Remove("Marks");
+
+        //Iterate Hashtable
+        foreach (var s in ht.Values)
+        {
+            Console.WriteLine("values = {0}",s);
+        }
+    }
+}
+
+7.C# Dictionary : A Dictionary<TKey, TValue> is a generic collection that consists of elements as key/value pairs that are not sorted in an order. 
+
+class Student
+{
+    public static void Main(string[] args)
+    {
+        //Create a Dictionary
+        Dictionary<int, string> Country = new Dictionary<int, string>();
+
+        //Add Elements in Hashtable
+        Country.Add(1,"India");
+        Country.Add(2,"America");
+        Country.Add(3,"China");
+        Country.Add(4,"Bhutan");
+
+        //Access Hashtable Elements
+        Console.WriteLine(Country[1]);
+
+        //Access Using Loop
+        foreach(var i in Country)
+        {
+            Console.WriteLine(i);
+        }
+
+        //Change Dictionary Elements
+        Country[2] = "NewZeland";
+
+        //Remove Dictionary Elements
+        Country.Remove(2);
+
+        //Access Using Loop
+        foreach (var i in Country)
+        {
+            Console.WriteLine(i);
+        }
+    }
+}

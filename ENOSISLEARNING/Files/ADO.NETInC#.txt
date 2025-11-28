@@ -1,0 +1,179 @@
+What is ADO.NET?
+
+ADO.NET (ActiveX Data Objects for .NET) is a set of classes in the .NET Framework used to interact with databases (like SQL Server, MySQL, Oracle, etc.).
+
+It Provides :
+
+1.Connection - Connection To Database
+2.Command - Run SQL query 
+3.DataReader - fast forward-only read
+4.DataSet and DataTable - in-memory data storage
+5.DataAdapter - bridge between DB and DataSet/DataTable
+
+
+Application
+    |
+   ADO.NET
+    |-------------------|
+    |                   |
+ Connection       Disconnected
+ (DataReader)     (DataSet, DataTable, DataAdapter)
+
+
+
+Step-1
+Namespace which is always use 
+using System.Data
+using System.Data.SqlClient//for Sql Server
+
+Step-2
+Establish Connection 
+string connectionString = "Data Source = Server_Name;Initial Catalog = Database_Name;Integrated Security=True;";
+
+SQlConnection - 
+
+ internal class Student
+ {
+     public static void Main(string[] args)
+     {
+         Connection();
+     }
+
+     public static void Connection()
+     {
+         string connectionString = "Data Source=DESKTOP-MPE7G61;Initial Catalog =AspTut;Integrated Security=True;";
+         SqlConnection Conn = new SqlConnection(connectionString);
+         Conn.Open();
+         Console.WriteLine("Connection Opened...!");
+         Conn.Close();
+
+     }
+ }
+
+
+CREATE DATABASE StudentDB;
+GO
+
+USE StudentDB;
+GO
+
+CREATE TABLE Students (
+    StudentID INT IDENTITY(1,1) PRIMARY KEY,
+    Name NVARCHAR(100) NOT NULL,
+    Email NVARCHAR(100) NOT NULL,
+    Course NVARCHAR(100) NOT NULL
+);
+
+
+public static void Main(string[] args)
+{
+    while (true)
+    {
+        Console.WriteLine("\n=== Student CRUD Menu ===");
+        Console.WriteLine("1. Add Student");
+        Console.WriteLine("2. View Students");
+        Console.WriteLine("3. Update Student");
+        Console.WriteLine("4. Delete Student");
+        Console.WriteLine("5. Exit");
+        Console.Write("Choose an option: ");
+        string choice = Console.ReadLine();
+
+        switch (choice)
+        {
+            case "1": AddStudent(); break;
+            case "2": ViewStudents(); break;
+            case "3": UpdateStudent(); break;
+            case "4": DeleteStudent(); break;
+            case "5": return;
+            default: Console.WriteLine("Invalid choice!"); break;
+        }
+    }
+}	
+
+
+static void AddStudent()
+{
+    Console.Write("Enter Name: ");
+    string name = Console.ReadLine();
+    Console.Write("Enter Email: ");
+    string email = Console.ReadLine();
+    Console.Write("Enter Course: ");
+    string course = Console.ReadLine();
+
+    string query = "INSERT INTO Students (Name, Email, Course) VALUES (@Name, @Email, @Course)";
+
+    using (SqlConnection con = new SqlConnection(connectionString))
+    using (SqlCommand cmd = new SqlCommand(query, con))
+    {
+        cmd.Parameters.AddWithValue("@Name", name);
+        cmd.Parameters.AddWithValue("@Email", email);
+        cmd.Parameters.AddWithValue("@Course", course);
+
+        con.Open();
+        int rows = cmd.ExecuteNonQuery();
+        Console.WriteLine(rows > 0 ? "Student added successfully!" : "Insert failed.");
+    }
+}
+static void ViewStudents()
+{
+    string query = "SELECT StudentID, Name, Email, Course FROM Students";
+
+    using (SqlConnection con = new SqlConnection(connectionString))
+    using (SqlCommand cmd = new SqlCommand(query, con))
+    {
+        con.Open();
+        SqlDataReader reader = cmd.ExecuteReader();
+
+        Console.WriteLine("\n--- Students List ---");
+        while (reader.Read())
+        {
+            Console.WriteLine($"{reader["StudentID"]} | {reader["Name"]} | {reader["Email"]} | {reader["Course"]}");
+        }
+    }
+}
+
+static void UpdateStudent()
+{
+    Console.Write("Enter StudentID to update: ");
+    int id = int.Parse(Console.ReadLine());
+
+    Console.Write("Enter New Name: ");
+    string name = Console.ReadLine();
+    Console.Write("Enter New Email: ");
+    string email = Console.ReadLine();
+    Console.Write("Enter New Course: ");
+    string course = Console.ReadLine();
+
+    string query = "UPDATE Students SET Name=@Name, Email=@Email, Course=@Course WHERE StudentID=@Id";
+
+    using (SqlConnection con = new SqlConnection(connectionString))
+    using (SqlCommand cmd = new SqlCommand(query, con))
+    {
+        cmd.Parameters.AddWithValue("@Name", name);
+        cmd.Parameters.AddWithValue("@Email", email);
+        cmd.Parameters.AddWithValue("@Course", course);
+        cmd.Parameters.AddWithValue("@Id", id);
+
+        con.Open();
+        int rows = cmd.ExecuteNonQuery();
+        Console.WriteLine(rows > 0 ? "Student updated successfully!" : "Update failed.");
+    }
+}
+
+static void DeleteStudent()
+{
+    Console.Write("Enter StudentID to delete: ");
+    int id = int.Parse(Console.ReadLine());
+
+    string query = "DELETE FROM Students WHERE StudentID=@Id";
+
+    using (SqlConnection con = new SqlConnection(connectionString))
+    using (SqlCommand cmd = new SqlCommand(query, con))
+    {
+        cmd.Parameters.AddWithValue("@Id", id);
+
+        con.Open();
+        int rows = cmd.ExecuteNonQuery();
+        Console.WriteLine(rows > 0 ? "Student deleted successfully!" : "Delete failed.");
+    }
+}

@@ -1,0 +1,181 @@
+1.Sequential Statement
+2.Conditional Statement
+3.Switch Case Statement
+------MENU-------
+1.select 1 for Addition
+2.select 2 for Substraction
+3.select 3 for Multiply
+Enter Your Choice:-
+	switch(i)
+	{
+		case 1:
+		//statement
+		break;
+		default:
+		//st
+		break;
+	}
+ int choice,a,b;
+  Console.WriteLine("----MENU----");
+  Console.WriteLine("select 1 for Addition");
+  Console.WriteLine("select 2 for Substraction");
+  Console.WriteLine("select 3 for Multiply");
+  Console.Write("Enter Your Choice:-");
+  choice= Convert.ToInt32(Console.ReadLine());
+  switch (choice)
+  {
+      case 1: 
+      Console.WriteLine("Enter first values:-");
+      a= Convert.ToInt32(Console.ReadLine());
+      Console.WriteLine("Enter Seond values:-");
+      b= Convert.ToInt32(Console.ReadLine());
+          Console.WriteLine("Sum is:- "+(a+b));
+          break;
+      case 2:
+          Console.WriteLine("Enter first values:-");
+          a = Convert.ToInt32(Console.ReadLine());
+          Console.WriteLine("Enter Seond values:-");
+          b = Convert.ToInt32(Console.ReadLine());
+          Console.WriteLine("Substraction is:- " + (a - b));
+          break;
+      case 3:
+          Console.WriteLine("Enter first values:-");
+          a = Convert.ToInt32(Console.ReadLine());
+          Console.WriteLine("Enter Seond values:-");
+          b = Convert.ToInt32(Console.ReadLine());
+          Console.WriteLine("Mulplication is:- " + (a * b));
+          break;
+      default: Console.WriteLine("Invalid Choice");
+      break;
+  }
+
+4.Looping Statement,Repeatative Statement,Iterative Statement
+Rquirements for execute a loop - > Initialization,Condition,Incrament/Decreament
+1.While Loop(Enter Loop)
+ int i = -5;
+ while(i<=5)
+ {
+     Console.WriteLine("Hello");
+     i++;
+ }
+ //1st 10 natural numbers using while loop
+ int i = 1;
+ while(i<=10)
+ {
+     Console.WriteLine(i);
+     i++;
+ }
+
+public static void Main(string[] args)
+{
+    //1st 10 natural numbers using while loop descending order
+    int i = 10;
+    while(i>=1)
+    {
+        Console.WriteLine(i);
+        i--;
+    }
+}
+
+  //print natural numbers in a range using while loop
+  int start,End;
+  Console.WriteLine("Enter strating value:-");
+  start=Convert.ToInt32(Console.ReadLine());
+  Console.WriteLine("Enter ending value:-");
+  End=Convert.ToInt32(Console.ReadLine());
+  while (start<=End)
+  {
+      Console.WriteLine(start);
+      start++;
+  }
+ public static void Main(string[] args)
+ {
+     //find sum of 10 natural numbers
+     int i=1,sum=0;
+     while (i<=10)
+     {
+         //sum = sum + i;
+         sum += i;
+         i++;
+     }
+     Console.WriteLine("Sum of 10 natural numbers is :-"+sum);
+ }
+
+ public static void Main(string[] args)
+ {
+     //find sum of square of  10 natural numbers
+     int i =1,sum=0;
+     while (i<=10)
+     {
+         //sum = sum + i;
+         sum += i*i;
+         i++;
+     }
+     Console.WriteLine("Sum of square of 10 natural numbers is :-"+sum);
+ }
+
+public static void Main(string[] args)
+{
+    //find sum of cube of  10 natural numbers
+    int i =1,sum=0;
+    while (i<=10)
+    {
+        //sum = sum + i;
+        sum += i*i*i;
+        i++;
+    }
+    Console.WriteLine("Sum of cube of 10 natural numbers is :-"+sum);
+}
+2.Do-While Loop(Exit Loop)
+do
+{
+  //st
+i++;
+}while(condition);
+
+ public static void Main(string[] args)
+ {
+     //find sum of cube of  10 natural numbers
+     int i =1;
+     do
+     {
+         Console.WriteLine(i);
+         i++;
+     } while (i <= 10);
+ }
+3.For Loop
+for(int i=1;i<=10;i++/i++)
+{
+	//st
+}
+public static void Main(string[] args)
+{
+   for(int i=1;i<=10;i++)
+   {
+    Console.WriteLine(i);
+   }
+}
+
+
+        public static void Main(string[] args)
+        {
+            int st=10,end=30;
+           for(int i=st;i<=end;i++)
+           {
+            Console.WriteLine(i);
+           }
+        }
+4.Foreach Loop
+foreach(int i in MyArray)
+{
+	//i;
+}
+
+ public static void Main(string[] args)
+ {
+     string[] course = {"C#","Java","Python","JavaScript"};
+    foreach(string i in course)
+     {
+         Console.WriteLine(i);
+     }
+ }

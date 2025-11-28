@@ -1,0 +1,123 @@
+Data Annotations In MVC
+
+
+public class Employee
+{
+    [Required(ErrorMessage ="ID Is Required")]
+   
+    public int ID { get; set; }
+
+    [Display(Name ="Employee Name")]
+    [Required(ErrorMessage = "Name Is Required")]
+    [StringLength(maximumLength: 5, MinimumLength = 2, ErrorMessage = "Minimum charater is 2 and maximum character is 5")]
+    public string EmployeeName { get; set; }
+
+    [Display(Name = "Employee Age")]
+    [Required(ErrorMessage = "Age Is Required")]
+    [Range(18,30,ErrorMessage ="Age must be between 18 to 30 years")]
+    public string EmployeeAge { get; set; }
+
+    [Required(ErrorMessage = "Gender Is Required")]
+    [Display(Name = "Employee Gender")]
+    public string EmployeeGender { get; set; }
+
+
+    [RegularExpression("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",ErrorMessage ="Invalid Email Address")]
+    [Required(ErrorMessage = "Email Is Required")]
+    [EmailAddress]
+    [Display(Name = "Employee Email")]
+    public string EmployeeEmail { get; set; }
+
+    [Required(ErrorMessage = "Password Is Required")]
+    [Display(Name = "Employee Password")]
+    public int Password { get; set; }
+
+    [Required(ErrorMessage = "Password Is Required")]
+    //[Compare("Password",ErrorMessage ="Password and Confirm Password must be same")]
+    [Display(Name = "Employee Confirm Password")]
+    public int ConfirmPassword { get; set; }
+
+    [Required(ErrorMessage = "Password Is Required")]
+    [Phone]
+    [Display(Name = "Employee Contact Number")]
+    public int PhoneNumber { get; set; }
+
+}
+
+
+  public class DefaultController : Controller
+  {
+      // GET: Default
+      public ActionResult Index()
+      {
+          return View();
+      }
+
+      [HttpPost]
+      public ActionResult Index(Employee emp)
+      {
+          if(ModelState.IsValid == true)
+          {
+              ViewBag.Message = "Successfully Submitted";
+              ModelState.Clear();
+          }
+          return View();
+      }
+  }
+
+
+
+@model MVCTutorial.Models.Employee
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+@using (Html.BeginForm())
+{
+
+    <div>
+        @Html.LabelFor(model => model.EmployeeName)
+        @Html.TextBoxFor(model => model.EmployeeName)
+        @Html.ValidationMessageFor(model => model.EmployeeName)
+    </div>
+    <div>
+        @Html.LabelFor(model => model.EmployeeAge)
+        @Html.TextBoxFor(model => model.EmployeeAge)
+        @Html.ValidationMessageFor(model => model.EmployeeAge)
+    </div>
+    <div>
+        @Html.LabelFor(model => model.EmployeeGender)
+        @Html.TextBoxFor(model => model.EmployeeGender)
+        @Html.ValidationMessageFor(model => model.EmployeeGender)
+    </div>
+    <div>
+        @Html.LabelFor(model => model.EmployeeEmail)
+        @Html.TextBoxFor(model => model.EmployeeEmail)
+        @Html.ValidationMessageFor(model => model.EmployeeEmail)
+    </div>
+    <div>
+        @Html.LabelFor(model => model.Password)
+        @Html.TextBoxFor(model => model.Password)
+        @Html.ValidationMessageFor(model => model.Password)
+    </div>
+    <div>
+        @Html.LabelFor(model => model.ConfirmPassword)
+        @Html.TextBoxFor(model => model.ConfirmPassword)
+        @Html.ValidationMessageFor(model => model.ConfirmPassword)
+    </div>
+    <div>
+        @Html.LabelFor(model => model.PhoneNumber)
+        @Html.TextBoxFor(model => model.PhoneNumber)
+        @Html.ValidationMessageFor(model => model.PhoneNumber)
+    </div>
+    <input type="submit" value="Submit" />
+
+}
+
+
+
+
+
+
+

@@ -1,0 +1,83 @@
+-------------------SQL TEST-------------------------------------------------
+SQL Question Paper
+Subject: SQL Fundamentals
+Duration: 1 hour 30 minutes
+Total Marks: 100
+
+Section A: CREATE, INSERT, UPDATE, DELETE
+(Each question carries 5 marks)
+[Total: 20 Marks]
+
+1.Write an SQL command to create a table named Students with the following structure:
+
+StudentID (INT, Primary Key)
+
+Name (VARCHAR(50))
+
+Age (INT)
+
+City (VARCHAR(30))
+
+2.Write an SQL command to insert the following record into the Students table:
+
+StudentID: 101
+
+Name: 'Anjali'
+
+Age: 22
+
+City: 'Mumbai'
+
+3.Write an SQL statement to update the City of the student with StudentID = 101 to 'Pune'.
+
+Write an SQL statement to delete the student record where StudentID = 101.
+
+Section B: Logical and Comparison Operators
+(Each question carries 6 marks)
+[Total: 30 Marks]
+
+Write an SQL query to select all students from the Students table where Age > 18 AND City = 'Delhi'.
+
+Write an SQL query to display students whose age is between 20 and 25.
+
+Write an SQL query to display students from cities other than 'Chennai'.
+
+Write an SQL query using OR to find students who are either below 18 years old OR from 'Kolkata'.
+
+Explain the difference between = and != operators in SQL with examples.
+
+Section C: Assignment Operators & LIKE Operator
+(Each question carries 10 marks)
+[Total: 30 Marks]
+
+Explain the use of the assignment operator in SQL with an example using the SET command.
+
+Use the LIKE operator to:
+
+A. Find students whose names start with 'A'.
+
+B. Find students whose city ends with 'pur'.
+
+C. Find students whose name contains 'an'.
+
+Write an SQL query to update a student’s age using the assignment operator (SET) and explain the query.
+
+Section D: Query Writing and Error Correction
+(Each question carries 10 marks)
+[Total: 20 Marks]
+
+Write a complete set of SQL queries to:
+
+A. Create a table Employees with fields: EmpID, EmpName, Salary, Department.
+
+B. Insert 3 sample records.
+
+C. Update one employee’s salary.
+
+D. Delete an employee from the department 'HR'.
+
+The following query has an error. Identify and correct it:
+
+sql
+Copy code
+SELECT * FORM Students WHERE Age => 20;

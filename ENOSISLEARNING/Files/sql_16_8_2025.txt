@@ -1,0 +1,434 @@
+--==================================KEYS In SQL==========16-08-2025==========================
+--[1]Candidate Key [2]Alternate Key [3]Composite Key [4]Super Key
+
+--[1]Candidate Key:
+--A Candidate Key is a column, or a set of columns, that could potentially be a primary key. A table can have multiple candidate keys, but only one can be chosen as the primary key.
+
+--Define Candidate Keys (the columns that can uniquely identify records in the table).
+
+--Example:Student Adharcard, RollNo, RegistrationNo, LicenceNo, VoterId, PhoneNo, and EmailId.
+-------------------------------------------------------
+
+--[2]. Alternate Key:
+--An Alternate Key is any candidate key that is not chosen as the primary key. 
+--Define Alternate Keys (columns that are unique but are not chosen as the Primary Key).
+------------------------------------------------------
+--Example of Candidate Key and Alternate Key:
+
+CREATE TABLE PersonalDetails (
+    Adharcard VARCHAR(12) CONSTRAINT pKID PRIMARY KEY NOT NULL,  -- Adharcard is 12 digits, and is the primary key
+    RollNo INT CONSTRAINT UKRollNo UNIQUE,                       -- Roll number
+    RegistrationNo VARCHAR(15) CONSTRAINT UKRgiNo UNIQUE,        -- Registration number (Candidate Key)
+    LicenceNo VARCHAR(20) CONSTRAINT UKLicenceNo UNIQUE,         -- Driving license number
+    VoterId VARCHAR(20) CONSTRAINT UKVoterId UNIQUE,             -- Voter ID
+    PhoneNo VARCHAR(15) CONSTRAINT UKPhoneNo UNIQUE,             -- Phone number
+    EmailId VARCHAR(100) CONSTRAINT UKEmailId UNIQUE,            -- Email address
+    
+);
+--OR--
+CREATE TABLE PersonalDetails2 (
+    Adharcard VARCHAR(12) NOT NULL,       -- Adharcard is 12 digits, and is the primary key
+    RollNo INT NOT NULL,                  -- Roll number
+    RegistrationNo VARCHAR(15) NOT NULL,  -- Registration number (Candidate Key)
+    LicenceNo VARCHAR(20),                -- Driving license number
+    VoterId VARCHAR(20),                  -- Voter ID
+    PhoneNo VARCHAR(15),                  -- Phone number
+    EmailId VARCHAR(100),                 -- Email address
+    
+    PRIMARY KEY (Adharcard),              -- Adharcard as the Primary Key
+    UNIQUE (RegistrationNo),              -- RegistrationNo as an Alternate Key
+    UNIQUE (EmailId),                     -- EmailId should be unique
+    UNIQUE (PhoneNo)                      -- PhoneNo should be unique
+);
+
+INSERT INTO PersonalDetails (Adharcard, RollNo, RegistrationNo, LicenceNo, VoterId, PhoneNo, EmailId) 
+VALUES
+('123456789012', 101, 'REG12345', 'DL1234567', 'VOTER123', '9876543210', 'person1@example.com'),
+('234567890123', 102, 'REG23456', 'DL2345678', 'VOTER234', '9876543211', 'person2@example.com'),
+('345678901234', 103, 'REG34567', 'DL3456789', 'VOTER345', '9876543212', 'person3@example.com'),
+('456789012345', 104, 'REG45678', 'DL4567890', 'VOTER456', '9876543213', 'person4@example.com'),
+('567890123456', 105, 'REG56789', 'DL5678901', 'VOTER567', '9876543214', 'person5@example.com');
+
+select * from PersonalDetails
+------------------------------
+--[3]. Composite Key (or Composite Primary Key):
+--Composite key,(also known as a Composite Primary Key)refers to cases where more than one column is used to specify the primary key of a table.
+
+--Note that the columns that make up a composite key can be of different data types.
+
+--Syntax:
+CREATE TABLE table_name (
+    column1 datatype,
+    column2 datatype,
+    PRIMARY KEY (column1, column2)
+);
+
+--Example:
+
+CREATE TABLE OrderDetails (
+    OrderID INT Not Null,
+    ProductID INT Not Null,
+    Quantity INT,
+    PRIMARY KEY (OrderID, ProductID)
+);
+
+INSERT INTO OrderDetails (OrderID, ProductID, Quantity) 
+VALUES
+(1, 1, 10),
+(1, 2, 5),
+(2, 1, 15),
+(3, 3, 7),
+(4, 4, 20);
+
+select * from OrderDetails where OrderID & ProductID=1
+
+select * from OrderDetails
+
+drop table OrderDetails
+
+--Alter:
+CREATE TABLE OrderDetails (
+    OrderID INT Not Null,
+    ProductID INT Not Null,
+    Quantity INT,
+    --PRIMARY KEY (OrderID, ProductID)
+);
+INSERT INTO OrderDetails (OrderID, ProductID, Quantity) 
+VALUES
+(1, 1, 10),
+(1, 2, 5),
+(2, 1, 15),
+(3, 3, 7),
+(4, 4, 20);
+
+select * from OrderDetails
+
+Alter table OrderDetails Add Primary Key(OrderID,ProductID);
+-------------------------
+--[4]. Super Key:
+--A super key is a combination of all possible atributes which can uniquely identify two tuples in a table.
+--Super set of any candidate key is super key.
+
+--A Super Key is any set of columns that can uniquely identify a record in a table. A super key can contain extra columns beyond the candidate key, but it still must uniquely identify rows.
+
+--Example:
+
+--If ProductID and SerialNumber are both candidate keys, then {ProductID, Name} or {ProductID, SerialNumber, Name} are super keys because they can still uniquely identify rows.
+------------------------
+
+--===========================Master Table & Child Tables=========== =====================
+--In SQL, the concepts of Master Tables and Child Tables are used to represent relationships between data entities, particularly in one-to-many and many-to-many relationships. Here's an overview of each:
+
+--[1] Master Table:
+    --Definition: A master table (also called a parent table) is a primary table that holds the main or primary records in a relationship. It contains unique identifiers (primary keys) for each record.
+   -- Characteristics:
+   -- Contains essential data that serves as a reference point for other tables.
+   -- Each record in the master table can relate to one or more records in a child table.
+   -- Example: In a database for an e-commerce application, a Customers table can be considered a master table, where each customer has a unique customer ID.
+
+--[2] Child Table:
+   -- Definition: A child table (also called a dependent table) contains records that are related to the records in a master table. It holds foreign keys that reference the primary keys of the master table.
+   -- Characteristics:
+   -- Each record in the child table corresponds to a record in the master table, establishing a dependency.
+   -- A child table may have multiple records associated with a single record in the master table.
+  --  Example: Continuing with the e-commerce application, an Orders table can be a child table where each order is linked to a specific customer through the customer ID (foreign key).
+
+--Example:
+
+--Master Table: Customers
+CustomerID	Name		Email
+1			John Doe	john@example.com
+2			Jane Smith	jane@example.com
+
+--Child Table: Orders
+OrderID	OrderDate	CustomerID	TotalAmount
+101		2024-01-01		1		150.00
+102		2024-01-02		1		200.00
+103		2024-01-03		2		300.00
+
+--Q.Why Use Master and Child Tables?
+
+   1. Data Organization: They help organize data logically, allowing for better management and retrieval.
+   2. Referential Integrity: Foreign keys in child tables maintain integrity between related records, ensuring that each child record corresponds to a valid master record.
+   
+--========================= Why Relational Model==Page No.60=========================
+--In SQL, a relationship refers to the way in which tables are linked together based on common attributes. This is fundamental to the relational database model, as it enables the organization of data into multiple tables while maintaining connections among them. Relationships help to structure data efficiently and allow for complex queries across tables.
+[Q]Why Use Relationships?
+
+  1. Data Integrity: Relationships help maintain consistency across related data. For instance, if a customer is deleted, the related orders can also be managed through cascading deletes or updates.
+
+  2. Normalization: By using relationships, data can be organized into related tables to eliminate redundancy and ensure efficient data storage.
+
+  3. Complex Queries: Relationships allow for more complex queries involving multiple tables, enabling the retrieval of comprehensive data sets.
+
+  4. Efficient Data Management: Relationships make it easier to manage large amounts of interconnected data without duplication.
+
+--Types of Relationships:
+
+   1. One-to-One (1:1):
+        In this relationship, a record in one table is associated with exactly one record in another table.
+        Example: A user profile might be associated with exactly one user account.
+
+   2. One-to-Many (1:M):
+        This is the most common type of relationship. A record in one table can be associated with multiple records in another table.
+        Example: A customer can have multiple orders, but each order belongs to only one customer.
+
+   3. Many-to-One (M:1):
+        This is essentially the reverse of a one-to-many relationship. Multiple records in one table can relate to a single record in another table.
+        Example: Many employees may work in one department.
+
+   4. Many-to-Many (M:M):
+        In this relationship, records in one table can be associated with multiple records in another table, and vice versa. This is typically implemented using a junction (or linking) table.
+        Example: Students can enroll in multiple courses, and each course can have multiple students.
+
+--========================= Advantages of Relational Model=======================
+The relational model in SQL offers several advantages that make it a popular choice for database management. Here are some key benefits:
+
+   1. Data Integrity: Relational databases enforce data integrity through constraints (e.g., primary keys, foreign keys, unique constraints). This ensures the accuracy and consistency of data.
+
+   2. Flexibility: The relational model allows for easy modification of the database structure (e.g., adding new tables or columns) without significant disruption to existing data.
+
+   3. Structured Query Language (SQL): SQL provides a powerful and standardized way to query and manipulate data, making it easier to interact with the database.
+
+   4. Normalization: The process of normalization helps eliminate data redundancy and promotes efficient data organization, which improves storage and retrieval.
+
+   5. Relationships: The ability to define relationships between tables (one-to-many, many-to-many) enables complex data interactions and enhances data retrieval capabilities.
+
+   6. Scalability: Relational databases can handle large volumes of data and are capable of scaling vertically or horizontally to meet growing demands.
+
+   7. Security: Advanced security features, such as user roles and permissions, help protect sensitive data from unauthorized access.
+
+   8. Transaction Management: Support for ACID (Atomicity, Consistency, Isolation, Durability) properties ensures reliable transactions, critical for applications requiring data accuracy.
+
+   9. Data Independence: Changes to the database schema do not affect application programs, allowing for better maintenance and evolution of applications.
+
+   10. Support for Complex Queries: SQL allows for complex queries involving multiple tables and aggregations, making it easy to extract valuable insights from data.
+
+These advantages make the relational model a robust choice for many applications, particularly those that require structured data management and complex relationships.
+
+
+--===============  JOINS IN SQL SERVER ==================================
+--In SQL, a JOIN is a clause used to combine records from two or more tables based on a related column between them. Joins allow you to retrieve data that spans multiple tables in a single query.
+
+--Types of Joins:
+1.INNER JOIN
+2.LEFT JOIN (or LEFT OUTER JOIN)
+3.RIGHT JOIN (or RIGHT OUTER JOIN)
+4.FULL JOIN (or FULL OUTER JOIN)
+5.CROSS JOIN.
+6.SELF JOIN
+
+----------------------------------------------------------------------------------------
+create
+--"left table"
+CREATE TABLE Categories (
+    CategoryID INT PRIMARY KEY,
+    CategoryName VARCHAR(255) NOT NULL,
+    Description TEXT        --2gb unlimitade data store
+);
+
+--"right table" 
+CREATE TABLE Products (
+    ProductID INT PRIMARY KEY,
+    ProductName VARCHAR(255) NOT NULL,
+    CategoryID INT,
+    Price DECIMAL(10, 2),
+    FOREIGN KEY (CategoryID) REFERENCES Categories(CategoryID)  -- Assuming you have a Categories table
+);
+select * from Categories;
+select * from Products;
+truncate table Categories;
+truncate table Products;
+drop table Categories;
+drop table Products;
+
+INSERT INTO Categories (CategoryID, CategoryName, Description) VALUES    --"left table"
+(1, 'Electronics', 'Devices and gadgets'),
+(2, 'Books', 'Printed and digital literature'),
+(3, 'Clothing', 'Apparel and accessories'),
+(4, 'Furniture', 'Home and office furniture'),
+(5, 'Toys', 'Children s toys and games'),
+(6, 'Groceries', 'Food and everyday items');
+
+INSERT INTO Products (ProductID, ProductName, CategoryID, Price) VALUES   --"right table"
+(1, 'Smartphone', 1, 699.99),
+(2, 'Laptop', 2, 999.99),
+(3, 'Novel', 4, 19.99),
+(4, 'T-shirt', 6, 14.99);
+
+truncate table Products
+DROP table Products;
+ALTER TABLE Categories DROP CONSTRAINT PK__Categori__19093A2B9E6E00D0;
+truncate table Categories
+DROP table Categories;
+select * from Categories;
+select * from Products;
+DROP table Products;
+
+--1. INNER JOIN:
+--The INNER JOIN only returns matching records between the two tables.
+--The INNER JOIN keyword selects records that have matching values in both tables.
+
+--INNER JOIN Syntax:
+SELECT column1,column2.....columnN
+FROM table1 INNER JOIN table2 ON table1.common_column = table2.common_column;
+
+--Example
+SELECT 
+    Products.ProductName, 
+   Categories.CategoryName,
+   Categories.Description
+FROM 
+    Products 
+INNER JOIN 
+    Categories ON Products.CategoryID = Categories.CategoryID;
+
+	--------------------
+	SELECT *
+FROM 
+    Products 
+INNER JOIN 
+    Categories ON Products.CategoryID = Categories.CategoryID;
+
+	----OR--------
+
+SELECT 
+    p.ProductName, 
+    c.CategoryName 
+FROM 
+    Products p
+INNER JOIN 
+    Categories  c ON p.CategoryID = c.CategoryID;
+
+select * from Categories;
+select * from Products;
+
+
+--2. LEFT JOIN (or LEFT OUTER JOIN)
+--LEFT JOIN (or LEFT OUTER JOIN): Returns all rows from the left table and the matched rows from the right table; if there is no match, NULL values are returned for columns from the right table.
+--The LEFT JOIN returns all records from the left table and matched records from the right table.
+
+--Syntax:
+SELECT column1,column2.....columnN
+FROM table1
+LEFT JOIN table2 ON table1.common_column = table2.common_column;
+
+--Example
+SELECT 
+    c.CategoryName, 
+    p.ProductName,
+	c.Description
+FROM 
+  Categories c
+LEFT JOIN 
+   Products p  ON c.CategoryID = p.CategoryID;
+
+
+select * from Categories;
+select * from Products;
+
+--Example 2
+SELECT  Categories.CategoryName , Products.ProductName
+FROM Categories 
+LEFT JOIN 
+Products 
+ON Categories.CategoryID = Products.CategoryID;
+
+--Example 3
+SELECT  C.CategoryName ,P.ProductName
+FROM Categories c 
+LEFT JOIN 
+Products p
+ON C.CategoryID = P.CategoryID;
+
+
+--3. RIGHT JOIN (or RIGHT OUTER JOIN)
+--RIGHT JOIN (or RIGHT OUTER JOIN): Returns all rows from the right table and the matched rows from the left table; if there is no match, NULL values are returned for columns from the left table.
+--The RIGHT JOIN returns all records from the right table and matched records from the left table.
+
+--Syntax:
+SELECT column1,column2.....columnN
+FROM table1
+RIGHT JOIN table2 ON table1.common_column = table2.common_column;
+
+--Example
+SELECT 
+    c.*,
+    p.* 
+  
+FROM 
+     Products p 
+RIGHT JOIN 
+    --Products p ON p.CategoryID = c.CategoryID;
+	Categories c ON   c.CategoryID=p.CategoryID;
+
+
+select * from Categories;
+select * from Products;
+
+--4. FULL JOIN (or FULL OUTER JOIN)----------------------------------------------------
+--FULL JOIN (or FULL OUTER JOIN): Returns all rows when there is a match in either table; if there is no match, NULL values are returned for non-matching rows from both tables.
+--The FULL JOIN returns all records when there is a match in either left or right table.
+
+--Syntax:
+SELECT columns
+FROM table1
+FULL JOIN table2 ON table1.common_column = table2.common_column;
+
+--Example
+SELECT
+    c.CategoryName,
+    p.ProductName 
+FROM 
+    Categories c
+FULL OUTER JOIN 
+ Products p ON p.CategoryID = c.CategoryID;
+
+select * from Categories;
+select * from Products;
+
+--5. CROSS JOIN
+--CROSS JOIN: Returns the Cartesian product of the two tables, combining every row of the first table with every row of the second table.
+--The CROSS JOIN produces a Cartesian product of the two tables, pairing every row in the first table with every row in the second.
+
+--Syntax:
+SELECT 
+	c.CategoryName , 
+    p.ProductName  
+	
+FROM 
+   Categories c 
+CROSS JOIN 
+    Products p;
+
+select * from Categories;
+select * from Products;
+FROM table1
+CROSS JOIN table2;
+
+--Example
+
+--6. SELF JOIN
+--A self join is a type of join in SQL where a table is joined with itself. This allows you to compare rows within the same table. Self joins are useful for scenarios where you need to relate records in a single table based on some condition.
+--The SELF JOIN can be used to compare rows within the same table.
+
+--Syntax:
+SELECT * 
+FROM tableName columnName 
+join tableName 
+ON tableName.columnName=tableName.columnName;
+
+SELECT a.column1, a.column2, b.column1, b.column2
+FROM TableName a
+JOIN TableName b ON a.common_column = b.common_column
+WHERE condition;
+
+
+--Example
+SELECT * from Categories CategoryID join Categories on Categories.CategoryID=Categories.CategoryID
+
+--2
+SELECT * from Products ProductID join Products on Products.ProductID=Products.ProductID
+
+select * from Products;
+select * from Categories;

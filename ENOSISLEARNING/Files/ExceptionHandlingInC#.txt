@@ -1,0 +1,83 @@
+//C# Exception and it's Types: An exception(Error,Bug) is an unexpected event that occurs during program execution.
+
+C# Exception Hierarchy
+Object----->Exception
+The major two exception classes derived from the Exception Class.
+1.SystemException - Built-in exception : all the  Built-in exception classes are derived from SystemEsception class.This calss handles all thw system-related exceptions.
+Some common system related exceptions:
+1.Stackoverflow : this exception is thrown when the execution stack exceds the stack size.
+2.ArithmeticException : this exception is thrown for errors in arithmetic,casting or Conversion.
+	*DividedByZeroException
+3.ValidationException : this exception is thrown when an input value is not valid.
+4.ArgumentException : this exception is thrown when we provide one invalid argument in a method.
+ class Program
+ {       
+     public static void Main(string[] args)
+     {
+         int[] num = { 1,2,3};
+         //print the array element present at 4th index
+         Console.WriteLine(num[4]);//System Exception
+     }
+ }
+
+
+2.ApplicationException - Userdefined exception : We can also create user-defined exceptions which ar know as Application level exception.The ApplicationException class is a base class from which we can derived application level exceptins.
+
+
+
+
+C# Exception Handling : Exceptions abnormally terminate the flow of the program instructions,w need to handle those exceptions.Responding and handle excptions is called Exception Handling.
+
+try and catch block :  the try and catch block is used to handle exceptions in C#.
+Synatx:
+try
+{
+
+	//code that may be raise an error
+
+}
+catch(Exception ex)
+{
+
+	//code that handles the error
+}
+
+
+ public static void Main(string[] args)
+ {
+     try
+     {
+         int num = 0;
+         //code that may raise an error
+         int dividebyZero = 7 / num;
+         Console.WriteLine(dividebyZero);
+     }
+     catch (Exception ex)
+     {
+        Console.WriteLine(ex.Message);
+     }
+ }
+
+
+try catch and finally block
+ public static void Main(string[] args)
+ {
+         Console.WriteLine("Enter First no:-");
+         int fn = Convert.ToInt32(Console.ReadLine());
+         Console.WriteLine("Enter Second no:-");
+         int sn = Convert.ToInt32(Console.ReadLine());
+     try
+     {
+         int result = fn / sn;
+         Console.WriteLine("Division of two values is :-"+result);
+     }
+     catch (Exception ex)
+     {
+        Console.WriteLine(ex.Message);
+     }
+     finally
+     {
+         //this code is always execute whether of exception occured or not.
+         Console.WriteLine("Sum of Two Two values is :-"+(fn+sn));
+     }
+ }

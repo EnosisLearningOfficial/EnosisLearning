@@ -1,0 +1,15 @@
+CREATE TABLE BatchMessages
+(
+    MessageID INT IDENTITY(1,1) PRIMARY KEY,  
+    BatchSheetID INT NOT NULL,                     
+    Sender NVARCHAR(100) NOT NULL,             
+    MessageText NVARCHAR(MAX) NOT NULL,        
+    MessageDateTime DATETIME NOT NULL DEFAULT GETDATE(), 
+
+    CONSTRAINT FK_BatchMessages_BatchesInfo FOREIGN KEY (BatchSheetID) 
+        REFERENCES  enosis.BatchSheetDetails(BatchSheetID)
+        ON DELETE CASCADE 
+);
+
+ALTER TABLE enosis.BatchSheetDetails
+ALTER COLUMN StudentName VARCHAR(255) NULL;

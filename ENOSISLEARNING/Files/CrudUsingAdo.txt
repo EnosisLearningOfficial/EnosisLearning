@@ -1,0 +1,161 @@
+CRUD using ADO.NET
+
+create database MyDb
+use MyDb
+create table Students(
+Id int primary key identity(1,1),
+Name nvarchar(max) not null,
+Email nvarchar(max) not null,
+Password nvarchar(max) not null,
+Age int not null,
+Comment nvarchar(max) not null,
+DateOfJoining datetime not null,
+SchoolName nvarchar(max) default 'Enosis Learning'
+);
+
+select * from Students;
+
+
+
+//Step 2
+
+Connection String
+
+
+<connectionStrings>
+	<add name="MyConn" connectionString="Server=DESKTOP-MPE7G61;Database=MyDb;Trusted_Connection=True;" providerName="System.Data.SqlClient"/>
+</connectionStrings>
+
+
+
+3.Create a Data Access Layer(DAL)
+StudentRepository.cs
+
+
+public class StudentRepository
+{
+    private string connectionString = ConfigurationManager.ConnectionStrings["MyConn"].ToString();
+
+    //CREATE
+
+    public void AddStudent(Students student)
+    {
+        try
+        {
+            using (SqlConnection Conn = new SqlConnection(connectionString))
+            {
+                string query = "INSERT INTO Students (Name, Email, Password, Age, Comment) VALUES (@Name, @Email, @Password, @Age, @Comment)";
+                using (SqlCommand cmd = new SqlCommand(query, Conn))
+                {
+                    cmd.Parameters.AddWithValue("@Name", student.Name);
+                    cmd.Parameters.AddWithValue("@Email", student.Email);
+                    cmd.Parameters.AddWithValue("@Password", student.Password);
+                    cmd.Parameters.AddWithValue("@Age", student.Age);
+                    cmd.Parameters.AddWithValue("@Comment", student.Comment);
+                    Conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+        catch (Exception)
+        {
+
+            throw;
+        }
+        //finally
+        //{
+        //    Conn.Close();
+        //}
+    }
+    //Read-Get All Students
+    public List<Students> GetAllStudents()
+    {
+        List<Students> studntList = new List<Students>();
+        using (SqlConnection Conn = new SqlConnection(connectionString))
+        {
+            string query = "Select * from Students";
+            using(SqlCommand cmd = new SqlCommand(query, Conn))
+            {
+                Conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Students student = new Students
+                    {
+                        Id = Convert.ToInt32(reader["Id"]),
+                        Name = reader["Name"].ToString(),
+                        Email = reader["Email"].ToString(),
+                        Password = reader["Password"].ToString(),
+                        Age = Convert.ToInt32(reader["Age"]),
+                        Comment = reader["Comment"].ToString(),
+                        DateOfJoining = Convert.ToDateTime(reader["DateOfJoining"])
+                    };
+                    studntList.Add(student);
+                }
+            }
+            return studntList;
+        }
+    }
+    //Update Student
+    public void UpdateStudent(Students students)
+    {
+        using (SqlConnection Conn = new SqlConnection(connectionString))
+        {
+            string query = "update Students set Name=@Name,Email=@Email,Password=@Password,Age=@Age,Comment=@Comment where Id=@Id";
+            using (SqlCommand cmd = new SqlCommand(query,Conn))
+            {
+                cmd.Parameters.AddWithValue("@Name", students.Name);
+                cmd.Parameters.AddWithValue("@Email", students.Email);
+                cmd.Parameters.AddWithValue("@Password", students.Password);
+                cmd.Parameters.AddWithValue("@Age", students.Age);
+                cmd.Parameters.AddWithValue("@Comment", students.Comment);
+                cmd.Parameters.AddWithValue("@Id", students.Id);
+                Conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+    }
+}
+
+
+
+//Controller Code:
+
+ private StudentRepository repo = new StudentRepository();
+ // GET: Students
+ public ActionResult Index()
+ {
+     List<Students> students = repo.GetAllStudents();
+     return View(students);
+ }
+ public ActionResult Create()
+ {
+     return View();
+ }
+ [HttpPost]
+ public ActionResult Create(Students students)
+ {
+     if(ModelState.IsValid)
+     {
+       repo.AddStudent(students);
+         return RedirectToAction("Index");
+     }
+     return View();
+ }
+ public ActionResult Edit(int id)
+ {
+     Students students = repo.GetAllStudents().Find(s => s.Id == id);
+     return View(students);
+ }
+ [HttpPost]
+ public ActionResult Edit(Students students)
+ {
+    if(ModelState.IsValid)
+     {
+         repo.UpdateStudent(students);
+         return RedirectToAction("Index");
+     }
+     return View(students);
+ }
+
+

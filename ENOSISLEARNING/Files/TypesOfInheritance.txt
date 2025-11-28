@@ -1,0 +1,167 @@
+C++ Public : public inheritance makes public members of the base class public in the derived class, and the protected members of the base class remain protected in the derived class.
+Protected : protected inheritance makes the public and protected members of the base class protected in the derived class.
+Private Inheritance : private inheritance makes the public and protected members of the base class private in the derived class.
+
+*private members of the base class are inaccessible to the derived class.
+
+
+Types of Inheritance : 
+1.Single Inheritance - A derived class inherits from one base class.Simple and most common form of inheritance.
+
+class A
+{
+
+public string Name;
+public int Id;
+
+
+}
+
+class B : public A
+{
+
+public string Email;
+public int Roll;
+
+
+}
+
+2. Multiple Inheritance - A derived class inherits from more than one base class.C++ supports this directly.
+
+
+class A
+{
+
+public string Name;
+public int Id;
+
+
+}
+
+class B
+{
+
+public string Name;
+public int Id;
+
+
+}
+
+class C : public A, public B
+{
+
+public string Email;
+public int Roll;
+
+
+}
+
+3. Multilevel Inheritance : 
+
+class A
+{
+
+public string Name;
+public int Id;
+
+
+}
+
+class B : public class A
+{
+
+public string Name;
+public int Id;
+
+
+}
+
+class C : public B
+{
+
+public string Email;
+public int Roll;
+
+
+}
+class D : public C
+{
+
+public string Email;
+public int Roll;
+
+
+}
+
+4. Hierarchical Inheritance : Multiple derived classes inherit from a single base class.
+class A
+{
+
+public string Name;
+public int Id;
+
+
+}
+
+class B : public class A
+{
+
+public string Name;
+public int Id;
+
+
+}
+
+class C : public A
+{
+
+public string Email;
+public int Roll;
+
+
+}
+class D : public A
+{
+
+public string Email;
+public int Roll;
+
+}
+
+5. Hybrid (or Virtual) Inheritance - A combination of two or more types of inheritance.
+
+class A
+{
+
+public string Name;
+public int Id;
+
+
+}
+
+class B : public class A
+{
+
+public string Name;
+public int Id;
+
+
+}
+
+class C : public A
+{
+
+public string Email;
+public int Roll;
+
+
+}
+class D : public C
+{
+
+public string Email;
+public int Roll;
+
+}
+
+

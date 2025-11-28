@@ -1,0 +1,104 @@
+  // C# - PREPROCESSOR DIRECTIVES
+
+  //#define DEBUG  // Define the DEBUG symbol
+  //    class Program
+  //    {
+  //        static void Main()
+  //        {
+  //#if DEBUG       //  #if !DEBUG
+  //            Console.WriteLine("Debug mode is ON");
+  //#else
+  //            Console.WriteLine("Debug mode is OFF");
+  //#endif
+  //            Console.WriteLine("Debug......!");
+  //            Console.ReadLine();
+  //        }
+  //    }
+
+
+  //Using #define, #if, #else, and #endif
+
+
+  /*#define STUDENT */  // Define a symbol named STUDENT
+
+  //using System;
+
+  //    class Program
+  //    {
+  //        static void Main()
+  //        {
+  //#if STUDENT
+  //            Console.WriteLine("Welcome, Student!");
+  //#else
+  //            Console.WriteLine("Welcome, Guest!");
+  //#endif
+
+  //            Console.WriteLine("Have a nice day!");
+  //        }
+  //    }
+
+
+  //C# - REGULAR EXPRESSIONS
+
+  //class Program
+  //{
+  //    static void Main()
+  //    {
+  //        // Define a regex pattern for email
+  //        string pattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
+
+
+  //        // Input string to validate
+  //        string email = "may+a.guj+jar@example.com";
+
+  //        // Check if the email matches the pattern
+  //        bool isValid = Regex.IsMatch(email, pattern);
+
+  //        if (isValid)
+  //        {
+  //            Console.WriteLine($"{email} is a valid email address.");
+  //        }
+  //        else
+  //        {
+  //            Console.WriteLine($"{email} is not a valid email address.");
+  //        }
+  //        Console.ReadLine();
+  //    }
+  //}
+
+
+  //C# - EXCEPTION HANDLING
+  class Program
+  {
+      static void Main()
+      {
+          try
+          {
+              Console.WriteLine("Enter the numerator:");
+              int numerator = Convert.ToInt32(Console.ReadLine());
+
+              Console.WriteLine("Enter the denominator:");
+              int denominator = Convert.ToInt32(Console.ReadLine());
+
+              // Attempt division
+              int result = numerator / denominator;
+              Console.WriteLine($"Result: {result}");
+          }
+          catch (DivideByZeroException ex)
+          {
+              // Handle division by zero
+             // Console.WriteLine("Error: Cannot divide by zero.");
+          }
+          catch (FormatException ex)
+          {
+              // Handle invalid input format
+              Console.WriteLine("Error: Please enter a valid number.");
+          }
+          finally
+          {
+              // Cleanup code (optional)
+              Console.WriteLine("Thank you for using the calculator.");
+          }
+          Console.ReadLine();
+      }
+  }

@@ -1,0 +1,195 @@
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="GridViewControl.aspx.cs" Inherits="AspTutorial.GridViewControl" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous"/>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class=" container-fluid">
+            <asp:GridView ID="StdGrv" DataKeyNames="StudentID" runat="server" CssClass="table table-borderless table-success" AutoGenerateColumns="false" OnRowEditing="StdGrv_RowEditing" OnRowCancelingEdit="StdGrv_RowCancelingEdit" OnRowUpdating="StdGrv_RowUpdating" OnRowDeleting="StdGrv_RowDeleting" ShowFooter="true" OnRowCommand="StdGrv_RowCommand">
+                <Columns>
+                    <asp:TemplateField HeaderText="Student ID" HeaderStyle-CssClass="text-primary">
+                        <ItemTemplate>
+                            <asp:Label ID="idlbl" Text='<%#Bind("StudentID") %>' runat="server" CssClass="text-primary"/>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Student Name" HeaderStyle-CssClass="text-primary">
+                        <ItemTemplate>
+                            <asp:Label ID="namelbl" Text='<%#Bind("Name") %>' runat="server" CssClass="text-primary"/>
+                        </ItemTemplate>
+                         <EditItemTemplate>
+                             <asp:TextBox ID="nametxt" Text='<%#Bind("Name") %>' runat="server" />
+                         </EditItemTemplate>
+                        <FooterTemplate>
+                            <asp:TextBox ID="footerNametxt" runat="server" placeholder="Enter Name" CssClass="form-control"/>
+                        </FooterTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Student Email" HeaderStyle-CssClass="text-primary">
+                        <ItemTemplate>
+                            <asp:Label ID="emaillbl" Text='<%#Bind("Email") %>' runat="server" CssClass="text-primary"/>
+                        </ItemTemplate>
+                         <EditItemTemplate>
+                             <asp:TextBox ID="Emailtxt" Text='<%#Bind("Email") %>' runat="server" />
+                         </EditItemTemplate>
+                        <FooterTemplate>
+                            <asp:TextBox ID="footerEmailtxt" runat="server" placeholder="Enter Email" CssClass="form-control"/>
+                        </FooterTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Student Course" HeaderStyle-CssClass="text-primary">
+                        <ItemTemplate>
+                            <asp:Label ID="courselbl" Text='<%#Bind("Course") %>' runat="server" CssClass="text-primary"/>
+                        </ItemTemplate>
+                         <EditItemTemplate>
+                             <asp:TextBox ID="Coursetxt" Text='<%#Bind("Course") %>' runat="server" />
+                         </EditItemTemplate>
+                         <FooterTemplate>
+                             <asp:TextBox ID="footerCoursetxt" runat="server" placeholder="Enter Course" CssClass="form-control"/>
+                         </FooterTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Action" HeaderStyle-CssClass="text-primary">
+                        <ItemTemplate>
+                            <asp:Button ID="Editbtn" Text="Edit" runat="server" CssClass="btn btn-warning" CommandName="Edit"/>
+                            <asp:Button ID="Deletebtn" Text="Delete" runat="server" CssClass="btn btn-danger" CommandName="Delete"/>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                             <asp:Button ID="Updatebtn" Text="Update" runat="server" CssClass="btn btn-info" CommandName="Update"/>
+                             <asp:Button ID="Cancelbtn" Text="Cancel" CommandName="Cancel" runat="server" CssClass="btn btn-success"/>
+                        </EditItemTemplate>
+                         <FooterTemplate>
+                            <asp:Button ID="Addbtn" Text="Add" CommandName="Add" runat="server" CssClass="btn btn-success"/>
+                         </FooterTemplate>
+                    </asp:TemplateField>
+                </Columns>
+            </asp:GridView>
+        </div>
+    </form>
+</body>
+</html>
+
+
+
+---------------CS Code---------------
+using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace AspTutorial
+{
+    public partial class GridViewControl : System.Web.UI.Page
+    {
+        string connectionString = "Data Source =DESKTOP-MPE7G61; Initial Catalog=AspTut;Integrated Security=true;";
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if(!IsPostBack)
+            {
+                BindGrid();
+            }
+        }
+
+        //Bind Gridview
+        void BindGrid()
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = "select * from Students";
+                using(SqlCommand cmd = new SqlCommand(query,conn))
+                {
+                    conn.Open();
+                    StdGrv.DataSource = cmd.ExecuteReader();
+                    StdGrv.DataBind();
+                }
+            }
+        }
+
+        //Edit Mode
+        protected void StdGrv_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            StdGrv.EditIndex = e.NewEditIndex;  
+            BindGrid();
+        }
+
+        //Exit Edit Mode
+        protected void StdGrv_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            StdGrv.EditIndex = -1;
+            BindGrid();
+        }
+
+        //Update Records
+        protected void StdGrv_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+            int id = Convert.ToInt32(StdGrv.DataKeys[e.RowIndex].Value);
+            string name = (StdGrv.Rows[e.RowIndex].FindControl("nametxt") as TextBox).Text;
+            string email = (StdGrv.Rows[e.RowIndex].FindControl("Emailtxt") as TextBox).Text;
+            string course = (StdGrv.Rows[e.RowIndex].FindControl("Coursetxt") as TextBox).Text;
+
+            using(SqlConnection Conn = new SqlConnection(connectionString))
+            {
+                string query = "Update Students set Name=@Name,Email=@Email,Course=@Course where StudentId =@ID";
+                using(SqlCommand cmd = new SqlCommand(query,Conn))
+                {
+                    cmd.Parameters.AddWithValue("@Name",name);
+                    cmd.Parameters.AddWithValue("@Email",email);
+                    cmd.Parameters.AddWithValue("@Course",course);
+                    cmd.Parameters.AddWithValue("@ID",id);
+                    Conn.Open();
+                    int rows = cmd.ExecuteNonQuery();
+                    Conn.Close();
+                }
+            }
+            StdGrv.EditIndex = -1;
+            BindGrid();
+        }
+
+        //Delete Records
+        protected void StdGrv_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            int id = Convert.ToInt32(StdGrv.DataKeys[e.RowIndex].Value);
+            using(SqlConnection Conn = new SqlConnection(connectionString))
+            {
+                string query = "Delete Students where StudentID=@ID";
+                using(SqlCommand cmd = new SqlCommand(query,Conn))
+                {
+                    cmd.Parameters.AddWithValue("@ID", id);
+                    Conn.Open();
+                    cmd.ExecuteNonQuery();
+                    Conn.Close();
+                }
+            }
+            BindGrid();
+        }
+
+        protected void StdGrv_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if(e.CommandName == "Add")
+            {
+                string name = (StdGrv.FooterRow.FindControl("footerNametxt") as TextBox).Text;
+                string email = (StdGrv.FooterRow.FindControl("footerEmailtxt") as TextBox).Text;
+                string course = (StdGrv.FooterRow.FindControl("footerCoursetxt") as TextBox).Text;
+
+                using(SqlConnection Conn = new SqlConnection(connectionString))
+                {
+                    string query = "insert into Students(Name,Email,Course)values(@Name,@Email,@Course)";
+                    using(SqlCommand cmd = new SqlCommand(query,Conn))
+                    {
+                        cmd.Parameters.AddWithValue("@Name",name);
+                        cmd.Parameters.AddWithValue("@Email",email);
+                        cmd.Parameters.AddWithValue("@Course",course);
+                        Conn.Open();
+                        cmd.ExecuteNonQuery();
+                        Conn.Close();
+                    }
+                }
+                BindGrid();
+            }
+        }
+    }
+}

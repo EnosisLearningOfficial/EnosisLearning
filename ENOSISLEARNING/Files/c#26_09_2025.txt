@@ -1,0 +1,131 @@
+
+    //class Program
+    //{
+    //    static void Main()
+    //    {
+    //        int number = 10;
+
+    //        // Check if number is positive
+    //        if (number > 0)
+    //        {
+    //            Console.WriteLine("The number is positive.");
+    //        }
+    //        Console.ReadLine();
+    //    }
+    //}
+
+
+    //class Program
+    //{
+    //    static void Main()
+    //    {
+    //        int number = -5;
+
+    //        // Check if number is positive or negative
+    //        if (number > 0)
+    //        {
+    //            Console.WriteLine("The number is positive.");
+    //        }
+    //        else
+    //        {
+    //            Console.WriteLine("The number is negative.");
+    //        }
+    //        Console.ReadLine();
+    //    }
+    //}
+
+
+
+    //class Program
+    //{
+    //    static void Main()
+    //    {
+    //        int number = 0;
+
+    //        // Multiple conditions
+    //        if (number > 0)
+    //        {
+    //            Console.WriteLine("The number is positive.");
+    //        }
+    //        else if (number < 0)
+    //        {
+    //            Console.WriteLine("The number is negative.");
+    //        }
+    //        else
+    //        {
+    //            Console.WriteLine("The number is zero.");
+    //        }
+    //        Console.ReadLine();
+    //    }
+
+    //}
+
+
+
+
+    //public class SwitchExample
+    //{
+    //    public static void Main(string[] args)
+    //    {
+    //        Console.WriteLine("Enter a number:");
+    //        int num = Convert.ToInt32(Console.ReadLine());
+
+    //        switch (num)
+    //        {
+    //            case 10: Console.WriteLine("It is 10"); break;
+    //            case 20: Console.WriteLine("It is 20"); break;
+    //            case 30: Console.WriteLine("It is 30"); break;
+    //            default: Console.WriteLine("Not 10, 20 or 30"); break;
+    //        }
+    //        Console.ReadLine();
+    //    }
+    //}
+
+
+    //class Program
+    //{
+    //    static void Main()
+    //    {
+    //        // Print numbers from 1 to 5 using for loop
+    //        for (int i = 1; i <= 5; i++)
+    //        {
+    //            Console.WriteLine(i);
+    //        }
+    //        Console.ReadLine();
+    //    }
+    //}
+
+
+
+    //class Program
+    //{
+    //    static void Main()
+    //    {
+    //        int i = 1;
+
+    //        // Print numbers from 1 to 5 using while loop
+    //        while (i <= 5)
+    //        {
+    //            Console.WriteLine(i);
+    //            i++; // increment the counter
+    //        }
+    //        Console.ReadLine();
+    //    }
+    //}
+
+
+    class Program
+    {
+        static void Main()
+        {
+            int i = 1;
+
+            // Print numbers from 1 to 5 using do-while loop
+            do
+            {
+                Console.WriteLine(i);
+                i++;
+            } while (i <= 5);
+            Console.ReadLine();
+        }
+    }

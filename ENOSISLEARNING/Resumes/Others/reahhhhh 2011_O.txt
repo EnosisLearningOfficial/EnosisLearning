@@ -1,0 +1,21 @@
+1. uptrend
+2.keycdn
+3. https://varvy.com/pagespeed/
+4.PAGE SPEED INSIDE
+5. PINGDOM TOOLS
+6. PAGELOCITY
+7. WEBPAGETEST
+8. YELLOW LAB TOOLS
+9. GTMETRIX
+10. DOT COM MONITOR
+
+Best tools to test website load speed:
+
+GTMetrix (free and paid)
+Site 24×7 (free and paid)
+WebPage Test (free)
+Varvy Pagespeed Optimization (free)
+Google PageSpeed Insight (free)
+Pingdom (free and paid)
+Uptime (paid)
+

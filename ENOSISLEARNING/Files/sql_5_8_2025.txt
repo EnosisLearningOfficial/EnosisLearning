@@ -1,0 +1,18 @@
+*What is  RDBMS?
+
+RDBMS (Relational Database Management System) is a type of database management system that stores data in structured tables (relations) and allows for relationships between those tables. It uses SQL (Structured Query Language) for querying and managing the data. Key features include data integrity, support for transactions, and the ability to enforce constraints. 
+An RDBMS (Relational Database Management System) is a type of database management system that stores and organizes data in a tabular form (rows and columns) and allows for relationships between tables using primary and foreign keys.
+
+*Examples of RDBMS include 
+MySQL,
+PostgreSQL, 
+Oracle, and 
+Microsoft SQL Server.
+
+
+*Advantages of RDBMS:
+
+Data is only stored once (uniquely).
+Complex queries can be carried out.
+Better security. 
+Cater for future requirements.

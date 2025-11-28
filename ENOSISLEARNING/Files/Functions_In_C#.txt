@@ -1,0 +1,68 @@
+Functions(Methods) in C#: Function(Method) is a basic building block of any programming language.
+
+syntax:
+
+1.Function Define--- business Logic
+2.Function Declaration---Not in C#
+3.Function Call
+
+//Define Method
+retun_Type function_Name(paramters,paremeters)
+{
+
+
+//Business Logic//
+
+
+}
+
+//Nature Of Methods
+1.Takes Nothing Returns Nothing
+public static void Main(string[] args)
+{
+    Fun();
+}
+
+ static void Fun()
+ {
+    Console.WriteLine("Fun is Running...!");
+ }
+
+2.Takes Something Returns Nothing
+//Call By Value Method
+public static void Main(string[] args)
+{
+    Square(5);//Actual Parameter
+}
+
+ static void Square(int a)//Formal Parameters
+ {
+    Console.WriteLine("Square of Given Value Is:-" +(a*a));
+ }
+
+3.Takes Nothing Returns Something
+ public static void Main(string[] args)
+ {
+     //int result = Square();
+     Console.WriteLine(Square());
+ }
+
+  static int Square()
+  {
+     int a;
+     Console.WriteLine("Enter Any Value:-");
+     a = Convert.ToInt32(Console.ReadLine());
+     int square = a * a;
+     return square;
+  }
+
+4.Takes Something Returns Somthing
+   public static void Main(string[] args)
+   {
+       Console.WriteLine(Add(10, 30));
+   }
+
+    static int Add(int a,int b)
+    {
+       return a + b;
+    }

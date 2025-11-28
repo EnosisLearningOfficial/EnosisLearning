@@ -1,0 +1,170 @@
+C# Recursion : A function that calls itself is known as a recursive function. And, this way is known as recursion.
+Advantages and Disadvantages of Recursion
+Advantage - Using recursion, our code looks clean and more readable.
+
+Disadvantages - When a recursive call is made, new storage locations for variables are allocated on the stack. As each recursive call returns, the old variables and parameters are removed from the stack. Hence, recursion generally uses more memory and is generally slow.
+class Program
+{       
+    public static void Main(string[] args)
+    {
+          int num = factorial(4);
+        Console.WriteLine("factorial of given value is :-" +num);
+    }
+    public static int factorial(int num)
+    {
+        //terminate condition
+        if(num == 0)
+        {
+            return 1;
+        }
+        else
+        {
+            //Recursive call
+            return num * factorial(num-1);
+        }
+    }
+}
+
+C# Lambda Expression : C# Lambda Expression is a short block of code that accepts parameters and returns a value. It is defined as an anonymous function (function without a name). 
+(parameterList) => lambda Body
+parameterList - list of input parameters
+=> - a lambda operator
+lambda body - can be an expression or statement
+
+Types of Lambda Expression
+The two types of lambda expressions are:
+
+1.Expression Lambda : Expression lambda contains a single expression in the lambda body. 
+class Program
+{       
+    public static void Main(string[] args)
+    {
+        //expressing lambda that returns the square of a number
+        var square = (int num) => num * num;
+        Console.WriteLine("Square of a number is :-"+square(5));
+    }
+}
+2.Statement Lambda : Statement lambda encloses one or more statements in the lambda body. We use curly braces {} to wrap the statements.
+class Program
+{       
+    public static void Main(string[] args)
+    {
+        //statement lambda that takes two values as an input and return the sum
+        var sum = (int a, int b) =>
+        {
+            int result = a + b;
+            return result;
+        };
+        Console.WriteLine("Sum of Given number is :-"+sum(5,10));
+    }
+}
+
+C# generics : C# Generics allow us to create a single class or method that can be used with different types of data.This helps us to reuse our code.
+1.C# generics Class : A generics class is used to create an instance of any data type. To define a generics class, we use angle brackets (<>) 
+ //define generic class
+ public class Student<T>
+ {
+     //define a variable of type T
+     public T data;
+
+     //constructor to initialize data
+     public Student(T value)
+     {
+         this.data = value;
+         Console.WriteLine("Data Passed:-"+this.data);
+     }
+ }
+ public static void Main(string[] args)
+ {
+     //create object of Student class with string type
+     Student<string> s1 = new Student<string>("Hello Generic World");
+     Student<int> s2 = new Student<int>(123);
+
+ }
+
+C# generics Method : Similar to the generics class, we can also create a method that can be used with any type of data.
+
+//define generic class
+public class Employee<T>
+{
+    //define a variable of type T
+    public T data;
+
+    //constructor to initialize data
+    public void Display(T value)
+    {
+        this.data = value;
+        Console.WriteLine("Data Passed:-"+this.data);
+    }
+}
+public static void Main(string[] args)
+{
+    //create object of Student class with string type
+    Employee<string> s1 = new Employee<string>();
+    s1.Display("Hello World");
+    Employee<int> s2 = new Employee<int>();
+    s2.Display(10);
+
+}
+
+Delegates : In C#, a delegate is a pointer to a method. That means, a delegate holds the address of a method which can be called using that delegate.
+Define a delegate : We define a delegate just like we define a normal method. That is, delegate also has a return type and parameter.
+syntax: 
+public delegate int myDelegate(int x);
+delegate - a keyword
+int - return type of delegate
+myDelegate - delegate name
+int x - parameter that the delegate takes
+A delegate is also called type-safe pointer.
+
+ class Program
+ {
+     //define a method that returns sum of teo int numbers
+     public static int Calculatesum(int x, int y)
+     {
+        return x + y;
+     }
+     //define a deligate
+     public delegate int mydelegate(int num1, int num2);
+     public static void Main(string[] args)
+     {
+         //create an instance of delegate by passing method name
+         mydelegate d = new mydelegate(Calculatesum);
+
+         //call the delegate
+         int result = d(10,20);
+         Console.WriteLine(result);
+     }
+ }
+
+Multicast Delegate in C# : The multicast delegate is used to point to more than one method at a time. We use += operator to add methods to delegate. 
+
+ class Program
+ {
+     //define a method that returns sum of teo int numbers
+     public static int Calculatesum(int x, int y)
+     {
+        return x + y;
+     }
+     // method that prints difference of two int numbers 
+     public static int difference(int x, int y)
+     {
+         return x-y;
+     }
+     //define a deligate
+     public delegate int mydelegate(int num1, int num2);
+     public static void Main(string[] args)
+     {
+         //create an instance of delegate by passing method name
+         mydelegate d = new mydelegate(Calculatesum);
+
+         //Multicast delegate
+         d += difference;
+
+         foreach(Delegate del in d.GetInvocationList())
+         {
+             int result = (int)del.DynamicInvoke(100,20);
+             Console.WriteLine(result);
+         }
+     }
+ }

@@ -1,0 +1,77 @@
+Entity Framework In MVC
+1.CodeFirst Approach
+2.Database Fisrt Aproach : DAtabase first approach is schema that is already exist.we generate models(c# classes) from the existing database.
+//step 1 : Create databse and Tables(Exist)
+//Step 2 : Create a New Project
+//step 3 : Install entity Framework From Nuget Package Manager.
+//Step 4 : Add Model Class to use Database First to Generat Models.Add entity Data Model.
+//Step 5 : Add Controller--> Create an Object of SchollDbEntities
+
+        private SchoolDbEntities db = new SchoolDbEntities();//Create an Object of Entity Model
+        // GET: Student
+        public ActionResult Index()
+        {
+            return View(db.Students.ToList());
+        }
+
+        // GET: CREATE
+        public ActionResult Create()
+        {
+            return View();
+        }
+        // POST: CREATE
+        [HttpPost]
+        public ActionResult Create(Student student)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Students.Add(student);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(student);
+        }
+
+        // GET: EDIT
+        public ActionResult Edit(int id)
+        {
+            if (id == 0)
+            {
+                return HttpNotFound();
+            }
+            Student student = db.Students.Find(id);
+            return View(student);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Student student)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(student).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(student);
+        }
+        // GET: DELETE
+        public ActionResult Delete(int id)
+        {
+            if (id == 0)
+            {
+                return HttpNotFound();
+            }
+            Student student = db.Students.Find(id);
+            return View(student);
+        }
+
+        [HttpPost,ActionName("Delete")]
+        public ActionResult ConfirmDelete(int id)
+        {
+            Student student = db.Students.Find(id);
+            db.Students.Remove(student);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+ 
+3.Model First Approach

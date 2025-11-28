@@ -1,0 +1,225 @@
+
+    //Delegates:Example: 1
+
+    //public delegate void MyDelegate(int num);
+    //class Program
+    //{
+    //    public static void MyMethod(int a)
+    //    {
+    //        a += 10;
+    //        Console.WriteLine(a);
+    //    }
+    //    static void Main(string[] args)
+    //    {
+    //        MyDelegate obj = new MyDelegate(Program.MyMethod);
+    //        obj(5);
+    //        obj.Invoke(5);  //method
+    //        Console.ReadLine();
+    //    }
+    //}
+
+
+    // Example: 2
+    //public delegate void Calculation(int a, int b);
+    //class Program
+    //{
+    //    public static void Addition(int a, int b)//mehod
+    //    {
+    //        int result = a + b;
+    //        Console.WriteLine("Addition result is : {0}", result);
+    //    }
+    //    public static void Subtraction(int a, int b)
+    //    {
+    //        int result = a - b;
+    //        Console.WriteLine("Subtraction result is : {0}", result);
+    //    }
+    //    static void Main(string[] args)
+    //    {
+    //        Calculation obj = new Calculation(Program.Addition);
+    //        obj.Invoke(20, 10);
+
+    //        obj = Subtraction;
+    //        obj(20, 10);
+    //        Console.ReadLine();
+    //    }
+    //}
+
+    //Using this property of delegates you can create an invocation list of methods that will be called when a delegate is invoked. This is called multicasting of a delegate. The following program demonstrates multicasting of a delegate −
+
+    //delegate int NumberChanger(int n);
+
+
+    //    class TestDelegate
+    //    {
+    //        static int num = 10;
+    //        public static int AddNum(int p)
+    //        {
+    //            num += p;
+    //            return num;
+    //        }
+    //        public static int MultNum(int q)
+    //        {
+    //            num *= q;
+    //            return num;
+    //        }
+    //        public static int getNum()
+    //        {
+    //            return num;
+    //        }
+    //        static void Main(string[] args)
+    //        {
+    //            //create delegate instances
+    //            NumberChanger nc;
+    //            NumberChanger nc1 = new NumberChanger(AddNum);
+    //            NumberChanger nc2 = new NumberChanger(MultNum);
+    //            nc = nc1;
+    //            nc += nc2;
+    //            //calling multicast
+    //            nc(5);
+    //            Console.WriteLine("Value of Num: {0}", getNum());
+    //            Console.ReadKey();
+    //        }
+    //    }
+
+
+
+
+    //We use this delegate to call two methods, the first prints the string to the console, and the second one prints it to a file −
+    //class PrintString
+    //{
+    //    static FileStream fs;
+    //    static StreamWriter sw;
+
+    //    // delegate declaration
+    //    public delegate void printString(string s);
+
+    //    // this method prints to the console
+    //    public static void WriteToScreen(string str)
+    //    {
+    //        Console.WriteLine("The String is: {0}", str);
+    //    }
+    //    //this method prints to a file
+    //    public static void WriteToFile(string s)
+    //    {
+    //        fs = new FileStream("D:\\Maya\\c# Batch\\C#_9AmTo10Am\\practical\\data.txt",
+    //        FileMode.Append, FileAccess.Write);
+    //        sw = new StreamWriter(fs);
+    //        sw.WriteLine(s);
+    //        sw.Flush();
+    //        sw.Close();
+    //        fs.Close();
+    //    }
+    //    // this method takes the delegate as parameter and uses it to
+    //    // call the methods as required
+    //    public static void sendString(printString ps)
+    //    {
+    //        ps("Hello World..................!");
+    //    }
+    //    static void Main(string[] args)
+    //    {
+    //        printString ps1 = new printString(WriteToScreen);
+    //        printString ps2 = new printString(WriteToFile);
+    //        sendString(ps1);
+    //        sendString(ps2);
+    //        Console.ReadKey();
+    //    }
+    //}
+
+
+
+
+    //anonymous function:
+    //public delegate void MyDelegate(int num);
+    //class Program
+    //{
+    //    static void Main(string[] args)
+    //    {
+    //        MyDelegate obj = delegate (int a)
+    //        {
+    //            a += 10;
+    //            Console.WriteLine(a);
+    //        };
+    //        obj(5);
+    //        Console.ReadLine();
+    //    }
+    //}
+
+
+
+    //C# LAMBDA EXPRESSIONS
+
+    //class Program
+    //{
+    //    delegate int Square(int num);
+    //    static void Main(string[] args)
+    //    {
+    //        Square GetSquare = x => x * x;
+    //        int j = GetSquare(5);
+    //        Console.WriteLine("Square: " + j);
+    //        Console.ReadKey();
+    //    }
+    //}
+
+
+
+
+
+    //ADD/REMOVE OPERATION IN EVENTS
+
+    //public class Publisher
+    //{
+    //    // 1. Declare event using built-in EventHandler
+    //    public event EventHandler OnPublish;
+
+    //    public void Publish()
+    //    {
+    //        Console.WriteLine("Publishing...");
+    //        OnPublish?.Invoke(this, EventArgs.Empty); // 2. Raise event
+    //    }
+    //}
+    //public class Subscriber
+    //{
+    //    public void HandleEvent(object sender, EventArgs e)
+    //    {
+    //        Console.WriteLine("Subscriber received the event!");
+    //    }
+    //}
+    //class Program
+    //{
+    //    static void Main()
+    //    {
+    //        Publisher pub = new Publisher();
+    //        Subscriber sub = new Subscriber();
+    //        // 3. Subscribe to the event
+    //        pub.OnPublish += sub.HandleEvent;
+    //        pub.Publish();
+    //        Console.ReadKey();
+    //    }
+    //}
+
+
+
+
+
+    //CAN WE USE EVENTS WITH DELEGATE?
+
+    //public delegate string demoDelegate(string str1, string str2);
+    //class MyEvents
+    //{
+    //    event demoDelegate myEvent;
+    //    public MyEvents()
+    //    {
+    //        this.myEvent += new demoDelegate(this.Display);
+    //    }
+    //    public string Display(string studentname, string subject)
+    //    {
+    //        return "Student: " + studentname + "\nSubject: " + subject;
+    //    }
+    //    static void Main(string[] args)
+    //    {
+    //        MyEvents e = new MyEvents();
+    //        string res = e.myEvent("Jack", "Science");
+    //        Console.WriteLine("RESULT...\n" + res);
+    //        Console.ReadKey();
+    //    }
+    //}

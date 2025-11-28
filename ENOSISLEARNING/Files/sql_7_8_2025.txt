@@ -1,0 +1,150 @@
+--============================= Commands In SQL ===========================--07-08-2025
+--What is a Commands in SQL?
+--Commands are instructions used to interact with a database. These commands allow users to create, manipulate, retrieve, and manage data. SQL commands are broadly classified into five categories:
+--SQL Commands(1.DDL, 2.DML, 3.DCL, 4.TCL, 5.DQL)
+
+--[1]. DDL=[Data Definition Language]The DDL Command in SQL are used to create and modify the schema/structure of the data base and its objects.
+
+--[DDL=>CREATE,ALTER,DROP,TRUNCATE]
+--1)CREATE Command:Create is a DDL command used to create databases, Tables and create data base.
+
+-- Syntax of create command  
+ --CREATE DATABASE Database_Name; 
+
+ --Exampale:
+
+ CREATE DATABASE SQLTest;
+ use SQLTest;
+
+ --SQL Table: Table is a collection of data, organized in terms of rows and columns. In DBMS term, table is known as relation and row as tuple.
+ 
+/*Syntax of create table:
+
+create table table_Name  
+(
+column_name1 data_type (size of the column1),  
+column_name2 data_type(size of the column2),  
+column_name3 data_type(size of the column3),  
+....................... 
+columnN data_type(size of the column_n)
+); 
+*/
+
+CREATE TABLE StudentS (  
+S_ID INT,  
+S_NAME VARCHAR (20),  
+S_AGE INT,
+S_MARKS float,
+S_CITY CHAR (25),   
+); 
+
+select * from StudentS;  
+select s_id, s_name from students;
+
+--2)ALTER Command:Alter is a DDL command which changes or modifies the existing structure of the database and it also changes the schema of database objects.
+--syntax: ALTER TABLE table_name ADD column_name ;  
+alter table Students Add Grade varchar(10);
+select * from StudentS;
+
+--Alter table table_name DROP Column1,column2,......,column_n;
+  Alter table Students Drop column Grade;
+  select * from StudentS;
+                                                                
+--3)DROP Command:-Drop is a command used to remove database objects when you use the drop command,it permanantly deletes the specified object along with all its data and structure.
+--syntax:  DROP DATABASE Database_Name;  
+  CREATE DATABASE Amruta;
+  DROP  DATABASE Amruta;   
+
+--4)TRUNCATE Command:TRUNCATE is a command used to remove all records from a table in a database.
+--syntax:  TRUNCATE TABLE table_Name;  
+  TRUNCATE TABLE Students;
+   select * from StudentS;   
+
+--Modify the column of the table.
+--syntax:Alter Table Table_name Modify(Column_DataType(size));
+  select * from StudentS;
+ALTER TABLE Students ALTER COLUMN S_NAME VARCHAR(30);
+
+--Rename Command:-
+--syntax:EXEC sp_rename 'old table_name', 'new_table_name';
+
+EXEC sp_rename 'Students', 'Student_Details';
+EXEC sp_rename 'Student_Details', 'Students';
+
+select * from Student_Details
+select * from Students
+
+--==================================================================================
+/*[2] DML-Data Manipulation Language.
+--which is used to manupulate data.
+Def:We can easily access, store, modify, update and delete the existing records from the database using DML commands.*/
+--Statement: [INSERT,UPDATE, DELETE,SELECT]
+
+--1.INSERT : It is used to insert a single or a multiple records in a table.
+--syntax:- INSERT INTO table_name VALUES (value1, value2, value3....);  
+	     --INSERT INTO table_name (column1, column2, column3....) VALUES (value1, value2, value3.....); 
+		    INSERT INTO Students  VALUES 
+			(1, 'Mayuri', 22, 70.50,'Pune'),
+			(2, 'Priya', 20, 80.30,'Loni'),  			
+			(3, 'Anu', 25, 90.80,'Lohare'),  
+		    (4, 'Megha', 26, 60.50,'Pune');
+
+			select * from Students 
+
+	        insert into Students(s_ID,s_NAME,s_AGE,s_MARKS,s_CITY) values(5,'payal', 76, 60.50,'Pune');
+
+			 insert into Students(s_ID,s_NAME,s_MARKS,s_CITY) values(6,'maya', 60.50,'Pune');
+
+	        insert into Students values(6, 'Meera', 26, 67.50,'Pune');
+
+	
+--==============================================================================
+			
+--2.UPDATE: It is used to modify existing data in a database.
+--syntax: UPDATE table_name SET [column_name1= value1,... column_nameN = valueN] [WHERE condition] 
+
+alter table Students Add Grade varchar(10);
+
+update students set Grade='A';
+Alter table Students Drop column Grade;
+  
+update students set s_NAME='madhuri' where s_Id=5;
+update students set s_age='100' where s_id=6;
+update students set s_NAME='mona' where s_AGE=26;
+select * from students
+
+--3.DELETE: It is used to remove data from a database.
+--syntax:DELETE FROM table_name [WHERE condition]; 
+delete from students where s_CITY='Pune';
+--Syntax:DELETE FROM table_name;  
+
+delete Students where s_id=3
+
+select * from students
+drop table students;
+
+
+--========================================================================================
+-- [5] DQL-Data query Language.[SELECT]
+--DQL (Data Query Language) is a subset of SQL commands used to retrieve data from a database. Its primary purpose is to fetch information stored in tables, allowing users to query, filter, and organize data as per their requirements.
+
+--SELECT: It is used to access the records from one or more database tables and views. It also retrieves the selected data that follow the conditions we want.
+
+--syntax:     SELECT * FROM table_name; 
+  --          SELECT Column_Name_1, Column_Name_2, ....., Column_Name_N FROM Table_Name; 
+
+select * from Student_Details
+select * from Students
+
+select s_id,s_age,s_city from Students
+select * from Students
+
+
+--========================================================================================
+
+-- [3] DCL-Data Control Language.=>Data Control Language.[Grant,Revoke]
+--DCL (Data Control Language) in SQL is used to manage access and permissions for users in a database. It controls who can access or modify database objects.
+
+-- [4] TCL-Transaction Control Language.[COMMIT,ROLLBACK]
+
+--=====================================================================================

@@ -1,0 +1,168 @@
+Recursion:A function that calls itself is known as a recursive function. And, this way is known as recursion.
+A physical world example would be to place two parallel mirrors facing each other. Any object in between them would be reflected recursively.
+
+//Example
+using System;
+/*
+Rule number 1 : Whenever you're using recursion you must have a Base condition
+     */
+namespace CSharpTut
+{
+    class Program
+    {
+        public static void Main()
+        {
+            int Result = Fun(5);
+            Console.WriteLine(Result);
+        }
+        static int Fun(int n)
+        {
+           if(n <= 0)//Base Condition
+            {
+                return 0;
+            }
+           else
+            {
+                return n + Fun(n - 1);
+            }
+        }
+    }
+}
+
+2.C# Lambda Expression : C# Lambda Expression is a short block of code that accepts parameters and returns a value. It is defined as an anonymous function (function without a name). 
+
+//How to Define a Lambda Expression
+(parameterList) => lambda Body
+parameterList - list of input parameters
+=> - a lambda operator
+lambda body - can be an expression or statement
+
+Types of Lambda Expression
+The two types of lambda expressions are:
+
+1.Expression Lambda : Expression lambda contains a single expression in the lambda body.
+//EX: (int num) => num * 5;
+2.Statement Lambda : Statement lambda encloses one or more statements in the lambda body. We use curly braces {} to wrap the statements.
+
+(int a, int b) =>
+{
+
+  var sum = a+b;
+  return sum;l
+
+};
+
+//Example:
+using System;
+namespace CSharpTut
+{
+    class Program
+    {
+        public static void Main()
+        {
+            // expression lambda that returns the square of a number 
+            var Square = (int num) => num * num;
+
+            //Statement Lambda 
+            var Sum = (int a, int b) =>
+            {
+                int sum = a + b;
+                return sum;
+            };
+
+            //passing input to the expression lambda
+            Console.WriteLine("Square of Number is:-" + Square(5));
+            //Statement Lambda find the sum of 5 and 6
+            Console.WriteLine("Sum of A and B is: - "+Sum(10,20));        
+        }
+    }
+}
+
+
+3.C# Anonymous Types: Anonymous type in C# allows us to create a type without specifying the name. 
+
+Ex: var Subject  = new {Name = "Math", Code = 123};
+
+using System;
+namespace CSharpTut
+{
+    class Program
+    {
+        public static void Main()
+        {
+            // create an anonymous type containing 3 properties 
+            var person = new {Age = 32, Name="Abhi",Address="Pune" };
+
+            // display the anonymous type
+            Console.WriteLine(person);
+            Console.WriteLine(person.Name);
+            Console.WriteLine(person.Age);
+            Console.WriteLine(person.Address);
+        }
+    }
+}
+
+
+4.C# delegates : In C#, a delegate is a pointer to a method. That means, a delegate holds the address of a method which can be called using that delegate.Any method from any accessible class or struct that matches the delegate signature can be assigned to the delegate.A delegate is also called type-safe pointer.
+
+//Define a delegate
+
+public delegate int myDelegate(int x);
+delegate : keyword
+int - return type of delegate
+myDelegate - delegate name
+int x - parameter that delegates takes
+
+using System;
+namespace CSharpTut
+{
+    class Program
+    {
+        // define a method that returns sum of two int numbers 
+        static int CalculateSum(int x, int y)
+        {
+            return x + y;
+        }
+
+        //Define Delegate
+        public delegate int MyDelegate(int num1, int num2);
+        public static void Main()
+        {
+            // create an instance of delegate by passing method name
+            MyDelegate d1 = new MyDelegate(CalculateSum);
+            int result = d1(5, 6);
+            Console.WriteLine(result);
+        }
+    }
+}
+
+5.Multicast Delegate in C# : The multicast delegate is used to point to more than one method at a time. We use += operator to add methods to delegate. 
+
+using System;
+namespace CSharpTut
+{
+    class Program
+    {
+        // define a method that returns sum of two int numbers 
+        static void CalculateSum(int x, int y)
+        {
+            Console.WriteLine(x + y); ;
+        }
+        // define a method that returns sum of two int numbers 
+        static void CalculateSub(int x, int y)
+        {
+            Console.WriteLine(x-y);
+        }
+
+        //Define Delegate
+        public delegate void MyDelegate(int num1, int num2);
+        public static void Main()
+        {
+            // create an instance of delegate by passing method name
+            MyDelegate d1 = new MyDelegate(CalculateSum);
+            d1 += CalculateSub;
+            d1(100,20);
+
+        }
+    }
+}

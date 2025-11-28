@@ -1,0 +1,17 @@
+Filters:
+
+There are 5 types of filters in MVC
+
+1.Authentication Filters
+2.Authorization Filters
+3.Action Filters
+4.Result Filters
+5.Exception Filters
+
+//The order of Filters if we use multiple Filters.//
+
+//We can create built-in or Custom Filters //
+
+1.Action method Level 
+2.Controlle Level
+3.Application Level

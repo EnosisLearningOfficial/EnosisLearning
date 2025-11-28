@@ -1,0 +1,80 @@
+--======================= Normalization =======================================
+Q.What is Normalization?
+--Normalization is a process of eliminating redundant data and storing the related information in a table.
+
+--Normalization is a database design process that organizes data in a way that reduces redundancy and improves data integrity. The primary goal of normalization is to eliminate undesirable characteristics like data anomalies and ensure that the data remains consistent and reliable.
+
+--Key Concepts:
+    1.Redundancy: Storing the same data in multiple places, which can lead to inconsistencies.
+    2.Data Integrity: Ensuring accuracy and consistency of data over its lifecycle.
+
+--Normal Forms
+
+Normalization typically involves dividing a database into multiple tables and defining relationships between them. The most common normal forms are:
+
+    1.First Normal Form (1NF):
+       . Ensures that each column contains atomic (indivisible) values.
+       . Each column in a table must hold unique values and entries must be unique.
+
+   -- Example: A table containing customer orders should not have multiple items in a single column. Instead, each item should be represented in a separate row.
+
+   2. Second Normal Form (2NF):
+        .Achieved when the table is in 1NF and all non-key attributes are fully functionally dependent on the primary key.
+        .Eliminates partial dependency; every non-key attribute must depend on the entire primary key.
+
+   -- Example: In a table where orders contain customer information, separate the customer data into a different table to avoid redundancy.
+
+   3. Third Normal Form (3NF):
+       . Achieved when the table is in 2NF and all the attributes are functionally dependent only on the primary key.
+       . Eliminates transitive dependency; non-key attributes should not depend on other non-key attributes.
+
+   -- Example: If a table has a column for CustomerAddress that depends on CustomerID, make CustomerAddress a part of the Customer table instead.
+
+   4. Boyce-Codd Normal Form (BCNF):
+        A stronger version of 3NF. Every determinant must be a candidate key.
+        Ensures that there are no anomalies due to functional dependencies.
+
+--Benefits of Normalization:
+
+   . Reduced Data Redundancy: Minimizes duplication of data across the database.
+   . Improved Data Integrity: Changes in data need to be made in only one place, reducing the risk of inconsistency.
+   . Easier Maintenance: Normalized databases are generally easier to maintain and update.
+
+--Example of Normalization
+--Consider a database storing information about students and their courses:
+Unnormalized Table:
+
+| StudentID | StudentName | Course1      | Course2      |
+|-----------|-------------|--------------|--------------|
+| 1         | John Doe    | Math         | Science      |
+| 2         | Jane Smith  | Math         | History      |
+
+--First Normal Form (1NF):
+
+| StudentID | StudentName | Course       |
+|-----------|-------------|--------------|
+| 1         | John Doe    | Math         |
+| 1         | John Doe    | Science      |
+| 2         | Jane Smith  | Math         |
+| 2         | Jane Smith  | History      |
+
+--Second Normal Form (2NF) (after creating a separate course table): Students Table:
+
+| StudentID | StudentName |
+|-----------|-------------|
+| 1         | John Doe    |
+| 2         | Jane Smith  |
+
+Courses Table:
+
+| StudentID | Course       |
+|-----------|--------------|
+| 1         | Math         |
+| 1         | Science      |
+| 2         | Math         |
+| 2         | History      |
+
+Summary
+
+Normalization is a critical aspect of database design that helps ensure data consistency and integrity. By organizing data into related tables and minimizing redundancy, normalization can lead to more efficient data management and retrieval.
+--=================================================================================

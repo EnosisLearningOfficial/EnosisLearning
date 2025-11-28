@@ -1,0 +1,822 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="contents.master.cs" Inherits="ENOSISLEARNING.contents" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+   <meta name="google-site-verification" content="KnQfNrAPpBDPoKQQyBwjlFT6H0UoZoT7B_0Kq7uJDtY" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+
+    <link rel="icon" type="image/ico" href="images/favicon.ico" />
+    <title>Enosis Learning</title>
+       
+   <link rel="stylesheet" type="text/css" href="css/bootstrap-min.css" />
+    <link rel="stylesheet" type="text/css" href="css/main1.css" />
+    <link rel="stylesheet" type="text/css" href="css/course.css"/>
+    <link href="Styles/client_style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="css/font-awesome.min.css" />
+  <script type="text/javascript" src="Scripts/jquery-1.11.3.min.js"></script>
+  <script type="text/javascript" src="Scripts/bootstrap.min.js"></script>
+
+
+
+   
+  
+
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics  24/7/2020-->
+<script  src="https://www.googletagmanager.com/gtag/js?id=UA-35962033-1"></script>
+
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-35962033-1');
+</script>
+    <style>
+        .cool-link {
+    display: inline-block;
+    color: #fff;
+    text-decoration:none !important;
+}
+
+.cool-link::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: #000;
+    transition: width .3s;
+}
+
+        .copyright {
+            text-align:center;
+        }
+.cool-link:hover::after {
+    width: 100%;
+ 
+}
+
+        .footLi li {
+            float:left !important;
+            margin-left:6px;
+            
+        }
+        .footer h6 {
+            text-align:left;
+
+
+        }
+        .footsec1 {
+            height:50%;
+        }
+        .footsec2 {
+            height:50%;
+        }
+        .foot ul li a {
+    color: white;
+}
+        .nav-side-menu {
+  overflow: auto;
+  font-family: verdana;
+  font-size: 12px;
+  font-weight: 200;
+  background-color: #2e353d;
+  position: fixed;
+  top: 0px;
+  width: 300px;
+  height: 100%;
+  color: #e1ffff;
+}
+.nav-side-menu .brand {
+  background-color: #23282e;
+  line-height: 50px;
+  display: block;
+  text-align: center;
+  font-size: 14px;
+}
+.nav-side-menu .toggle-btn {
+  display: none;
+}
+.nav-side-menu ul,
+.nav-side-menu li {
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+  line-height: 35px;
+  cursor: pointer;
+ 
+}
+        .foot ul li
+        {
+            text-align:left;
+        }
+.nav-side-menu ul :not(collapsed) .arrow:before,
+.nav-side-menu li :not(collapsed) .arrow:before {
+  font-family: FontAwesome;
+  content: "\f078";
+  display: inline-block;
+  padding-left: 10px;
+  padding-right: 10px;
+  vertical-align: middle;
+  float: right;
+}
+.nav-side-menu ul .active,
+.nav-side-menu li .active {
+  border-left: 3px solid #d19b3d;
+  background-color: #4f5b69;
+}
+.nav-side-menu ul .sub-menu li.active,
+.nav-side-menu li .sub-menu li.active {
+  color: #d19b3d;
+}
+.nav-side-menu ul .sub-menu li.active a,
+.nav-side-menu li .sub-menu li.active a {
+  color: #d19b3d;
+}
+.nav-side-menu ul .sub-menu li,
+.nav-side-menu li .sub-menu li {
+  background-color: #181c20;
+  border: none;
+  line-height: 28px;
+  border-bottom: 1px solid #23282e;
+  margin-left: 0px;
+}
+.nav-side-menu ul .sub-menu li:hover,
+.nav-side-menu li .sub-menu li:hover {
+  background-color: #020203;
+}
+.nav-side-menu ul .sub-menu li:before,
+.nav-side-menu li .sub-menu li:before {
+  font-family: FontAwesome;
+  content: "\f105";
+  display: inline-block;
+  padding-left: 10px;
+  padding-right: 10px;
+  vertical-align: middle;
+}
+.nav-side-menu li {
+  padding-left: 0px;
+  border-left: 3px solid #2e353d;
+  border-bottom: 1px solid #23282e;
+}
+.contact {
+    height: 67px;
+    padding: 11px 0 0 0;
+    line-height: 40px;
+    float:left;
+    width:70%;
+}
+.nav-side-menu li a {
+  text-decoration: none;
+  color: #e1ffff;
+}
+.nav-side-menu li a i {
+  padding-left: 10px;
+  width: 20px;
+  padding-right: 20px;
+}
+.nav-side-menu li:hover {
+  border-left: 3px solid #d19b3d;
+  background-color: #4f5b69;
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  -ms-transition: all 1s ease;
+  transition: all 1s ease;
+}
+@media (max-width: 767px) {
+  .nav-side-menu {
+    position: relative;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  .nav-side-menu .toggle-btn {
+    display: block;
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    z-index: 10 !important;
+    padding: 3px;
+    background-color: #ffffff;
+    color: #000;
+    width: 40px;
+    text-align: center;
+  }
+  .brand {
+    text-align: left !important;
+    font-size: 22px;
+    padding-left: 20px;
+    line-height: 50px !important;
+  }
+}
+@media (min-width: 767px) {
+  .nav-side-menu .menu-list .menu-content {
+    display: block;
+  }
+}
+body {
+  margin: 0px;
+  padding: 0px;
+  background-color:red;
+}
+.modal-header {
+    min-height: 16.42857143px;
+    padding: 15px;
+    border-bottom: 1px solid #e5e5e5;
+    float: left;
+    width: 100%;
+    background: #006495;
+    color: white;
+}
+  .close
+      {
+          float: right;
+          font-size: 21px;
+        
+          line-height: 1;
+             color: white;
+    opacity: 1;
+         
+        
+      }
+
+
+
+        /*@media screen and (max-width: 750px)
+        {
+           
+            .menu-btn
+            {
+                display: flex;
+                justify-content: space-around;
+                width: 99vw;
+                padding: 0px 7px;
+                margin-right: 145px;
+            }
+
+            .logo{
+	height: auto;
+	width: 257px;
+	margin: 5px;
+    margin-left:80px;
+}
+
+            .btn-accordion {
+    color: #fff!important;
+    background-color: #EA5E12;
+    padding: 5px 0px;
+    vertical-align: middle;
+}
+
+            .myul li
+            {
+                margin:16px;
+            }
+            .footsec2 {
+    margin-left: 15px;
+}
+
+            .right-div
+            {
+                margin-right:54px;
+            }
+
+          
+   }*/
+
+
+        @media screen and (max-width: 980px)
+        {
+            .menu-btn
+            {
+                display: flex;
+    justify-content: space-around;
+    width: 99vw;
+    padding: 0px 13px;
+    margin-right: -66px;
+    font-size:8px;
+            }
+             .right-div
+            {
+             
+    margin-right: 107px;
+            }
+
+            .footsec2
+            {
+                margin-left:16px;
+            }
+
+        }
+
+.submenus li a {
+ 
+  
+  
+  color:#006495;
+  text-align:center;
+  background-color:#fff;
+  
+
+}
+ .dropbtn {
+  font-size: 16px;  
+  border: none;
+  outline: none;
+  color: #000;
+  padding: 14px 16px;
+ 
+  margin: 0;
+}
+
+
+      .myul li {
+           margin: 16px;
+          
+          }
+      
+      }
+.myul li a
+  {  
+    
+     color:white;
+     outline: none;
+     text-decoration:none;
+  }
+      .myul li a:hover
+      {
+          font-style:oblique;
+          color:#ff6a00;
+          
+      }
+
+
+      .close
+      {
+          float: right;
+          font-size: 21px;
+        
+          line-height: 1;
+             color: white;
+    opacity: 1;
+         
+        
+      }
+
+      .modal-content {
+    position: relative;
+    background-color: #fff;
+   
+    background-clip: padding-box;
+   
+    border: 1px solid rgba(0, 0, 0, .2);
+    outline: 0;
+  
+ 
+}
+       
+    </style>
+    
+    <asp:ContentPlaceHolder ID="head" runat="server">
+
+    </asp:ContentPlaceHolder>
+
+</head>
+<body>
+   <form data-toggle="validator" id="form1" runat="server">
+<div>
+
+<div class="calltoaction">
+<div class="container-fluid top left">
+<div class="logo fl-lt mar1 left" >
+<a href="index.aspx" ><span class="enosis">enosis </span><span class="lrning">learning</span>
+</a>
+     <br />
+<a href="index.aspx" >
+<span class="creatng">Creating Software Professionals</span></a>
+
+</div>
+   
+  
+<div class="contact demo">
+<div class="pull-right">
+                           
+<div class="menu-btn">
+<a href="EnosisJobs.aspx" class="btn btn-warning" style="box-shadow: 1px 1px 3px 1px gray" ><span class="fa fa-graduation-cap"></span>&nbsp;Apply For Internship</a>
+                                
+<a href="EnosisJobs.aspx" class="btn btn-primary" style="background-color: #55acee;box-shadow: 1px 1px 3px 1px gray"" ><span class="fa fa-lightbulb-o"></span>&nbsp;Apply For Job</a>
+                                
+<a href="SubmitResume.aspx" class="btn btn-primary" style="background-color: #25d366; box-shadow: 1px 1px 3px 1px gray""><span class="fa fa-upload"></span>&nbsp;Upload Your Resume</a>
+                                
+<%--<a id="btnRDemo" class="upld-resume fa fa-send" data-toggle="modal" data-target="#myModal" href="#" target="_parent">Request Demo</a>--%>
+                                
+    <a id="btnRDemo" href="#" class="btn btn-danger" style="box-shadow: 1px 1px 3px 1px gray"" data-toggle="modal" data-target="#myModal" target="_parent"><span class="fa fa-send"></span>&nbsp;Request For Demo</a>
+    <a href="https://api.whatsapp.com/send?phone=917757012052" class="btn btn-outline-dark" style=" background-color:#223d9c; width:130px; height:34px;box-shadow: 1px 1px 3px 1px gray"" > <img src="Images/whatsapp.png" style="width:20px;height:20px">&nbsp;7757012054</a>
+
+                                
+   <%-- <span class="upld-resume fa fa-phone"> &nbsp;7757012054</span>&nbsp;--%>
+
+    <%-- <a href="https://api.whatsapp.com/send?phone=917757012052" ><img src="Images/whatsapp.png" style="width:30px;height:30px"  />
+        <span class="upld-resume fa fa-phone" > &nbsp;7757012054</span>
+    </a>--%>
+
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog">
+<div class="modal-dialog modal-sm">
+<div class="modal-content">
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+<h2 class="modal-title" style="color:#000 !important; top: 0px!important;">Request For Demo</h2>
+<h6 style="color:red!important" runat="server" id="head6"></h6>
+</div>
+
+<div class="modal-body">
+<div class="form-horizontal">
+<div class="form-group">
+<div class="col-xs-12">
+<asp:TextBox CssClass="form-control my-form-control" ID="txtUserName" placeholder="Enter Full Name" runat="server" />
+</div>
+</div>
+<div class="form-group">
+<div class="col-xs-12">
+<asp:TextBox CssClass="form-control my-form-control" ID="txtEmailId" placeholder="Enter Your Email Id" runat="server" />
+</div>
+</div>
+<div class="form-group">
+<div class="col-xs-12">
+<asp:TextBox CssClass="form-control my-form-control" ID="txtUserContactNo" placeholder="Enter Your Mobile No" runat="server" />
+</div>
+</div>
+<div class="form-group">
+<div class="col-xs-12">
+<asp:DropDownList CssClass="form-control my-form-control" ID="drpDCourse" runat="server">
+<%--<asp:ListItem Value="0" Text="Please Select Course" />
+  <asp:ListItem Text=".NET" />
+                    <asp:ListItem Text="JAVA" />
+                    <asp:ListItem Text="SQLSERVER" />
+                    <asp:ListItem Text="POWERBI" />
+                         <asp:ListItem Text="C" />
+                          <asp:ListItem Text="C++" />
+                          <asp:ListItem Text="DESIGNING" />
+                
+                    <asp:ListItem Text="OTHERS" />--%>
+              
+
+
+</asp:DropDownList>
+</div>
+</div>
+</div>
+</div>
+<div class="modal-footer">
+<asp:Button ID="Button9" OnClick="btnSend_Click" Text="Send" runat="server" class="btn btn-primary" />
+<button type="button" class="btn btn-default" data-dismiss="modal" style="background-color:#f89d0d">Cancel</button>
+
+</div>
+</div>
+<div class="clearfix"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="clearfix"></div>
+</div>
+<nav class="navbar my-navbar">
+<!-- Brand and toggle get grouped for better mobile display -->
+<div class="navbar-header">
+<button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+<span class="sr-only">Toggle navigation</span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</button>
+</div>
+    
+
+<!-- Collection of nav links and other content for toggling -->
+<div id="navbarCollapse" class="collapse navbar-collapse ">
+    <nav>
+<ul class="nav navbar-nav my-menubar" id="nav">
+<li id="lihome" runat="server"><a  href='Index.aspx'>Home</a></li>
+
+<%--<li class='active' id="liHome" runat="server"><a href='Index.aspx'>Home</a></li>--%>
+<li class="dropdown" id="li1" runat="server"><a class="dropbtn" href='courses.aspx'>Courses</a>
+<ul id="courseMenu" class="submenus">
+<%-- GridView Courses Menu --%>
+    <li data-course="5"><a href="#">Full Stack.Net Contents</a></li>
+    <li data-course="0"><a href="FullStack-Java-Training.aspx">Full Stack Java Contents</a></li>
+    <li data-course="0"><a href="Data-Analytics-Training.aspx">Data Analytics Contents</a></li>
+    <li data-course="0"><a href="#">.Net Core Contents</a></li>
+    <li data-course="6"><a href="#">SQL SERVER Contents</a></li>
+    <li data-course="0"><a href="power-bi-training.aspx">POWER BI Contents</a></li>
+    <li data-course="1"><a href="#">C Language Contents</a></li>
+    <li data-course="2"><a href="#">C++ Language Contents</a></li>
+    <li data-course="8"><a href="#">Web Designing Contents</a></li>
+<%-- GridView Courses Menu --%>
+                        
+                                  
+</ul>
+</li>
+<li id="liTutorials" runat="server"><a  href='Tutorials.aspx'>Tutorials</a></li>
+
+
+<li id="liAssignment" runat="server"><a  href='Assignments.aspx'>Assignments</a></li>
+
+<li id="liInterview" runat="server" visible="false"><a  href='QuestionBank.aspx'>Interview Questions</a></li>
+                            
+<li class="dropdown" id="li3" runat="server"><a  href="Interview_Questions.aspx?lag=SQL Server">Interview Questions & Answers</a>
+<ul class="submenus">
+<li><a href="Interview_Questions.aspx?lag=C">C Language</a></li>
+<li><a href="Interview_Questions.aspx?lag=CPP">C++ Language</a></li>
+<li><a href="Interview_Questions.aspx?lag=JAVA">Java</a></li>
+<li><a href="Interview_Questions.aspx?lag=CSHARP">CSharp.Net</a></li>
+<li><a href="Interview_Questions.aspx?lag=ASP.NET">ASP.Net</a></li>
+<li><a href="Interview_Questions.aspx?lag=MVC">ASP.NET MVC</a></li>
+<li><a href="Interview_Questions.aspx?lag=WCF">WCF</a></li>
+                                 
+                                    
+<li><a href="Interview_Questions.aspx?lag=SQLSERVER">SQL SERVER </a></li>
+<li><a href="Interview_Questions.aspx?lag=MSBI">MSBI</a></li>
+<li><a href="Interview_Questions.aspx?lag=SSIS">SSIS</a></li>
+<li><a href="Interview_Questions.aspx?lag=SSRS">SSRS</a></li>
+<li><a href="Interview_Questions.aspx?lag=SSAS">SSAS</a></li>
+<li><a href="Interview_Questions.aspx?lag=POWERBI">POWERBI</a></li>
+                            
+<li><a href="Interview_Questions.aspx?lag=MANUALTESTING">Manual Testing</a></li>
+<li><a href="Interview_Questions.aspx?lag=SELENIUM">Selenium Testing</a></li>
+
+<li><a href="Interview_Questions.aspx?lag=WEBDESIGNING">Web Designing</a></li>
+                                    
+                            
+</ul>
+</li>
+<li class="dropdown" id="li11" runat="server"><a class="dropbtn" >KnowledgeBase</a>
+    <ul class="submenus">
+
+<li><a href="SqlServerKnowledgeBase.aspx">SQLSERVER</a></li>
+<li><a href="PowerBIKnowledgeBase.aspx">POWERBI</a></li>
+<li><a href="CSharpKnowledgeBase.aspx">CSHARP</a></li>
+
+<li><a href="Asp.NetKnowledgeBase.aspx">ASP.NET</a></li>
+<li><a href="Asp.NetMVCKnowledgeBase.aspx">ASP.NET MVC </a></li>
+<li><a href="EFKnowledgeBase.aspx">ENTITY FRAMEWORK </a></li>
+
+<li><a href="WebAPIKnowledgeBase.aspx">WEB API </a></li>
+<li><a href="JQUERYKnowledgeBase.aspx">JQUERY </a></li>
+<li><a href="AngularKnowledgeBase.aspx">ANGULAR JS </a></li>
+
+<li><a href="CSharpKnowledgeBase.aspx">WEB DESIGNING </a></li>
+
+                                
+</ul>
+</li>
+
+
+<li id="li2" runat="server"><a  href='QuestionPapers.aspx'>Question Papers</a></li>
+    <li id="liArticles" runat="server"><a  href='Articles.aspx'>Articles</a></li>
+<li id="liDownloads" runat="server"><a  href='DownLoads.aspx'>DownLoads</a></li>                            
+
+<li id="liClients" runat="server"><a  href="clients.aspx">Clients</a></li>
+<%--<li id="liAbout" runat="server"><a href='About.aspx'>About</a></li>--%>
+
+<li id="liFaq" runat="server"><a  href='FAQ.aspx'>FAQ</a></li>
+<li class="dropdown" id="li4" runat="server"><a class="dropbtn" >Books</a>
+    <ul class="submenus">
+
+<li><a href="SqlServerBook.aspx">SQLSERVER BOOK</a></li>
+</ul>
+</li>
+
+<li id="liContact" runat="server"><a  href='contact.aspx'>Contact</a></li>
+
+
+
+
+
+  </ul>   
+        </nav>
+</div>
+</nav>
+<!---Banner Div Start Here-->
+</div>
+
+<!--CallToAction ends-->
+</div>
+
+<div class="col-lg-9 pad0 course-detail">
+
+<asp:ContentPlaceHolder ID="ContentPlaceHolder1"  runat="server">
+</asp:ContentPlaceHolder>
+</div>
+<div class="col-lg-3 pad9 course-detail">
+<div class="frm mar-bt1" style="float: left; box-shadow: 0 9px 50px hsla(20, 67%, 75%, 0.31); border: 1px solid rgba(147, 184, 189,0.8);
+    border-radius: 5px;width: 100%;">
+     <p><b> Need More Details ? Fill The Enquiry Form</b></p>
+    
+    <div class="enquiry-form-wrppr1">
+                    
+    <asp:Label ID="lblRes" runat="server"  />     <asp:RegularExpressionValidator ID="regEmail" ControlToValidate="txtEEmailId" Text="Please Enter Valid EmailID" Display="Dynamic" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" runat="server" CssClass="valid" />
+    <asp:RequiredFieldValidator ID="rMobile" ControlToValidate="txtEUserContactNo" ErrorMessage="Please enter Contact No" runat="server" CssClass="valid" Display="Dynamic" />
+    <asp:RequiredFieldValidator ID="rEmail" ControlToValidate="txtEEmailId" ErrorMessage="Please enter Email" runat="server" CssClass="valid" Display="Dynamic" />
+
+    <div class="form-group">   <asp:TextBox ID="txtEUserName" runat="server" PlaceHolder="Enter User Name" CssClass="form-control" ToolTip="Enter User Name" ></asp:TextBox></div>
+    <div class="form-group">   <asp:TextBox ID="txtEUserContactNo" runat="server" PlaceHolder="User Contact Number" CssClass="form-control" ToolTip="Enter User Number" ></asp:TextBox></div>
+    <div class="form-group">   <asp:TextBox ID="txtEEmailId" runat="server" PlaceHolder="User Email Id" CssClass="form-control" ToolTip="User E-mail Address" ></asp:TextBox>
+      
+    </div>
+    <div class="form-group">  
+        <asp:DropDownList CssClass="form-control my-form-control" ID="DropDownList1" AutoPostBack="true"  runat="server">
+<asp:ListItem Value="0" Text="Please Select Course" />
+  <asp:ListItem Text=".NET" />
+                    <asp:ListItem Text="JAVA" />
+                    <asp:ListItem Text="SQLSERVER" />
+                    <asp:ListItem Text="POWERBI" />
+                         <asp:ListItem Text="C" />
+                          <asp:ListItem Text="C++" />
+                          <asp:ListItem Text="DESIGNING" />
+                
+                    <asp:ListItem Text="OTHERS" />
+              
+
+
+</asp:DropDownList>
+
+
+        <%--<asp:TextBox ID="txtECourseName" runat="server" PlaceHolder="Course Name" CssClass="form-control" ToolTip="Course Name" ></asp:TextBox>--%>
+
+    </div>
+    <div class="btn-wrpr">
+    <asp:Button ID="btnSubmit" runat="server" Width="85px" height="25px" Text="SUBMIT"  CssClass="btn-frm-bt1" style="color: #fff;"/>
+    </div>                               
+    </div>
+    </div>
+
+    <div class="frm mar-bt1" style="box-shadow: 0 9px 50px hsla(20, 67%, 75%, 0.31); border: 1px solid rgba(147, 184, 189,0.8);
+    border-radius: 5px;">
+    <p>Interview Questions</p>
+    <ul class="myul" >
+    <li style=" box-shadow:2px 2px 10px 1px gray"><a href="Interview_Questions.aspx?lag=MVC">ASP.NET MVC</a></li>
+    <li style="background-color:#d93a32; box-shadow:2px 2px 10px 1px gray""><a href="Interview_Questions.aspx?lag=Manual Testing">Software Testing</a></li>
+    <li  style="background-color:#e68f0e;box-shadow:2px 2px 10px 1px gray""><a href="Interview_Questions.aspx?lag=Web Designing">Web Designing</a></li>     
+    <li style="background-color:#43b828;box-shadow:2px 2px 10px 1px gray""><a href="Interview_Questions.aspx?lag=C Programming">C Language</a></li>
+    <li  style="background-color:#1e5257;box-shadow:2px 2px 10px 1px gray""><a href="Interview_Questions.aspx?lag=SQL Server">SQL SERVER </a></li>
+    <li style="background-color:#cf7e8b;box-shadow:2px 2px 10px 1px gray""><a href="Interview_Questions.aspx?lag=POWERBI">POWERBI</a></li>
+    <li  style="background-color:#a13875;box-shadow:2px 2px 10px 1px gray""><a href="Interview_Questions.aspx?lag=Csharp">C#.Net</a></li> 
+    <li style="background-color:#5638a1;box-shadow:2px 2px 10px 1px gray""><a href="Interview_Questions.aspx?lag=ASP.NET">ASP.Net</a></li>
+    <li  style="background-color:#0c549c;box-shadow:2px 2px 10px 1px gray""><a href="Interview_Questions.aspx?lag=Selenium">Selenium</a></li>                                                                  
+    <li style="background-color:#0e97a1;box-shadow:2px 2px 10px 1px gray""><a href="Interview_Questions.aspx?lag=SSIS">SSIS</a></li>
+    <li  style="background-color:#0ea166;box-shadow:2px 2px 10px 1px gray""><a href="Interview_Questions.aspx?lag=SSRS">SSRS</a></li>
+    <li style="background-color:#0a5909;box-shadow:2px 2px 10px 1px gray""><a href="Interview_Questions.aspx?lag=SSAS">SSAS</a></li>                                                   
+    <li  style="background-color:#dbbf1d;box-shadow:2px 2px 10px 1px gray""><a href="Interview_Questions.aspx?lag=JAVA">Java</a></li>
+    </ul>
+    </div>
+</div>
+<!--container-fluid end-->
+
+<div id="myfooter" class="foot clearfix" style="padding:10px;">
+<!--footer-->
+<div class="container-fluid footer">
+
+<div class="left-div col-lg-9 col-md-5">
+
+<!--        <p>Courses We Conduct</p> -->
+<ul class="col-lg-12 col-md-12 col-sm-12 footLi">
+<li><b> Course Contents </b></li> 
+
+                        <li><a href="c-training.aspx" class="foot-a">C</a></li>
+<li><a href="c++-training.aspx" class="foot-a">C++</a></li>
+<li><a href="FullStack-Java-Training.aspx" class="foot-a"> Full Stack Java</a></li>
+<li><a href="FullStack-.Net-Training.aspx" class="foot-a">Full Stack.Net </a></li>
+<li><a href=".Net_Core-Training.aspx" class="foot-a">.Net Core</a></li>
+
+<li><a href="sql-server-training.aspx" class="foot-a">SQL SERVER</a></li>
+<li><a href="power-bi-training.aspx" class="foot-a">POWERBI</a></li>
+<li><a href="Data-Analytics-Training.aspx" class="foot-a">Data Analytics</a></li>
+                        
+<li><a href="web-designing-course.aspx" class="foot-a">Web Designing</a></li>
+                        
+                        
+<%--<li><a href="manual-testing-training.aspx" class="foot-a">Manual Testing</a></li>
+<li><a href="selenium-training.aspx" class="foot-a">Selenium</a></li>--%>
+<li><a href="courses/web-designing-course.aspx" class="foot-a">Web Designing</a></li>
+                        
+</ul>
+<div class="footsec1 col-lg-8 col-md-6"> 
+<!--        <p>Courses We Conduct</p> -->
+
+<ul class="col-lg-6 col-md-6 col-sm-12 ">
+<li><a href="Interview_Questions.aspx?lag=C" class="foot-a">C Interview Questions</a></li>
+<li><a href="Interview_Questions.aspx?lag=CPP" class="foot-a">C++ Interview Questions</a></li>
+<li><a href="Interview_Questions.aspx?lag=JAVA" class="foot-a">Java Interview Questions</a></li>
+<li><a href="Interview_Questions.aspx?lag=CSHARP" class="foot-a">CSharp.Net Interview Questions</a></li>
+<li><a href="Interview_Questions.aspx?lag=ASP.NET" class="foot-a">ASP.Net Interview Questions</a></li>
+<li><a href="Interview_Questions.aspx?lag=MVC" class="foot-a">ASP.NET MVC Interview Questions</a></li>
+<li><a href="Interview_Questions.aspx?lag=WCF" class="foot-a">WCF Interview Questions</a></li>
+                      
+</ul>
+<ul class="col-lg-6 col-md-6 col-sm-12 ">
+<li><a href="Interview_Questions.aspx?lag=SQLSERVER" class="foot-a">SQL SERVER Interview Questions</a></li>
+                     
+<li><a href="Interview_Questions.aspx?lag=SSIS" class="foot-a">SSIS Interview Questions</a></li>
+<li><a href="Interview_Questions.aspx?lag=SSRS" class="foot-a">SSRS Interview Questions</a></li>
+<li><a href="Interview_Questions.aspx?lag=SSAS" class="foot-a">SSAS Interview Questions</a></li>
+<li><a href="Interview_Questions.aspx?lag=POWERBI" class="foot-a">POWERBI Interview Questions</a></li>
+<li><a href="Interview_Questions.aspx?lag=MANUALTESTING" class="foot-a">Software Testing Interview Questions</a></li>
+<li><a href="Interview_Questions.aspx?lag=SELENIUM" class="foot-a">Selenium Interview Questions</a></li>
+                  
+<li><a href="Interview_Questions.aspx?lag=WEBDESIGNING" class="foot-a">Web Designing Interview Questions</a></li>
+                       
+                     
+                        
+</ul>
+</div>
+        
+<div class="footsec2 col-lg-4 col-md-6">
+<ul class="clearfix ">
+<li><a href="index.aspx" class="foot-a">Home</a></li>
+<li><a href="About.aspx" class="foot-a">About us</a></li>
+<li><a href="index.aspx#crousel" class="foot-a">View Courses</a></li>
+<li><a href="FAQ.aspx" class="foot-a">Faqs</a></li>
+<li><a href="contact.aspx" class="foot-a">Contact Us</a></li>
+<li><a href="Enosis_Learning_sitemap.html" class="foot-a">Site Link Map</a></li>
+<li><a class="cool-link" href="SubmitResume.aspx" class="foot-a">Freshers Upload Your Resume</a> </li>
+</ul>
+</div>
+           
+
+</div>
+<div class="right-div col-lg-3 col-md-5" style="float:right; margin-top:40px;">
+<ul >
+<li>
+<img src="images/footer-phone-icon.png" alt="phone icon" width="20" height="19" class="socialOn" />
+<span>7757012054 | 7757012055</span></li>
+<li >
+<img src="images/footer-email-icon.png" alt="email icon" width="20" height="20" class="socialOn" />
+<span>courses@enosislearning.com</span></li>
+<li><a href="http://www.facebook.com/pages/Enosis-learning/140657589442325?ref=ts&fref=ts">
+<img src="images/footer-facebook.png" alt="follow us on facebook" width="19" height="19" class="socialOn" />
+<span>Follow us on facebook</span></a></li>
+            
+
+<li><a href="http://www.linkedin.com/company/2762062?trk=tyah">
+<img src="images/footer-linkedin.png" alt="follow us on linkedin" width="20" height="19" class="socialOn" />
+<span>Follow us on linkedin</span></a></li>
+<li style="left:1px; position:relative"><a href="https://www.twitter.com/Enosislearning">
+<img src="images/footer-twitter.png" alt="follow us on twitter" width="19" height="19" class="socialOn" />
+<span>Follow us on twitter</span></a></li>
+</ul>
+
+</div>
+<section class="clearfix copyright">
+<span style="font-size: 12px; color: #fff;">Enosis Learning </span><span style="font-size: 12px; color: #D3ECF6;">All right are reserved | www.enosislearning.com 2024</span>
+</section>
+
+</div>
+              
+<!--COPYRIGHT-->
+</div>
+        
+</form>
+    <!-- Active li menu -->
+    <script>
+        var str = location.href.toLowerCase();
+        $("#nav li").each(function () {
+            if (str.indexOf($(this).attr("href"))) {
+                $("li.active").removeClass("active");
+                $(this).parent().addClass("active");
+            }
+        });
+        $("li.active").parents().each(function () {
+            if ($(this).is("li")) {
+                $(this).addClass("active");
+            }
+        });
+    </script>
+  
+    <script type="text/javascript">
+        var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+        (function () {
+            var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/577546b4b3a070fc728e3b40/default';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
+    </script>
+        <script>
+            $(document).ready(function () {
+                $("#courseMenu li").on("click", function () {
+                    var courseId = $(this).data("course");
+                    // Redirect to the new page with the CourseID as a query string
+                    window.location.href = "UpdatedCourseContent.aspx?courseId=" + encodeURIComponent(courseId);
+                });
+            });
+        </script>
+</body>
+</html>

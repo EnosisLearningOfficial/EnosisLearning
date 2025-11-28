@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <!-- Heading Tag 
+   <h1></h1>
+   <h6></h6> 
+   -->
+    <h1 title="This is my h1 tag" align="center">This is my heading...!</h1>
+    <h2>This is h2 tag</h2>
+    <h3>This is h3 tag</h3>
+    <h4>This is h4 tag</h4>
+    <h5>This is h5 tag</h5>
+    <h6>This is h6 tag</h6>
+
+    <!-- Paragraph tag -->
+     <p title="paragraph" align="center"><b>Lorem ipsum dolor sit amet consectetur adipisicing elit.</b> Provident ratione porro possimus consequatur voluptas quisquam, cum asperiores. <em>Recusandae illo minus fugiat, nesciunt mollitia earum suscipit asperiores,</em> dignissimos, inventore ipsum minima?
+     <i>Eaque minus officiis voluptatem dignissimos dolore delectus excepturi deleniti saepe sequi,</i> quia consequatur cumque quae, aliquam sint? Placeat sequi quis possimus fuga quaerat, nesciunt perspiciatis culpa expedita. <strong>Et, eaque debitis?</strong></p>
+     <!-- Bold tag 
+     <b></b> 
+     -->
+     <!-- Strong Tag
+     <strong></strong> 
+     -->
+     <!-- Italic tag
+     <i></i> 
+     -->
+     <!-- Emphesis tag
+     <em></em> 
+     -->
+     <!-- Superscript tag
+      <sup></sup>
+     -->
+     <p>x<sup>2</sup></p>
+     <!-- Subscript tag
+     <sub></sub> 
+     -->
+     <p>H<sub>2</sub>SO<sub>4</sub></p>
+
+     <!-- Self closing tag in html 
+     <hr/> 
+     break tag
+     <br/>   <br>
+     -->
+     <h1 align="center">The Cow</h1>
+     <hr/>
+     <p align="center">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Suscipit tempore corporis voluptate sunt amet neque labore aliquid quas illo consequuntur laborum, nihil veritatis, aliquam possimus, odit aperiam delectus modi! Nobis?
+     Aliquid, quia eveniet dolorem repellat consectetur suscipit magnam saepe odio eaque iste sed officia <br>nihil earum at recusandae, perferendis velit iure. Quam, enim id quos voluptatum repudiandae ab labore laborum.
+     Tenetur expedita quam id libero assumenda quod, quidem dicta ullam debitis veritatis dolores pariatur! Minima quasi adipisci consequatur exercitationem soluta aperiam, commodi a! Eius, vitae. Illo laboriosam iste eos tenetur!
+     Aperiam unde, saepe soluta ut repudiandae ipsam a quos eligendi doloribus in mollitia consequatur repellat numquam fuga, rem natus excepturi nihil totam cumque porro non optio itaque? Suscipit, quo beatae?
+     Rerum optio distinctio magni dolores quod ea officiis eum, illum ullam numquam exercitationem accusamus magnam itaque consectetur nisi vel expedita non quis, aut dolorum temporibus labore! Provident omnis eum commodi?</p>
+</body>
+</html>

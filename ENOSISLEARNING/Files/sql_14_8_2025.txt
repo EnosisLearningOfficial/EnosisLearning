@@ -1,0 +1,227 @@
+--=================================CLAUSES IN SQL===========14-08-2025==============
+--clauses:In SQL, clauses are essential components of statements that specify conditions, filters, or other instructions.
+
+--a clause is a component or part of a SQL statement that performs a specific function or operation. Clauses define different aspects of a query, such as the data you're retrieving, how it's filtered, or how it's sorted.
+
+--1. SELECT Clause
+-- Used to specify the columns to be returned in the result set.  
+    SELECT e_id, e_name,salary FROM Employee;
+
+   SELECT * FROM Employee;
+
+--2. FROM Clause
+-- Specifies the table from which to retrieve the data. 
+    SELECT * FROM Employee;
+
+--3. WHERE Clause
+ -- Filters records based on specified conditions.  
+    SELECT * FROM Employee WHERE salary < 60000;
+    SELECT * FROM Employee;
+
+--4. ORDER BY Clause
+-- Sorts the result set by one or more columns.(ASC,DESC)
+    SELECT * FROM Employee ORDER BY e_name, department ASC;
+	SELECT * FROM Employee ORDER BY e_name DESC;
+
+	SELECT * FROM Employee ORDER BY e_id ASC;
+	SELECT * FROM Employee ORDER BY e_id DESC;
+
+
+	SELECT * FROM Employee;
+-------------------------------------------------------------------------------------------
+--5. GROUP BY Clause
+--Groups rows that have the same values into summary rows.
+
+--The GROUP BY statement is often used with aggregate functions (COUNT(), MAX(), MIN(), SUM(), AVG()) to group the result-set by one or more columns.
+ 
+ --Syntax:
+SELECT column1, column2, aggregate_function(column3)
+FROM table_name
+WHERE condition
+GROUP BY column1, column2
+ORDER BY column1;
+
+--Example:
+SELECT COUNT(e_id) AS ID, bitStatus
+FROM Employee
+GROUP BY bitStatus;
+
+SELECT * FROM Employee
+
+insert into Employee values('xyz',70000,'Sales','',0);
+--SELECT COUNT(e_id), bitStatus
+--FROM Employee;
+
+--6. HAVING Clause:
+--The HAVING clause in SQL is used to filter the results of a query after grouping the data with a GROUP BY clause. It allows you to apply conditions to aggregate functions (like SUM(), AVG(), COUNT(), etc.)
+
+-- The HAVING clause was added to SQL because the WHERE keyword cannot be used with aggregate functions.
+
+--If you want to apply a condition on an aggregate function, you will use the HAVING clause.
+
+ --HAVING Syntax:
+SELECT column1, column2, ..., aggregate_function(column)
+FROM table_name
+WHERE condition
+GROUP BY column1, column2, ...
+HAVING aggregate_condition;
+
+--Example:
+SELECT department, e_name, salary
+FROM Employee
+WHERE department IN ('Sales', 'Finance')
+GROUP BY department, e_name, salary
+HAVING salary > 60000;
+
+
+select * from Employee
+
+--8. DISTINCT Clause
+   -- Removes duplicate values from the result set.
+    SELECT DISTINCT bitStatus FROM Employee;
+
+	select * from Employee
+
+--9.TOP N clause:The TOP N clause is used in SQL to limit the number of rows returned by a query.
+
+SELECT TOP 3 e_id, e_name, salary FROM Employee;
+
+select * from Employee
+
+--10. CASE Clause:Provides conditional logic in SQL statements.  
+SELECT e_name,salary,
+       CASE 
+           WHEN salary > 70000 THEN 'High'
+           WHEN salary BETWEEN 50000 AND 70000 THEN 'Medium'
+           ELSE 'Low'
+       END AS SalaryCategory
+FROM Employee;
+
+select * from Employee
+
+--====================Constraint in SQL SERVER=======================
+--What is Constraint:
+--In SQL, a constraint is a rule applied to a column or a set of columns in a database table that limits the types of data that can be inserted or updated. Constraints ensure the integrity, accuracy, and reliability of the data in the database.
+
+  1.Primary Key Constraint:A primary key is a unique identifier for each record in a database table, ensuring that no two rows have the same value and that no primary key value can be NULL.
+
+      customer_id INT PRIMARY KEY: This ensures that each customer has a unique identifier.
+
+  2.Not Null Constraint:A NOT NULL constraint in SQL ensures that a column must always contain a value; it cannot be left empty (NULL).
+
+        customer_name VARCHAR(100) NOT NULL: This ensures that the customer name cannot be NULL.
+
+  3.Unique Constraints:A UNIQUE constraint in SQL ensures that all values in a column (or a set of columns) are distinct, meaning no two rows can have the same value in that column.
+
+        email VARCHAR(100) UNIQUE: This ensures that each email address is unique across the table.
+        phone VARCHAR(15) UNIQUE: This ensures that each phone number is unique across the table.
+
+  4.Check Constraint:A CHECK constraint in SQL enforces a specific condition on the values in a column, ensuring that all entries in that column meet the defined criteria. 
+
+    balance DECIMAL(10, 2) CHECK (balance >= 0): This ensures that the balance cannot be negative.
+
+  5.Default Constraint:A DEFAULT constraint in SQL sets a default value for a column when no value is specified during record insertion.
+
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP: This sets the default value of the created_at column to the current timestamp when a new record is inserted.
+ 
+------------------------------------------------------------------------------------
+CREATE TABLE Customers (
+    Customer_id INT PRIMARY KEY identity(1,1) NOT NULL,     --PRIMARY KEY    
+    Customer_name VARCHAR(100) NOT NULL,           --NOT NULL,    
+    Email VARCHAR(100) UNIQUE,           -- Unique Constraint
+    Phone VARCHAR(15)  UNIQUE,            -- Unique Constraint
+    Balance Int CHECK (balance >= 0),  -- Check Constraint
+	City VARCHAR(100) Default 'Pune'    -- Default Constraint
+);
+
+
+INSERT INTO Customers (Customer_name, Email, Phone, Balance) VALUES
+('Alice Johnson', 'alice.johnson@example.com', '1234567890', 100),
+('Bob Smith', 'bob.smith@example.com', '0987654321', 200),
+('Charlie Brown', 'charlie.brown@example.com', '1122334455', 300),
+('Daisy Miller', 'daisy.miller@example.com', '2233445566', 150),
+('Eve Davis', 'eve.davis@example.com', '3344556677', 50);
+
+select * from Customers
+
+truncate table Customers
+-------------------------------------------------------------------------------------- 
+select * from Customerss
+Drop table Customers
+CREATE TABLE Customerss (
+    Customer_id INT NOT NULL,         
+    Customer_name VARCHAR(100) NOT NULL,               
+    Email VARCHAR(100) CONSTRAINT UKEmail UNIQUE,           -- Unique Constraint
+    Phone VARCHAR(15) CONSTRAINT UKPhone UNIQUE,            -- Unique Constraint
+    Balance Int CONSTRAINT ckBalance CHECK (balance >= 0),  -- Check Constraint
+	City VARCHAR(100) Default 'Pune'                        -- Default Constraint
+);
+
+INSERT INTO Customerss (Customer_id, Customer_name, Email, Phone, Balance, City) VALUES
+(1, 'Alice Johnson', 'alice.johnson@example.com', '1234567890', 100, 'Pune'),
+(2, 'Bob Smith', 'bob.smith@example.com', '0987654321', 200, 'Mumbai'),
+(3, 'Charlie Brown', 'charlie.brown@example.com', '1122334455', 300, 'Delhi'),
+(4, 'Daisy Miller', 'daisy.miller@example.com', '2233445566', 150, 'Bangalore'),
+(5, 'Eve Davis', 'eve.davis@example.com', '3344556677', 50, 'Pune');
+---------------------------------------------------------------------------
+select * from Customerss
+
+------------------------------------------------------------------------------------------------
+--Add CONSTRAINTS:----------------------------------------------------------------
+--Syntax:
+ALTER TABLE TABLE_NAME
+ADD CONSTRAINT CONSTRAINT_NAME PRIMARY KEY (COLUMN_NAME);
+
+--Ex:
+ALTER TABLE Customerss
+ADD CONSTRAINT IDpK PRIMARY KEY (Customer_id);
+
+select * from Customerss
+--------------------------------------------------------------------------------------------------
+--Drop CONSTRAINT:-------------------------------------------------------------------
+--Syntax:
+ALTER TABLE TABLE_NAME
+DROP CONSTRAINT CONSTRAINT_NAME;
+
+--Example:
+ALTER TABLE Customerss
+DROP CONSTRAINT IDpK;
+----------------------------------------------------------------------------------------------------------
+drop table Customers
+
+select * from Customer
+Drop table Customer
+
+6.Foreign Key Constraint:
+--A foreign key constraint is a rule applied to a column (or a set of columns) in a relational database table that creates a link between the data in two tables. It enforces referential integrity, ensuring that the relationship between the two tables remains consistent.
+
+--Definition:A foreign key in one table points to a primary key in another table. This establishes a relationship between the two tables.
+
+CREATE TABLE Customers (
+    Customer_id INT CONSTRAINT pKID PRIMARY KEY NOT NULL,  -- Primary Key Constraint
+    Customer_name VARCHAR(100) NOT NULL,        -- Not Null Constraint
+    Email VARCHAR(100),           -- Unique Constraint
+    Phone VARCHAR(15),            -- Unique Constraint
+    Balance Int,  -- Check Constraint
+	City VARCHAR(100)         -- Default Constraint
+);
+
+select * from Customers;
+
+ALTER TABLE Customerss
+ADD CONSTRAINT IDpK PRIMARY KEY (Customer_id);
+
+
+
+CREATE TABLE Emp (
+    e_id INT PRIMARY KEY,                -- Primary Key Constraint
+    e_name VARCHAR(100) NOT NULL,        -- Not Null Constraint
+    salary DECIMAL(10, 2),
+    department VARCHAR(100),              
+    joiningDate DATETIME,                 -- Joining Date
+    customer_id INT,                      -- Foreign Key Reference
+    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id)  -- Foreign Key Constraint
+);
+
+select * from Customers;
+select * from Emp;

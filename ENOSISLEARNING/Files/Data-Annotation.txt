@@ -1,0 +1,10 @@
+1.What is the purpose of data annotations in ASP.NET MVC?
+2.How do you use the [Required] attribute in a model?
+3.What is the [StringLength] attribute used for?Explain with Attributes.
+4.How does the [Range] attribute work in MVC?
+5.What is the difference between [StringLength] and [MaxLength]?
+6.How can you apply custom error messages in data annotations?
+7.What is the use of [RegularExpression] in MVC?
+8.How can you validate a model manually using ModelState.IsValid?
+9.How do you implement server-side validation using data annotations?Create a Model and Demonstrate.
+10.What is the purpose of [Display] and [DisplayName] annotations?

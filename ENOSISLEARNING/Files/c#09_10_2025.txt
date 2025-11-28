@@ -1,0 +1,145 @@
+
+    //create a new file
+
+    //class Program
+    //{
+    //    static void Main()
+    //    {
+    //        string path = @"D:\Maya\c# Batch\C#_9AmTo10Am\practical\data3.txt";
+    //        string content = "Hello, this is a file created in C#!";
+
+    //        // Create the file and write content to it
+    //        System.IO.File.WriteAllText(path, content);
+
+    //        Console.WriteLine("File created successfully!");
+    //        Console.ReadLine();
+    //    }
+    //}
+
+
+
+    //2. WRITING TO A FILE
+    //class Program
+    //{
+    //    static void Main(string[] args)
+    //    {
+    //        string writeText = "Hello World!";  // Create a text string
+    //        System.IO.File.WriteAllText(@"D:\Maya\c# Batch\C#_9AmTo10Am\practical\data3.txt", writeText);  // Create a file and write the contents of writeText to it
+
+    //        string readText = System.IO.File.ReadAllText(@"D:\Maya\c# Batch\C#_9AmTo10Am\practical\data3.txt"); // Read the contents of the file
+    //        Console.WriteLine(readText); // Output the content
+    //        Console.ReadLine();
+    //    }
+    //}
+
+
+
+
+    //3. READING FROM A FILE
+    //class program
+    //{
+    //    static void Main(string[] args)
+    //    {
+    //        // string path = "e:\\maya\\data.txt";
+    //        string path = @"D:\Maya\c# Batch\C#_9AmTo10Am\practical\data3.txt";   //verbatim literal
+    //        if (System.IO.File.Exists(path))
+    //        {
+    //            Console.WriteLine("file found..");
+    //            string data = System.IO.File.ReadAllText(path);
+    //            Console.WriteLine(data);
+    //        }
+    //        else
+    //        {
+    //            Console.WriteLine("file not found..");
+    //        }
+    //        Console.ReadKey();
+    //    }
+    //}
+
+
+    //4. COPY DATA FROM ONE FILE TO ANOTHER 
+    //class Program
+    //{
+    //    static void Main(string[] args)
+    //    {
+    //        string path = @"D:\Maya\c# Batch\C#_9AmTo10Am\practical\data3.txt";   //verbatim literal
+    //        string path2 = @"D:\Maya\c# Batch\C#_9AmTo10Am\practical\data.txt";
+    //        System.IO.File.Copy(path, path2);
+    //        Console.ReadKey();
+    //    }
+    //}
+
+
+
+    //5. DELETING A FILE
+    //class Program
+    //{
+    //    static void Main()
+    //    {
+    //        string path = @"D:\Maya\c# Batch\C#_9AmTo10Am\practical\data.txt";
+
+    //        // Check if the file exists
+    //        if (System.IO.File.Exists(path))
+    //        {
+    //            // Delete the file
+    //            System.IO.File.Delete(path);
+    //            Console.WriteLine("File found and deleted successfully!");
+    //        }
+    //        else
+    //        {
+    //            Console.WriteLine("File does not exist.");
+    //        }
+
+    //        Console.ReadLine();
+    //    }
+    //}
+
+
+    // 6. OVERWRITE A FILE DATA
+
+    //class Program
+    //{
+    //    static void Main(string[] args)
+    //    {
+    //        string path = @"D:\Maya\c# Batch\C#_9AmTo10Am\practical\data3.txt";   //verbatim literal
+    //        string path2 = @"D:\Maya\c# Batch\C#_9AmTo10Am\practical\data.txt";
+    //        System.IO.File.Copy(path, path2, true);
+    //        Console.ReadKey();
+    //    }
+    //}
+
+
+    //HANDLING EXCEPTIONS IN C# FILES
+    //class Program
+    //{
+    //    static void Main()
+    //    {
+    //        string sourceFilePath = @"D:\Maya\c# Batch\C#_9AmTo10Am\practical\data.txt"; // Original file path
+    //        string destinationFilePath = @"D:\Maya\c# Batch\C#_9AmTo10Am\practical\data.txt"; // Destination for copying
+    //        string movedFilePath = @"D:\Maya\c# Batch\C#_9AmTo10Am\data.txt"; // Destination for moving
+    //        try
+    //        {
+    //            // Check if the source file exists before copying
+    //            if (System.IO.File.Exists(sourceFilePath))
+    //            {
+    //                // Copying the file
+    //                System.IO.File.Copy(sourceFilePath, destinationFilePath, true);
+    //                Console.WriteLine("File copied successfully.");
+
+    //                // Moving the copied file to a new location
+    //                System.IO.File.Move(destinationFilePath, movedFilePath);
+    //                Console.WriteLine("File moved successfully.");
+    //            }
+    //            else
+    //            {
+    //                Console.WriteLine("Source file does not exist.");
+    //            }
+    //        }
+    //        catch (Exception ex)
+    //        {
+    //            // Handle exceptions such as file not found or permission issues
+    //            Console.WriteLine($"An error occurred: {ex.Message}");
+    //        }
+    //        Console.ReadLine();
+    //    }
+    //}

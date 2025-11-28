@@ -1,0 +1,79 @@
+//Step 7 :  Creat a Controller Named Visitors.cs
+        private AppDbContext db = new AppDbContext();
+        // GET: Visitors
+        public ActionResult Index()
+        {
+            // Fix: Correctly access the DbSet property and call ToList() method
+            var visitors = db.visitors.ToList();
+            return View(visitors);
+        }
+
+        //GET: Visitors/Create
+        public ActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Create(Visitors v)
+        {
+            if(ModelState.IsValid)
+            {
+                db.visitors.Add(v);//Add Records in table//
+                db.SaveChanges();//Save Changes in database//
+                return RedirectToAction("Index");
+            }
+            return View(v);
+        }
+
+        //GET: Visitors/Edit/
+        public ActionResult Edit(int id)
+        {
+            var visitor = db.visitors.Find(id);
+            if(visitor == null)
+            {
+                return HttpNotFound();
+            }
+            return View(visitor);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Visitors v)
+        {
+           if(ModelState.IsValid)
+            {
+                db.Entry(v).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(v);
+        }
+
+        //Get Delete
+        public ActionResult Delete(int id)
+        {
+            var visitor = db.visitors.Find(id);
+            if(visitor == null)
+            {
+                return HttpNotFound();
+            }
+            return View(visitor);
+        }
+
+        
+        [HttpPost,ActionName("Delete")]
+        public ActionResult DeleteConfirm(int id)
+        {
+            var visitors = db.visitors.Find(id);
+            db.visitors.Remove(visitors);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        public ActionResult Details(int id)
+        {
+            var visitor = db.visitors.Find(id);
+            if(visitor == null)
+            {
+                return HttpNotFound();
+            }
+            return View(visitor);
+        }

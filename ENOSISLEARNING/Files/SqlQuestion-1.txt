@@ -1,0 +1,32 @@
+1️.Create a table Students
+
+Columns:
+
+StudentID – INT (Primary Key)
+
+FirstName – VARCHAR(50)
+
+LastName – VARCHAR(50)
+
+Email – VARCHAR(100)
+
+Mobile – VARCHAR(15)
+
+Gender – VARCHAR(10)
+
+DOB – DATE
+
+Address – VARCHAR(200)
+
+City – VARCHAR(50)
+
+Course – VARCHAR(50)
+
+1.Which SQL command is used to create a new table?
+2️.Write the basic syntax of the CREATE TABLE statement.
+3️.Why is it necessary to define data types while creating a table?
+4️.What are SQL data types? Give examples.
+5️.What is the difference between CHAR and VARCHAR data types?
+6️.What type of data is stored using INT, DECIMAL, and FLOAT data types?
+7️.What is the difference between DATE and DATETIME data types?
+8.Which SQL command is used to view the structure of a table after it is created?

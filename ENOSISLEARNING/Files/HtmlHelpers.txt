@@ -1,0 +1,144 @@
+HTML Helpers:In ASP.NET MVC, HTML Helpers are methods that help you generate HTML markup from your Razor views using C# code. They make it easier to create form elements, links, and other HTML elements while keeping your code clean and strongly typed. They reduce the chances of errors in HTML and integrate well with MVC’s model binding. 
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Loosely Type Html Control</h2>
+<h1>TextBox</h1>
+<input type="text" name="FullName" value="dfsdfdf" class="form-control"/>
+<br />
+@Html.TextBox("FullName","abhi",
+    new { 
+        style="border-radius:10px;border-color:red"
+    })
+<br />
+@* External stylesheet linking *@
+@Html.TextBox("FullName","abhi",
+    new { 
+       @class="form-control mt-3",
+       title="Enter Name",
+       @readonly="true"
+    })
+
+@* BeginForm and EndForm *@
+<h2>Forms</h2>
+@{
+    //it will get form data//
+    Html.BeginForm("Index", "HtmlHelper");
+}
+@Html.Label("User Name") &nbsp; @Html.TextBox("UserName", "", new {@class="form-control"})
+@Html.Label("Pasword") &nbsp; @Html.Password("Password", "", new {@class="form-control"})
+@Html.Label("Male") &nbsp; @Html.RadioButton("Gender", "Male")
+@Html.Label("Female") &nbsp; @Html.RadioButton("Gender", "Female")
+<br />
+@Html.Label("Country") &nbsp; @Html.DropDownList("CountryList",new SelectList(new[] {"India","America","Japan","Russia","China"}),"Choose Country", new {@class="form-select"})
+<br />
+@Html.CheckBox("acceptterms",true) &nbsp; @Html.Label("Accept All Terms and Conditions")
+<br />
+<input type="submit" name="submit" class="btn btn-success mt-2"/>
+@{ 
+    Html.EndForm();
+}
+
+@* Hyperlink *@
+@Html.ActionLink("Go to About Section","About","HtmlHelper")
+<br />
+<a href="@Url.Action("About","HtmlHelper")">content</a>
+
+2.Strongly Typed Html Helpers:It Enables these helper methods to directly associate with Model properties in a Strongly Typed View.It Provides helper Methods that you can use only Strongly Typed Views.
+
+namespace MVCTutorial.Models
+{
+    public class SignUp
+    {
+        public int UserId { get; set; }
+        public string UserName { get; set; }
+        public int Password { get; set; }
+        public string Gender { get; set; }
+        public string Email { get; set; }
+        public string Comment { get; set; }
+    }
+}
+
+@model MVCTutorial.Models.SignUp
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Strongly Type Html Helpers</h2>
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.UserId)
+    <p>@Html.LabelFor(model => model.UserName) &nbsp; @Html.TextBoxFor(model => model.UserName, new { @class = "form-control" })</p>
+    <p>@Html.LabelFor(model => model.Password) &nbsp; @Html.TextBoxFor(model => model.Password, new { @class = "form-control" })</p>
+    <p>@Html.LabelFor(model => model.Gender) &nbsp; @Html.DropDownListFor(model => model.Gender, new SelectList(new[] { "Male", "Female" }), new { @class = "form-select" })</p>
+    <p>@Html.LabelFor(model => model.Email) &nbsp; @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })</p>
+    <p>@Html.LabelFor(model => model.Comment) &nbsp; @Html.TextBoxFor(model => model.Comment, new { @class = "form-control" })</p>
+}
+
+
+
+using MVCTutorial.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+
+namespace MVCTutorial.Controllers
+{
+    public class HtmlHelperController : Controller
+    {
+        // GET: HtmlHelper
+        public ActionResult Index()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Index(Calculation c1)
+        {
+            int num1 = c1.Num1;
+            int num2 = c1.Num2;
+            int sum = num1 + num2;
+            ViewBag.Result = sum;
+            return View();
+        }
+        public ActionResult About()
+        {
+            return View();
+        }
+    }
+}
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace MVCTutorial.Models
+{
+    public class Calculation
+    {
+        public int Num1 { get; set; }
+        public int Num2 { get; set; }
+    }
+}
+
+
+@model MVCTutorial.Models.Calculation
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Strongly Type Html Helpers</h2>
+@using (Html.BeginForm())
+{
+    <p>@Html.LabelFor(model=>model.Num1) &nbsp; @Html.TextBoxFor(model=>model.Num1)</p>
+    <p>@Html.LabelFor(model=>model.Num2) &nbsp; @Html.TextBoxFor(model=>model.Num2)</p>
+    <input type="submit" value="Submit" class="btn btn-primary"/>
+    <p class="text-danger display-3">Addition of Two Values is:-@ViewBag.Result</p>
+}
+
+

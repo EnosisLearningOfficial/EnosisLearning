@@ -1,0 +1,157 @@
+Action Methods :  A Controller class can contain one or more action methods,also known as controller action. Controller Manages the flow of the application
+    it responsible for intercepting incoming request and excecuting the appropriate application code.Communicates with the models of the application and selects the required view to be rendered for the request. Get Data from database and specify a view that returns a response to the client. these tasks are done by controller's Action Methods.
+
+1.Actiond Methods are public methods in controller classes.
+2. Are responsible for processing the requests that are sent to the controller.
+3.Typicaly returns an ActionResult object that encaptulates the result of executing the method.
+4.By Default ,it generates a response in the form of ActionResult.
+
+ Rules:
+        They must be declared as public.
+        Action Methods must be dclared as public.it cannot be private or protected.
+        they cannot be declared as static.
+        they cannot have overloaded versions based on parameters.
+
+ActionResult :   Action Result is a base class for all implementing classes that provides different types of result.  Action Result is a base class for all implementing classes that provides different types of result.
+
+
+
+Razor View Syntax: View Provides the UI of the application to the user. is uses to display content of an application and also to accept user input.use modeldata to create this ui. contains both HTML markup and c# code that runs on the web server.view has a file extension .cshtml
+
+ Razor:  is a syntax based on the asp.net framework that allows creating views. is simple and easy to understand for users who are fimiliar with the c#.net or vb.net programming language.
+
+Razor Engine:  The MVC freamework uses a view engine to convert the code of a view into html markup that a browser can understand. is used as the default view engine by the MVC framework.compiles a view of your application when the view is required for the first time.Delivers the compiled view for subsequent request untill you make changes to the view.does not introduce a new set of programming language , but provides template markup syntax to segregate HTML markup and programming code in a view.
+
+
+//Model
+public class Course
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public string Description { get; set; }
+}
+
+//Controller 
+public class CourseController : Controller
+ {
+     // GET: Course
+     public ActionResult Index()
+     {
+         Course c1 = new Course();
+         {
+             c1.Id = 1;
+             c1.Name = "Test";
+             c1.Description = "Test";
+         };
+         //Course c2 = new Course();
+         //c2.Id = 2;
+         //c2.Name = "Test";
+         //c2.Description = "Test";
+         return View(c1);
+     }
+ }
+
+//View
+
+@model IEnumerable<MvcTutorialDemo.Models.Course>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+@* Inline Razor Syntax *@
+<p>Today's Date And Time Is :- @DateTime.Now</p>
+
+@* Multiline *@
+@{
+    int id = 101;
+    string Name = "Abhijeet";
+    <h1>ID Is :- @id</h1>
+    <h1>Name Is :- @Name</h1>
+
+    //Arithmetic4
+    int num1 = 10;
+    int num2 = 20;
+    <h2>Sum of Num1 and Num2 is :- @(num1+num2)</h2>
+
+    //Statements
+
+    int age = 18;
+    if (age >= 18)
+    {
+        <h1>Eligible for Voting..!</h1>
+    }
+    else
+    {
+        <h1>Not Eligible for Voting..!</h1>
+    }
+
+    //Switch Case
+    <ol>
+        <li>Select 1 for Square</li>
+        <li>Select 2 for Cube</li>
+    </ol>
+    var choice = 2;
+    var num = 10;
+    switch (choice)
+    {
+        case 1: <h1>Square is : @(num*num)</h1>
+            break;
+        case 2: <h1>Cube is : @(num*num*num)</h1>
+            break;
+        default: <h1>Invalid Choice</h1>
+            break;
+    }
+
+    //Loop
+
+    int i = 1;
+    while (i <= 5)
+    {
+        <ul>
+            <li>@i</li>
+        </ul>
+        i++;
+    }
+    int j = 1;
+    do
+    {
+        <ul>
+            <li>@j</li>
+        </ul>
+        j++;
+    } while (j <= 10);
+
+    for (int k = 1; k <= 15; k++)
+    {
+        <ul>
+            <li>@k</li>
+        </ul>
+    }
+
+
+    //Arrays
+    string[] Courses = { "C", "C++", "Java" };
+    foreach (var item in Courses)
+    {
+        <li>@item</li>
+    }
+
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Description</th>
+        </tr>
+       
+        <tbody>
+            <tr>
+            <td>@Model.Id</td>
+            <td>@Model.Name</td>
+            <td>@Model.Description</td>
+        </tr>
+        </tbody>
+    </table>
+}
+
+

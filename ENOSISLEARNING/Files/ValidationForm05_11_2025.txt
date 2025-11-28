@@ -1,0 +1,195 @@
+<%@ Page Title="Validation Example" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ValidationForm.aspx.cs" Inherits="WebApplication1.ValidationForm" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <div style="max-width:500px; margin:auto; background-color:#f9f9f9; padding:20px; border-radius:15px;">
+        <h2 style="text-align:center; color:#333;">Validation Form Example</h2>
+        <hr />
+
+        <!-- Full Name -->
+        <asp:Label ID="lblName" runat="server" Text="Full Name:" AssociatedControlID="txtName" />
+        <asp:TextBox ID="txtName" runat="server" CssClass="form-control" />
+        <asp:RequiredFieldValidator 
+            ID="RequiredFieldValidator1" 
+            runat="server" 
+            ControlToValidate="txtName" 
+            ErrorMessage="Full Name is required." 
+            ForeColor="Red" 
+            Display="Dynamic" />
+        <br />
+
+        <!-- Email -->
+        <asp:Label ID="lblEmail" runat="server" Text="Email:" AssociatedControlID="txtEmail" />
+        <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" />
+        <asp:RequiredFieldValidator 
+            ID="RequiredFieldValidator2" 
+            runat="server" 
+            ControlToValidate="txtEmail" 
+            ErrorMessage="Email is required." 
+            ForeColor="Red" 
+            Display="Dynamic" />
+        <asp:RegularExpressionValidator 
+            ID="RegexEmail" 
+            runat="server" 
+            ControlToValidate="txtEmail" 
+            ErrorMessage="Invalid email format." 
+            ForeColor="Red" 
+            Display="Dynamic" 
+            ValidationExpression="^[^@\s]+@[^@\s]+\.[^@\s]+$" />
+        <br />
+
+        <!-- Age -->
+        <asp:Label ID="lblAge" runat="server" Text="Age:" AssociatedControlID="txtAge" />
+        <asp:TextBox ID="txtAge" runat="server" CssClass="form-control" />
+        <asp:RangeValidator 
+            ID="RangeValidator1" 
+            runat="server" 
+            ControlToValidate="txtAge" 
+            MinimumValue="18" 
+            MaximumValue="60" 
+            Type="Integer" 
+            ErrorMessage="Age must be between 18 and 60." 
+            ForeColor="Red" 
+            Display="Dynamic" />
+        <br />
+
+        <!-- Mobile Number -->
+        <asp:Label ID="lblMobile" runat="server" Text="Mobile No:" AssociatedControlID="txtMobile" />
+        <asp:TextBox ID="txtMobile" runat="server" CssClass="form-control" MaxLength="10" />
+        <asp:RequiredFieldValidator 
+            ID="RequiredFieldValidator5" 
+            runat="server" 
+            ControlToValidate="txtMobile" 
+            ErrorMessage="Mobile number is required." 
+            ForeColor="Red" 
+            Display="Dynamic" />
+        <asp:RegularExpressionValidator 
+            ID="RegexMobile" 
+            runat="server" 
+            ControlToValidate="txtMobile" 
+            ErrorMessage="Enter a valid 10-digit mobile number." 
+            ForeColor="Red" 
+            Display="Dynamic" 
+            ValidationExpression="^[0-9]{10}$" />
+        <br />
+
+        <!-- Password -->
+        <asp:Label ID="lblPassword" runat="server" Text="Password:" AssociatedControlID="txtPassword" />
+        <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" CssClass="form-control" />
+        <asp:RequiredFieldValidator 
+            ID="RequiredFieldValidator3" 
+            runat="server" 
+            ControlToValidate="txtPassword" 
+            ErrorMessage="Password is required." 
+            ForeColor="Red" 
+            Display="Dynamic" />
+        <br />
+
+        <!-- Confirm Password -->
+        <asp:Label ID="lblConfirmPassword" runat="server" Text="Confirm Password:" AssociatedControlID="txtConfirmPassword" />
+        <asp:TextBox ID="txtConfirmPassword" runat="server" TextMode="Password" CssClass="form-control" />
+        <asp:RequiredFieldValidator 
+            ID="RequiredFieldValidator4" 
+            runat="server" 
+            ControlToValidate="txtConfirmPassword" 
+            ErrorMessage="Confirm Password is required." 
+            ForeColor="Red" 
+            Display="Dynamic" />
+        <asp:CompareValidator 
+            ID="CompareValidator1" 
+            runat="server" 
+            ControlToValidate="txtConfirmPassword" 
+            ControlToCompare="txtPassword" 
+            ErrorMessage="Passwords do not match." 
+            ForeColor="Red" 
+            Display="Dynamic" />
+        <br />
+
+        <!-- Validation Summary -->
+        <asp:ValidationSummary 
+            ID="ValidationSummary1" 
+            runat="server" 
+            HeaderText="Please fix the following errors:" 
+            ForeColor="Red" 
+            DisplayMode="BulletList" />
+        <br />
+
+        <!-- Submit Button -->
+        <asp:Button ID="btnSubmit" runat="server" Text="Submit" CssClass="btn btn-primary" OnClick="btnSubmit_Click" />
+    </div>
+</asp:Content>
+
+=================================================================================
+using System;
+using System.Configuration;
+using System.Data.SqlClient;
+
+namespace WebApplication1
+{
+    public partial class ValidationForm : System.Web.UI.Page
+    {
+        string connStr = ConfigurationManager.ConnectionStrings["connString"].ConnectionString;
+
+        protected void Page_Load(object sender, EventArgs e)
+        {
+        }
+
+
+
+        protected void btnSubmit_Click(object sender, EventArgs e)
+        {
+            if (Page.IsValid)
+            {
+                using (SqlConnection con = new SqlConnection(connStr))
+                {
+                    string query = "INSERT INTO tbl_Validation (FullName, Email, Age, MobileNo, Password) VALUES (@FullName, @Email, @Age, @MobileNo, @Password)";
+                    SqlCommand cmd = new SqlCommand(query, con);
+
+                    cmd.Parameters.AddWithValue("@FullName", txtName.Text.Trim());
+                    cmd.Parameters.AddWithValue("@Email", txtEmail.Text.Trim());
+                    cmd.Parameters.AddWithValue("@Age", txtAge.Text.Trim());
+                    cmd.Parameters.AddWithValue("@MobileNo", txtMobile.Text.Trim());
+                    cmd.Parameters.AddWithValue("@Password", txtPassword.Text.Trim());
+
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                }
+
+                Response.Write("<script>alert('Record inserted successfully!');</script>");
+                ClearForm();
+            }
+        }
+
+        private void ClearForm()
+        {
+            txtName.Text = "";
+            txtEmail.Text = "";
+            txtAge.Text = "";
+            txtMobile.Text = "";
+            txtPassword.Text = "";
+            txtConfirmPassword.Text = "";
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//CREATE TABLE tbl_Validation (
+//    Id INT IDENTITY(1,1) PRIMARY KEY,
+//    FullName NVARCHAR(100),
+//    Email NVARCHAR(100),
+//    Age INT,
+//    MobileNo NVARCHAR(15),
+//    Password NVARCHAR(100)
+//);

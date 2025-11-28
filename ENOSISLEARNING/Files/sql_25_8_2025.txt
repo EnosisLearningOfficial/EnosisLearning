@@ -1,0 +1,247 @@
+--===================== :  Triggers ====================25-08-2025======================
+•	Introduction to Triggers:What is a Trigger?
+--"A trigger is an event that is automatically fired or occurs when an operation is performed."
+--	A trigger is a special kind of a store procedure (set of sql statements) or program that executes in response to certain action on the table like insertion, deletion or updating of data. 
+--	It is a database object which is bound to a table and is executed automatically. 
+
+--Types of Triggers: 
+
+1.	DML Triggers
+2.	DDL Triggers
+3.	LOGON Triggers-Is use for Administration Porpose
+
+----------------------------------------------------------------------------------------
+[1] DML Trigger:
+--DML triggers are automatically fired when an INSERT, UPDATE or DELETE event occurs on a table.
+--A DML (Data Manipulation Language) trigger is a special type of trigger in SQL Server that automatically executes (or "fires") in response to specific DML events such as INSERT, UPDATE, or DELETE operations on a table or view. DML triggers can be used to enforce business rules, maintain data integrity, or log changes.
+
+--Types of DML Triggers:
+   1. AFTER Trigger: Executes after the triggering DML operation has been completed.
+   2. INSTEAD OF Trigger: Executes in place of the triggering DML operation, allowing you to modify its behavior.
+
+----------------------============================================------------------------
+--  1. AFTER Trigger
+--An AFTER Trigger is a type of trigger in SQL Server that automatically executes after a specific data manipulation language (DML) event, such as INSERT, UPDATE, or DELETE, has been completed on a table or view. Unlike INSTEAD OF triggers, which replace the standard behavior of the DML operation, AFTER triggers run after the operation has occurred, allowing you to perform additional actions based on the outcome of that operation.
+
+--AFTER Trigger Syntax:
+CREATE TRIGGER trigger_name
+ON table_name
+AFTER INSERT | UPDATE | DELETE
+AS
+BEGIN
+    -- SQL statements to execute
+END;
+
+
+-- Create the Employee_Demo table
+CREATE TABLE Employee_Demo
+(
+ Emp_ID int identity,
+ Emp_Name varchar(55),
+ Emp_Sal decimal (10,2)
+)
+
+drop table Employee_Demo
+-- Create the EmployeeLog table
+CREATE TABLE EmployeeLog (
+    LogID INT PRIMARY KEY IDENTITY,
+    EmployeeID INT,
+    Action VARCHAR(50),
+    ActionDate DATETIME DEFAULT GETDATE()
+);
+
+drop table EmployeeLog
+-------------------------------
+--Trigger for After Insert
+CREATE TRIGGER trg_AfterInsert_Employee
+ON Employee_Demo
+AFTER INSERT
+AS
+BEGIN
+    INSERT INTO EmployeeLog (EmployeeID, Action)
+    SELECT Emp_ID, 'Inserted'
+    FROM inserted;
+END;
+
+-- Sample INSERT statements
+INSERT INTO Employee_Demo (Emp_Name, Emp_Sal)
+VALUES ('John Doe', 50000);
+--or--
+INSERT INTO Employee_Demo (Emp_Name, Emp_Sal) VALUES ('Amita', 50000);
+INSERT INTO Employee_Demo (Emp_Name, Emp_Sal) VALUES ('Mohani', 1200);
+INSERT INTO Employee_Demo (Emp_Name, Emp_Sal) VALUES ('Avini', 1100);
+INSERT INTO Employee_Demo (Emp_Name, Emp_Sal) VALUES ('Manoj', 1300);
+INSERT INTO Employee_Demo (Emp_Name, Emp_Sal) VALUES ('Riyaz', 1400);
+
+SELECT * from Employee_Demo
+SELECT * from EmployeeLog
+-------------------------------------------------------------------------
+--Trigger for After Update
+CREATE TRIGGER trg_AfterUpdate_Employee
+ON Employee_Demo
+AFTER UPDATE
+AS
+BEGIN
+    INSERT INTO EmployeeLog (EmployeeID, Action)
+    SELECT Emp_ID, 'Updated'
+    FROM inserted;
+END;
+
+
+UPDATE Employee_Demo
+SET Emp_Sal = 85000
+WHERE Emp_ID = 1;  -- Assuming there is an employee with Emp_ID = 1
+
+
+SELECT * from Employee_Demo
+SELECT * from EmployeeLog
+-----------------------------
+--Trigger for After Delete  
+
+CREATE TRIGGER trg_AfterDelete_Employee
+ON Employee_Demo
+AFTER DELETE
+AS
+BEGIN
+    INSERT INTO EmployeeLog (EmployeeID, Action)
+    SELECT Emp_ID, 'Deleted'
+    FROM deleted;
+END;
+
+
+DELETE FROM Employee_Demo
+WHERE Emp_ID = 6;  -- Assuming there is an employee with Emp_ID = 1
+
+
+SELECT * from Employee_Demo
+SELECT * from EmployeeLog
+----------
+Drop TRIGGER trg_AfterInsert_Employee
+Drop TRIGGER trg_AfterUpdate_Employee
+Drop TRIGGER trg_AfterDelete_Employee
+
+truncate table Employee_Demo
+truncate table EmployeeLog
+-----------------------------------------------------------End
+ 2. INSTEAD OF Trigger:
+ --Unlike INSTEAD OF triggers, which execute in place of a data manipulation operation (such as INSERT, UPDATE, or DELETE), AFTER triggers run after the operation has already been performed. This means that INSTEAD OF triggers can modify or prevent the original action, while AFTER triggers allow you to respond to the outcome of the action that has just occurred, such as logging changes or enforcing additional business rules.
+
+ --INSTEAD OF Trigger Syntax:
+
+CREATE TRIGGER trigger_name
+ON table_name
+INSTEAD OF INSERT | UPDATE | DELETE
+AS
+BEGIN
+    -- SQL statements to execute
+END;
+
+--Example of an INSTEAD OF Trigger
+--Trigger for Instead Of Insert
+CREATE TRIGGER trg_INSTEADInsert_Employee
+ON Employee_Demo
+INSTEAD OF INSERT
+AS
+BEGIN
+    -- Example: Check if the salary is above a certain threshold before inserting
+    IF EXISTS (SELECT * FROM inserted WHERE Emp_Sal >= 30000)
+    BEGIN
+        RAISERROR('Salary must be at least 30,000.', 16, 1);
+        RETURN;
+    END
+    
+    -- Proceed with the insert
+    INSERT INTO Employee_Demo (Emp_Name, Emp_Sal)
+    SELECT Emp_Name, Emp_Sal
+    FROM inserted;
+    
+    -- Log the action
+    INSERT INTO EmployeeLog (EmployeeID, Action)
+    SELECT Emp_ID, 'Inserted'
+    FROM inserted;
+	END;
+-----------------------------------------------------------------
+--Attempt to insert a new employee with a salary below the threshold:
+INSERT INTO Employee_Demo (Emp_Name, Emp_Sal)
+VALUES ('Jane Smith', 25000);
+
+--If you insert a valid employee:
+INSERT INTO Employee_Demo (Emp_Name, Emp_Sal)
+VALUES ('mohn', 65000);
+
+SELECT * from Employee_Demo
+SELECT * from EmployeeLog
+---------------------------
+--Trigger for Instead Of Update
+CREATE TRIGGER trg_INSTEADUpdate_Employee
+ON Employee_Demo
+INSTEAD OF UPDATE
+AS
+BEGIN
+    -- Example: Prevent salary updates to below a certain threshold
+    IF EXISTS (SELECT * FROM inserted i JOIN deleted d ON i.Emp_ID = d.Emp_ID WHERE i.Emp_Sal < 30000 AND d.Emp_Sal >= 30000)
+    BEGIN
+        RAISERROR('Salary cannot be decreased below 30,000.', 16, 1);
+        RETURN;
+    END
+    
+    -- Proceed with the update
+    UPDATE e
+    SET e.Emp_Name = i.Emp_Name,
+        e.Emp_Sal = i.Emp_Sal
+    FROM Employee_Demo e
+    JOIN inserted i ON e.Emp_ID = i.Emp_ID;
+
+    -- Log the action
+    INSERT INTO EmployeeLog (EmployeeID, Action)
+    SELECT d.Emp_ID, 'Updated'
+    FROM deleted d;
+END;
+-----------
+--Attempt to update an employee's salary below the threshold:
+UPDATE Employee_Demo
+SET Emp_Sal = 25000
+WHERE Emp_ID = 1;  -- Assuming Emp_ID = 1 has a current salary above 30,000
+
+--If you update an employee's name or a valid salary change:
+UPDATE Employee_Demo
+SET Emp_Name = 'John Doe Updated', Emp_Sal = 40000
+WHERE Emp_ID = 1;
+
+SELECT * from Employee_Demo
+SELECT * from EmployeeLog
+--------------------------------
+--Trigger for Instead Of Delete
+CREATE TRIGGER trg_INSTEADDelete_Employee
+ON Employee_Demo
+INSTEAD OF DELETE
+AS
+BEGIN
+    -- Example: Prevent deletion if the employee's salary is above a certain threshold
+    IF EXISTS (SELECT * FROM deleted WHERE Emp_Sal < 50000)
+    BEGIN
+        RAISERROR('Employees with a salary above 50,000 cannot be deleted.', 16, 1);
+        RETURN;
+    END
+    
+    -- Proceed with the deletion
+    DELETE FROM Employee_Demo
+    WHERE Emp_ID IN (SELECT Emp_ID FROM deleted);
+    
+    -- Log the action
+    INSERT INTO EmployeeLog (EmployeeID, Action)
+    SELECT Emp_ID, 'Deleted'
+    FROM deleted;
+END;
+
+--Attempt to delete an employee with a salary above the threshold:
+DELETE FROM Employee_Demo
+WHERE Emp_ID = 1;  -- Assuming Emp_ID = 1 has a salary above 50,000
+
+UPDATE Employee_Demo
+SET Emp_Sal = 60000
+WHERE Emp_ID = 1;
+
+SELECT * from Employee_Demo
+SELECT * from EmployeeLog
+------------------------------

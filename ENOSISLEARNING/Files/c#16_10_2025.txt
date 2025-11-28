@@ -1,0 +1,487 @@
+
+
+
+
+
+
+
+
+
+    //ARRAY COLLECTIONS 
+    //class Program
+    //{
+    //    static void Main()
+    //    {
+    //        // Creating an array of integers
+    //        int[] numbers = new int[3] { 10, 20, 30 };
+
+    //        // Displaying array elements
+    //        Console.WriteLine("Array elements:");
+    //        foreach (int number in numbers)
+    //        {
+    //            Console.WriteLine(number);
+    //        }
+    //        Console.ReadLine();
+    //    }
+    //}
+
+
+    //2. USING LIST (DYNAMIC COLLECTION)
+    //class Program
+    //{
+    //    static void Main()
+    //    {
+    //        // Creating a List of integers
+    //        List<int> numbers = new List<int>();
+
+    //        // Adding elements to the list
+    //        numbers.Add(10);
+    //        numbers.Add(20);
+    //        numbers.Add(30);
+
+    //        // Displaying the elements of the list
+    //        Console.WriteLine("List elements:");
+    //        foreach (int number in numbers)
+    //        {
+    //            Console.WriteLine(number);
+    //        }
+    //        Console.ReadLine();
+    //    }
+    //}
+
+
+    //3. USING DICTIONARY (KEY-VALUE PAIR COLLECTION)
+    //class Program
+    //{
+    //    static void Main()
+    //    {// Creating a Dictionary with string as key and int as value
+    //        Dictionary<string, int> ageDictionary = new Dictionary<string, int>();
+
+    //        // Adding key-value pairs to the dictionary
+    //        ageDictionary.Add("Alice", 30);
+    //        ageDictionary.Add("Bob", 25);
+    //        ageDictionary.Add("Charlie", 35);
+
+    //        // Displaying the key-value pairs from the dictionary
+    //        Console.WriteLine("Dictionary elements:");
+    //        foreach (var item in ageDictionary)
+    //        {
+    //            Console.WriteLine($"{item.Key}: {item.Value}");
+    //        }
+    //        Console.ReadLine();
+    //    }
+    //}
+
+
+    //4. QUEUE<T>
+    //class Program
+    //{
+    //    static void Main()
+    //    {
+    //        /// Creating a Queue of integers
+    //        Queue<int> queue = new Queue<int>();
+
+    //        // Adding elements to the queue
+    //        queue.Enqueue(10);
+    //        queue.Enqueue(20);
+    //        queue.Enqueue(30);
+
+    //        // Dequeue and display elements
+    //        Console.WriteLine("Queue elements (FIFO):");
+    //        Console.WriteLine(queue.Dequeue()); // Removes 10
+    //        Console.WriteLine(queue.Dequeue()); // Removes 20
+    //        Console.WriteLine(queue.Dequeue()); // Removes 30
+    //        Console.ReadLine();
+    //    }
+    //}
+
+
+    //5. STACK<T>
+    //class Program
+    //{
+    //    static void Main()
+    //    {
+    //        // Creating a Stack of integers
+    //        Stack<int> stack = new Stack<int>();
+
+    //        // Pushing elements onto the stack
+    //        stack.Push(10);
+    //        stack.Push(20);
+    //        stack.Push(30);
+
+    //        // Pop and display elements
+    //        Console.WriteLine("Stack elements (LIFO):");
+    //        Console.WriteLine(stack.Pop()); // Removes 30
+    //        Console.WriteLine(stack.Pop()); // Removes 20
+    //        Console.WriteLine(stack.Pop()); // Removes 10
+    //        Console.ReadLine();
+    //    }
+    //}
+
+
+    // 6. HASHSET<T>
+    //class Program
+    //{
+    //    static void Main()
+    //    {
+    //        // Creating a HashSet of integers
+    //        HashSet<int> numbers = new HashSet<int>();
+
+    //        // Adding elements to the HashSet
+    //        numbers.Add(10);
+    //        numbers.Add(20);
+    //        numbers.Add(10); // Duplicate, will not be added
+
+    //        // Displaying elements of the HashSet
+    //        Console.WriteLine("HashSet elements (unique):");
+    //        foreach (int number in numbers)
+    //        {
+    //            Console.WriteLine(number);
+    //        }
+    //        Console.ReadLine();
+    //    }
+    //}
+
+
+    // 7. LINKEDLIST<T>
+    //class Program
+    //{
+    //    static void Main()
+    //    {
+    //        // Creating a LinkedList of integers
+    //        LinkedList<int> linkedList = new LinkedList<int>();
+
+    //        // Adding elements to the LinkedList
+    //        linkedList.AddLast(10);
+    //        linkedList.AddLast(20);
+    //        linkedList.AddLast(30);
+
+    //        // Displaying elements of the LinkedList
+    //        Console.WriteLine("LinkedList elements:");
+    //        foreach (int number in linkedList)
+    //        {
+    //            Console.WriteLine(number);
+    //        }
+    //        Console.ReadLine();
+    //    }
+
+    //}
+
+
+    // 8. SORTEDLIST<TKEY, TVALUE>
+
+    //class Program
+    //{
+    //    static void Main()
+    //    {
+    //        // Creating a SortedList
+    //        SortedList<int, string> sortedList = new SortedList<int, string>();
+
+    //        // Adding elements to the SortedList
+    //        sortedList.Add(2, "B");
+    //        sortedList.Add(1, "A");
+    //        sortedList.Add(3, "C");
+
+    //        // Displaying elements of the SortedList
+    //        Console.WriteLine("SortedList elements:");
+    //        foreach (var item in sortedList)
+    //        {
+    //            Console.WriteLine($"{item.Key}: {item.Value}");
+    //        }
+    //        Console.ReadLine();
+    //    }
+    //}
+
+
+
+    //1. GENERIC CLASS EXAMPLE
+    //class Program
+    //{
+    //    public class Box<T>
+    //    {
+    //        private T item;
+
+    //        // Constructor to initialize the box with a value
+    //        public Box(T value)
+    //        {
+    //            item = value;
+    //        }
+
+    //        // Method to get the value stored in the box
+    //        public T GetItem()
+    //        {
+    //            return item;
+    //        }
+    //    }
+    //    static void Main()
+    //    {
+    //        // Creating a Box to store an integer
+    //        Box<int> intBox = new Box<int>(100);
+    //        Console.WriteLine("Integer Box contains: " + intBox.GetItem());
+
+    //        // Creating a Box to store a string
+    //        Box<string> stringBox = new Box<string>("Hello, Generics!");
+    //        Console.WriteLine("String Box contains: " + stringBox.GetItem());
+    //        Console.ReadLine();
+    //    }
+    //}
+
+
+    // 2. GENERIC METHOD EXAMPLE
+
+    //class Program
+    //{
+    //    // Generic method to find the larger of two values
+    //    public static T GetLarger<T>(T value1, T value2) where T : IComparable<T>
+    //    {
+    //        return value1.CompareTo(value2) > 0 ? value1 : value2;
+    //    }
+    //    static void Main()
+    //    {
+    //        // Using the generic method with integers
+    //        int largerInt = GetLarger(10, 20);
+    //        Console.WriteLine("Larger Integer: " + largerInt);
+
+    //        // Using the generic method with strings
+    //        string largerString = GetLarger("Apple", "Banana");
+    //        Console.WriteLine("Larger String: " + largerString);
+    //        Console.ReadLine();
+    //    }
+    //}
+
+
+
+    //NON- Generics:
+    //class Program
+    //{
+    //    static void Main()
+    //    {
+    //        ArrayList numbers = new ArrayList();
+
+    //       // Adding elements to the list
+    //        numbers.Add(10);
+    //        numbers.Add(20.30f);
+    //        numbers.Add(30.60);
+    //        numbers.Add("computer");
+    //        numbers.Add("m");
+
+    //        //numbers.Remove(30.60);
+    //        //numbers.RemoveRange(1,3);
+    //        //numbers.RemoveAt(1);
+    //        //numbers.Reverse();
+
+    //        // Displaying the elements of the list
+    //        Console.WriteLine("List elements:");
+    //        for (int i = 0; i < numbers.Count; i++)
+    //        {
+    //            Console.WriteLine("ArrayList values:" + numbers[i]);
+    //        }
+    //        Console.ReadLine();
+    //    }
+    //}
+
+
+    //internal class Student
+    //{
+    //    public static void GetAllData()
+    //    {
+    //        string connectionString = "Data Source=ENOSIS-LT1;Initial Catalog=ConsoleCRUD;Integrated Security = true";
+    //        string query = "select * from UserDetails";
+    //        using (SqlConnection Conn = new SqlConnection(connectionString))
+    //        {
+    //            Conn.Open();
+    //            using (SqlCommand cmd = new SqlCommand(query, Conn))
+    //            {
+    //                SqlDataReader reader = cmd.ExecuteReader();
+    //                while (reader.Read())
+    //                {
+    //                    Console.WriteLine($"Name : {reader["Name"]} ID : {reader["Id"]}");
+    //                }
+
+    //            }
+    //        }
+    //    }
+    //    public static void Insert()
+    //    {
+    //        Console.WriteLine("Enter Your Name : ");
+    //        string Name = Console.ReadLine();
+    //        Console.WriteLine("Enter Your Email : ");
+    //        string Email = Console.ReadLine();
+    //        Console.WriteLine("Enter Your Password : ");
+    //        string Password = Console.ReadLine();
+    //        Console.WriteLine("Enter Your Gender : ");
+    //        string Gender = Console.ReadLine();
+    //        Console.WriteLine("Enter Your Country : ");
+    //        string Country = Console.ReadLine();
+    //        Console.WriteLine("Enter Your DOB : ");
+    //        string DOB = Console.ReadLine();
+    //        Console.WriteLine("Enter Your Feedback : ");
+    //        string Feedback = Console.ReadLine();
+    //        try
+    //        {
+    //            string connectionString = "Data Source=ENOSIS-LT1;Initial Catalog=ConsoleCRUD;Integrated Security = true";
+    //            string query = "insert into UserDetails(Name,Email,Password,Gender,Country,DOB,Feedback)values(@Name,@Email,@Password,@Gender,@Country,@DOB,@Feedback)";
+    //            using (SqlConnection Conn = new SqlConnection(connectionString))
+    //            {
+    //                Conn.Open();
+    //                using (SqlCommand cmd = new SqlCommand(query, Conn))
+    //                {
+    //                    cmd.Parameters.AddWithValue("@Name", Name);
+    //                    cmd.Parameters.AddWithValue("@Email", Email);
+    //                    cmd.Parameters.AddWithValue("@Password", Password);
+    //                    cmd.Parameters.AddWithValue("@Gender", Gender);
+    //                    cmd.Parameters.AddWithValue("@Country", Country);
+    //                    cmd.Parameters.AddWithValue("@DOB", DOB);
+    //                    cmd.Parameters.AddWithValue("@Feedback", Feedback);
+    //                    cmd.ExecuteNonQuery();
+    //                    Console.WriteLine("Record Inserted Successfully...!");
+    //                }
+    //            }
+    //        }
+    //        catch (Exception ex)
+    //        {
+    //            Console.WriteLine(ex.Message);
+    //        }
+    //    }
+    //    public static void Delete(int id)
+    //    {
+    //        string connectionString = "Data Source=ENOSIS-LT1;Initial Catalog=ConsoleCRUD;Integrated Security = true";
+    //        string query = "Delete UserDetails where Id = @Id";
+    //        using (SqlConnection Conn = new SqlConnection(connectionString))
+    //        {
+    //            Conn.Open();
+    //            using (SqlCommand cmd = new SqlCommand(query, Conn))
+    //            {
+    //                cmd.Parameters.AddWithValue("@Id", id);
+    //                cmd.ExecuteNonQuery();
+    //                Console.WriteLine("Record DEleted...!");
+    //            }
+    //        }
+    //    }
+    //    public static void Main(string[] args)
+    //    {
+    //        // Insert();
+    //        // Update();
+    //        Delete(10);
+    //        GetAllData();
+    //    }
+    //}
+
+    //CREATE TABLE UserDetails (
+    //    ID INT PRIMARY KEY IDENTITY(1,1), -- Optional auto-increment ID
+    //    Name NVARCHAR(100),
+    //    Email NVARCHAR(100),
+    //    Password NVARCHAR(100),
+    //    Gender NVARCHAR(10),
+    //    Country NVARCHAR(50),
+    //    DOB DATE,
+    //    Feedback NVARCHAR(MAX)
+    //);
+
+
+    internal class Ado
+    {
+        string connectionString = "Data Source=ENOSIS-LT1;Initial Catalog=ConsoleCRUD;Integrated Security = true";
+        //Method For Read Data//
+        public static void GetAllData()
+        {
+            string connectionString = "Data Source=ENOSIS-LT1; User ID=enosis;Password=jitu@123!;Initial Catalog=ConsoleCRUD;Integrated Security = true";
+            using (SqlConnection Conn = new SqlConnection(connectionString))
+            {
+                string query = "select * from UserDetails";
+                Conn.Open();
+                using (SqlCommand cmd = new SqlCommand(query, Conn))
+                {
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Console.WriteLine($"ID : {reader["Id"]} Name : {reader["Name"]} Email: {reader["Email"]}");
+                    }
+                }
+            }
+
+        }
+        //Method For Insertion//
+        public static void InsertRecord(string name, string email, string password, string gender, string country, string dob, string feedback)
+        {
+            try
+            {
+
+                string connectionString = "Data Source=ENOSIS-LT1; User ID=enosis;Password=jitu@123!;Initial Catalog=ConsoleCRUD;Integrated Security = true";
+                using (SqlConnection Conn = new SqlConnection(connectionString))
+                {
+                    string query = "insert into UserDetails(Name,Email,Password,Gender,Country,DOB,Feedback)values(@Name,@Email,@Password,@Gender,@Country,@DOB,@Feedback)";
+                    Conn.Open();
+                    using (SqlCommand cmd = new SqlCommand(query, Conn))
+                    {
+                        cmd.Parameters.AddWithValue("@Name", name);
+                        cmd.Parameters.AddWithValue("@Email", email);
+                        cmd.Parameters.AddWithValue("@Password", password);
+                        cmd.Parameters.AddWithValue("@Gender", gender);
+                        cmd.Parameters.AddWithValue("@Country", country);
+                        cmd.Parameters.AddWithValue("@DOB", dob);
+                        cmd.Parameters.AddWithValue("@Feedback", feedback);
+                        cmd.ExecuteNonQuery();
+                        Console.WriteLine("Record Inserted Successfully...!");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+        //Update Record//
+        public static void UpdateRecord(string name, string email, string password, string gender, string country, string dob, string feedback, int id)
+        {
+            string connectionString = "Data Source=ENOSIS-LT1; User ID=enosis;Password=jitu@123!;Initial Catalog=ConsoleCRUD;Integrated Security = true";
+            using (SqlConnection Conn = new SqlConnection(connectionString))
+            {
+                string query = "update UserDetails set Name=@Name,Email=@Email,Password=@Password,Gender=@Gender,Country=@Country,DOB=@Dob,Feedback=@Feedback where Id=@Id";
+                using (SqlCommand cmd = new SqlCommand(query, Conn))
+                {
+                    cmd.Parameters.AddWithValue("@Name", name);
+                    cmd.Parameters.AddWithValue("@Email", email);
+                    cmd.Parameters.AddWithValue("@Password", password);
+                    cmd.Parameters.AddWithValue("@Gender", gender);
+                    cmd.Parameters.AddWithValue("@Country", country);
+                    cmd.Parameters.AddWithValue("@Dob", dob);
+                    cmd.Parameters.AddWithValue("@Feedback", feedback);
+                    cmd.Parameters.AddWithValue("@Id", id);
+                    Conn.Open();
+                    cmd.ExecuteNonQuery();
+                    Console.WriteLine("Record Updated Successfully...!");
+                }
+            }
+        }
+        //Delete Record//
+        public static void DeleteRecord(int id)
+        {
+            try
+            {
+                string connectionString = "Data Source=ENOSIS-LT1; User ID=enosi;Password=jitu@123!;Initial Catalog=ConsoleCRUD;Integrated Security = true";
+                using (SqlConnection Conn = new SqlConnection(connectionString))
+                {
+                    string query = "Delete UserDetails where Id=@Id";
+                    using (SqlCommand cmd = new SqlCommand(query, Conn))
+                    {
+                        cmd.Parameters.AddWithValue("@Id", id);
+                        Conn.Open();
+                        cmd.ExecuteNonQuery();
+                        Console.WriteLine("Record Deleted Successfully...!");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+        //public static void Main(string[] args)
+        //{
+        //    //InsertRecord("AAAA", "meera@email.com", "2334", "Female", "India", "1998/04/27", "Tester");
+        //   // UpdateRecord("BBBB", "example@email.com", "1234", "Female", "India", "1998/01/20", "Developer", 9);
+        //    DeleteRecord(9);
+        //    GetAllData();
+        //}
+    }

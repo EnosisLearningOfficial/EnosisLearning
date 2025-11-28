@@ -1,0 +1,340 @@
+Passing Data from a controller to a View MVC:
+
+We can use following objects to pass data between controller to view.
+1.ViewData
+2.ViewBag
+3.TempData
+4.Session
+
+1.ViewData: passes data from controller to view.ViewData is a dictionary of object that is derived from ViewDataDictionary class.
+Characterstics: 1.the lifetime of ViewData object exist only during the current request(We Cannot Pass ViewData object value from one Action method to another).
+2.The value of viewdata becomes null if the request is redirected.It becomes NULL.
+3.ViewData requires typecasting when you use  complex data type to avoid errror.
+
+Syntax : ViewData["key"] = value;
+where key : is a string value to identify the object present in viewdata. 
+
+
+    public class Employee
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public int Age { get; set; }
+        public string Role { get; set; }
+    }
+
+
+
+public class HomeController : Controller
+{
+    // GET: Home
+    public ActionResult Index()
+    {
+        ViewData["Message"] = "Message From ViewData";
+        ViewData["CurrentDateTime"] = DateTime.Now;
+        string[] course = { "C", "C++", "Java" };
+        ViewData["CourseArray"] = course;
+        ViewData["SportsList"] = new List<string>() { 
+        "Cricket","Hockey","Football","Kabaddi"
+        };
+        Employee emp = new Employee();
+        emp.Id = 1;
+        emp.Name = "Abhijeet Roy";
+        emp.Age = 30;
+        emp.Role = "Developer";
+        ViewData["Employee"] = emp;
+        return View();
+    }
+}
+
+
+<h2 class="text-danger">ViewData</h2>
+<p>@ViewData["Message"]</p>
+<p>@ViewData["CurrentDateTime"]</p>
+<h2 class="text-danger">Passing Array Using ViewData</h2>
+@foreach (string i in (string[])ViewData["CourseArray"])
+{
+    <li>@i</li>
+}
+<h2 class="text-danger">Passing List Using ViewData</h2>
+@foreach (string i in (List<string>)ViewData["SportsList"])
+{
+    <li>@i</li>
+}
+<h2 class="text-danger">Passing Object Using ViewData</h2>
+@{ 
+    var employees = (MvcTutorialDemo.Models.Employee)ViewData["Employee"];
+}
+<ul>
+    <li>@employees.Id</li>
+    <li>@employees.Name</li>
+    <li>@employees.Age</li>
+    <li>@employees.Role</li>
+</ul>
+
+
+2.VieBag : The ViewBag in ASP.NET MVC is a dynamic object that provides a convenient way to pass data from a controller to a view.
+Syntax ViewBag.IdentifierName = ";
+
+//ViewBag
+ViewBag.Message = "Message From ViewBag";
+ViewBag.CurrentDateTime = DateTime.Now;
+ViewBag.CourseArray = course;
+ViewBag.SportsList = new List<string>() {
+"Cricket","Hockey","Football","Kabaddi"
+};
+ViewBag.Employee = emp;
+
+<hr class=" text-secondary" />
+<h2 class="text-danger">ViewBag</h2>
+<p>@ViewBag.Message</p>
+<p>@ViewBag.CurrentDateTime</p>
+<h2 class="text-danger">Passing Array Using ViewBag</h2>
+@foreach (var i in (string[])ViewBag.CourseArray)
+{
+    <li>@i</li>
+}
+<h2 class="text-danger">Passing List Using ViewBag</h2>
+@foreach (var i in (List<string>)ViewBag.SportsList)
+{
+    <li>@i</li>
+}
+@{
+    var emp = ViewBag.Employee as MvcTutorialDemo.Models.Employee;
+}
+<h2 class="text-danger">Passing Object Using ViewBag</h2>
+<ul>
+    <li>@emp.Id</li>
+    <li>@emp.Name</li>
+    <li>@emp.Age</li>
+    <li>@emp.Role</li>
+</ul>
+
+3.TempData : TempData : TempData in ASP.NET MVC is used to pass data from one action method to another. It stores data temporarily and automatically removes it after it has been read. TempData is particularly useful for redirection scenarios where data needs to be persisted across multiple requests.
+ TempData is a Dictionary object derived from the TempData Dictionary.
+ TempData stores data as key pairs.TempData["Key]="Value"
+ TempData must be typecast before use.
+ Check for null values to avoid runtime errors.
+ TempData allows passing data from the current request to the subsequent request during request redirection.
+Syntax: 
+TempData["key"] = Value;
+ key is a string value to identify the object present in Template.
+        value is the object present in template.
+        TempData in Asp.Net MVC can be used to store temporary data which can be used in the subsequent request.TempData will be cleared out after the compilation of a subsequent request.
+        Call TempData.Keep() to keep all the values of TempData in the third request.
+
+
+
+//TempData
+TempData["Message"] = "Message From TempData";
+TempData["CurrentDateTime"] = DateTime.Now;
+TempData["CourseArray"] = course;
+TempData["SportsList"] = new List<string>() {
+"Cricket","Hockey","Football","Kabaddi"
+};
+TempData["Employee"] = emp;
+return RedirectToAction("About");
+
+
+
+ public ActionResult About()
+ {
+     if (TempData["Message"] != null)
+     {
+         ViewBag.Msg = TempData["Message"].ToString().Trim();
+         //ViewBag.Msg2 = ViewData["Message"].ToString().Trim();
+         //ViewBag.Msg3 = ViewBag.Message.ToString().Trim();
+     }
+     TempData.Keep();
+     return View();
+ } 
+ public ActionResult Contact()
+ {
+     if (TempData["Message"] != null)
+     {
+         ViewBag.Msg = TempData["Message"].ToString().Trim();
+         //ViewBag.Msg2 = ViewData["Message"].ToString().Trim();
+         //ViewBag.Msg3 = ViewBag.Message.ToString().Trim();
+     }
+     //TempData.Keep();
+     return View();
+ }
+
+
+<hr class=" text-secondary" />
+<h2 class="text-danger">TempData</h2>
+<p>@TempData["Message"]</p>
+<p>@TempData["CurrentDateTime"]</p>
+<h2 class="text-danger">Passing Array Using TempData</h2>
+@foreach (var i in (string[])TempData["CourseArray"])
+{
+    <li>@i</li>
+}
+<h2 class="text-danger">Passing List Using TempData</h2>
+@foreach (var i in (List<string>)TempData["SportsList"])
+{
+    <li>@i</li>
+}
+@{
+    var emp2 = TempData["Employee"] as MvcTutorialDemo.Models.Employee;
+
+
+
+}
+<h2 class="text-danger">Passing Object Using TempData</h2>
+<ul>
+    <li>@emp2.Id</li>
+    <li>@emp2.Name</li>
+    <li>@emp2.Age</li>
+    <li>@emp2.Role</li>
+</ul>
+
+
+//Session : Session:Session is a property of controller class whose type is HttpSessionStateBase.
+Session is also used to passed datawithin the asp.Net MVC application and unlike TempData.
+it presist for its expiration time(default time is 20 minutes but it can be increased).
+Session is valid for all request,not for a single redirect.
+it also requires type casting for getting data and check for null value to avoid errors.
+Session has a performence drawback because it slow daown the application that's why it is not recommended to always use Session,Session can be used to according to the situation.
+
+  // GET: Home
+  public ActionResult Index()
+  {
+      //ViewData
+      ViewData["Message"] = "Message From ViewData";
+      ViewData["CurrentDateTime"] = DateTime.Now;
+      string[] course = { "C", "C++", "Java" };
+      ViewData["CourseArray"] = course;
+      ViewData["SportsList"] = new List<string>() { 
+      "Cricket","Hockey","Football","Kabaddi"
+      };
+      Employee emp = new Employee();
+      emp.Id = 1;
+      emp.Name = "Abhijeet Roy";
+      emp.Age = 30;
+      emp.Role = "Developer";
+      ViewData["Employee"] = emp;
+
+      //ViewBag
+      ViewBag.Message = "Message From ViewBag";
+      ViewBag.CurrentDateTime = DateTime.Now;
+      ViewBag.CourseArray = course;
+      ViewBag.SportsList = new List<string>() {
+      "Cricket","Hockey","Football","Kabaddi"
+      };
+      ViewBag.Employee = emp;
+
+      //TempData
+      TempData["Message"] = "Message From TempData";
+      TempData["CurrentDateTime"] = DateTime.Now;
+      TempData["CourseArray"] = course;
+      TempData["SportsList"] = new List<string>() {
+      "Cricket","Hockey","Football","Kabaddi"
+      };
+      TempData["Employee"] = emp;
+      //return RedirectToAction("About");
+
+      //Session
+      Session["Message"] = "Message From Session";
+      Session["CurrentDateTime"] = DateTime.Now;
+      Session["CourseArray"] = course;
+      Session["SportsList"] = new List<string>() {
+      "Cricket","Hockey","Football","Kabaddi"
+      };
+      Session["Employee"] = emp;
+      return RedirectToAction("About");
+      //return View();
+  }
+
+  public ActionResult About()
+  {
+      if (TempData["Message"] != null)
+      {
+          ViewBag.Msg = TempData["Message"].ToString().Trim();
+          //ViewBag.Msg2 = ViewData["Message"].ToString().Trim();
+          //ViewBag.Msg3 = ViewBag.Message.ToString().Trim();
+      }
+      TempData.Keep();
+//Session
+      if (Session["Message"] != null)
+      {
+          ViewBag.Message = Session["Message"].ToString().Trim();
+      }
+      return View();
+  } 
+  public ActionResult Contact()
+  {
+      if (TempData["Message"] != null)
+      {
+          ViewBag.Msg = TempData["Message"].ToString().Trim();
+          //ViewBag.Msg2 = ViewData["Message"].ToString().Trim();
+          //ViewBag.Msg3 = ViewBag.Message.ToString().Trim();
+      }
+      //TempData.Keep();
+//Session
+      if (Session["Message"] != null)
+      {
+          ViewBag.Message = Session["Message"].ToString().Trim();
+      }
+      return View();
+  }
+
+//Index page
+<hr class=" text-secondary" />
+<h2 class="text-danger">Session</h2>
+<p>@Session["Message"]</p>
+<p>@Session["CurrentDateTime"]</p>
+<h2 class="text-danger">Passing Array Using Session</h2>
+@foreach (var i in (string[])Session["CourseArray"])
+{
+    <li>@i</li>
+}
+<h2 class="text-danger">Passing List Using Session</h2>
+@foreach (var i in (List<string>)Session["SportsList"])
+{
+    <li>@i</li>
+}
+@{
+    var emp3 = Session["Employee"] as MvcTutorialDemo.Models.Employee;
+}
+<h2 class="text-danger">Passing Object Using Session</h2>
+<ul>
+    <li>@emp3.Id</li>
+    <li>@emp3.Name</li>
+    <li>@emp3.Age</li>
+    <li>@emp3.Role</li>
+</ul>
+
+//About and Contact Page 
+<p>Session</p>
+@ViewBag.Message
+
+//Web.config
+  <system.web>
+	 <!--  whole application to follow the same timeout-->
+	  <sessionState timeout="10"/>
+	  <!--  whole application to follow the same timeout-->
+    <compilation debug="true" targetFramework="4.8.1" />
+    <httpRuntime targetFramework="4.8.1" />
+  </system.web>
+
+
+//Global.asax
+
+namespace MvcTutorialDemo
+{
+    public class MvcApplication : System.Web.HttpApplication
+    {
+        protected void Application_Start()
+        {
+            AreaRegistration.RegisterAllAreas();
+            RouteConfig.RegisterRoutes(RouteTable.Routes);
+        }
+
+        protected void Session_Satrt(object sender , EventArgs e)
+        {
+            //set it dynamically:
+            Session.Timeout = 20;//TimeOut in Minutes
+        }
+    }
+}

@@ -1,0 +1,88 @@
+#include <iostream>
+using namespace std;
+int main() {
+//String Concatenation
+string first = "john ";
+string last = "doe";
+string test = "XYZ";
+//string fullname = first + last;
+string fullname = first+" "+last+" "+test;
+cout<<fullname<<endl;
+//Append
+string name = first.append(last);
+cout<<name;
+    return 0;
+}
+
+2.C++ Numbers and Strings : WARNING!
+
+C++ uses the + operator for both addition and concatenation.
+
+Numbers are added. Strings are concatenated.
+
+.C++ String Length : To get the length of a string, use the length() function:
+#include <iostream>
+using namespace std;
+int main() {
+//String Length
+string text="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+cout<<"The length of txt string is :-"<<text.length();
+
+    return 0;
+}
+
+4.Access Strings : wecan access the characters in a string by referring to its index number inside square brackets [].
+#include <iostream>
+using namespace std;
+int main() {
+//4.Access  String 
+string text="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+cout<<text[9];
+text[9]='A';
+cout<<text[9];
+    return 0;
+}
+
+5.C++ User Input Strings : However, cin considers a space (whitespace, tabs, etc) as a terminating character, which means that it can only store a single word (even if you type many words.
+
+That's why, when working with strings, we often use the getline() function to read a line of text. It takes cin as the first parameter, and the string variable as second:
+
+#include <iostream>
+using namespace std;
+int main() {
+//4.Access  String 
+string text;
+cout<<"enter any string:-";
+getline(cin,text);
+cout<<"your Name is :- "<<text;
+    return 0;
+}
+
+
+Polymorphism
+1.Compile time - Method Overloading 
+2.Runtime - Method Overriding - Function overriding is a concept of object-oriented programming which allows a derived class to redefine a function that is already defined in the base class.
+#include <iostream>
+using namespace std;
+class A{
+  public:
+  virtual void Fun()
+  {
+      cout<<"A is Running...!";
+  }
+};
+class B : public A
+{
+  public:
+  void  Fun() override
+  {
+      cout<<"B is Running...!";
+  }
+};
+int main() {
+A *a1;
+B b1;
+a1 = &b1;
+a1->Fun();
+    return 0;
+}

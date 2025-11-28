@@ -1,0 +1,380 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MyAdmin.master.cs" Inherits="ENOSISLEARNING.MyAdmin" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">   
+    <title>Enosis Learning</title>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.ico"/>
+     <%-- Font Style --%>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond&display=swap"/>
+    <!-- Boxicons CSS -->
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <link href="../Layout_file/libs/flot/css/float-chart.css" rel="stylesheet"/>
+    <link href="../Layout_file/css/style.min.css" rel="stylesheet"/>
+    <link href="css/MyAdmin.css" rel="stylesheet" />
+    <script  src="https://www.googletagmanager.com/gtag/js?id=UA-35962033-1"></script>
+    <link rel="stylesheet" href="css/font-awesome.min.css" />
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.ico"/>
+     <%-- Font Style --%>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond&display=swap"/>
+    <%-- Bootstrap CSS --%>
+    <link href="css/bootstrap-min.css" rel="stylesheet" />
+    <!-- Boxicons CSS -->
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <%-- Font Awesome --%>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+     <script>
+         window.dataLayer = window.dataLayer || [];
+         function gtag() { dataLayer.push(arguments); }
+         gtag('js', new Date());
+
+         gtag('config', 'UA-35962033-1');
+     </script>
+    <style>
+       
+.icon-content .menu2 {
+    width:200px;
+    display: none; 
+    position: absolute; 
+    top: 81%; 
+    left: -150px;
+    border: 0px solid #ccc; 
+    padding: 10px; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    z-index: 1000;
+}
+.icon-content .menu2 a {
+    display: block; 
+    color: #333; 
+    text-decoration: none;
+    padding: 6px 10px; 
+    background-color:white;
+}
+
+.icon-content .menu2 a:hover {
+  background-color: white;
+}
+
+.icon-content:hover .menu2 {
+    display: block;
+}
+
+.menu2 {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+#lnkLogout:hover
+{
+   color:red;
+}
+    #uploadDiv {
+        position: fixed;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #ccc;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        text-align: center;
+        z-index: 1000;
+    }
+    /* Ensure modal is centered */
+.modal-dialog {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 70vh; /* Full screen height */
+}
+
+/* Modern Glassmorphism Effect */
+.stylish-modal {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.5s ease-in-out;
+    max-width: 500px; /* Set a max width */
+    width: 100%;
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Stylish Modal Header */
+.modal-header {
+    background-color:transparent;
+    color: white;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+/* Stylish Modal Text */
+.modal-text {
+    font-size: 16px;
+    color: white;
+    text-align: center;
+    font-weight: 500;
+}
+
+/* Select Box Styling */
+.stylish-select {
+    border: 2px solid #685b7b;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 16px;
+}
+
+/* Button Styling */
+.stylish-btn {
+    background: linear-gradient(135deg, #007bff, #6610f2);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.stylish-btn:hover {
+    background: linear-gradient(135deg, #6610f2, #007bff);
+    color: white;
+}
+
+/* Save Button */
+.stylish-save {
+    background: #28a745;
+    border-radius: 8px;
+    font-weight: 600;
+    padding: 10px 15px;
+    transition: 0.3s;
+}
+
+.stylish-save:hover {
+    background: #218838;
+}
+</style>
+     <script type="text/javascript">
+         function openModal() {
+
+             //$('#myModal').modal();
+             $("#myModal").modal('show');
+         }
+     </script>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div id="myModal" class="modal fade" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color:dodgerblue;">
+        <h5 class="modal-title display-5 text-light" id="myModallabel">Add Enquiry</h5>
+        <button type="button" class="btn-close text-danger" data-bs-dismiss="modal" aria-label="Close">
+        </button>
+      </div>
+     <!-- Modal Body -->
+        <div class="modal-body">
+        </div>
+    </div>
+    </div>
+</div>
+        <%-- Upload Prifle Picture --%>
+        <div id="uploadDiv" runat="server" visible="false">
+            <asp:FileUpload ID="FileUpload1" runat="server" />
+            <br /><br />
+            <asp:Button ID="btnUpload" runat="server" Text="Upload" OnClick="btnUpload_Click" CausesValidation="false"/>
+            <span style="margin:5px"></span>
+            <asp:Button ID="btnClose" runat="server" Text="Close" OnClick="btnClose_Click" CausesValidation="false"/>
+        </div>
+        <%-- Upload Prifle Picture --%>
+                    <%-- ///////////////////////Navbar Starts Here //////////////////////--%>
+                <nav role="navigation" class="navbar">
+                    <%-- ///////////////////////Icon's Section Starts Here //////////////////////--%>
+                    <div class="icons">
+                        <div class="icon-content">
+                            <i class="bx bx-home"></i>
+                        </div>
+                       <div class="icon-content position-relative" href="#">
+                           <!-- Hidden field to store Faculty ID -->
+                         <input type="hidden" id="CandidateIDHidden" value="<%= Session["FACULTYID"] != null ?Session["FACULTYID"].ToString() : "" %>" />
+                            <!-- Notification Bell Icon -->
+                           <a href="BatchApproval.aspx" style="text-decoration:none;background:none">
+                                <i class='bx bx-bell' style="font-size: 24px; cursor: pointer;"></i>
+                                 <!-- Notification Count Badge -->
+                                 <span id="notificationCount" class="badge bg-danger position-absolute top-0 start-100 translate-middle rounded-circle" style="font-size: 8px; min-width: 20px;position:relative;top:-25px;left:10px;background-color:#ccc;color:red;" runat="server">
+                                 </span>
+                           </a>
+                        </div>
+                        <div class="icon-content">
+                             <i class="bx bx-envelope"></i>
+                        </div>
+                        <div class="icon-content">
+                            <asp:Image ID="imgProfilePreview" ImageUrl="~/Images/add.png" runat="server" CssClass="profile"/>
+                            <div class="menu2">
+                                <a href="#">
+                                    <asp:Label ID="lbltxt" Text="text" runat="server" style="color:#333;font-weight:normal;font-family: 'Montserrat', sans-serif;font-size:15px;margin-left:-5px;"/>
+                                </a>
+                               <a href="#"  data-bs-toggle="modal"  data-bs-target="#myModal">
+                                    <asp:LinkButton ID="lnkUploadProfile" runat="server" 
+                                            Style="color:#333;font-weight:normal;font-family: 'Montserrat', sans-serif;
+                                                   font-size:15px;margin-left:0px;text-decoration:none;" OnClick="lnkUploadProfile_Click" CausesValidation="false">
+                                            Change Image
+                                        </asp:LinkButton>
+                                </a>
+                                <a href="#">
+                                     <asp:LinkButton ID="lnkLogout" runat="server" OnClick="lnkLogout_Click" style="color:#333;font-weight:normal;font-family: 'Montserrat', sans-serif;font-size:12px;margin-top:-15px;" CausesValidation="false">Log-Out</asp:LinkButton>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <%-- ///////////////////////Icon's Section Ends Here //////////////////////--%>
+                    <%-- ///////////////////////left-section Starts Here //////////////////////--%>
+                    <div class="left-section">
+                         <%-- ///////////////////////Logo Section Starts Here //////////////////////--%>
+                        <div class="logo">
+                            <%-- <img src="Images/favicon.ico" alt="">--%><span style="position:relative;top:3px;left:-5px;font-size:20px !important;">Enosis</span><span style="position:relative;top:3px;left:-5px;font-size:20px !important;">&nbsp;Learning</span>
+                        </div>
+                         <%-- ///////////////////////Logo Section Ends Here //////////////////////--%>
+                         <%-- ///////////////////////Hamburger Section Starts Here //////////////////////--%>
+                        <div class="hamburger" style="position:relative;left:0;bottom:4px">
+                            <div id="menuToggle">
+                                <input type="checkbox" />
+                                 <span></span>
+                                 <span></span>
+                                 <span></span>
+                                 <ul id="menu">
+                                   <li>
+                                       <div class="icon-container">
+                                           <a href="BatchesDetails.aspx"><i class="bx bx-carousel"></i>
+                                           <i class="text">BatchSheet</i></a>
+                                       </div>
+                                   </li>
+                                   <li>
+                                     <div class="icon-container">
+                                         <a href="SearchCandidate.aspx"><i class="bx bx-female"></i>
+                                         <i class="text">&nbsp; Candidate</i></a>
+                                     </div>
+                                 </li>
+                                 <li>
+                                    <div class="icon-container">
+                                        <a href="Enquiries.aspx"><i class="bx bx-run"></i>
+                                        <i class="text">Enquiry</i></a>
+                                   </div>
+                                </li>
+                                 <li>
+                                    <div class="icon-container">
+                                        <a href="Question_Status.aspx"><i class="bx bx-code-curly"></i>
+                                        <i class="text">Question</i></a>
+                                   </div>
+                                </li>
+                                <li>
+                                  <div class="icon-container">
+                                       <a href="View_Certificate.aspx"><i class="bx bx-certification"></i>
+                                       <i class="text">&nbsp; Certificate</i></a>
+                                  </div>
+                                </li>
+                                <li>
+                                  <div class="icon-container">
+                                       <a href="SoftwareCourses.aspx"><i class="bx bx-book"></i>
+                                       <i class="text">Courses</i></a>
+                                  </div>
+                                </li>
+                                <li>
+                                  <div class="icon-container">
+                                       <a href="UserDetails.aspx"><i class="bx bx-search-alt-2"></i>
+                                       <i class="text">Details</i></a>
+                                  </div>
+                                </li>
+                                <li>
+                                  <div class="icon-container">
+                                       <a href="ViewCompany.aspx"><i class="bx bx-buildings"></i>
+                                       <i class="text">Company</i></a>
+                                  </div>
+                                </li> 
+                                <li>
+                                  <div class="icon-container">
+                                       <a href="ViewVacancy.aspx"><i class="bx bx-broadcast"></i>
+                                       <i class="text">Vacancy</i></a>
+                                  </div>
+                                </li>
+                                <li>
+                                  <div class="icon-container">
+                                       <a href="profiles.aspx"><i class="bx bx-user-pin"></i>
+                                       <i class="text">Profiles</i></a>
+                                  </div>
+                                </li>
+                                 </ul>
+                            </div>
+                        </div>
+                         <%-- ///////////////////////Hamburger Section Starts Here //////////////////////--%>
+                    </div>
+                    <%-- ///////////////////////left-section Ends Here //////////////////////--%>
+                </nav>
+              <%-- ///////////////////////Navbar Ends Here //////////////////////--%>
+              <%-- ///////////////////////Menu Bar Starts Here //////////////////////--%>
+                <div class="main" style="background-color:#e7f2fd;">
+                    <div class="menu"><a href="BatchesDetails.aspx">Batches</a></div>
+                    <div class="menu">
+                        <a href="SearchCandidate.aspx">Candidate</a>
+                    </div>
+                    <div class="menu"><a href="Enquiries.aspx">Enquiry</a></div>
+                    <div class="menu">
+                        <a href="Question_Status.aspx">Questions</a>
+                    </div>
+           <%--         added by maya --%>
+                    <div class="menu"><a href="SearchVacancy.aspx">Vacancy</a>  
+                    </div>  
+
+                    <div class="menu"><a href="SoftwareCourses.aspx">Courses</a>  </div> 
+                    <div class="menu"><a href="UserDetails.aspx">Users</a>  </div> 
+                    <div class="menu"><a href="TskManager.aspx">Tasks</a>  </div>
+
+
+                    
+                    <div class="menu"><a href="#">Admin</a>
+                         <div class="drop-menu">
+                             <a href="ContactManager.aspx">View Contacts</a>
+                             <a href="ViewCompany.aspx">Company</a>     
+                             <a href="View_Certificate.aspx">Certificate</a>
+                             <a href="DocumentManager.aspx">DocumentManager</a>
+                             <a href="NewImageManager.aspx">ImageManager</a>
+                             <a href="PhotoClickByCamera.aspx">ClickPhoto</a>
+                             <a href="Pincode.aspx">PinCode</a>
+                             <a href="UPIpay.aspx">UPI Payment</a>
+                             <a href="DataBase.aspx">View All Tables</a>
+                         </div>
+                     </div>
+                    <div class="menu"><a href="profiles.aspx">Profiles</a></div>
+                </div>
+              <%-- ///////////////////////Menu Bar Ends Here //////////////////////--%>
+             <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+                 <asp:Label ID="lblMessage" runat="server" />
+            </div>
+         <%-- ///////////////////////Footer Starts Here //////////////////////--%>
+       <footer>
+           <div class="footer-content">
+               <p>&copy; <span id="copyright-year"></span>Enosis Learning All Rights Reserved 2025</p>
+           </div>
+       </footer>
+<%-- ///////////////////////Footer Ends Here //////////////////////--%>
+    </form>
+    <!-- jQuery (Required for Bootstrap Modals) -->
+    <script type="text/javascript" src="Scripts/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="Scripts/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</body>
+</html>

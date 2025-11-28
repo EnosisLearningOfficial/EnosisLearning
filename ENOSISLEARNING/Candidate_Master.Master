@@ -1,0 +1,318 @@
+﻿I<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Candidate_Master.master.cs" Inherits="ENOSISLEARNING.Candidate_Master" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+      <title></title>
+     <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+ 
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.ico"/>
+  
+    <!-- Custom CSS -->
+    <link href="../Layout_file/libs/flot/css/float-chart.css" rel="stylesheet"/>
+    <!-- Custom CSS -->
+    <link href="../Layout_file/css/style.min.css" rel="stylesheet"/>
+   
+   
+     <script  src="https://www.googletagmanager.com/gtag/js?id=UA-35962033-1"></script>
+
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-35962033-1');
+</script>
+    <style>
+        *
+        {
+            margin : 0px;
+            padding : 0px;
+        }
+        html,body
+        {
+            width:100%;
+            height:100%;
+        }
+        /* Show the dropdown menu on hover */
+.nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+/* Style the dropdown menu */
+.dropdown-menu {
+    display: none; /* Hide by default */
+    position: absolute;
+    top: 100%; /* Position below the trigger */
+    right: 0; /* Align to the right */
+    z-index: 1000;
+    min-width: 200px;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px 15px;
+}
+
+/* Add hover effect to dropdown items */
+.dropdown-item {
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    color: #333;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.dropdown-item:hover {
+    background-color: #f1f1f1;
+    text-decoration: none;
+    color: #000;
+}
+
+    </style>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper" style="margin-top:-21px">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+        <header class="topbar" data-navbarbg="skin5">
+            <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+                <div class="navbar-header" data-logobg="skin5">
+                    <!-- This is for the sidebar toggle which is visible on mobile only -->
+                    <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
+                    <!-- ============================================================== -->
+                    <!-- Logo -->
+                    <!-- ============================================================== -->
+                    <a class="navbar-brand" href="index.aspx">
+                        <!-- Logo icon -->
+                        <b class="logo-icon p-l-10">
+                            <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
+                            <!-- Dark Logo icon -->
+                            <img src="images/favicon.ico" width="30" height="30" alt="homepage" class="light-logo" style="margin-top:10px;"/>
+                           
+                        </b>
+                        <!--End Logo icon -->
+                         <!-- Logo text -->
+                       <%-- <span class="logo-text">
+                             <!-- dark Logo text -->
+                             <img src="../Layout_file/images/enosislogo.png" alt="homepage" class="light-logo" />
+                            
+                        </span>--%>
+                        <!-- Logo icon -->
+                        <!-- <b class="logo-icon"> -->
+                            <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
+                            <!-- Dark Logo icon -->
+                            <!-- <img src="../../assets/images/logo-text.png" alt="homepage" class="light-logo" /> -->
+                            
+                        <!-- </b> -->
+                        <!--End Logo icon -->
+                    </a>
+                    <!-- ============================================================== -->
+                    <!-- End Logo -->
+                    <!-- ============================================================== -->
+                    <!-- ============================================================== -->
+                    <!-- Toggle which is visible on mobile only -->
+                    <!-- ============================================================== -->
+                    <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i class="ti-more"></i></a>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End Logo -->
+                <!-- ============================================================== -->
+                <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
+                    <!-- ============================================================== -->
+                    <!-- toggle and nav items -->
+                    <!-- ============================================================== -->
+                    <ul class="navbar-nav float-left mr-auto">
+                        <li class="nav-item d-none d-md-block"><a class="nav-link sidebartoggler waves-effect waves-light" href="javascript:void(0)" data-sidebartype="mini-sidebar"><%--<i class="mdi mdi-menu font-24"></i>--%><img src="Layout_file/images/menusideicon.png" alt="img" width="30" height="30" style="margin-top:15px;"/></a></li>
+                        <!-- ============================================================== -->
+                       
+                    </ul>
+                    <!-- ============================================================== -->
+                    <!-- Right side toggle and nav items -->
+                    <!-- ============================================================== -->
+                    <ul class="navbar-nav float-right">
+                       
+
+                        <!-- ============================================================== -->
+                        <!-- User profile and search -->
+                        <!-- ============================================================== -->
+                       <%-- <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../Layout_file/images/users/1.jpg" alt="user" class="rounded-circle" width="31" style="margin-top:15px;"/></a>
+                            <div class="dropdown-menu dropdown-menu-right user-dd animated">
+                                <a class="dropdown-item " id="hyklogoff" href="javascript:void(0)" runat="server"><i class="ti-user m-r-5 m-l-5"></i> <asp:Label id="lblusername" runat="server" ></asp:Label></a>
+                              
+                                <a class="dropdown-item" id="hyperlogin" runat="server" ><i class="fa fa-power-off m-r-5 m-l-5"></i> <asp:Label id="login" runat="server" /> </a>
+                                <div class="dropdown-divider"></div>
+                               
+                            </div>
+                        </li>--%>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../Layout_file/images/users/1.jpg" alt="user" class="rounded-circle" width="31" style="margin-top:15px;"/></a>
+                            <div class="dropdown-menu dropdown-menu-right user-dd animated">
+                                <a class="dropdown-item " id="hyklogoff" href="javascript:void(0)" runat="server"><i class="ti-user m-r-5 m-l-5"></i> <asp:Label id="lblusername" runat="server" ></asp:Label></a>
+                              
+                                <a class="dropdown-item" id="hyperlogin" runat="server" ><asp:Label id="login" runat="server" /> </a>
+                                <div class="dropdown-divider"></div>
+                               
+                            </div>
+                        </li>
+
+                        <!-- ============================================================== -->
+                        <!-- User profile and search -->
+                        <!-- ============================================================== -->
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- ============================================================== -->
+        <!-- End Topbar header -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <aside class="left-sidebar" data-sidebarbg="skin5">
+            <!-- Sidebar scroll-->
+            <div class="scroll-sidebar">
+                <!-- Sidebar navigation-->
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav" class="p-t-30">
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="StudentIndex.aspx" aria-expanded="false">
+                            <img src="Layout_file/images/student.png" width="30" height="30" /><span class="hide-menu">Dashboard</span></a></li>
+
+                      <%--  <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="View_Certificate.aspx" aria-expanded="false"><img src="Layout_file/images/question.png" width="25" height="25" /><span class="hide-menu">  Certificate </span></a>
+                          
+                        </li>
+                      --%> 
+                       
+                      
+                      
+                    </ul> 
+                    <ul id="sidebarnav11" class="p-t-30">
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="Candidate.aspx" aria-expanded="false">
+                            <img src="Layout_file/images/student.png" width="30" height="30" /><span class="hide-menu">Candidate</span></a></li>
+
+                      <%--  <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="View_Certificate.aspx" aria-expanded="false"><img src="Layout_file/images/question.png" width="25" height="25" /><span class="hide-menu">  Certificate </span></a>
+                          
+                        </li>
+                      --%> 
+                       
+                      
+                      
+                    </ul>
+                     <ul id="sidebarnav2" class="p-t-30">
+                     <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="CandidateResult.aspx" aria-expanded="false">
+                         <img src="Layout_file/images/student.png" width="30" height="30" /><span class="hide-menu">Report Card</span></a></li>
+
+                   <%--  <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="View_Certificate.aspx" aria-expanded="false"><img src="Layout_file/images/question.png" width="25" height="25" /><span class="hide-menu">  Certificate </span></a>
+       
+                     </li>
+                   --%> 
+    
+   
+   
+                 </ul>
+                     <ul id="sidebarnav3" class="p-t-30">
+                     <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="Candidate.aspx" aria-expanded="false">
+                         <img src="Layout_file/images/student.png" width="30" height="30" /><span class="hide-menu">Topicss</span></a></li>
+
+                   <%--  <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="View_Certificate.aspx" aria-expanded="false"><img src="Layout_file/images/question.png" width="25" height="25" /><span class="hide-menu">  Certificate </span></a>
+       
+                     </li>
+                   --%> 
+    
+   
+   
+                 </ul>
+                     <ul id="sidebarnav4" class="p-t-30">
+                     <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="Candidate.aspx" aria-expanded="false">
+                         <img src="Layout_file/images/student.png" width="30" height="30" /><span class="hide-menu">Fees</span></a></li>
+
+                   <%--  <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="View_Certificate.aspx" aria-expanded="false"><img src="Layout_file/images/question.png" width="25" height="25" /><span class="hide-menu">  Certificate </span></a>
+       
+                     </li>
+                   --%> 
+    
+   
+   
+                 </ul>
+                     <ul id="sidebarnav5" class="p-t-30">
+                     <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="Candidate.aspx" aria-expanded="false">
+                         <img src="Layout_file/images/student.png" width="30" height="30" /><span class="hide-menu">Certificate</span></a></li>
+
+                   <%--  <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="View_Certificate.aspx" aria-expanded="false"><img src="Layout_file/images/question.png" width="25" height="25" /><span class="hide-menu">  Certificate </span></a>
+       
+                     </li>
+                   --%> 
+    
+   
+   
+                 </ul>
+                </nav>
+                <!-- End Sidebar navigation -->
+            </div>
+            <!-- End Sidebar scroll-->
+        </aside>
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+         <div class="container-fluid ">
+                   <form id="form1" runat="server">
+  
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+    
+          </form>
+         </div>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+        
+         
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page wrapper  -->
+        <!-- ============================================================== -->
+    </div>
+ 
+   
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="../Layout_file/libs/popper.js/dist/umd/popper.min.js"></script>
+    <script src="../Layout_file/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../Layout_file/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+    <script src="../Layout_file/extra-libs/sparkline/sparkline.js"></script>
+    <!--Wave Effects -->
+    <script src="../Layout_file/js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="../Layout_file/js/sidebarmenu.js"></script>
+    <!--Custom JavaScript -->
+    <script src="../Layout_file/js/custom.min.js"></script>
+
+    <!-- Charts js Files -->
+    <script src="../Layout_file/libs/flot/excanvas.js"></script>
+    <script src="../Layout_file/libs/flot/jquery.flot.js"></script>
+    <script src="../Layout_file/libs/flot/jquery.flot.pie.js"></script>
+    <script src="../Layout_file/libs/flot/jquery.flot.time.js"></script>
+    <script src="../Layout_file/libs/flot/jquery.flot.stack.js"></script>
+    <script src="../Layout_file/libs/flot/jquery.flot.crosshair.js"></script>
+    <script src="../Layout_file/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
+    <script src="../Layout_file/js/pages/chart/chart-page-init.js"></script>
+</body>
+</html>

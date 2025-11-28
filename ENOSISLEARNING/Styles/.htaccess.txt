@@ -1,0 +1,5 @@
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^www\.enosislearning\.com$
+RewriteRule ^/?$ "http\:\/\/enosislearning\.com\/" [R=301,L]
+RewriteCond %{HTTP_HOST} !^www.enosislearning.com$ [NC]
+RewriteRule ^(.*)$ http://www.enosislearning.com/$1 [L,R=301]

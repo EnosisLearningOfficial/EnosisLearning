@@ -1,0 +1,182 @@
+--------------------Operators in SQL ---------------08-08-2025---------------------
+ /*In SQL, operators are special symbols or keywords that perform operations on one, two, or more operands (values or expressions) to produce a result. Operators can be categorized into several types based on the operations they perform. Here are the main categories of operators in SQL:*/
+
+--[1]Arithmetic Operator
+--[2]Comparison Operator
+--[3]Logical Operator
+
+--[1]Arithmetic Operator:In SQL, arithmetic refers to the use of arithmetic operators to perform mathematical calculations on numerical data types. Arithmetic operations can be applied to values in columns, constants, or expressions to produce results such as sums, differences, products, or quotients.
+CREATE TABLE Employee (
+    e_id INT PRIMARY KEY IDENTITY(1,1),                -- Employee ID
+    e_name CHAR(100),                   -- Employee Name
+    salary FLOAT,                        -- Salary
+    department VARCHAR(100),             -- Department
+    joiningDate DATETIME,                -- Joining Date
+    bitStatus BIT                        -- Status (0 or 1)
+);
+select * from Employee
+drop table Employee
+
+INSERT INTO Employee (e_id, e_name, salary, department, joiningDate, bitStatus)
+VALUES 
+('John Doe', 60000.00, 'Sales', '2022-01-15', 1),
+('Jane Smith', 75000.50, 'Marketing', '2021-03-10', 0),
+('Akira Tanaka', 80000.00, 'Engineering', '2020-07-22', 1),
+('Maria Garcia', 55000.75, 'HR', '2019-05-30', 0),
+('Chen Wei', 72000.25, 'Finance', '2023-09-01', 1),
+('John Doe', 60000.00, 'Sales', '01-15-2022', 0);
+
+--1. Addition (+)
+select 10+20 as Addition
+
+SELECT salary + 1000 AS NewSalary FROM Employee;
+select * from Employee
+
+--2. Subtraction (-)
+select 70-20 as Subtraction
+
+SELECT salary - 1000 AS NewSalary FROM Employee;
+select * from Employee
+
+--3. Multiplication (*)
+select 10*20 as Multiplication
+
+SELECT salary * 2 AS NewSalary FROM Employee;
+select * from Employee
+
+--4. Division (/)
+select 10/20 as Division
+
+SELECT salary / 2 AS NewSalary FROM Employee;
+select * from Employee
+
+--5. Modulo (%)
+select 10%20 as Division
+
+select 10%3 as Division
+
+--------------[2]Comparison Operator-----------------------
+/*In SQL, comparison operators are used to compare two values or expressions. They return a Boolean result: TRUE, FALSE, or NULL. These operators are essential for filtering data in WHERE clauses and are fundamental for constructing queries that involve conditions.*/
+
+--1. Equal To (=)
+--Retrieve employees whose department is 'Sales':
+SELECT * FROM Employee WHERE department = 'Sales';
+select * from Employee
+
+--2. Not Equal To (<> or !=)
+--Get employees whose department is not 'HR':
+SELECT * FROM Employee WHERE department != 'HR';
+select * from Employee
+
+--3. Greater Than (>)
+--Find employees with a salary greater than 60,000:
+SELECT * FROM Employee WHERE salary > 60000;
+select * from Employee
+
+--4. Greater Than or Equal To (>=)
+--Get employees with a salary of 60,000 or more:
+SELECT * FROM Employee WHERE salary >= 60000;
+select * from Employee
+
+--5. Less Than (<)
+--Retrieve employees whose salary is less than 60,000:
+SELECT * FROM Employee WHERE salary < 60000;
+select * from Employee
+
+--6. Less Than or Equal To (<=)
+--Find employees with a salary of 75,000 or less:
+SELECT * FROM Employee WHERE salary <= 60000;
+select * from Employee
+
+--7. BETWEEN Operator (for range comparisons)
+--Retrieve employees whose salary is between 60,000 and 80,000:
+SELECT * FROM Employee WHERE salary BETWEEN 60000 AND 80000;
+select * from Employee
+
+--8. IS NULL and IS NOT NULL
+--Assuming you had nullable fields, you could check for null values:
+SELECT * FROM Employee WHERE joiningDate IS NULL;
+select * from Employee
+
+--9. LIKE (for pattern matching)
+--	Like Operators:Is used to search string patterns in the query.
+
+--Using % Wildcard, 2. _(underscore),[]
+Example: 
+
+--Retrieve employees whose names start with 'J':
+SELECT * FROM Employee WHERE e_name LIKE 'J%'; --first list char j
+select * from Employee
+
+SELECT * FROM Employee WHERE e_name LIKE '%a'; --last list char a
+select * from Employee
+
+SELECT * FROM Employee WHERE e_name LIKE '__h%'; --first list 3rd char h
+select * from Employee
+
+SELECT * FROM Employee WHERE e_name LIKE '%k_'; --last list 2nd char k
+select * from Employee
+
+--show all names not starting with A
+SELECT * FROM Employee WHERE e_name LIKE '[^A]%'; --Not Starting list  char A
+select * from Employee
+ 
+
+----------------------------[3].logical operators-------------------
+
+/*In SQL, logical operators are used to combine multiple conditions in a WHERE clause or other conditional statements. These operators evaluate to a Boolean result: TRUE, FALSE, or NULL. Logical operators help refine queries by allowing you to specify complex criteria for selecting records.*/
+
+--1. AND Operator
+
+--The AND operator is used to combine two or more conditions, and all conditions must be true for the record to be selected.(1&1=1)
+
+--Example: Employees in Sales with Salary Greater Than 60,000.
+--Retrieve employees who work in the 'Sales' department and have a salary 60,000:
+select * from Employee
+SELECT * FROM Employee WHERE department = 'Sales' AND salary = 60000;
+
+--2. OR Operator
+--The OR operator is used to combine conditions, and if any condition is true, the record will be selected.
+--Example: Employees in Sales or Marketing
+--Find employees who are either in the 'Sales' department or in the 'Marketing' department:
+
+SELECT * FROM Employee WHERE department = 'Sales' OR salary = 500000;
+select * from Employee
+
+--3. NOT Operator
+--The NOT operator is used to reverse the result of a condition. If the condition is true, NOT makes it false, and vice versa.
+--Example: Employees Not in HR
+--Retrieve employees who are not in the 'HR' department:
+SELECT * FROM Employee WHERE Not bitStatus = '1';
+select * from Employee
+
+--4.Between Operator:
+SELECT e_id, e_name, salary FROM Employee WHERE salary BETWEEN 70000 AND 80000;
+SELECT * FROM Employee
+
+--5.IN (for matching against a set of values)
+--Find employees who are in either 'Sales' or 'Engineering':
+SELECT * FROM Employee WHERE department IN ('Sales', 'Engineering','HR');
+SELECT * FROM Employee
+
+SELECT * FROM Employee WHERE e_id IN (2,5,6,1);
+
+--6.ALL Operator:The ALL operator compares a value to all values in a subquery.
+--Example: 
+SELECT All e_name,salary,bitStatus FROM Employee
+SELECT * FROM Employee
+
+--7.ANY Operator:
+--Example:Let's say you want to find employees whose salary is greater than the salary of any employee in the "HR" department.
+SELECT e_id, e_name, salary,department
+FROM Employee
+WHERE salary > ANY (SELECT salary FROM Employee WHERE department = 'HR');
+
+select * from Employee
+
+--7.SOME operator:The SOME operator in SQL is similar to the ANY operator. It checks if at least one value returned by a subquery meets a specified condition. 
+SELECT e_id, e_name, salary
+FROM Employee
+WHERE salary > SOME (SELECT salary FROM Employee WHERE department = 'HR');
+
+select * from Employee;

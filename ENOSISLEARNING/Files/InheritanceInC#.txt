@@ -1,0 +1,391 @@
+OOPS
+
+1.Data Encaptulation--->Class And Objects
+2.Inheritance- in C# ingeritance allow us to create a new class class from existing class.this is a capability to inherit properties of a class to another class.
+
+    class Program
+    {
+        public class Car
+        {
+            //Data Members
+            private int CarNo;
+            private string ModelName;
+            private string Break;
+            private string Color;
+            private string Horn;
+            private string Engine;
+            private string Gear;
+            //Members Functions/Methods
+            public void SetData(int carNo, string modelName, string brake, string color, string horn, string engine, string gear)
+            {
+                CarNo = carNo;
+                ModelName = modelName;
+                Break = brake;
+                Color = color;
+                Horn = horn;
+                Engine = engine;
+                Gear = gear;
+            }
+            public void GetData()
+            {
+                Console.WriteLine("Car No: " + CarNo);
+                Console.WriteLine("Model Name: " + ModelName);
+                Console.WriteLine("Break: " + Break);
+                Console.WriteLine("Color: " + Color);
+                Console.WriteLine("Horn: " + Horn);
+                Console.WriteLine("Engine: " + Engine);
+                Console.WriteLine("Gear: " + Gear);
+            }
+
+        };
+        public class SuperCar : Car//Ingherited car Class
+        {
+            private string Navigation;
+            private string Internet;
+            private string Disc;
+            private string NOS;
+            private string Satalite;
+            public void SetSuperCarData(string navigation, string internet, string disc, string nos, string satalite)
+            {
+                Navigation = navigation;
+                Internet = internet;
+                Disc = disc;
+                NOS = nos;
+                Satalite = satalite;
+            }
+            public void GetSuperCarData()
+            {
+                Console.WriteLine("Navigation: " + Navigation);
+                Console.WriteLine("Internet: " + Internet);
+                Console.WriteLine("Disc: " + Disc);
+                Console.WriteLine("NOS: " + NOS);
+                Console.WriteLine("Satalite: " + Satalite);
+            }
+        };
+        public static void Main(string[] args)
+        {
+           Car c1 = new Car();
+            c1.SetData(1234, "Toyota", "ABS", "Red", "Loud", "V8", "Automatic");
+            c1.GetData();
+            SuperCar superCar = new SuperCar();
+            superCar.SetData(5678, "Lamborghini", "Ceramic", "Yellow", "Very Loud", "V12", "Semi-Automatic");
+            superCar.SetSuperCarData("Yes", "Yes", "Yes", "Yes", "Yes");
+            superCar.GetData();
+            superCar.GetSuperCarData();
+        }
+    }
+
+1.The Class from which a new class is created is known as as the Base Class Or Parent Class or Super Class and the new class is called Derived Class or Child Class or Sub class.
+
+1.Availibility
+2.Accessibility
+
+
+Protected Members in C# Inheritance
+when we declare a fild or mthod as protected, it can only be accessed from the same class and it's derived class.
+
+    class Program
+    {
+        public class Car
+        {
+            //Data Members
+            private int CarNo;
+            private string ModelName;
+            private string Break;
+            private string Color;
+            private string Horn;
+            private string Engine;
+            private string Gear;
+            //Members Functions/Methods
+            protected void SetData(int carNo, string modelName, string brake, string color, string horn, string engine, string gear)
+            {
+                CarNo = carNo;
+                ModelName = modelName;
+                Break = brake;
+                Color = color;
+                Horn = horn;
+                Engine = engine;
+                Gear = gear;
+            }
+            public void GetData()
+            {
+                Console.WriteLine("Car No: " + CarNo);
+                Console.WriteLine("Model Name: " + ModelName);
+                Console.WriteLine("Break: " + Break);
+                Console.WriteLine("Color: " + Color);
+                Console.WriteLine("Horn: " + Horn);
+                Console.WriteLine("Engine: " + Engine);
+                Console.WriteLine("Gear: " + Gear);
+            }
+
+        };
+        public class SuperCar : Car//Ingherited car Class
+        {
+            private string Navigation;
+            private string Internet;
+            private string Disc;
+            private string NOS;
+            private string Satalite;
+            public void SetSuperCarData(string navigation, string internet, string disc, string nos, string satalite)
+            {
+                Navigation = navigation;
+                Internet = internet;
+                Disc = disc;
+                NOS = nos;
+                Satalite = satalite;
+            }
+            public void GetSuperCarData()
+            {
+                Console.WriteLine("Navigation: " + Navigation);
+                Console.WriteLine("Internet: " + Internet);
+                Console.WriteLine("Disc: " + Disc);
+                Console.WriteLine("NOS: " + NOS);
+                Console.WriteLine("Satalite: " + Satalite);
+            }
+        };
+        public static void Main(string[] args)
+        {
+            Car c1 = new Car();
+            c1.SetData(1234, "Toyota", "ABS", "Red", "Loud", "V8", "Automatic");
+            c1.GetData();
+            SuperCar superCar = new SuperCar();
+            superCar.SetData(5678, "Lamborghini", "Ceramic", "Yellow", "Very Loud", "V12", "Semi-Automatic");
+            superCar.SetSuperCarData("Yes", "Yes", "Yes", "Yes", "Yes");
+            superCar.GetData();
+            superCar.GetSuperCarData();
+        }
+    }
+}
+
+
+
+//Types Of Inheritance
+
+1.Single Inheritance :in single inheritance a single class inherit from Single base class.
+        public class Car
+        {
+            //Data Members
+            private int CarNo;
+            private string ModelName;
+            private string Break;
+            private string Color;
+            private string Horn;
+            private string Engine;
+            private string Gear;
+            //Members Functions/Methods
+            protected void SetData(int carNo, string modelName, string brake, string color, string horn, string engine, string gear)
+            {
+                CarNo = carNo;
+                ModelName = modelName;
+                Break = brake;
+                Color = color;
+                Horn = horn;
+                Engine = engine;
+                Gear = gear;
+            }
+            public void GetData()
+            {
+                Console.WriteLine("Car No: " + CarNo);
+                Console.WriteLine("Model Name: " + ModelName);
+                Console.WriteLine("Break: " + Break);
+                Console.WriteLine("Color: " + Color);
+                Console.WriteLine("Horn: " + Horn);
+                Console.WriteLine("Engine: " + Engine);
+                Console.WriteLine("Gear: " + Gear);
+            }
+
+        };
+        public class SuperCar : Car//Ingherited car Class
+        {
+            private string Navigation;
+            private string Internet;
+            private string Disc;
+            private string NOS;
+            private string Satalite;
+            public void SetSuperCarData(string navigation, string internet, string disc, string nos, string satalite)
+            {
+                Navigation = navigation;
+                Internet = internet;
+                Disc = disc;
+                NOS = nos;
+                Satalite = satalite;
+            }
+            public void GetSuperCarData()
+            {
+                Console.WriteLine("Navigation: " + Navigation);
+                Console.WriteLine("Internet: " + Internet);
+                Console.WriteLine("Disc: " + Disc);
+                Console.WriteLine("NOS: " + NOS);
+                Console.WriteLine("Satalite: " + Satalite);
+            }
+        };
+
+2.Multilevel Inheritance : a derived class inherits from a base class and then the same derive class acts as a base class for another class.
+
+        public class Car
+        {
+            //Data Members
+            private int CarNo;
+            private string ModelName;
+            private string Break;
+            private string Color;
+            private string Horn;
+            private string Engine;
+            private string Gear;
+            //Members Functions/Methods
+            protected void SetData(int carNo, string modelName, string brake, string color, string horn, string engine, string gear)
+            {
+                CarNo = carNo;
+                ModelName = modelName;
+                Break = brake;
+                Color = color;
+                Horn = horn;
+                Engine = engine;
+                Gear = gear;
+            }
+            public void GetData()
+            {
+                Console.WriteLine("Car No: " + CarNo);
+                Console.WriteLine("Model Name: " + ModelName);
+                Console.WriteLine("Break: " + Break);
+                Console.WriteLine("Color: " + Color);
+                Console.WriteLine("Horn: " + Horn);
+                Console.WriteLine("Engine: " + Engine);
+                Console.WriteLine("Gear: " + Gear);
+            }
+
+        };
+        public class SuperCar : Car//Ingherited car Class
+        {
+            private string Navigation;
+            private string Internet;
+            private string Disc;
+            private string NOS;
+            private string Satalite;
+            public void SetSuperCarData(string navigation, string internet, string disc, string nos, string satalite)
+            {
+                Navigation = navigation;
+                Internet = internet;
+                Disc = disc;
+                NOS = nos;
+                Satalite = satalite;
+            }
+            public void GetSuperCarData()
+            {
+                Console.WriteLine("Navigation: " + Navigation);
+                Console.WriteLine("Internet: " + Internet);
+                Console.WriteLine("Disc: " + Disc);
+                Console.WriteLine("NOS: " + NOS);
+                Console.WriteLine("Satalite: " + Satalite);
+            }
+        };
+        public class HyperCar : SuperCar//Ingherited car Class
+        {
+            private string Navigation;
+            private string Internet;
+            private string Disc;
+            private string NOS;
+            private string Satalite;
+            public void SetHyperCar(string navigation, string internet, string disc, string nos, string satalite)
+            {
+                Navigation = navigation;
+                Internet = internet;
+                Disc = disc;
+                NOS = nos;
+                Satalite = satalite;
+            }
+            public void GetHyperCar()
+            {
+                Console.WriteLine("Navigation: " + Navigation);
+                Console.WriteLine("Internet: " + Internet);
+                Console.WriteLine("Disc: " + Disc);
+                Console.WriteLine("NOS: " + NOS);
+                Console.WriteLine("Satalite: " + Satalite);
+            }
+        };
+
+3.Hierarchial Inheritance : in this inheritance multiple derived classes inherit from a signle base class.
+ public class Car
+ {
+     //Data Members
+     private int CarNo;
+     private string ModelName;
+     private string Break;
+     private string Color;
+     private string Horn;
+     private string Engine;
+     private string Gear;
+     //Members Functions/Methods
+     protected void SetData(int carNo, string modelName, string brake, string color, string horn, string engine, string gear)
+     {
+         CarNo = carNo;
+         ModelName = modelName;
+         Break = brake;
+         Color = color;
+         Horn = horn;
+         Engine = engine;
+         Gear = gear;
+     }
+     public void GetData()
+     {
+         Console.WriteLine("Car No: " + CarNo);
+         Console.WriteLine("Model Name: " + ModelName);
+         Console.WriteLine("Break: " + Break);
+         Console.WriteLine("Color: " + Color);
+         Console.WriteLine("Horn: " + Horn);
+         Console.WriteLine("Engine: " + Engine);
+         Console.WriteLine("Gear: " + Gear);
+     }
+
+ };
+ public class SuperCar : Car//Ingherited car Class
+ {
+     private string Navigation;
+     private string Internet;
+     private string Disc;
+     private string NOS;
+     private string Satalite;
+     public void SetSuperCarData(string navigation, string internet, string disc, string nos, string satalite)
+     {
+         Navigation = navigation;
+         Internet = internet;
+         Disc = disc;
+         NOS = nos;
+         Satalite = satalite;
+     }
+     public void GetSuperCarData()
+     {
+         Console.WriteLine("Navigation: " + Navigation);
+         Console.WriteLine("Internet: " + Internet);
+         Console.WriteLine("Disc: " + Disc);
+         Console.WriteLine("NOS: " + NOS);
+         Console.WriteLine("Satalite: " + Satalite);
+     }
+ };
+ public class HyperCar : Car//Ingherited car Class
+ {
+     private string Navigation;
+     private string Internet;
+     private string Disc;
+     private string NOS;
+     private string Satalite;
+     public void SetHyperCar(string navigation, string internet, string disc, string nos, string satalite)
+     {
+         Navigation = navigation;
+         Internet = internet;
+         Disc = disc;
+         NOS = nos;
+         Satalite = satalite;
+     }
+     public void GetHyperCar()
+     {
+         Console.WriteLine("Navigation: " + Navigation);
+         Console.WriteLine("Internet: " + Internet);
+         Console.WriteLine("Disc: " + Disc);
+         Console.WriteLine("NOS: " + NOS);
+         Console.WriteLine("Satalite: " + Satalite);
+     }
+ };
+4.Multiple Inheritance : C# doesn't Support Multiple Inheritance instead of we are using Interfac for Implementing Multiple Inheritance.
+
+5.Hybrid Inheritance: it is a combination of two or more types of Inheritance.The combination of multilvel and hierarchical inheritance is an example of Hybrid Inheritance.

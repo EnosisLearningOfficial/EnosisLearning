@@ -1,0 +1,219 @@
+State Management
+
+1.Client side State Management
+
+(a)ViewState --- What is View State? (Theory in ASP.NET WebForms)
+
+ViewState is a built-in state management technique in ASP.NET WebForms used to preserve the values of controls and page data between postbacks.
+
+Because HTTP is stateless, every time the page reloads due to a button click (postback), all control values would normally be lost.
+ViewState prevents this loss by storing the page’s state in a hidden field.
+ViewState is a client-side mechanism that stores page and control values in an encoded hidden field so that the state is restored automatically on postbacks.
+⭐ Advantages of ViewState
+
+Maintains state automatically without coding.
+
+No server memory required.
+
+Works even without cookies.
+
+Easy to use (ViewState is default ON).
+
+⭐ Disadvantages of ViewState
+
+Increases page size (hidden field can become large).
+
+Slows down page load time if too big.
+
+Not suitable for large data.
+
+Not secure unless MAC + encryption is enabled.
+
+Cannot be shared across pages.
+
+⭐ When to use ViewState
+
+When you want controls to keep their values after postback.
+
+When storing small, page-specific values like:
+
+Selected dropdown index
+
+Page step number
+
+Temporary flags
+
+⭐ When NOT to use ViewState
+
+For sensitive data (passwords, tokens).
+
+Large objects (use Session instead).
+
+If page size is critical (high-traffic apps).
+
+For multi-page data (use Session/DB).
+
+ViewState["Name"] = "Abhijeet";
+string name = ViewState["Name"].ToString();
+
+(b).HiddenField A HiddenField is a lightweight client-side control that stores data in a hidden HTML input element and sends it to the server during postback.
+⭐ Use cases of HiddenField
+
+Use HiddenField when you want to store:
+
+Small values
+
+Non-sensitive data
+
+Data that must survive only on the same page
+
+Data that you want to update using JavaScript
+
+IDs, flags, reference values
+
+Example uses:
+
+Store UserID
+
+Store BatchSheetID (like you're using)
+
+Store temporary states updated via jQuery/AJAX
+
+Store pagination indexes
+
+⭐ Advantages of HiddenField
+
+Very lightweight (smaller than ViewState).
+
+Easy to modify using JavaScript or jQuery.
+
+Good for small page state that you manage manually.
+
+Works even if ViewState is disabled.
+
+⭐ Disadvantages of HiddenField
+
+Visible in page source (DON'T store sensitive data).
+
+Value can be modified by user (unless validated).
+
+Not ideal for large data.
+
+Cannot be shared across multiple pages.
+
+protected void btnSet_Click(object sender, EventArgs e)
+{
+    HiddenField1.Value = txtName.Text;
+}
+
+protected void btnget_Click(object sender, EventArgs e)
+{
+    lblResult.Text = "Hidden Field Value: " + HiddenField1.Value;   
+}
+
+(c).A QueryString is a way to pass data between pages through the URL in key–value format.
+It is a client-side state management technique where values are appended to the URL after a ?.
+⭐ Advantages of QueryString
+
+Simple and easy to implement.
+
+No server memory required.
+
+Ideal for sending small, non-sensitive data.
+
+Works across different pages.
+
+Users can bookmark the URL with parameters.
+
+Good for filters, search, pagination.
+
+⭐ Disadvantages of QueryString
+
+Visible in URL → Not secure.
+
+Limited size (URL max ~2048 characters).
+
+Cannot store sensitive data (passwords, tokens).
+
+Anyone can change the value manually.
+
+Not good for large or complex objects.
+
+Space, special characters need encoding.
+
+
+
+
+
+//Complete Code
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs" Inherits="StudentManagementApplication.WebForm1" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <asp:TextBox ID="txtName" runat="server" />
+        <asp:Button ID="btnSave" Text="Save" runat="server" OnClick="btnSave_Click"/>
+        <asp:Label ID="lblmsg" runat="server" />
+
+        <h1>HiddenField</h1>
+        <asp:HiddenField ID="HiddenField1" runat="server" />
+        <asp:Button ID="btnSet" Text="Set" runat="server" OnClick="btnSet_Click" />
+        <asp:Button ID="btnget" Text="Get" runat="server" OnClick="btnget_Click"/>
+        <asp:Label ID="lblResult" runat="server" />
+
+        <h2>QueryString</h2>
+        <asp:TextBox ID="txtCourse" runat="server" />
+        <asp:TextBox ID="txtDuration" runat="server" />
+        <asp:Button ID="btnSend" Text="Send Course Value Another Page" runat="server" OnClick="btnSend_Click"/>
+    </form>
+</body>
+</html>
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace StudentManagementApplication
+{
+    public partial class WebForm1 : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnSave_Click(object sender, EventArgs e)
+        {
+            ViewState["UserName"] = txtName.Text;
+            lblmsg.Text = "Welcome, " + ViewState["UserName"].ToString();
+        }
+
+        protected void btnSet_Click(object sender, EventArgs e)
+        {
+            HiddenField1.Value = txtName.Text;
+        }
+
+        protected void btnget_Click(object sender, EventArgs e)
+        {
+            lblResult.Text = "Hidden Field Value: " + HiddenField1.Value;   
+        }
+
+        protected void btnSend_Click(object sender, EventArgs e)
+        {
+            string Course = txtCourse.Text;
+            string Duration = txtDuration.Text;
+
+            //Redirecting to WebForm2.aspx with query string
+            Response.Redirect("WebForm2.aspx?Course=" +Course + "&Duration=" +Duration); 
+        }
+    }
+}

@@ -1,0 +1,96 @@
+
+    //class Student
+    //{
+    //    public string Name;
+    //    public int Age;
+    //    public void DisplayStudentInfo()
+    //    {
+    //        Console.WriteLine("Student Name: " + Name);
+    //        Console.WriteLine("Student Age: " + Age);
+    //    }
+    //}
+    //class Program
+    //{
+    //    static void Main()
+    //    {
+    //        Student student1 = new Student();
+    //        student1.Name = "Alice";
+    //        student1.Age = 14;
+
+    //        student1.DisplayStudentInfo();
+    //        Console.ReadKey();
+    //    }
+    //}
+
+
+    //class Program
+    //{
+    //    static void Main(string[] args)
+    //    {
+    //        short a;
+    //        int b;
+    //        double c;
+    //        /* actual initialization */
+    //        a = 10;
+    //        b = 20;
+    //        c = a + b;
+    //        Console.WriteLine("a = {0}, b = {1}, c = {2}", a, b, c);
+    //        Console.ReadLine();
+    //    }
+    //}
+
+
+    //class Program
+    //{
+    //    static void Main()
+    //    {
+    //        // Asking user to enter first number
+    //        Console.Write("Enter first number: ");
+    //        int num1 = Convert.ToInt32(Console.ReadLine());
+
+    //        // Asking user to enter second number
+    //        Console.Write("Enter second number: ");
+    //        int num2 = Convert.ToInt32(Console.ReadLine());
+
+    //        // Calculating sum
+    //        int sum = num1 + num2;
+
+    //        // Displaying result
+    //        //Console.WriteLine("The sum of {0} and {1} is: {2}", num1, num2, sum);
+    //        Console.WriteLine("The sum of {0}", num1);
+    //        Console.WriteLine("The sum of {0}", num2);
+    //        Console.WriteLine("The sum of {0}", sum);
+
+    //        // Keep console open until key press
+    //        Console.ReadKey();
+    //    }
+    //}
+
+
+
+    //class Program
+    //{
+    //    static void Main(string[] args)
+    //    {
+    //        Console.WriteLine("Hello\tWorld\n\nSir");
+    //        Console.ReadLine();
+    //    }
+    //}
+
+
+
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            const double pi = 3.14159;
+            // constant declaration 
+            double r;
+            Console.WriteLine("Enter Radius: ");
+            r = Convert.ToDouble(Console.ReadLine());
+            double areaCircle = pi * r * r;
+            Console.WriteLine("Radius: {0}, Area: {1}", r, areaCircle);
+            Console.ReadLine();
+        }
+    }

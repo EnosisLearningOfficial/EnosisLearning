@@ -1,0 +1,73 @@
+1.Client-side validation
+2.Server-side validation:
+
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AspValidations.aspx.cs" Inherits="AspTutorial.AspValidations" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous"/>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <asp:ScriptManager runat="server"></asp:ScriptManager>
+        <div class="container mt-2">
+            <%-- 1.RequiredField Validator --%>
+          
+            <asp:TextBox ID="Nametxt" placeholder="Enter Name" CssClass="form-control" runat="server" />
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ControlToValidate="Nametxt" ErrorMessage="Required" ForeColor="Red" Display="Dynamic" SetFocusOnError="true" runat="server" />
+
+
+            <asp:TextBox ID="Passwordtxt" TextMode="Password" placeholder="Enter Password" CssClass="form-control mt-2" runat="server" />
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" ControlToValidate="Passwordtxt" ErrorMessage="Required" ForeColor="Red" Display="Dynamic" SetFocusOnError="true" runat="server" />
+
+
+          
+
+             <%--2.Compare Validator --%>
+            <asp:CompareValidator ErrorMessage="Password Doesn't Match" ControlToValidate="CPasswordtxt" ControlToCompare="Passwordtxt" ForeColor="Red" Display="Dynamic" SetFocusOnError="true" runat="server" />
+
+              <asp:TextBox ID="CPasswordtxt" TextMode="Password" placeholder="Confirm Password" CssClass="form-control mt-2" runat="server" />
+              <asp:RequiredFieldValidator ID="RequiredFieldValidator3" ControlToValidate="CPasswordtxt" ErrorMessage="Required" ForeColor="Red" Display="Dynamic" SetFocusOnError="true" runat="server" />
+
+            <%-- 3.Range Validator --%>
+
+            <asp:RangeValidator ID="RangeValidator1" ErrorMessage="Age Must be between 18 to 35 years" ControlToValidate="Age" MinimumValue="18" MaximumValue="35" ForeColor="Red" Display="Dynamic" SetFocusOnError="true" runat="server" />
+
+            <asp:TextBox ID="Age" TextMode="Number" placeholder="Enter Age" CssClass="form-control mt-2" runat="server" />
+
+
+
+            <%-- 4.Regular Expression Validator --%>
+
+            <asp:RegularExpressionValidator ID="RegularExpressionValidator1" ErrorMessage="Invalid Email Id" ControlToValidate="Emailtxt" runat="server" Display="Dynamic" ForeColor="Red" SetFocusOnError="True" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" />
+
+            <asp:TextBox ID="Emailtxt"  placeholder="Enter Email" CssClass="form-control mt-2" runat="server" />
+
+
+
+
+            <%-- 5.Custom Validation --%>
+
+            <asp:CustomValidator ID="CustomValidator1" ErrorMessage="Select Course First" ControlToValidate="drpCourse" ForeColor="Red" Display="Dynamic" SetFocusOnError="true" runat="server" OnServerValidate="CustomValidator1_ServerValidate"/>
+
+            <asp:DropDownList ID="drpCourse" runat="server" CssClass="form-select">
+                <asp:ListItem Value="0" Text="--Select--" />
+                <asp:ListItem Value="C" Text="C" />
+                <asp:ListItem Value="C++" Text="C++" />
+                <asp:ListItem Value="C#" Text="C#" />
+            </asp:DropDownList>
+
+            <%-- Submit Button --%>
+            <asp:Button ID="btnSubmit" Text="Submit" runat="server" CssClass="btn btn-success mt-2"/>
+
+	     <%-- 6.ValidationSummary--%>
+            <asp:ValidationSummary ID="ValidationSummary1" ShowValidationErrors="true" ForeColor="Red" DisplayMode="BulletList" runat="server" />
+              
+        </div>
+    </form>
+</body>
+</html>
+

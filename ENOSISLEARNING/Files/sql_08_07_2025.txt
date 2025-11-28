@@ -1,0 +1,344 @@
+--==============================CHAPTER 7 :  T-SQL =============08-07-2025===========
+--•	What is T-SQL?--------------------------------------------------------------------
+--T-SQL is a transactional sql which is used to perform the back-end transactions of the application to use techniques of programming language. T-SQL is used to add the business logic in the application and used to build the application logic.
+--T-SQL is a transactional language that is used to create applications like; we add business logic in the request.
+--TSQL is used to writing the procedure, and many advanced concepts of databases are written in it.
+
+--T-SQL=sql server
+--pl-SQL=oracal suported
+---------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------
+--•	Syntax Conventions ---------------------------------------------------------------
+--In T-SQL, syntax conventions help ensure clarity and consistency when writing queries and scripts. Here are some key conventions to keep in mind:
+--1. Keywords:
+    --T-SQL keywords are usually written in uppercase (e.g., SELECT, FROM, WHERE) to distinguish them from identifiers and improve readability.
+
+--2. Identifiers:
+    --Identifiers (like table and column names) can be written in lowercase or mixed case. If they contain spaces or special characters, they should be enclosed in square brackets (e.g., [Employee Name]).
+
+--3. Semicolons
+    --While not always required, using a semicolon (;) to terminate statements is a good practice, especially in scripts containing multiple statements.
+
+--4. Line Breaks and Indentation
+    --Use line breaks and indentation to enhance readability. Typically, each clause (e.g., SELECT, FROM, WHERE) starts on a new line.
+
+--5. Comments
+   -- Single-line comments can be added using --, and multi-line comments can be enclosed between /* and */.
+
+--6. String Literals
+    --String literals should be enclosed in single quotes (e.g., 'example'). Use two single quotes to include a single quote within a string (e.g., 'It''s a test').
+
+--7. Data Types
+    --When defining variables or parameters, use T-SQL data types like INT, VARCHAR, DATETIME, etc.
+
+--Example:
+
+--Here’s a simple example following these conventions:
+•	Identifiers:Identifiers are the names you give to various elements in your T-SQL code.
+variable=@COURSE_ID
+data type=INT,Varchar
+
+•	Operators:
+= (Assignment Operator): Used to assign a value to a variable. For example, in @COURSE_ID = 5, the = operator assigns the integer value 5 to the variable @COURSE_ID.
+
+•	Variables:Variables are used to store values temporarily. 
+@COURSE_ID: This variable is declared as an INT and initialized with the value 5.
+@name: This variable is declared as VARCHAR(20) and initialized with the string 'Enosis'.
+
+--[1] Local variable:
+--A user declares the local variable.
+--By default, a local variable starts with @.
+--Every local variable scope has the restriction 
+--to the current batch or procedure within any given session.
+
+--[2] Global variable:
+--The system maintains the global variable. 
+--A user cannot declare them.
+--The global variable starts with @@
+--It stores session related information.
+
+PRINT: This is a keyword but serves as an identifier for the action to output a message.
+PRINT @COURSE_ID
+
+--Example:
+declare @name as Varchar(20)='Enosis'
+print @name
+--------------------------------------------------------------------------------------
+--------------varchar VS Nvarchar----------------------------------------------
+--Example
+ use SQLTest;
+--varchar
+declare @a varchar(8000)  --(8000) (8001)
+set @a='Tech'
+print @a
+print datalength(@a)
+print len (@a)
+
+--Nvarchar
+declare @a nvarchar(100)  --limit(4000)(4001)
+set @a='Technology'
+print @a
+print datalength(@a)
+print len (@a)
+
+--Nvarchar
+declare @a nvarchar(100)  --limit(4000)(4001)
+set @a = 'テク';  -- This is 'Tech' in Japanese katakana
+print @a
+print datalength(@a)
+print len (@a)
+
+--Nvarchar
+declare @a nvarchar(100)  --limit(4000)(4001)
+set @a = N'テク';  -- This is 'Tech' in Japanese katakana
+print @a
+print datalength(@a)
+print len (@a)
+---------------------------------------------------
+--=========================Control statements  ===================================
+--Control statements in SQL are used to manage the flow of execution within a SQL script or procedure. They allow you to control the logic of how SQL operations are performed based on certain conditions or loops. These statements help in making decisions (conditional logic), repeating actions (loops), and handling errors.
+--In SQL Server, control statements are used to manage the flow of execution in SQL scripts, procedures, and functions. Here are the main types of control statements:
+
+1. Conditional Control Statements
+2. Loop Control Statements
+3. Error Handling Statements
+
+1. Conditional Control Statements:
+•IF...ELSE
+•CASE:
+
+--These statements allow you to execute certain sections of code based on conditions.
+
+•	IF...ELSE Statement ---------------------------------------------------------------
+--In T-SQL, IF...ELSE statements are used for conditional logic, allowing you to execute specific blocks of code based on whether a condition evaluates to true or false.
+
+--Syntax:
+IF condition
+BEGIN
+    -- Code to execute if condition is true
+END
+ELSE
+BEGIN
+    -- Code to execute if condition is false
+END
+
+--Example1:
+
+DECLARE @mySalary INT = 4000,
+        @avgSalary int = 4900
+
+IF @mySalary <= @avgSalary
+	PRINT 'Hello'
+ELSE
+	PRINT 'Welcome'
+
+--Example2:
+
+DECLARE @Salary DECIMAL(10, 2);
+SET @Salary = 60000;  -- You can change this value to test different scenarios
+IF @Salary > 50000
+BEGIN
+    PRINT 'The salary is above the threshold.';
+END
+ELSE
+BEGIN
+    PRINT 'The salary is below the threshold.';
+END
+
+
+--Nested IF Statements 
+DECLARE @StudentMarks INT = 98;
+IF (@StudentMarks > 95)
+	BEGIN
+		IF @StudentMarks > 90
+			PRINT 'A+';
+		ELSE
+			PRINT 'A-';
+	END	
+ELSE 
+	PRINT 'Below A grade' 
+
+--Explanation
+
+    Declare and Set Variable:
+        We declare a variable @Salary and set it to 60000. You can change this value to test different outcomes.
+
+    IF Condition:
+        The IF statement checks if @Salary is greater than 50000.
+
+    BEGIN...END Block:
+        If the condition is true (i.e., @Salary is greater than 50000), it executes the code within the first BEGIN...END block, printing the message: "The salary is above the threshold."
+
+    ELSE Block:
+        If the condition is false, the code within the ELSE block is executed, printing: "The salary is below the threshold."
+-------------------------------------------------------------------------------------
+•	Case statements------------------------------------------------------------------
+--In T-SQL, the CASE statement allows you to perform conditional logic within a query. It’s similar to IF...ELSE but is often used within SELECT, UPDATE, or ORDER BY statements to return specific values based on conditions.
+
+--Syntax:
+CASE expression
+	WHEN expression1 THEN result1
+	WHEN expression2 THEN result2
+	ELSE expression 
+END
+
+
+CREATE TABLE Employees (
+e_id INT PRIMARY KEY,                -- Employee ID
+e_name CHAR(100),                   -- Employee Name
+salary FLOAT,                        -- Salary
+department VARCHAR(100),             -- Department
+joiningDate DATETIME DEFAULT GETDATE(), --DATETIME,                -- Joining Date
+bitStatus BIT                        -- Status (0 or 1)
+);
+select * from Employees;
+
+INSERT INTO Employees (e_id, e_name, salary, department, bitStatus)
+VALUES 
+(1, 'John Doe', 60000.00, 'Sales', 1),
+(2, 'Jane Smith', 75000.50, 'Marketing', 1),
+(3, 'Akira Tanaka', 80000.00, 'Engineering', 1),
+(4, 'Maria Garcia', 55000.75, 'HR', 0),
+(5, 'Chen Wei', 72000.25, 'Finance', 1);
+
+TRUNCATE TABLE Employees;
+
+drop table Employees;
+select * from Employees;
+
+
+--1. Simple CASE
+SELECT 
+    e_id,
+    e_name,
+    salary,
+    department,
+    joiningDate,
+    bitStatus,
+    CASE 
+        WHEN salary > 75000 THEN 'High'
+        WHEN salary BETWEEN 50000 AND 75000 THEN 'Medium'
+        ELSE 'Low'
+    END AS SalaryCategory,
+    CASE 
+        WHEN bitStatus = 1 THEN 'Active'
+        ELSE 'Inactive'
+    END AS EmploymentStatus
+FROM Employees;
+
+select * from Employees
+-----------------------------------------------------------------------------------------
+2. Loop Control Statements-------------------------------------------------------------------
+• WHILE:
+--In T-SQL, looping constructs allow you to execute a block of code multiple times. The most commonly used looping statements are WHILE loops.
+
+--------while loop-----------
+--Executes a block of code repeatedly as long as the specified condition is true.
+--Syntax:
+Declaration
+While(condition)
+Begin
+Statements
+incrimination
+end
+
+--Example:
+DECLARE @Counter INT 
+SET @Counter=1
+WHILE (@Counter<= 20)--condition
+BEGIN
+    PRINT 'The counter value is = ' + CONVERT(VARCHAR,@Counter)
+    SET @Counter  = @Counter  + 1
+END 
+
+---------**********---------
+DECLARE @Counter INT 
+SET @Counter=1
+WHILE ( @Counter <= 10)
+BEGIN
+    PRINT 'Enosis Learning = ' + CONVERT(VARCHAR,@Counter)
+	SET @Counter  = @Counter  + 1
+  
+END
+-------------
+--Example3:
+
+DECLARE @i INT = 1;
+
+WHILE @i <= 10
+BEGIN
+    IF @i % 2 = 0
+        PRINT CAST(@i AS VARCHAR) + ' is Even';
+    ELSE
+        PRINT CAST(@i AS VARCHAR) + ' is Odd';
+
+    SET @i = @i + 1;
+END
+
+--Example3:
+DECLARE @i INT = 2;
+
+WHILE @i <= 20
+BEGIN
+    PRINT @i;
+    SET @i = @i + 2;
+END
+
+
+--Example 4:
+DECLARE @i INT = 1;
+DECLARE @rows INT = 5;
+
+WHILE @i <= @rows
+BEGIN
+    PRINT REPLICATE('*', @i);
+    SET @i = @i + 1;
+END
+--OR--
+--Example 4:
+DECLARE @i INT = 1;
+DECLARE @rows INT = 5;
+DECLARE @line NVARCHAR(100);
+
+WHILE @i <= @rows
+BEGIN
+    SET @line = REPLICATE('* ', @i);
+    PRINT @line;
+    SET @i = @i + 1;
+END
+
+--Example5 :
+DECLARE @i INT = 1;
+DECLARE @rows INT = 5;
+DECLARE @spaces INT;
+DECLARE @stars VARCHAR(100);
+
+WHILE @i <= @rows
+BEGIN
+    SET @spaces = @rows - @i;
+    SET @stars = REPLICATE(' ', @spaces) + REPLICATE('* ', @i);
+
+    PRINT @stars;
+
+    SET @i = @i + 1;
+END
+
+----------Break Statement----------
+--In SQL Server, the BREAK statement is used to exit from a loop or control structure, such as a WHILE loop. It allows you to stop the execution of the loop and proceed with the next statement following the loop.
+
+--Syntax:
+BREAK;
+
+--Example:
+DECLARE @Counter INT 
+SET @Counter=1
+WHILE ( @Counter <= 10)
+BEGIN
+  PRINT 'The counter value is = ' + CONVERT(VARCHAR,@Counter)
+  IF @Counter =7
+  BEGIN
+  BREAK
+  END
+    SET @Counter  = @Counter  + 1
+END

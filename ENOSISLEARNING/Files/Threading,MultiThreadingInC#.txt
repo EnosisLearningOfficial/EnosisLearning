@@ -1,0 +1,166 @@
+C# Multithreading : Multithreading in C# is a technique that allows a program to perform multiple operations at the same time by executing different threads concurrently. It is commonly used to improve performance, responsiveness, and efficient resource utilization in applications.
+
+What is a Thread?
+A thread is the smallest unit of execution in a program. Every C# program starts with a main thread created automatically by the runtime. You can create additional threads to run tasks in parallel with the main thread.
+
+Creating Threads in C#
+C# provides multiple ways to create threads:
+
+1. Using Thread Class
+
+The Thread class in the System. Threading namespace allows explicit creation and management of threads. This is the most basic way of working with multithreading.
+
+class Program
+{
+    static void PrintNumbers()
+    {
+        for(int i = 1; i <= 5; i++)
+        {
+            Console.WriteLine("Worker Thread: "+i);
+            Thread.Sleep(500);//Simulates Work
+        }
+    }
+    static void PrintNumbers2()
+    {
+        for(int i = 1; i <= 5; i++)
+        {
+            Console.WriteLine("Worker Thread2: "+i);
+            Thread.Sleep(500);//Simulates Work
+        }
+    }
+    public static void Main(string[] args)
+    {
+        Thread t1 = new Thread(PrintNumbers);
+        Thread t2 = new Thread(PrintNumbers2);
+        t1.Start();//start the worker thread
+        t2.Start();//start the worker thread
+        for(int i = 1; i <= 5; i++)
+        {
+            Console.WriteLine("Main Thread: "+i);
+            Thread.Sleep(500);//Simulates Work
+        }
+    }
+}
+
+Explanation:
+
+Thread object is created with a target method.
+Start() begins execution in parallel with the main thread.
+
+
+2. Using ParameterizedThreadStart : Sometimes threads need input data. C# provides the ParameterizedThreadStart delegate to pass parameters to threads.
+ class Program
+ {
+    static void PrintMessage(object msg)
+     {
+       Console.WriteLine("Message : "+msg);
+     }
+     public static void Main(string[] args)
+     {
+         Thread t1 = new Thread(PrintMessage);
+         t1.Start("Hello from Thread...!");
+     }
+ }
+
+3. Using Lambda Expressions :Instead of separate methods, you can define thread logic inline.
+
+class Program
+{
+    public static void Main(string[] args)
+    {
+        Thread t1 = new Thread(() =>
+        {
+            for(int i=0;i<=3;i++)
+            {
+                Console.WriteLine("Lambda Thread :-" +i);
+            }
+        });
+        t1.Start();
+    }
+}
+
+4.Foreground and Background Threads :C# threads can run in two modes
+1.Foreground Threads: Keep running until they finish, even if the main thread ends.
+2.Background Threads: Terminate when all foreground threads end.
+class Program
+{
+    public static void Main(string[] args)
+    {
+        Thread t1 = new Thread(() =>
+        {
+            Console.WriteLine("Background Thread is Running...!");
+        });
+        t1.IsBackground = false;
+        t1.Start();
+    }
+}
+
+5.Thread Synchronization :When multiple threads access and modify shared data, issues like race conditions can occur. This happens when two or more threads try to update the same variable at the same time, leading to inconsistent results.
+
+To solve this, C# provides synchronization mechanisms. The most common is the lock statement, which ensures that only one thread can access a critical section of code at a time.
+
+ class Counter
+ {
+     private int count = 0;
+     private readonly object locker = new object();
+
+     public void Increament()
+     {
+         lock(locker)
+         {
+             count++;
+             Console.WriteLine("Count : "+count);
+         }
+     }
+ }
+ public static void Main(string[] args)
+ {
+     Counter counter = new Counter();
+     Thread t1 = new Thread(counter.Increament);
+     Thread t2 = new Thread(counter.Increament);
+     t1.Start();
+     t2.Start();
+ }
+6.Multithreading with Tasks : The Task Parallel Library (TPL) provides a modern and easier way to manage multithreading. It abstracts low-level thread management and is highly optimized.
+ class Program
+ {
+     public static void Main(string[] args)
+     {
+         Task t1 = Task.Run(() =>
+         {
+             for(int i =1;i<=5;i++)
+             {
+                 Console.WriteLine($"Task 1 : "+i);
+             }
+         });
+         Task t2 = Task.Run(() =>
+         {
+             for(int i =1;i<=5;i++)
+             {
+                 Console.WriteLine($"Task 2 : "+i);
+             }
+         });
+         Task.WaitAll(t1,t2);// Wait for both tasks to complete
+     }
+ }
+
+7.Async and Await (High-Level Multithreading) : For I/O-bound operations (like file access, database calls, or API requests), C# provides async and await keywords. These make asynchronous code look like synchronous code, improving readability.
+class Program
+{
+    static async Task FetchData()
+    {
+        await Task.Delay(2000);//Simulate Network Call
+        Console.WriteLine("Data fetched successfully.");
+    }
+    //Entry Point of prohram
+    static async Task Main(string[] args)
+    {
+        Console.WriteLine("Fetching...");
+        await FetchData();
+        Console.WriteLine("Done...!");
+    }
+}
+
+A Task represents a unit of work that runs asynchronously — possibly on another thread, or after some delay.
+ async :The keyword async marks a method as asynchronous.
+It means that the method can use the await keyword inside it and can return immediately to the caller without blocking the thread.

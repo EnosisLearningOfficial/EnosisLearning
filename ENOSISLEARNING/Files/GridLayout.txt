@@ -1,0 +1,86 @@
+Nested table 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- Nested Table -->
+     <table border="1">
+        <tr>
+            <td>table 1</td>
+            <td>
+                <table border="1">
+                    <tr>
+                        <td>table 2</td>
+                        <td>table 2</td>
+                    </tr>
+                     <tr>
+                        <td>table 2</td>
+                        <td>table 2</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+          <tr>
+            <td>table 1</td>
+            <td>table 1</td>
+        </tr>
+     </table>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+ <!-- Grid Layout 
+    CSS - > Cascading stylesheet
+    1.Inline Css
+    2.internal Css
+    3.External Css
+    
+    -->
+<body style="margin:0px;padding:0px;background-color: dodgerblue;">
+     <div class="container" style="width:100%;height:645px;background-color:red">
+        <div class="navbar" style="width:100%;height:45px;background-color: blue;">Navbar</div>
+        <div class="sidebar" style="width:20%;height:550px;background-color:green"></div>
+        <div class="footer" style="width:100%;height:50px;background-color: aqua;"></div>
+     </div>
+</body>
+</html>
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+ <!-- Grid Layout 
+    CSS - > Cascading stylesheet
+    1.Inline Css
+    2.internal Css
+    3.External Css
+    
+    -->
+<body style="margin:0px;padding:0px;background-color: dodgerblue;">
+     <div class="container" style="width:100%;height:645px;background-color:red">
+        <div class="navbar" style="width:100%;height:45px;background-color: blue;">Navbar</div>
+        <div class="main-body" style="width:100%;height:550px;background-color: black;">
+            <div class="right" style="width:80%;height:100%;background-color: brown;float:right;"></div>
+            <div class="left" style="width:20%;height:100%;background-color: yellow;"></div>
+        </div>
+        <div class="footer" style="width:100%;height:50px;background-color: violet;"></div>
+     </div>
+</body>
+</html>

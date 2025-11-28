@@ -1,0 +1,89 @@
+C# Files : C# provides the File class which is used to perform various operations like creating a file, opening a file, reading and writing a file etc.
+What are Files and Directory ?
+A file is a named location that can be used to store related information. For example,
+
+program.cs is a C# file that contains information about the C# program.
+
+A directory is a collection of files and subdirectories. A directory inside a directory is known as a subdirectory.
+
+Working with Files in C# :C# provides a System.IO namespace that contains several classes that are used to perform operations on files and dictionaries.
+
+1.Create()	Create or overwrite a file in the specified path.
+2.Open()	Opens a FileStream on the specified path with read / write access
+3.WriteAllText()	Create a new file, writes the specified string to the file, and then closes the file
+4.ReadAllText()	Opens a text file, reads all lines of the file, and then closes the file.
+5.Copy()	Copies an existing file to a new file. Overwriting a file of the same name is not allowed.
+6.AppendAllText()	Opens a file, appends the specified string to the file, and then closes the file. If the file does not exist, this method creates a file, writes the specified string to the file, then closes the file.
+
+
+1.Create a File in C# : We use the Create() method of the File class to create a new file in C#.
+ public static void Main(string[] args)
+ {
+     //Path of th file to be created
+     string Path = "F:\\Abhijet_Roy\\CsharpTut\\myFile.txt";
+
+     FileStream fs = File.Create(Path);
+
+     //Check if myfile.txt is created at the specified location
+     if (File.Exists(Path))
+     {
+         Console.WriteLine("File created successfully");
+     }
+     else
+     {
+         Console.WriteLine("File creation failed.");
+     }
+ }
+
+
+In the above example, we have created a file myFile.txt at C:\Program directory using the Create() method.
+
+After creating the file, notice that we have used the Exists() method to check whether the file myFile.txt exists or not.
+
+2.Open a File : We use the Open() method of the File class to open an existing file in C#. The method opens a FileStream on the specified file. 
+
+        public static void Main(string[] args)
+        {
+            //Path of th file to be created
+            string Path = "F:\\Abhijet_Roy\\CsharpTut\\myFile.txt";
+
+            //open a file at path
+            FileStream fs = File.Open(Path,FileMode.Open);
+        }
+
+
+3.Write to a File: We use the WriteAllText() method of the File class to write to a file. The method creates a new file and writes content to that file.
+
+ public static void Main(string[] args)
+ {
+     //Path of th file to be created
+     string Path = "F:\\Abhijet_Roy\\CsharpTut\\myFile.txt";
+
+     //Write a file at path
+     File.WriteAllText(Path,"The text has been written...!");
+ }
+
+4.Read a File in C# : We use the ReadAllText() method of the File class to read contents of the file. The method returns a string containing all the text in the specified file.
+public static void Main(string[] args)
+{
+    //Path of th file to be created
+    string Path = "F:\\Abhijet_Roy\\CsharpTut\\myFile.txt";
+    //Read a file at path
+    string Readtext = File.ReadAllText(Path);
+    Console.WriteLine(Readtext);
+}
+
+5.AppendAllText()
+public static void Main(string[] args)
+{
+    //Path of th file to be created
+    string Path = "F:\\Abhijet_Roy\\CsharpTut\\myFile.txt";
+
+    string content = "This is a new line added"+DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss") + "\n";
+
+    //Append Mode
+    File.AppendAllText(Path, content);
+    //Read a file at path
+    string Readtext = File.ReadAllText(Path);
+    Console.WriteLine(Readtext);
+}

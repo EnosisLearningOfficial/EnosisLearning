@@ -1,0 +1,312 @@
+1.Data Abstraction : Only present you the essential features without including any background details or any other explaination.
+Abstraction in C# 
+1.The Abstract is use to achive abstraction in C#.
+
+1.Abstract Class and Methods
+	1.Abstract Class : In C# we cannot create an object of an abstract class.We use absatract keyword to create an abstract class.
+class Program
+{
+    public abstract class CommonFeaturesOfMotorVehicles
+    {
+        public string? ModelNumber { get; set; }
+        public string? CarColor { get; set; }
+        public string? CarModel { get; set; }
+        public string? BreakType { get; set; }
+        public string? EngineType { get; set; }
+        public string? FuelType { get; set; }
+    };  
+    class Car : CommonFeaturesOfMotorVehicles
+    {
+        public string? CarName { get; set; }
+        public string? MusicSystem { get; set; }
+        public string? AirConditioner { get; set; }
+    }
+    class SuperCar : CommonFeaturesOfMotorVehicles
+    {
+        public string? CarName { get; set; }
+        public string? MusicSystem { get; set; }
+        public string? AirConditioner { get; set; }
+        public string? NOS { get; set; }
+    }
+    public static void Main(string[] args)
+    {
+        CommonFeaturesOfMotorVehicles commonFeatures = new CommonFeaturesOfMotorVehicles();//Compiler raise an rrorr while you try to crate an instance of an abstract class.
+        Car car = new Car();//Use of Common feature Class
+    }
+}
+2.Abstract Method : An Abstact class can have both abstract method which dont have body and non-abstract method that means that method have body.
+
+class Program
+{
+    public abstract class CommonFeaturesOfMotorVehicles
+    {
+        public string? ModelNumber { get; set; }
+        public string? CarColor { get; set; }
+        public string? CarModel { get; set; }
+        public string? BreakType { get; set; }
+        public string? EngineType { get; set; }
+        public string? FuelType { get; set; }
+
+        //Non-Abstract Method
+        public void SetData()
+        {
+            Console.WriteLine("Data Set");
+        }
+        //Abstract Method
+        public abstract void GetData();//Declaring An abstarct Method
+    };  
+    class Car : CommonFeaturesOfMotorVehicles
+    {
+        public string? CarName { get; set; }
+        public string? MusicSystem { get; set; }
+        public string? AirConditioner { get; set; }
+
+        public override void GetData() //Implementing Abstract Method
+        {
+            Console.WriteLine("Car Data Retrieved");
+        }
+    }
+    class SuperCar : CommonFeaturesOfMotorVehicles
+    {
+        public string? CarName { get; set; }
+        public string? MusicSystem { get; set; }
+        public string? AirConditioner { get; set; }
+        public string? NOS { get; set; }
+
+        public override void GetData() //Implementing Abstract Method
+        {
+            Console.WriteLine("SuperCar Data Retrieved");
+        }
+    }
+    public static void Main(string[] args)
+    {
+        Car car = new Car();//Use of Common feature Class
+        car.SetData();//Use of Non-Abstract Method
+        car.GetData();//Use of Abstract Method
+    }
+}
+
+3.Access Constructor of Abstract class : 
+ class Program
+ {
+     public abstract class CommonFeaturesOfMotorVehicles
+     {
+         public string? ModelNumber { get; set; }
+         public string? CarColor { get; set; }
+         public string? CarModel { get; set; }
+         public string? BreakType { get; set; }
+         public string? EngineType { get; set; }
+         public string? FuelType { get; set; }
+
+         //Constructor
+         public CommonFeaturesOfMotorVehicles()
+         {
+             Console.WriteLine("Common Features Of Motor Vehicles Constructor Called");
+         }
+
+         //Non-Abstract Method
+         public void SetData()
+         {
+             Console.WriteLine("Data Set");
+         }
+         //Abstract Method
+         public abstract void GetData();//Declaring An abstarct Method
+     };  
+     class Car : CommonFeaturesOfMotorVehicles
+     {
+         public string? CarName { get; set; }
+         public string? MusicSystem { get; set; }
+         public string? AirConditioner { get; set; }
+
+
+         //Constructor
+         public Car()
+         {
+             Console.WriteLine("Car Constructor Called");
+         }
+         public override void GetData() //Implementing Abstract Method
+         {
+             Console.WriteLine("Car Data Retrieved");
+         }
+     }
+     class SuperCar : CommonFeaturesOfMotorVehicles
+     {
+         public string? CarName { get; set; }
+         public string? MusicSystem { get; set; }
+         public string? AirConditioner { get; set; }
+         public string? NOS { get; set; }
+
+         public override void GetData() //Implementing Abstract Method
+         {
+             Console.WriteLine("SuperCar Data Retrieved");
+         }
+     }
+     public static void Main(string[] args)
+     {
+         Car car = new Car();//Use of Common feature Class
+         car.SetData();//Use of Non-Abstract Method
+         car.GetData();//Use of Abstract Method
+     }
+ }
+--------------------------------------------------------
+C# Partial Class and Partial Methods :
+	1.Partial class :  While programming in C# ,we can split the defination of a class over two or more source file.the source file contains a section of the defination of class and all parts are combined when th application is compiled.
+//File1.cs code
+internal class File1
+{
+}
+public partial class Record
+{
+    private int H;
+    private int W;
+    public Record(int h, int w)
+    {
+        this.H = h;
+        this.W = w;
+    }
+}
+
+//File2.cs
+ internal class File2
+ {
+ }
+ public partial class Record
+ {
+     public void PrintRecord()
+     {
+         Console.WriteLine("Height:"+H);
+         Console.WriteLine("Width:"+W);
+     }
+ }
+
+//Program.cs
+class Program
+{
+    public static void Main(string[] args)
+    {
+        Record myRecord = new Record(10, 20);
+        myRecord.PrintRecord();
+        Console.ReadLine();
+    }
+}
+Things to remeber about partial class
+1.the partial keyword specify that other parts of the class can be defined in the namespace.
+2.it is mendatory to use the partial keyword if yoe are trying to make a class partial.
+	2.Partial Method : A partial class may contain partial method.One part of the class contain the signature of the method.An optional implementation may be defined in the same part or another 	part.if the implementation is not supplied then the method and all the calls are removed at compile time.
+//File1.cs
+ internal class File1
+ {
+ }
+ public partial class Car
+ {
+     partial void InitializeCar();//Method Signature
+     public void BuildRim() { }
+     public void BuildWheels() { }
+ }
+
+//File2.cs
+ internal class File2
+ {
+ }
+ public partial class Car
+ {
+     public void BuildEngine() {
+         Console.WriteLine("Build Engine");
+     }
+     partial void InitializeCar()
+     {
+         string str = "Car";
+         Console.WriteLine(str);
+     }
+
+ }
+
+//Program.cs
+ class Program
+ {
+     public static void Main(string[] args)
+     {
+         Car c1 = new Car();//This will call Initializer via Constructor
+         c1.BuildEngine();
+         c1.BuildWheels();
+         c1.BuildRim();
+     }
+ }
+
+------------------------------------------------
+3.Sealed Class and Sealed Method
+	1.Sealed Class: In C# when we don't want a class to be inherited by another class.we can declare the class as a sealed class.a sealed class cannot hav drived class.we use sealed keyword to create a sealed class.
+class Program
+{
+    sealed class MySealedClass
+    {
+        public void DisplayMessage()
+        {
+            Console.WriteLine("Hello from MySealedClass!");
+        }
+    }
+
+    class MyDerivedClass : MySealedClass // This will cause a compile-time error
+    {
+    }
+    public static void Main(string[] args)
+    {
+        
+    }
+}
+	2.Sealed Methods : During Method Overriding,if we don't want an overridden method to be further overridden by another class, we can declare it as a sealed method.
+ class Program
+ {
+     class Animal
+     {
+         public virtual void makeSound()
+         {
+             Console.WriteLine("Animal sound");
+         }
+     }
+     class Dog : Animal
+     {
+         sealed public override void makeSound()
+         {
+             Console.WriteLine("Dog Sounds Like Woof");
+         }
+     }
+     class Puppy : Dog
+     {
+         public override void makeSound()// This will cause a compile-time error because makeSound is sealed in Dog class
+         {
+             Console.WriteLine("Puppy Sounds Like Yip");
+         }
+     }
+     public static void Main(string[] args)
+     {
+         
+     }
+ }
+-----------------------------------------
+Interface in C# : in C# an interface is similar to abstract class.however,unlike abstract classes all methods of an interface are fully abstract(methos without body).we use interface keyword to crate a interface.we cannot us access modifiers inside an interface.All members of an interface are public by default.an interface doesn't allow fields.Similar to abstract class ,interface helps us to achive abstraction in c#.interfaces provides specification that a class must follow.interfaces are use to achive multiple inheritance.
+class Program
+{
+    interface IPolygon
+    {
+        //method without body
+        void CalculateArea(int l, int b);
+    }
+    class Rectangle : IPolygon
+    {
+        //implementation of method
+        public void CalculateArea(int l, int b)
+        {
+            Console.WriteLine("Area of Rectangle: " + (l * b));
+        }
+    }
+    public static void Main(string[] args)
+    {
+        Rectangle r1 = new Rectangle();
+        r1.CalculateArea(5, 10);
+    }
+}
+2.Data Encaptulation
+3.Polymorphism
+4.Inheritance
+5.Advance Topics(Modularities)

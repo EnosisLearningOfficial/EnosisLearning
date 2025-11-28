@@ -1,0 +1,100 @@
+ //Multi Dimnsional Array Array
+ int rows,col;
+ Console.WriteLine("Enter no of Rows:-");
+ rows = Convert.ToInt32(Console.ReadLine());
+ Console.WriteLine("Enter no of Columns:-");
+ col = Convert.ToInt32(Console.ReadLine());
+ int[,] Num = new int[rows, col];
+ for(int i=0; i < rows; i++)
+ {
+     for(int j = 0; j < col; j++)
+     {
+         Console.WriteLine($"Enter Element [{i},{j}] :-");
+         Num[i, j] = Convert.ToInt32(Console.ReadLine());
+     }
+ }
+
+
+//Jagged Array
+
+ //Jagged Array//
+ int[,,] num = { { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } }, { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } } };
+ Console.WriteLine(num[0,2,2]);
+
+public static void Main(string[] args)
+{
+    //Jagged Array//
+    int[,,] num = new int[2,3,3];
+   for(int i =0;i<2;i++)//No Of Array
+    {
+        for(int j= 0;j<3;j++)//No of Rows
+        {
+            for(int k=0;k<3;k++)//No of Columns
+            {
+                Console.WriteLine("Enter 18 values:-");
+                num[i,j,k] = Convert.ToInt32(Console.ReadLine());
+            }
+        }
+    }    
+   for(int i =0;i<2;i++)//No Of Array
+    {
+        for(int j= 0;j<3;j++)//No of Rows
+        {
+            for(int k=0;k<3;k++)//No of Columns
+            {
+                Console.Write(num[i,j,k]+"\t");
+            }
+            Console.WriteLine("\n");
+        }
+        Console.WriteLine("\n");
+    }    
+}
+
+
+class Program
+{
+    public static void Main(string[] args)
+    {
+        Console.WriteLine("----MENU----");
+        Console.WriteLine("select 1 for Find Sum Of 10 Even Natural Numbers");
+        Console.WriteLine("select 2 for Find Sum of Square od 10 Natural Numbers");
+        Console.WriteLine("Enter Your Choice:-");
+        int choice = Convert.ToInt32(Console.ReadLine());
+            switch (choice)
+            {
+                case 1:
+                    EvenSum();
+                    break;
+                case 2:
+                    SumSquare();
+                    Console.ReadKey();
+                    break;
+                default:
+                    Console.WriteLine("Invalid Choice");
+                    Console.ReadKey();
+                    break;
+
+            }
+        }
+    public static void EvenSum()
+    {
+        int sum = 0;
+        for(int i=1;i<=10;i++)
+        {
+            if(i%2==0)
+            {
+               sum += i;
+            }
+        }
+        Console.WriteLine("Sum Of 10 Even Numbers:-"+sum);
+    }
+    public static void SumSquare()
+    {
+        int sum = 0;
+        for(int i=1;i<=10;i++)
+        {
+           sum += i*i;
+        }
+        Console.WriteLine("Sum Of Square Of 10 Numbers:-"+sum);
+    }
+

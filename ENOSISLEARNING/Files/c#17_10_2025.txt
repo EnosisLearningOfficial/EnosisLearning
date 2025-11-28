@@ -1,0 +1,189 @@
+
+    //class MainThreadProgram
+    //{
+    //    static void Main(string[] args)
+    //    {
+    //        Thread th = Thread.CurrentThread;
+    //        th.Name = "MainThread";
+    //        Console.WriteLine("This is {0}", th.Name);
+    //        Console.ReadKey();
+    //    }
+    //}
+
+
+    //class Example
+    //{
+    //    static void Main(string[] args)
+    //    {
+    //        Thread t1 = new Thread(Func1);
+    //        t1.Start();
+    //        Thread t2 = new Thread(Func2);
+    //        t2.Start();
+    //        Thread t3 = new Thread(Func3);
+    //        t3.Start();
+    //        t1.Join();
+    //        t2.Join();
+    //        t3.Join();
+    //        Console.ReadKey();
+    //    }
+    //    private static void Func2(object obj)
+    //    {
+    //        Console.WriteLine("Thread2 is executed");
+    //    }
+    //    private static void Func1(object obj)
+    //    {
+    //        Console.WriteLine("Thread1 is executed");
+    //    }
+    //    private static void Func3(object obj)
+    //    {
+    //        Console.WriteLine("Thread3 is executed");
+    //    }
+    //}
+
+
+
+    //class LockDisplay
+    //{
+    //    public void DisplayNum()
+    //    {
+    //        lock (this)
+    //        {
+    //            for (int i = 1; i <= 5; i++)
+    //            {
+    //                Thread.Sleep(100);
+    //                Console.WriteLine("i = {0}", i);
+    //            }
+    //        }
+    //    }
+    //}
+    //class Example
+    //{
+    //    public static void Main(string[] args)
+    //    {
+    //        LockDisplay obj = new LockDisplay();
+    //        Console.WriteLine("Threading using Lock");
+    //        Thread t1 = new Thread(new ThreadStart(obj.DisplayNum));
+    //        Thread t2 = new Thread(new ThreadStart(obj.DisplayNum));
+    //        t1.Start();
+    //        t2.Start();
+    //        Console.ReadKey();
+    //    }
+    //}
+
+    //class ThreadCreationProgram
+    //{
+    //    public static void CallToChildThread()
+    //    {
+    //        Console.WriteLine("Child thread starts");
+    //    }
+    //    static void Main(string[] args)
+    //    {
+    //        ThreadStart childref = new ThreadStart(CallToChildThread);
+    //        Console.WriteLine("In Main: Creating the Child thread");
+    //        Thread childThread = new Thread(childref);
+    //        childThread.Start();
+    //        Console.ReadKey();
+    //    }
+    //}
+
+    //class ThreadCreationProgram
+    //{
+    //    public static void CallToChildThread()
+    //    {
+    //        Console.WriteLine("Child thread starts");
+
+    //        // the thread is paused for 5000 milliseconds
+    //        int sleepfor = 5000;
+
+    //        Console.WriteLine("Child Thread Paused for {0} seconds", sleepfor / 1000);
+    //        Thread.Sleep(sleepfor);
+    //        Console.WriteLine("Child thread resumes");
+    //    }
+    //    static void Main(string[] args)
+    //    {
+    //        ThreadStart childref = new ThreadStart(CallToChildThread);
+    //        Console.WriteLine("In Main: Creating the Child thread");
+    //        Thread childThread = new Thread(childref);
+    //        childThread.Start();
+    //        Console.ReadKey();
+    //    }
+    //}
+
+
+
+    //class ThreadCreationProgram
+    //{
+    //    public static void CallToChildThread()
+    //    {
+    //        try
+    //        {
+    //            Console.WriteLine("Child thread starts");
+
+    //            // do some work, like counting to 10
+    //            for (int counter = 0; counter <= 10; counter++)
+    //            {
+    //                Thread.Sleep(500);
+    //                Console.WriteLine(counter);
+    //            }
+
+    //            Console.WriteLine("Child Thread Completed");
+    //        }
+    //        catch (ThreadAbortException e)
+    //        {
+    //            Console.WriteLine("Thread Abort Exception");
+    //        }
+    //        finally
+    //        {
+    //            Console.WriteLine("Couldn't catch the Thread Exception");
+    //        }
+    //    }
+    //    static void Main(string[] args)
+    //    {
+    //        ThreadStart childref = new ThreadStart(CallToChildThread);
+    //        Console.WriteLine("In Main: Creating the Child thread");
+    //        Thread childThread = new Thread(childref);
+    //        childThread.Start();
+
+    //        //stop the main thread for some time
+    //        Thread.Sleep(2000);
+
+    //        //now abort the child
+    //        Console.WriteLine("In Main: Aborting the Child thread");
+
+    //        childThread.Abort();
+    //        Console.ReadKey();
+    //    }
+    //}
+
+
+
+    public class Calculator
+    {
+        // A simple method that adds two numbers
+        public int Add(int a, int b)
+        {
+            return a + b;
+        }
+
+        // A method that subtracts two numbers
+        public int Subtract(int a, int b)
+        {
+            return a - b;
+        }
+    }
+    class Program
+    {
+        static void Main()
+        {
+            // Create an instance of the Calculator class from the DLL
+            Calculator calc = new Calculator();
+
+            // Use methods from the Calculator class
+            int sum = calc.Add(10, 20);
+            int difference = calc.Subtract(30, 15);
+
+            // Display the results
+            Console.WriteLine("Sum: " + sum);           // Output: Sum: 30
+            Console.WriteLine("Difference: " + difference); // Output: Difference: 15
+        }
+    }

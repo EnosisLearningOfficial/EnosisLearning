@@ -1,0 +1,219 @@
+C# generics : C# Generics allow us to create a single class or method that can be used with different types of data. This helps us to reuse our code.
+
+1.C# generics Class : A generics class is used to create an instance of any data type. To define a generics class, we use angle brackets (<>)
+
+class Student<T>
+{
+  //Block of Code
+}
+
+1.generics class named Student
+2.T used inside the angle bracket is called the type parameter.
+
+using System;
+namespace CSharpTut
+{
+    class Program
+    {
+        //Generic Class Defination
+        public class Student<T>
+        {
+            //define a variable type T
+            public T data;
+
+            //Define a constructor of the student class
+            public Student(T data)
+            {
+                this.data = data;
+                Console.WriteLine("Data Passes : "+this.data);
+            }
+        }
+        public static void Main()
+        {
+            //  // create an instance with data type string 
+            Student<string> student1 = new Student<string>("John Doe");
+            // create an instance with data type int
+            Student<int> student2  = new Student<int>(10);
+            // create an instance with data type double
+            Student<double> student3  = new Student<double>(23.89);
+        }
+    }
+}
+
+2.C# generics Method: Similar to the generics class, we can also create a method that can be used with any type of data.Such a class is known as the generics Method.
+
+using System;
+namespace CSharpTut
+{
+    class Program
+    {
+        //Generic Class Defination
+        public class Student<T>
+        {
+            //Define a Generic Method of the student class
+            public void displayData(T data)
+            {
+                Console.WriteLine("Data Passesd : "+data);
+            }
+           
+        }
+        public static void Main()
+        {
+            // // create an instance of Student class by specifying T as string 
+            Student<string> student1 = new Student<string>();
+            student1.displayData("John doe");
+            //  // create an instance of Student class by specifying T as int
+            Student<int> student2  = new Student<int>();
+            student2.displayData(10);
+            //  // create an instance of Student class by specifying T as double
+            Student<double> student3  = new Student<double>();
+            student3.displayData(23.33);
+        }
+    }
+}
+ 
+3. Generics Method with Return Type :  we defined a generics method without a return type. However, we can also define a generics method with a return type.
+
+using System;
+namespace CSharpTut
+{
+    class Program
+    {
+        //Generic Class Defination
+        public class Student<T>
+        {
+            //Define a Generic Method of the student class
+            public T displayData(T data)
+            {
+                return data;
+            }
+           
+        }
+        public static void Main()
+        {
+            // // create an instance of Student class by specifying T as string 
+            Student<string> student1 = new Student<string>();
+            Console.WriteLine(student1.displayData("John doe")); ;
+            //  // create an instance of Student class by specifying T as int
+            Student<int> student2  = new Student<int>();
+            Console.WriteLine(student2.displayData(10)); ;
+            //  // create an instance of Student class by specifying T as double
+            Student<double> student3  = new Student<double>();
+            Console.WriteLine(student3.displayData(23.33)); ;
+        }
+    }
+}
+
+Advantages of Generics
+1.Code Reusability
+2.Compile-time Type Checking
+3.Used with Collection
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+C# Indexers : An indexer allows us to access instances of a class using an index just like an array.
+Define C# Indexer:
+public int this[int index]
+{
+	get
+	{
+		return val[index];
+	}
+	set
+	{
+		val[index] = value;
+	}
+
+
+}
+public - access modifier
+int - return type of indexer
+this - indicates we are defining indexer in current class
+int index - access values using integer index position
+get - ,method that returns values
+set - method that assigns values
+
+using System;
+namespace CSharpTut
+{
+    class Program
+    {
+        //Declare an array to store elements
+        private string[] studentName = new string[10];
+
+        //Define Indexer
+        public string this[int index]
+        {
+            get
+            {
+                //return value of store at StudentName Array
+                return studentName[index];
+            }
+            set
+            {
+                //assigns value to studentName
+                studentName[index] = value;
+            }
+        }
+        public static void Main()
+        {
+            //create an instance of Program class
+            Program p1 = new Program();
+            //insert values in p1[] using indexer i.e index position
+            p1[0] = "Harry";
+            p1[1] = "Ron";
+            p1[2] = "Hermoine";
+            Console.WriteLine("First element in p1 is : "+ p1[0]);
+            Console.WriteLine("Second element in p1 is : "+ p1[1]);
+            Console.WriteLine("Third element in p1 is : "+ p1[2]);
+        }
+    }
+}
+
+2.Generic Indexer in C# : n C#, we can also use indexers with a generic class.
+using System;
+namespace CSharpTut
+{
+    class Program
+    {
+       public class Student<T>
+        {
+            //Declare an array to store elements
+            private T[] studentName = new T[10];
+
+            //Define Indexer
+            public T this[int index]
+            {
+                get
+                {
+                    //return value of store at StudentName Array
+                    return studentName[index];
+                }
+                set
+                {
+                    //assigns value to studentName
+                    studentName[index] = value;
+                }
+            }
+        }
+        public static void Main()
+        {
+            //Create instance of Program class of int type
+            Student<int> id = new Student<int>();
+            id[0] = 1;
+            id[1] = 2;
+            id[2] = 3;
+            Console.WriteLine("First elemet in Id Object : " + id[0]);
+            Console.WriteLine("second elemet in Id Object : " + id[1]);
+            Console.WriteLine("third elemet in Id Object : " + id[2]);
+            //Create instance of Program class of string type
+            Student<string> Names = new Student<string>();
+            Names[0] ="A";
+            Names[1] = "B";
+            Names[2] = "C";
+            Console.WriteLine("First elemet in Names Object : " + Names[0]);
+            Console.WriteLine("second elemet in Names Object : " + Names[1]);
+            Console.WriteLine("third elemet in Names Object : " + Names[2]);
+        }
+    }
+}

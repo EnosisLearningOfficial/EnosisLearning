@@ -1,0 +1,407 @@
+--========================•	Creating Views==========22-08-2025==========================
+--A view in SQL is a virtual table that is based on the result of a query. It can combine data from one or more tables and can be used to simplify complex queries, enhance security by restricting access to certain data, or present data in a specific format.
+
+Q.Can you allocate memory to a view in SQL?
+--No, you cannot allocate memory to a view in SQL. A view is a virtual table that does not store data itself; it dynamically retrieves data from the underlying tables when queried. The memory used during the execution of a view depends on the data being accessed and the complexity of the query, but you do not manually allocate memory to a view like you might with other database objects.
+
+--Types of View:
+1.Simple View.
+2.Complex View.
+
+CREATE TABLE Persons (    
+  person_name varchar(45) NOT NULL,    
+  product varchar(45) DEFAULT NULL,    
+  country varchar(25) DEFAULT NULL,  
+  price float,  
+  years int NOT NULL    
+);  
+
+INSERT INTO Persons (person_name, product, country, price, years)     
+VALUES ('Steffen', 'Computer', 'USA', 20000.00, 2018),     
+('Joseph', 'Laptop', 'India', 35000.00, 2016),     
+('Kevin', 'TV', 'USA', 15000.00, 2016),     
+('Thompson', 'Mobile', 'France', 12500.00, 2017),   
+('Donald', 'Laptop', 'England', 30000.00, 2018),    
+('Joseph', 'Mobile', 'India', 18000.00, 2018),    
+('Matthew', 'Desktop', 'France', 22000.00, 2017),     
+('Antonio', 'Mouse', 'England', 1200.00, 2016);   
+
+select * from Persons
+
+drop table Persons
+
+1.Simple View: A view that is based on a single table and does not contain any complex queries, such as joins or groupings. It can be used to simplify access to the tables data.
+
+--Syntax:
+CREATE VIEW view_name AS
+SELECT column1, column2, ...
+FROM table_name
+WHERE condition;
+
+--Example:
+CREATE VIEW simple_persons_view AS
+SELECT person_name, product
+FROM Persons;
+
+select person_name as prson_Name,product as Pro from Persons
+
+select person_name as prson_Name,product as Pro from simple_persons_view
+
+drop view simple_persons_view
+
+2.Complex View: A view that is based on multiple tables and may include joins, subqueries, or aggregations. It can provide a more complex representation of data.
+
+--Syntax for Creating a Complex View:
+CREATE VIEW view_name AS
+SELECT column1, column2, ...
+FROM table1
+JOIN table2 ON table1.common_column = table2.common_column
+WHERE condition
+GROUP BY column1, column2
+HAVING condition;
+
+--Example1:
+CREATE VIEW country_sales_summary AS
+SELECT
+    country,
+    SUM(price) AS total_price,
+    COUNT(*) AS total_products
+FROM
+    Persons
+GROUP BY
+    country
+HAVING
+    SUM(price) > 20000;
+
+select * from country_sales_summary
+
+select * from Persons
+
+--Example2:
+	CREATE TABLE Persons (    
+  person_name varchar(45) NOT NULL,    
+  product varchar(45) DEFAULT NULL,    
+  country varchar(25) DEFAULT NULL,  
+  price float,  
+  years int NOT NULL    
+); 
+INSERT INTO Persons (person_name, product, country, price, years)     
+VALUES ('Steffen', 'Computer', 'USA', 20000.00, 2018),     
+('Joseph', 'Laptop', 'India', 35000.00, 2016),     
+('Kevin', 'TV', 'USA', 15000.00, 2016),     
+('Thompson', 'Mobile', 'France', 12500.00, 2017),   
+('Donald', 'Laptop', 'England', 30000.00, 2018),    
+('Joseph', 'Mobile', 'India', 18000.00, 2018),    
+('Matthew', 'Desktop', 'France', 22000.00, 2017),     
+('Antonio', 'Mouse', 'England', 1200.00, 2016);  
+
+
+drop table Employee
+
+CREATE TABLE Employee (
+    e_id INT PRIMARY KEY,                -- Employee ID
+    e_name CHAR(100),                   -- Employee Name
+    salary FLOAT,                        -- Salary
+    department VARCHAR(100),             -- Department
+    joiningDate DATETIME,                -- Joining Date
+    bitStatus BIT                        -- Status (0 or 1)
+);
+
+INSERT INTO Employee (e_id, e_name, salary, department, joiningDate, bitStatus)
+VALUES 
+(1, 'John Doe', 60000.00, 'Sales', '2022-01-15', 1),
+(2, 'Jane Smith', 75000.50, 'Marketing', '2021-03-10', 0),
+(3, 'Akira Tanaka', 80000.00, 'Engineering', '2020-07-22', 1),
+(4, 'Maria Garcia', 55000.75, 'HR', '2019-05-30', 0),
+(5, 'Chen Wei', 72000.25, 'Finance', '2023-09-01', 1);
+
+drop table Employee
+
+--Complex View Example:
+CREATE VIEW sales_employee_products AS
+SELECT 
+    e.e_name AS employee_name,
+    e.department,
+    SUM(p.price) AS total_product_price
+FROM 
+    Employee e left JOIN Persons p ON e.e_name = p.person_name
+WHERE 
+    e.department = 'Sales' AND e.salary > 50000
+GROUP BY 
+    e.e_name, e.department;
+
+
+	select * from sales_employee_products
+
+-----------------------
+
+•	Usage of Views------------------------------------------------------
+Views in SQL are used for various purposes that enhance database management and data retrieval. Here are some key uses of views:
+
+   1. Simplifying Complex Queries:
+        Views can encapsulate complex SQL queries, making it easier for users to access and manipulate data without needing to understand the underlying complexity.
+
+   2 .Data Security:
+        Views can restrict access to sensitive data. By granting permissions on a view rather than the underlying tables, you can control what data users can see or modify.
+
+  3. Data Abstraction:
+        Views provide a level of abstraction, allowing users to interact with data without needing to know the underlying table structures. This is especially useful in applications where the database schema might change.
+
+   4. Aggregating Data:
+        Views can be used to summarize data, such as calculating totals or averages, without needing to run aggregation queries each time. This is useful for reports.
+
+   5. Joining Tables:
+        Views can join multiple tables, providing a consolidated view of related data. This simplifies queries that need data from different sources.
+
+   6. Data Presentation:
+        Views can format and present data in a specific way, making it easier for users to understand. This can include renaming columns or combining fields.
+
+  7. Testing and Development:
+        Views can be used to test queries or models without affecting the underlying data. This is useful in development environments.
+
+   8. Updatable Views:
+        In some cases, views can be updatable, allowing users to modify the data through the view. This can simplify data entry for users.
+-------------------------------------------------------------------------------------
+--===============================  Indexes =================================
+•	Introduction to Index
+--An index in SQL is a database object that improves the speed of data retrieval operations on a table. It acts like a pointer to the data in a table, allowing the database to find rows more quickly without scanning the entire table.
+
+•	Types of Indexes-------------------------------------
+1. Clustered Index
+2. Non-Clustered Index
+3. Unique Index
+
+1. Clustered Index:
+    --Definition: A clustered index determines the physical order of data in a table. A table can have only one clustered index.
+   
+    Example: Often created on primary key columns.
+	--Syntax:
+	CREATE CLUSTERED INDEX index_name ON table_name (column1, column2, ...);
+
+	--Example:
+	
+	CREATE TABLE Students (
+    StudentID INT,
+    FirstName VARCHAR(100),
+    LastName VARCHAR(100) 
+);
+drop table Students
+select * from Students
+
+insert into Students values(1,'aaa','ccc')
+
+-- Creating a clustered index on LastName
+CREATE CLUSTERED INDEX idx_lastname ON Students (LastName);
+
+CREATE CLUSTERED INDEX idx_Id ON Students (StudentID);
+
+2. Non-Clustered Index:
+    --Definition: A non-clustered index is a separate structure from the data table that contains pointers to the data. A table can have multiple non-clustered indexes.
+    
+    Example: Creating an index on the LastName column in an Employees table.
+	--Syntax:
+	CREATE NONCLUSTERED INDEX index_name ON table_name (column1, column2, ...);
+	--Example:
+	-- Creating a non-clustered index on FirstName
+	CREATE NONCLUSTERED INDEX idx_firstname ON Students (FirstName);
+	CREATE NONCLUSTERED INDEX idx_Sid ON Students (LastName);
+
+	
+	select * from Students
+
+3. Unique Index:
+    --Definition: Ensures that all values in the indexed column(s) are unique. This can be created on any column, not just primary keys.
+   
+    Example: An index on an Email column to ensure no duplicate email addresses.
+	--Syntax:
+	CREATE UNIQUE INDEX index_name ON table_name (column1, column2, ...);
+
+	--Example:
+	CREATE TABLE Student (
+    StudentID INT PRIMARY KEY,
+    FirstName VARCHAR(100),
+    LastName VARCHAR(100),
+    Email VARCHAR(100)
+);
+drop table Students
+
+insert into Student values(1,'abc','vfch','xyz@gmail.com') 
+insert into Student values(2,'tyu','vffch','xy@gmail.com') 
+insert into Student values(3,'bbb','vfdch','xyhhz@gmail.com') 
+select * from Student
+-- Creating a unique index on Email
+CREATE UNIQUE INDEX idx_email ON Student (Email);
+
+drop idx_email;
+-----------------------------------------------------
+--===============  Types of Tables in SQL SERVER======================
+--Tables are used to store the data in Microsoft SQL server. Tables are created inside DATABASE of SQL SERVER to store data. In tables, data is logically organized in row and column format. Each row represents a new records and each column represents fields in that records. 
+--Types of Tables:
+1.	User Defined Table
+2.	System Defined Tables
+3.  Temporary table
+
+1.	User Defined Table:
+These tables are created by the user for storing data.
+
+2.	System Defined Tables:
+These tables are already created by sql server which stores system related information.
+
+3.  Temporary table:
+--A temporary table is a type of table in a database that is created to hold data temporarily. It exists only for the duration of a session or transaction and is automatically dropped when no longer needed. 
+
+-- Types of Temporary Tables:
+	1.Local Temp Table
+	2.Global Temp Table
+
+[1]•Local Temp Table:
+--A local temporary table in SQL is a type of temporary table that is created for use within a specific session. It is only accessible to the session that created it and is automatically dropped when that session ends.
+--#TempEmployees is a local temporary table that holds employee data for the duration of the session.
+
+--Syntax:
+CREATE TABLE #temp_table_name (
+    column1 datatype,
+    column2 datatype,
+    ...
+);
+
+--Example1:
+CREATE TABLE #Temp (
+    rollno INT,
+    name VARCHAR(20)
+);
+INSERT INTO #Temp (rollno, name) VALUES (1, 'Alice'), (2, 'Bob');
+
+drop table #Temp
+
+SELECT * FROM #Temp;
+
+[2]•Global Temp Table:
+--A global temporary table in SQL is a type of temporary table that is accessible to all sessions and users. Unlike local temporary tables, which are limited to the session that created them, global temporary tables can be shared across multiple sessions.
+--##GlobalTempEmployees is a global temporary table that can be accessed by any session, allowing for shared temporary data storage across different users.
+
+--Syntax:
+CREATE TABLE ##temp_table_name (
+    column1 datatype,
+    column2 datatype,
+    ...
+);
+--Example1:
+CREATE TABLE ##GlobalTempEmployees (
+    EmployeeID INT,
+    EmployeeName VARCHAR(50)
+);
+INSERT INTO ##GlobalTempEmployees (EmployeeID, EmployeeName)
+VALUES (1, 'Alice'), (2, 'Bob');
+
+SELECT * FROM ##GlobalTempEmployees;
+
+--Temporary table
+--Example2:
+  create table #s1(
+  rollno int, name varchar(10))
+
+  create table #Temp(
+  rollno int,name varchar(20))
+  insert into #Temp values(1,'abc')
+  create table #tempTable(
+  roll int)
+
+  create table ##GlobleTemp
+  (
+   rollno int,name varchar(20))
+   insert into ##GlobleTemp values(1,'abc')
+
+-----------------------------------------------------------------------------------
+
+•	Usage of Temp Tables:
+Temporary tables are versatile tools in SQL, offering several benefits and use cases. Here are some common usages of temporary tables:
+1. Storing Intermediate Results
+    --Complex Queries: Break down complex queries into simpler parts. You can store the results of an initial query in a temporary table and then perform additional operations on that data.
+    Data Transformation: Capture intermediate data during ETL (Extract, Transform, Load) processes.
+
+2. Session-Specific Data
+    --User-Specific Data: Store data relevant only to a specific user session, such as a shopping cart in an e-commerce application.
+
+3. Performance Improvement
+   -- Reducing Redundant Calculations: Avoid recalculating the same data multiple times by storing it in a temporary table.
+    Indexing: Create indexes on temporary tables to optimize query performance for large datasets.
+
+4. Simplifying Logic
+   -- Breaking Down Procedures: In stored procedures, use temporary tables to simplify logic and reduce complexity by breaking tasks into smaller, manageable parts.
+    Handling Large Data Sets: Temporarily store large data sets to process in chunks.
+
+5. Testing and Debugging
+    --Development and Testing: Use temporary tables during development to test queries or procedures without affecting production data.
+    Logging: Capture error logs or debugging information temporarily for analysis.
+
+6. Data Aggregation
+   -- Summarizing Data: Aggregate data from multiple sources or tables, storing results in a temporary table for further analysis or reporting.
+
+-----------------------------------------------------------------------------
+
+-================•Common Table Expression (CTE)===========================
+--A Common Table Expression (CTE) in SQL is a temporary result set that you can reference within a SELECT, INSERT, UPDATE, or DELETE statement. CTEs provide a way to organize and simplify complex queries by allowing you to define a result set that can be used later in the query. They improve readability and maintainability of your SQL code.
+
+--A common table expression, or CTE, is a temporary named result set created from a simple SELECT statement that can be used in a subsequent SELECT statement.
+--Each SQL CTE is like a named query, whose result is stored in a virtual table (a CTE) to be referenced later in the main query.
+
+--Syntax:
+WITH cte_name (column_names) AS (
+    query
+)
+SELECT * FROM cte_name;
+
+CREATE TABLE tbl_Customers (
+    Customer_id INT NOT NULL,         
+    Customer_name VARCHAR(100) NOT NULL,               
+    Email VARCHAR(100),           
+    Phone VARCHAR(15),           
+    Balance Int ,  
+	City VARCHAR(100)                      
+);
+
+INSERT INTO tbl_Customers (Customer_id, Customer_name, Email, Phone, Balance, City) VALUES
+(1, 'Alice Johnson', 'alice.johnson@example.com', '1234567890', 100, 'Pune'),
+(2, 'Bob Smith', 'bob.smith@example.com', '0987654321', 200, 'Mumbai'),
+(3, 'Charlie Brown', 'charlie.brown@example.com', '1122334455', 300, 'Delhi'),
+(4, 'Daisy Miller', 'daisy.miller@example.com', '2233445566', 150, 'Bangalore'),
+(5, 'Eve Davis', 'eve.davis@example.com', '3344556677', 50, 'Pune');
+
+
+select * from tbl_Customers
+
+--1. Basic CTE Example:
+--This example retrieves all customers along with their balances, using a CTE to improve readability.
+
+WITH CustomerBalances AS (
+    SELECT Customer_id, Customer_name, Balance
+    FROM tbl_Customers
+)
+SELECT * FROM CustomerBalances;
+
+select * from tbl_Customers
+-----------------------
+--2. CTE for Filtering
+--This example uses a CTE to filter out customers with a balance greater than 100.
+
+WITH HighBalanceCustomers AS (
+    SELECT Customer_id, Customer_name, Balance
+    FROM tbl_Customers
+    WHERE Balance > 100
+)
+SELECT * FROM HighBalanceCustomers;
+
+select * from Customers
+-------------------------------
+--3. CTE for Aggregation
+--In this example, we calculate the total balance of all customers.
+
+WITH TotalBalance AS (
+    SELECT SUM(Balance) AS TotalAmount
+    FROM tbl_Customers
+)
+SELECT * FROM TotalBalance;
+
+select * from tbl_Customers
+-----------------------------

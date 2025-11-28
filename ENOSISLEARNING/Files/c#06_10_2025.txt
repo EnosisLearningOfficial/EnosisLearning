@@ -1,0 +1,224 @@
+
+    //Accessing Array Elements
+
+    //class Program
+    //{
+    //    static void Main()
+    //    {
+    //        // Declare and initialize array
+    //        int[] numbers = new int[5];
+
+    //        // Assign values
+    //        numbers[0] = 10;
+    //        numbers[1] = 20;
+    //        numbers[2] = 30;
+    //        numbers[3] = 40;
+    //        numbers[4] = 50;
+    //        // Access and print values
+    //        for (int i = 0; i < numbers.Length; i++)
+    //        {
+    //            Console.WriteLine("Element at index " + i + ": " + numbers[i]);
+    //        }
+    //        Console.ReadKey();
+    //    }
+    //}
+
+
+    //class Program
+    //{
+    //    static void Main()
+    //    {
+    //        // Declare and initialize array
+    //        int[] numbers = { 10, 20, 30, 40, 50 };
+    //        // Access and print values
+    //        for (int i = 0; i < numbers.Length; i++)
+    //        {
+    //            Console.WriteLine("Element at index " + i + ": " + numbers[i]);
+    //        }
+    //        Console.ReadKey();
+    //    }
+    //}
+
+
+    // Shortcut Initialization
+    //class Program
+    //{
+    //    static void Main()
+    //    {
+    //        // Declare and initialize array
+    //        int[] numbers = { 10, 20, 30, 40, 50 };
+
+    //        int index = 0; // To keep track of the index manually
+    //        foreach (int i in numbers)
+    //        {
+    //            Console.WriteLine("Element at index " + index + ": " + i);
+    //            index++;
+    //        }
+
+    //        Console.ReadKey();
+    //    }
+    //}
+
+
+    //1.Multi-Dimensional Array
+    //class Program
+    //{
+    //    static void Main(string[] args)
+    //    {
+    //        // Declare and initialize a 2D array (2 rows, 3 columns)
+    //        int[,] numbers = { { 1, 2, 3 }, { 4, 5, 6 } };
+
+    //        // Access and print the elements of the array
+    //        for (int i = 0; i < 2; i++) // Loop through rows
+    //        {
+    //            for (int j = 0; j < 3; j++) // Loop through columns
+    //            {
+    //                Console.WriteLine($"Element[{i}, {j}] = {numbers[i, j]}");
+    //            }
+    //        }
+    //        Console.ReadKey();
+    //    }
+    //}
+
+
+    //2.Jagged Array
+    //class Program
+    //{
+    //    static void Main(string[] args)
+    //    {
+    //        // Declare and initialize a jagged array
+    //        int[][] jaggedArray = new int[3][];
+    //        jaggedArray[0] = new int[] { 1, 2, 3 };
+    //        jaggedArray[1] = new int[] { 4, 5 };
+    //        jaggedArray[2] = new int[] { 6, 7, 8, 9 };
+
+    //        // Access and print elements of the jagged array
+    //        for (int i = 0; i < jaggedArray.Length; i++) // Loop through rows
+    //        {
+    //            Console.Write($"Row {i}: ");
+    //            for (int j = 0; j < jaggedArray[i].Length; j++) // Loop through columns
+    //            {
+    //                Console.Write(jaggedArray[i][j] + " ");
+    //            }
+    //            Console.WriteLine(); // Move to the next row
+    //        }
+    //        Console.ReadKey();
+    //    }
+    //}
+
+
+
+    ////3. PASSING SINGLE-DIMENSIONAL ARRAYS
+    //class Program
+    //{
+    //    static void PrintArray(int[] numbers)
+    //    {
+    //        Console.WriteLine("Array Elements:");
+    //        foreach (int num in numbers)
+    //        {
+    //            Console.Write(num + " ");
+    //        }
+    //        Console.WriteLine();
+    //    }
+    //    static void Main()
+    //    {
+    //        int[] arr = { 10, 20, 30, 40 };
+    //        PrintArray(arr); // Passing array to function
+    //        Console.ReadLine();
+    //    }
+    //}
+
+
+
+    // 4.	Param arrays
+    //class Program
+    //{
+    //    static void PrintNumbers(params int[] numbers)
+    //    {
+    //        Console.WriteLine("You passed the following numbers:");
+    //        foreach (int num in numbers)
+    //        {
+    //            Console.Write(num + " ");
+    //        }
+    //        Console.WriteLine();
+    //    }
+    //    static void Main()
+    //    {
+    //        // Calling the method with different numbers of arguments
+    //        PrintNumbers(1, 2, 3);          // Pass individual values
+    //        PrintNumbers(10, 20);           // Pass fewer values
+    //        PrintNumbers();                 // Pass no values
+
+    //        int[] array = { 5, 15, 25, 35 };
+    //        PrintNumbers(array);            // Pass an array
+    //        Console.ReadKey();
+    //    }
+    //}
+
+
+
+    //public class StringExample
+    //{
+    //    public static void Main(string[] args)
+    //    {
+    //        string s1 = "hello";
+
+    //        char[] ch = { 'c', 's', 'h', 'a', 'r', 'p' };
+    //        string s2 = new string(ch);
+
+    //        Console.WriteLine(s1);
+    //        Console.WriteLine(s2);
+    //        Console.ReadKey();
+    //    }
+    //}
+
+
+
+    ////C# String Clone () method example
+    //public class StringExample
+    //{
+    //    public static void Main(string[] args)
+    //    {
+    //        string s1 = "Hello ";
+    //        string s2 = (String)s1.Clone();
+    //        Console.WriteLine(s1);
+    //        Console.WriteLine(s2);
+    //        Console.ReadKey();
+    //    }
+    //}
+
+
+
+    //C# String Compare () method example
+    //public class StringExample
+    //{
+    //    public static void Main(string[] args)
+    //    {
+    //        string s1 = "hello";
+    //        string s2 = "hello";
+    //        string s3 = "csharp";
+    //        string s4 = "hello";
+    //        string s5 = "mello";
+
+    //        Console.WriteLine(string.Compare(s1, s2));
+    //        Console.WriteLine(string.Compare(s2, s3));
+    //        Console.WriteLine(string.Compare(s3, s4));
+    //        Console.WriteLine(string.Compare(s4, s5));
+    //        Console.ReadKey();
+    //    }
+    //}
+
+
+
+    //C# String Copy () Method Example
+    public class StringExample
+    {
+        public static void Main(string[] args)
+        {
+            string s1 = "Hello ";
+            string s2 = string.Copy(s1);
+            Console.WriteLine(s1);
+            Console.WriteLine(s2);
+            Console.ReadKey();
+        }
+    }

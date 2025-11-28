@@ -1,0 +1,280 @@
+1.Passing Data from Controller to view : 1.in ASP.NET MVC application , a controller typically performs the business logic of the application and need to return the result to the user through a view.
+
+We Can use following objects to pass data between controller and view:
+1.ViewBag : In ASP.NET MVC 5, ViewBag is a dynamic property that allows you to pass data from the Controller to the View.It is a wrapper around the ViewData dictionary but uses dynamic type (no need for explicit casting).
+
+Key Points about ViewBag
+
+Dynamic Property – You don’t need to define a type. Example: ViewBag.Name = "Abhijeet";
+
+Lifetime – It only lasts for the current HTTP request. (If you redirect to another request, data will be lost.)
+
+Null Checking – Since it’s dynamic, if you mistype a property name, you’ll get a runtime error, not a compile-time error.
+
+Use Case – Best for sending small amounts of data (like strings, messages, dropdown lists, etc.) to the view.
+
+syntax : ViewBag.Message = "Hello Welcome to Enosis"
+
+
+public class Employee
+{
+    public int ID { get; set; }
+    public string Name { get; set; }
+    public string Age { get; set; }
+    public string Roll { get; set; }
+}
+
+ public ActionResult Index()
+ {
+     ViewBag.Message = "Your application description page."; 
+     ViewBag.CurrentTime = DateTime.Now;
+     string[] Course = { "C", "C++", "Java" };
+     ViewBag.Course = Course;
+     List<string> SportsList = new List<string>()
+     {
+         "Cricket", "Football", "Hockey", "Tennis"
+     };
+     ViewBag.SportsList = SportsList;
+     Employee emp = new Employee();
+     emp.ID = 101;
+     emp.Name = "John";
+     emp.Age = "22";
+     emp.Roll = "A1";
+     ViewBag.Employee = emp;
+     return View();
+ }
+
+<h2>@ViewBag.Message</h2>
+<h2>@ViewBag.CurrentTime</h2>
+<h1>Pass Array</h1>
+@foreach(var i in ViewBag.Course)
+{
+    <ul>
+        <li>@i</li>
+    </ul>
+}
+<h1>Pass List</h1>
+@foreach(var i in ViewBag.SportsList)
+{
+    <ul>
+        <li>@i</li>
+    </ul>
+}
+<h1>Passing Objects</h1>
+@*Casting Object for ViewBag*@
+
+@{
+    var emp = ViewBag.Employee as MVCTutorial.Models.Employee;
+ }
+<ul>
+    <li>ID:@emp.ID</li>
+    <li>Name:@emp.Name</li>
+    <li>Age:@emp.Age</li>
+    <li>Roll:@emp.Roll</li>
+</ul>
+
+2.ViewData: ViewData is a dictionary object (ViewDataDictionary) in ASP.NET MVC used to pass data from a Controller to a View.It works on a key-value pair basis, where the key is a string and the value is an object.
+
+Key Points about ViewData
+
+Type → It’s a ViewDataDictionary (inherits from Dictionary<string, object>).
+
+Data Passing → From Controller → View only (just like ViewBag).
+
+Lifetime → Available only for the current HTTP request (not across redirects).
+
+Requires Casting → Since it stores data as an object, you must cast it back to the right type in the view.
+
+Best For → Small pieces of data (messages, single values, or lists) between controller and view.
+
+Syntax : ViewData["Key"] = value;
+
+ Key : is a String value to identify the objet present in ViewData.
+        Value : is the object present in ViewData.This object may be a string,object,list,arrayor a different type,such as int,char,float,double,DateTime etc.
+NOTE : ViewData does not provide compile time error checking.for example if we mis-spell keys you woudn't get any compile time errors.you get to know about the error only at runtime.
+
+public ActionResult Index()
+{
+    ViewData["Message"] = "Your application description page.";
+    ViewData["CurrentTime"] = DateTime.Now;
+    string[] Course = { "C", "C++", "Java" };
+    ViewData["Course"] = Course;
+    List<string> SportsList = new List<string>()
+    {
+        "Cricket", "Football", "Hockey", "Tennis"
+    };
+    ViewData["SportsList"] = SportsList;
+    Employee emp = new Employee();
+    emp.ID = 101;
+    emp.Name = "John";
+    emp.Age = "22";
+    emp.Roll = "A1";
+    ViewData["Employee"] = emp;
+    return View();
+}
+
+
+<h2>Index</h2>
+
+<h2>@ViewData["Message"]</h2>
+<h2>@ViewData["CurrentTime"]</h2>
+
+<h1>Pass Array</h1>
+@foreach(string i in (string[])ViewData["Course"])
+{
+    <ul>
+        <li>@i</li>
+    </ul>
+}
+<h1>Pass List</h1>
+@foreach(string i in (List<string>)ViewData["SportsList"])
+{
+    <ul>
+        <li>@i</li>
+    </ul>
+}
+<h1>Passing Objects</h1>
+@*Casting Object for ViewBag*@
+
+@{
+    var emp = (MVCTutorial.Models.Employee)ViewData["Employee"];
+ }
+<ul>
+    <li>ID:@emp.ID</li>
+    <li>Name:@emp.Name</li>
+    <li>Age:@emp.Age</li>
+    <li>Roll:@emp.Roll</li>
+</ul>
+
+
+3.TempData:In ASP.NET MVC, TempData is a dictionary object (like ViewData) that is used to pass data from one request to another.It’s stored in TempDataDictionary and internally uses Session to persist data.
+
+Key Points about TempData
+
+Type → TempDataDictionary (stores key-value pairs).
+
+Lifetime → Data is available for the current request and the next request only. After that, it’s automatically cleared.
+
+Use Case → Best for passing messages/data across redirects (e.g., success/error messages after form submission).
+
+Requires Casting → Just like ViewData, because it stores values as object.
+
+Implementation → Uses Session behind the scenes, so it can survive redirects (unlike ViewBag/ViewData).
+
+
+public class StudentController : Controller
+{
+    // GET: Student
+    public ActionResult Index()
+    {
+        TempData["Message"] = "Welcome to Enosis";
+        return RedirectToAction("About");
+        //return View();
+    }
+    public ActionResult About()
+    {
+        if(TempData["Message"] != null)
+        {
+         ViewBag.Message = TempData["Message"].ToString();
+        }
+        return RedirectToAction("Contact");
+        //return View();
+    }
+    public ActionResult Contact()
+    {
+        if(TempData["Message"] != null)
+        {
+         ViewBag.Message = TempData["Message"].ToString();
+        }
+        //For maintain TempData in Another control.But this is not the good Practice//
+        TempData.Keep();
+        return View();
+    }
+}
+
+<h2>About</h2>
+ @ViewBag.Message;
+
+<h2>Contact</h2>
+
+@ViewBag.Message
+
+4.Session:A Session in ASP.NET is a server-side storage mechanism that allows you to store and retrieve user-specific data for the entire duration of a user’s session (from login until logout/timeout).
+
+It uses a unique Session ID (stored in a cookie or URL) to identify each user.
+
+Key Points about Session
+
+Lifetime → By default, a session lasts 20 minutes of inactivity (can be changed in web.config).
+
+Scope → User-specific. Each user gets their own session data.
+
+Storage → Data is stored on the server (in memory, SQL Server, or State Server depending on configuration).
+
+Type Safety → Stores data as object, so casting is needed when retrieving.
+
+Use Cases →
+
+User authentication (storing login info)
+
+Shopping cart data
+
+Preferences/settings
+
+ public class StudentController : Controller
+ {
+     // GET: Student
+     public ActionResult Index()
+     {
+         return View();
+     }
+     public ActionResult About()
+     {
+         return View();
+     }
+     public ActionResult Contact()
+     {
+         return View();
+     }
+     public ActionResult Login()
+     {
+         //Save data in session
+         Session["Username"] = "Abhijet Roy";
+         Session["LoginTime"] = DateTime.Now;
+         return RedirectToAction("Dashboard");
+     }
+     public ActionResult Dashboard()
+     {
+         //Retrieve data from session
+         string user = Session["Username"] as string;
+         DateTime? logintime = Session["LoginTime"] as DateTime?;
+         ViewBag.Name = user;
+         ViewBag.logintime = logintime;
+         if(user == null || logintime == null)
+         {
+             return RedirectToAction("Login");
+         }
+         return View();
+     }
+ }
+
+<configuration>
+  <system.web>
+    <sessionState timeout="30"></sessionState>
+  </system.web>
+</configuration>
+
+
+ public ActionResult Login()
+ {
+     //Save data in session
+     Session["Username"] = null;
+     Session["LoginTime"] = DateTime.Now;
+     Session.Timeout = 1; //1 minute
+     return RedirectToAction("Dashboard");
+ }
+<h2>Dashboard</h2>
+
+@ViewBag.Name
+@ViewBag.logintime
+
