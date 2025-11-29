@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/NewMyAdmin.Master" AutoEventWireup="true" CodeBehind="BatchInfo.aspx.cs" Inherits="ENOSISLEARNING.BatchInfo" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
      <title>Enosis Learning</title>
-    <%-- GitHub Testing 28/11/2025 --%>
+    <%-- GitHub Testing completed 28/11/2025 --%>
     <!-- Tagify CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
