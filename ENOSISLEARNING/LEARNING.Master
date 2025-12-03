@@ -351,7 +351,7 @@
         <!-- Brand + Slogan -->
   <a class="navbar-brand" href="index.aspx" style="line-height:1.2;">
     <span style="color:blue;font-weight:bold;">enosis</span>
-    <span style="color:orange;font-weight:bold;">learning</span><br>
+    <span style="color:orange;font-weight:bold;">learning</span><br/>
     <small class="brand-slogan">Creating Software Professionals</small>
   </a>
     </div>

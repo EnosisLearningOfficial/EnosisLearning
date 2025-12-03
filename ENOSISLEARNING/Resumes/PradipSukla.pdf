@@ -1,0 +1,1634 @@
+
+
+<!DOCTYPE html>
+
+<html>
+<head><link href="css/bootstrap-min.css" rel="stylesheet" /><title>
+	Enosis Learning
+</title>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.ico" /><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&amp;display=swap" /><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond&amp;display=swap" />
+    <!-- Boxicons CSS -->
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+            <script src="js/jquery-3.3.1.min.js"></script>
+    <link href="../Layout_file/libs/flot/css/float-chart.css" rel="stylesheet" /><link href="../Layout_file/css/style.min.css" rel="stylesheet" /><link href="css/MyAdmin.css" rel="stylesheet" />
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+    <script  src="https://www.googletagmanager.com/gtag/js?id=UA-35962033-1"></script>
+
+
+     <link rel="stylesheet" type="text/css" href="css/bootstrap-min.css" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" /><link rel="stylesheet" href="css/font-awesome.min.css" />
+  <script type="text/javascript" src="Scripts/jquery-1.11.3.min.js"></script>
+  <script type="text/javascript" src="Scripts/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.ico" /><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&amp;display=swap" /><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond&amp;display=swap" /><link href="css/bootstrap-min.css" rel="stylesheet" />
+    <!-- Boxicons CSS -->
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+     
+    <script src="js/jquery-3.3.1.min.js"></script>
+    
+     <script src="../Layout_file/libs/popper.js/dist/umd/popper.min.js"></script>
+    
+    <script src="js/bootstrap.min.js"></script>
+     <script>
+         window.dataLayer = window.dataLayer || [];
+         function gtag() { dataLayer.push(arguments); }
+         gtag('js', new Date());
+
+         gtag('config', 'UA-35962033-1');
+     </script>
+    <style>
+       
+.icon-content .menu2 {
+    width:200px;
+    display: none; /* Hidden by default */
+    position: absolute; /* Positioned relative to the .icon-content */
+    top: 81%; /* Place it below the icon */
+    left: -150px;
+   /* background-color: #fff;*/ /* White background for the menu */
+    border: 0px solid #ccc; /* Optional border */
+    padding: 10px; /* Add padding to the menu */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    z-index: 1000;
+}
+.icon-content .menu2 a {
+    display: block; /* Each option takes a full line */
+    color: #333; /* Text color */
+    text-decoration: none; /* Remove underline */
+    padding: 6px 10px; /* Add spacing inside each menu item */
+    background-color:white;
+}
+
+.icon-content .menu2 a:hover {
+  /*  background-color: white;*/ /* Highlight on hover */
+  background-color: white;
+ /* color:#1d96b2;*/
+}
+
+/* Show the menu on hover */
+.icon-content:hover .menu2 {
+    display: block;
+}
+
+/* Remove bullet points if there is a list-style applied by default */
+.menu2 {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+#lnkLogout:hover
+{
+   color:red;
+}
+    #uploadDiv {
+        position: fixed;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #ccc;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        text-align: center;
+        z-index: 1000;
+    }
+    /* Ensure modal is centered */
+.modal-dialog {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 70vh; /* Full screen height */
+}
+
+/* Modern Glassmorphism Effect */
+.stylish-modal {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.5s ease-in-out;
+    max-width: 500px; /* Set a max width */
+    width: 100%;
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Stylish Modal Header */
+.modal-header {
+    background-color:transparent;
+    color: white;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+/* Stylish Modal Text */
+.modal-text {
+    font-size: 16px;
+    color: white;
+    text-align: center;
+    font-weight: 500;
+}
+
+/* Select Box Styling */
+.stylish-select {
+    border: 2px solid #685b7b;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 16px;
+}
+
+/* Button Styling */
+.stylish-btn {
+    background: linear-gradient(135deg, #007bff, #6610f2);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.stylish-btn:hover {
+    background: linear-gradient(135deg, #6610f2, #007bff);
+    color: white;
+}
+
+/* Save Button */
+.stylish-save {
+    background: #28a745;
+    border-radius: 8px;
+    font-weight: 600;
+    padding: 10px 15px;
+    transition: 0.3s;
+}
+
+.stylish-save:hover {
+    background: #218838;
+}
+</style>
+     <script type="text/javascript">
+         function openModal() {
+
+             //$('#myModal').modal();
+             $("#myModal").modal('show');
+         }
+     </script>
+    
+     <link href="css/MyAdmin.css" rel="stylesheet" />
+        
+    <link href="../Layout_file/libs/flot/css/float-chart.css" rel="stylesheet"/>
+   
+   
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+    <script  src="https://www.googletagmanager.com/gtag/js?id=UA-35962033-1"></script>
+
+
+     <link rel="stylesheet" type="text/css" href="css/bootstrap-min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="css/font-awesome.min.css" />
+  <script type="text/javascript" src="Scripts/jquery-1.11.3.min.js"></script>
+  <script type="text/javascript" src="Scripts/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.ico"/>
+     
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond&display=swap"/>
+    
+    <link href="css/bootstrap-min.css" rel="stylesheet" />
+    <!-- Boxicons CSS -->
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+     
+   
+    
+     <script src="../Layout_file/libs/popper.js/dist/umd/popper.min.js"></script>
+    
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#myModal").modal('hide');
+            $("#myfooter").modal('hide');
+            $("#myadmissions").modal('hide');
+
+            /*  $('#ContentPlaceHolder1_btnACPP').click(function () {
+                  alert('show');
+                  $("#dialog-detail1").dialog('open');
+              });*/
+
+            $('#ContentPlaceHolder1_btnAJava').click(function () {
+                alert('show');
+                $("#dialog-detail").dialog('open');
+            });
+            $("#dialog-detail1").dialog({
+                title: 'Fill User Details',
+                autoOpen: false,
+                resizable: false,
+                width: 400,
+                modal: true,
+                show: { effect: 'drop', direction: "up" },
+                draggable: true,
+                beforeclose: function (event) {
+                    if (!confirm("Close dialog ?")) return false;
+                },
+
+                open: function (event, ui) {
+
+
+                    // $(".ui-dialog-titlebar-close").hide();
+                },
+                buttons: {
+                    "OK": function () {
+                        $(this).dialog("close");
+
+                    },
+                    "Cancel": function () {
+                        $(this).dialog("close");
+                    }
+                }
+            });
+
+
+
+        });
+
+    </script>
+    <script type="text/javascript">
+        function openModal() {
+
+            //$('#myModal').modal();
+            $("#myModal").modal('show');
+        }
+    </script>
+    <script type="text/javascript">
+        function CloseModal() {
+
+            $("#myModal").modal('hide');
+        }
+
+        function popup() {
+
+            $("#EmailModal").modal('show');
+        }
+
+
+    </script>
+    <script>
+        document.getElementById("uploadBtn").onchange = function () {
+            document.getElementById("uploadFile").value = this.value;
+        };
+    </script>
+    <style>
+         .modalBackground{
+             background: #00000087;
+         }
+         .popupheading
+         {
+             color: white;
+             background: navy;
+             padding: 5px 30px;
+         }
+         .modalPopup
+         {
+             padding:10px;
+             width:40%;
+             background:white;
+         }
+             .modalPopup table tr td
+             {
+                 padding:10px;
+
+             }
+             .modalPopup input
+             {
+                 width:100%;
+             }
+
+        .iconstyle
+        {
+            background: #173151;
+    color: white;
+    font-size: 19px;
+        margin-bottom: 7px;
+            margin-right: 20px;
+        }
+        .datafield
+        {
+            padding-left:2px;
+        }
+
+@media (max-width:766px)
+{
+    .col-md-1,.col-md-2
+    {
+        width:30% !important;
+        margin-bottom:2px;
+    }
+}
+        *
+        {
+          font-family: 'Montserrat', sans-serif;
+        } 
+        .container
+        {
+          width:95%;
+          height:100%;
+          border:1px solid transparent;
+        }
+        .inline-div 
+        {
+            display: inline-block;
+            width: 9.5%;
+            height: 30px;
+            background-color: #f2f2f2;
+            border: 1px solid transparent;
+            border-radius:5px;
+            text-align: center;
+            vertical-align: top;
+            line-height: 50px; /* Centers the text vertically */
+        }
+        .search-bar
+        {
+            margin-top:5px;
+            margin-left:0%;
+        }
+        .btn
+        {
+            color:white;
+            text-align:center;
+            vertical-align: top;
+            line-height: 15px; /* Centers the text vertically */
+            border-radius:5px;
+            background-color:#1d96b2;
+            transition: all 0.3s ease;
+        }
+        .btn:hover
+        {
+            background-color:tomato;
+            transform: scale(1.1);
+            color:white;
+        }
+        .form-control
+        {
+            height:35px;
+            border-radius:5px;
+        }
+        .Filter-info
+        {
+            margin-top:10px;
+            margin-left:0%;
+        }
+        .Filter-info-items-1
+        {
+            display: inline-block;
+            width: 10%;
+            height: 30px;
+            border: 1px solid transparent;
+            border-radius:5px;
+            text-align:center;
+            vertical-align: top;
+            line-height: 22px; /* Centers the text vertically */
+        }
+        .Filter-info-items-2
+        {
+            display: inline-block;
+            width: 24%;
+            height: 30px;
+            border: 1px solid transparent;
+            border-radius:5px;
+            text-align:center;
+            vertical-align: top;
+            line-height: 22px; /* Centers the text vertically */
+        }
+        .Filter-info-items-3
+        {
+            display: inline-block;
+            width: 25%;
+            height: 30px;
+            border: 1px solid transparent;
+            border-radius:5px;
+            text-align:center;
+            vertical-align: top;
+            line-height: 22px; /* Centers the text vertically */
+        }
+        .Filter-info-items-4
+        {
+            display: inline-block;
+            width: 25%;
+            height: 30px;
+            border: 1px solid transparent;
+            position:relative;
+            margin-left:5px;
+        }
+        #btnRDemo
+        {
+            height:30px;
+            border-radius:5px;
+            text-align:center;
+            position:absolute;
+        }
+        .bx-send
+        {
+           color:white;
+           position:absolute;
+           left:0.5px;
+        }
+        .bx-send:hover
+        {
+            color:white;
+        }
+@media (max-width:766px)
+{
+    .col-md-1,.col-md-2
+    {
+        width:30% !important;
+        margin-bottom:2px;
+    }
+}
+ .gridview-area
+{
+    max-width: 100%;
+    margin-top:5px;
+    overflow-x: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #f8f9fa;
+}
+.table
+{
+     border-collapse: collapse;
+     border-color:#1d96b2;
+     background-color :white;
+}
+.gridview-item
+{
+    padding:-10px;
+    transition: background-color 0.3s ease;
+    text-align:center;
+    font-size:10px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight:500;
+    color:black;
+    background-color :white;
+}
+.gridview-header {
+ text-align:center;
+ background-color: #1d96b2;
+ color: #fff;
+ font-size:10px;
+ font-weight: bold;
+ font-family: 'Montserrat', sans-serif;
+}
+ .gridview-header th {
+ text-align: center;
+ border: none;
+ }
+
+
+ .gridview-header-item {
+     padding: 12px;
+     text-align: center;
+     background-color: #4caf50;
+     color: #fff;
+     border-radius: 8px;
+     position: relative;
+     cursor: pointer;
+     transition: background-color 0.3s ease;
+ }
+
+ .gridview-header-item:hover {
+    
+ }
+
+ .gridview-header-item::after {
+     content: "\f0dc"; /* FontAwesome icon for sorting */
+     font-family: "Font Awesome 5 Free";
+     font-weight: 900;
+     position: absolute;
+     right: 10px;
+     top: 50%;
+     transform: translateY(-50%);
+     opacity: 0.7;
+     background-color :white;
+ }
+ .footer
+{
+    border-bottom:0.5px solid lightgrey;
+    border-top:none;
+    border-right:none;
+    border-left:none;
+}
+ .inline-item-2
+{
+    width:100%;
+    height:30px;
+    background-color:transparent;
+    display:flex;
+}
+.items
+{   
+    width:20%;
+    height:100%;
+    background-color:transparent;
+    font-size:12px;
+    font-weight:normal;
+    margin-left:8px;
+}
+.btn-primary
+{
+   
+    height:30px;
+    border-radius:5px;
+    text-align:center;
+    position:relative;
+    padding:5px 10px;
+}
+.image-item
+{
+    width:25px;
+    height:25px;
+    position:absolute;
+    left:0px;
+    top:1px;
+}
+.resume
+{
+    color:black;
+}
+    </style>
+</head>
+<body>
+    <form method="post" action="./SearchCandidate.aspx" onsubmit="javascript:return WebForm_OnSubmit();" id="form1" enctype="multipart/form-data">
+<div class="aspNetHidden">
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="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" />
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['form1'];
+if (!theForm) {
+    theForm = document.form1;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="/WebResource.axd?d=9KV5GESTGvPUJfcOf3Ss8UNn3-KO9A8QvYGRh-GVQ97tgJrjALjUPZXDzzbaX29sZWQITqr4rLHKBFPV7-HWaieGwVpKmpcU31ynyLRfhIM1&amp;t=638883469099574018" type="text/javascript"></script>
+
+
+<script src="/ScriptResource.axd?d=JO8ymQuiiV1RCaBLpUoLgFMeWt8Cfodo1r3e-ill7990KtbutjXPrjINxTMdXi_cqv1k-q_gmc29KpKWM68bxs0DJ_nUjQEx8zEwnbu9CVd1r1kg8yhUHrKH0-FVyp42TFW7JnsMGXPG9Edfjo9g_fHKUaFkSmJZL6yoKfvy6BI1&amp;t=ffffffff96313960" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=yMY1W1v0R4qYvL1kyBGd6v5t_MAFzQ99hQl-9TgNtv4XedIPII_og_96aLn7FPGAsPS2Yfzk7fgLXMCNFpVjq0SwxQK6zKCf4N5Cvj10Ez7mfA21NFd5uzuMVDm3V_joUeHj_BazYgirggz53vUM30T3VGc0GB7HgG0ZI9Q1lZGiXAQHUZoq-9M-IF0GgJLM0&amp;t=74a40145" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+if (typeof(Sys) === 'undefined') throw new Error('ASP.NET Ajax client-side framework failed to load.');
+//]]>
+</script>
+
+<script src="/ScriptResource.axd?d=sCd5szq_IAORsqounq2ZNWqaS5GGwa0lpH1jLvacQywmUOrvJCNf7-5sFrF_vrutjc5aKAwFO9PgJvbs217VqLwxHr-2YcU4O_iobYUNQvGCHfV3gjqxk3gA1o_l5vqinnwsHMCx1BhJ4AkgYDptW1p8kXoFDYY6bjmd1bcaNS5ZnyPKggwDiQRCa_IiTcWi0&amp;t=74a40145" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+function WebForm_OnSubmit() {
+if (typeof(ValidatorOnSubmit) == "function" && ValidatorOnSubmit() == false) return false;
+return true;
+}
+//]]>
+</script>
+
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="633176F2" />
+	<input type="hidden" name="__VIEWSTATEENCRYPTED" id="__VIEWSTATEENCRYPTED" value="" />
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="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" />
+</div>
+        <div id="myModal" class="modal fade" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color:dodgerblue;">
+        <h5 class="modal-title display-5 text-light" id="myModallabel">Add Enquiry</h5>
+        <button type="button" class="btn-close text-danger" data-bs-dismiss="modal" aria-label="Close">
+        </button>
+      </div>
+     <!-- Modal Body -->
+        <div class="modal-body">
+        </div>
+    </div>
+    </div>
+</div>
+        
+        
+        
+                    
+                <nav role="navigation" class="navbar">
+                    
+                    <div class="icons">
+                        <div class="icon-content">
+                            <i class="bx bx-home"></i>
+                        </div>
+                       <div class="icon-content position-relative" href="#">
+                           <!-- Hidden field to store Faculty ID -->
+                         <input type="hidden" id="CandidateIDHidden" value="42" />
+                            <!-- Notification Bell Icon -->
+                           <a href="BatchApproval.aspx" style="text-decoration:none;background:none">
+                                <i class='bx bx-bell' style="font-size: 24px; cursor: pointer;"></i>
+                                 <!-- Notification Count Badge -->
+                                 <span id="notificationCount" class="badge bg-danger position-absolute top-0 start-100 translate-middle rounded-circle" style="font-size: 8px; min-width: 20px;position:relative;top:-25px;left:10px;background-color:#ccc;color:red;">0</span>
+                           </a>
+                        </div>
+                        <div class="icon-content">
+                             <i class="bx bx-envelope"></i>
+                        </div>
+                        <div class="icon-content">
+                            <img id="imgProfilePreview" class="profile" src="Uploads/MyPic.jpg" />
+                            <div class="menu2">
+                                <a href="#">
+                                    <span id="lbltxt" style="color:#333;font-weight:normal;font-family: 'Montserrat', sans-serif;font-size:15px;margin-left:-5px;">Welcome abhijeet</span>
+                                </a>
+                               <a href="#"  data-bs-toggle="modal"  data-bs-target="#myModal">
+                                    <a id="lnkUploadProfile" href="javascript:__doPostBack(&#39;ctl00$lnkUploadProfile&#39;,&#39;&#39;)" style="color:#333;font-weight:normal;font-family: 'Montserrat', sans-serif;
+                                                   font-size:15px;margin-left:0px;text-decoration:none;">
+                                            Change Image
+                                        </a>
+                                </a>
+                                <a href="#">
+                                     <a id="lnkLogout" href="javascript:__doPostBack(&#39;ctl00$lnkLogout&#39;,&#39;&#39;)" style="color:#333;font-weight:normal;font-family: 'Montserrat', sans-serif;font-size:12px;margin-top:-15px;">Log-Out</a>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="left-section">
+                         
+                        <div class="logo">
+                            <span style="position:relative;top:3px;left:-5px;">Enosis</span><span style="position:relative;top:3px;left:-5px;">&nbsp;Learning</span>
+                        </div>
+                         
+                         
+                        <div class="hamburger" style="position:relative;left:0;bottom:4px">
+                            <div id="menuToggle">
+                                <input type="checkbox" />
+                                 <span></span>
+                                 <span></span>
+                                 <span></span>
+                                 <ul id="menu">
+                                   <li>
+                                       <div class="icon-container">
+                                           <a href="BatchesDetails.aspx"><i class="bx bx-carousel"></i>
+                                           <i class="text">BatchSheet</i></a>
+                                       </div>
+                                   </li>
+                                   <li>
+                                     <div class="icon-container">
+                                         <a href="SearchCandidate.aspx"><i class="bx bx-female"></i>
+                                         <i class="text">&nbsp; Candidate</i></a>
+                                     </div>
+                                 </li>
+                                 <li>
+                                    <div class="icon-container">
+                                        <a href="Enquiries.aspx"><i class="bx bx-run"></i>
+                                        <i class="text">Enquiry</i></a>
+                                   </div>
+                                </li>
+                                 <li>
+                                    <div class="icon-container">
+                                        <a href="Question_Status.aspx"><i class="bx bx-code-curly"></i>
+                                        <i class="text">Question</i></a>
+                                   </div>
+                                </li>
+                                <li>
+                                  <div class="icon-container">
+                                       <a href="View_Certificate.aspx"><i class="bx bx-certification"></i>
+                                       <i class="text">&nbsp; Certificate</i></a>
+                                  </div>
+                                </li>
+                                <li>
+                                  <div class="icon-container">
+                                       <a href="SoftwareCourses.aspx"><i class="bx bx-book"></i>
+                                       <i class="text">Courses</i></a>
+                                  </div>
+                                </li>
+                                <li>
+                                  <div class="icon-container">
+                                       <a href="UserDetails.aspx"><i class="bx bx-search-alt-2"></i>
+                                       <i class="text">Details</i></a>
+                                  </div>
+                                </li>
+                                <li>
+                                  <div class="icon-container">
+                                       <a href="ViewCompany.aspx"><i class="bx bx-buildings"></i>
+                                       <i class="text">Company</i></a>
+                                  </div>
+                                </li> 
+                                <li>
+                                  <div class="icon-container">
+                                       <a href="ViewVacancy.aspx"><i class="bx bx-broadcast"></i>
+                                       <i class="text">Vacancy</i></a>
+                                  </div>
+                                </li>
+                                <li>
+                                  <div class="icon-container">
+                                       <a href="profiles.aspx"><i class="bx bx-user-pin"></i>
+                                       <i class="text">Profiles</i></a>
+                                  </div>
+                                </li>
+                                 </ul>
+                            </div>
+                        </div>
+                         
+                    </div>
+                    
+                </nav>
+              
+              
+                <div class="main" style="background-color:#e7f2fd;">
+                    <div class="menu"><a href="BatchesDetails.aspx">Batches</a></div>
+                    <div class="menu">
+                        <a href="SearchCandidate.aspx">Candidate</a>
+                       
+                    </div>
+                    <div class="menu"><a href="Enquiries.aspx">Enquiry</a></div>
+                    <div class="menu">
+                        <a href="Question_Status.aspx">Questions</a>
+                        
+                    </div>
+           
+                    <div class="menu"><a href="SearchVacancy.aspx">Vacancy</a>  
+                    </div>  
+
+                    <div class="menu"><a href="SoftwareCourses.aspx">Courses</a>  </div> 
+                    <div class="menu"><a href="UserDetails.aspx">Users</a>  </div> 
+                    <div class="menu"><a href="TskManager.aspx">Tasks</a>  </div>
+
+
+                    
+                    <div class="menu"><a href="#">Admin</a>
+                         <div class="drop-menu">
+                                
+                             <a href="ContactManager.aspx">View Contacts</a>
+                            
+                             <a href="ViewCompany.aspx">Company</a>     
+                             <a href="View_Certificate.aspx">Certificate</a>
+                             <a href="DocumentManager.aspx">DocumentManager</a>
+                             <a href="NewImageManager.aspx">ImageManager</a>
+                             <a href="PhotoClickByCamera.aspx">ClickPhoto</a>
+                             <a href="Pincode.aspx">PinCode</a>
+                             <a href="UPIpay.aspx">UPI Payment</a>
+                             <a href="DataBase.aspx">View All Tables</a>
+                         </div>
+                     </div>
+                    <div class="menu"><a href="profiles.aspx">Profiles</a></div>
+                </div>
+              
+             <div>
+            
+   
+        <script type="text/javascript">
+//<![CDATA[
+Sys.WebForms.PageRequestManager._initialize('ctl00$ContentPlaceHolder1$ScriptManager1', 'form1', [], [], [], 90, 'ctl00');
+//]]>
+</script>
+
+    <div id="dialog-detail1" style="display: none">
+        <h1>welcome to enosis</h1>
+    </div>
+
+   <div id="myModal3" class="modal fade" tabindex="-1"  role="dialog">
+<div class="modal-dialog">
+<div class="modal-content">
+     <div class="modal-header" style="background-color:transparent;">
+   <h5 class="modal-title display-5 text-primary" id="myModallabel">Add Candidate</h5>
+   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+     <span aria-hidden="true" style="color:red;">&times;</span>
+   </button>
+ </div>
+<div class="modal-body">
+<div class="form-horizontal">
+    <!-- Full Name -->
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label" for="txtUserName">Full Name:</label>
+                    <div class="col-sm-9">
+                        <div class="input-group">
+                            
+                            <input name="ctl00$ContentPlaceHolder1$txtUserName" type="text" id="ContentPlaceHolder1_txtUserName" class="form-control" placeholder="Full Name" style="width:420px;border-radius:5px;" />
+                            <span id="ContentPlaceHolder1_ctl00" style="color:Red;display:none;">*</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Email ID -->
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label" for="txtEmailId">Email ID:</label>
+                    <div class="col-sm-9">
+                        <div class="input-group">                
+                            <input name="ctl00$ContentPlaceHolder1$txtEmailId" type="text" id="ContentPlaceHolder1_txtEmailId" class="form-control" placeholder="Email ID" style="width:420px;border-radius:5px;" />
+                             <span id="ContentPlaceHolder1_ctl01" style="color:Red;display:none;">*</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- DOB -->
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label" for="txtEmailId">DOB:</label>
+                    <div class="col-sm-9">
+                        <div class="input-group">                
+                            <input name="ctl00$ContentPlaceHolder1$txtDob" type="date" id="ContentPlaceHolder1_txtDob" class="form-control" style="width:420px;border-radius:5px;" />
+                             <span id="ContentPlaceHolder1_ctl02" style="color:Red;display:none;">*</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mobile -->
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label" for="txtMobile">Mobile:</label>
+                    <div class="col-sm-9">
+                        <div class="input-group">
+                            <input name="ctl00$ContentPlaceHolder1$txtMobile" type="text" id="ContentPlaceHolder1_txtMobile" class="form-control" placeholder="Mobile" style="width:420px;border-radius:5px;" />
+                            <span id="ContentPlaceHolder1_ctl03" style="color:Red;display:none;">*</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course -->
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label" for="drpDCourse1">Course:</label>
+                    <div class="col-sm-9">
+                        <select name="ctl00$ContentPlaceHolder1$drpDCourse1" id="ContentPlaceHolder1_drpDCourse1" class="form-control">
+	<option selected="selected" value="1">C language</option>
+	<option value="2">C++</option>
+	<option value="3">C &amp; C++</option>
+	<option value="4">CSHARP.NET</option>
+	<option value="5">ASP.NET</option>
+	<option value="6">SQL SERVER</option>
+	<option value="7">CSHARP.NET,ADO.NET,ASP.NET,SQL SERVER</option>
+	<option value="8">Web Designing</option>
+	<option value="17">ASP.NET MVC</option>
+	<option value="20">JAVA</option>
+	<option value="24">FULL STACK JAVA</option>
+	<option value="25">POWER-BI</option>
+	<option value="26">FULLSTACK.NET</option>
+	<option value="29">DATA ANALYTICS</option>
+	<option value="30">.NET CORE</option>
+
+</select>
+                    </div>
+                </div>
+
+                <!-- Fees -->
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label" for="txtFees">Fees:</label>
+                    <div class="col-sm-9">
+                        <input name="ctl00$ContentPlaceHolder1$txtFees" type="text" id="ContentPlaceHolder1_txtFees" class="form-control" placeholder="Fees" />
+                         <span id="ContentPlaceHolder1_ctl04" style="color:Red;display:none;">*</span>
+                    </div>
+                </div>
+
+                <!-- Qualification -->
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label" for="drpRQualifications">Qualification:</label>
+                    <div class="col-sm-9">
+                        <select name="ctl00$ContentPlaceHolder1$drpRQualifications" id="ContentPlaceHolder1_drpRQualifications" class="form-control">
+	<option selected="selected" value="1">S.S.C</option>
+	<option value="2">H.S.C</option>
+	<option value="3">B.A</option>
+	<option value="4">B.Arch</option>
+	<option value="5">BCA</option>
+	<option value="6">BBA</option>
+	<option value="7">B.Com</option>
+	<option value="8">B.Ed</option>
+	<option value="9">BDS</option>
+	<option value="10">BHM</option>
+	<option value="11">B.Pharma</option>
+	<option value="12">B.Sc</option>
+	<option value="13">B.Tech/BE</option>
+	<option value="14">LLB</option>
+	<option value="15">MBBS</option>
+	<option value="16">Diploma</option>
+	<option value="17">MCM</option>
+	<option value="18">MA</option>
+	<option value="19">M.Arch</option>
+	<option value="20">M.Com</option>
+	<option value="21">M.Ed</option>
+	<option value="22">M.Pharma</option>
+	<option value="23">MSC</option>
+	<option value="24">M.Tech</option>
+	<option value="25">MBA/PGDM</option>
+	<option value="26">MCA</option>
+	<option value="27">MS</option>
+	<option value="28">PG Diploma</option>
+
+</select>
+                    </div>
+                </div>
+
+                <!-- Counsellor -->
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label" for="drpCounsellor1">Counsellor:</label>
+                    <div class="col-sm-9">
+                        <select name="ctl00$ContentPlaceHolder1$drpCounsellor1" id="ContentPlaceHolder1_drpCounsellor1" class="form-control">
+	<option selected="selected" value="0">Select Counsellor</option>
+	<option value="DILLIP">DILLIP</option>
+	<option value="DIPALI">DIPALI</option>
+	<option value="SHRUTI">SHRUTI</option>
+	<option value="SHRADHA">SHRADHA</option>
+
+</select>
+                    </div>
+                </div>
+    <div class="card-footer text-end" style="float:right">
+            <input type="submit" name="ctl00$ContentPlaceHolder1$btnSAVE" value="SAVE" onclick="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$ContentPlaceHolder1$btnSAVE&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, false))" id="ContentPlaceHolder1_btnSAVE" class="btn btn-primary" />
+        </div>
+</div>
+    </div>
+    </div>
+<div class="clearfix"></div>
+</div>
+</div>
+
+    <div id="#myadmissions" class="modal fade" tabindex="-1" role="dialog">
+        
+    </div>
+    <div id="dialog-detail" style="display:none;">
+        <div>
+
+</div>
+    </div>
+     <div class="container">
+    <div class="search-bar">
+         <div class="inline-div">
+             <input name="ctl00$ContentPlaceHolder1$txtRegNo" type="text" id="ContentPlaceHolder1_txtRegNo" class="form-control" placeholder="RegNo" />
+         </div>
+         <div class="inline-div">
+              <input name="ctl00$ContentPlaceHolder1$txtName" type="text" id="ContentPlaceHolder1_txtName" class="form-control" placeholder="Name" />
+         </div>
+         <div class="inline-div">
+             <select name="ctl00$ContentPlaceHolder1$drpEducation" id="ContentPlaceHolder1_drpEducation" class="form-control" style="height:35px;">
+	<option selected="selected" value="0">Education</option>
+	<option value="1">S.S.C</option>
+	<option value="2">H.S.C</option>
+	<option value="3">B.A</option>
+	<option value="4">B.Arch</option>
+	<option value="5">BCA</option>
+	<option value="6">BBA</option>
+	<option value="7">B.Com</option>
+	<option value="8">B.Ed</option>
+	<option value="9">BDS</option>
+	<option value="10">BHM</option>
+	<option value="11">B.Pharma</option>
+	<option value="12">B.Sc</option>
+	<option value="13">B.Tech/BE</option>
+	<option value="14">LLB</option>
+	<option value="15">MBBS</option>
+	<option value="16">Diploma</option>
+	<option value="17">MCM</option>
+	<option value="18">MA</option>
+	<option value="19">M.Arch</option>
+	<option value="20">M.Com</option>
+	<option value="21">M.Ed</option>
+	<option value="22">M.Pharma</option>
+	<option value="23">MSC</option>
+	<option value="24">M.Tech</option>
+	<option value="25">MBA/PGDM</option>
+	<option value="26">MCA</option>
+	<option value="27">MS</option>
+	<option value="28">PG Diploma</option>
+
+</select>
+         </div>
+         <div class="inline-div">
+             <select name="ctl00$ContentPlaceHolder1$drpExperience" id="ContentPlaceHolder1_drpExperience" class="form-control" style="height:35px;">
+	<option selected="selected" value="-1">Experience</option>
+	<option value="0">Fresher</option>
+	<option value=""></option>
+	<option value="0">0</option>
+	<option value="1">1</option>
+	<option value="2">2</option>
+	<option value="3">3</option>
+	<option value="4">4</option>
+	<option value="5">5</option>
+	<option value="6">6</option>
+	<option value="7">7</option>
+	<option value="8">8</option>
+	<option value="9">9</option>
+	<option value="10">10</option>
+	<option value="11">11</option>
+	<option value="12">12</option>
+	<option value="13">13</option>
+	<option value="14">14</option>
+	<option value="15">15</option>
+
+</select>
+         </div>
+         <div class="inline-div">
+             <select name="ctl00$ContentPlaceHolder1$drpYearPassing" id="ContentPlaceHolder1_drpYearPassing" class="form-control datafield" style="height:35px;">
+	<option selected="selected" value="0">Passing Year</option>
+	<option value="2025">2025</option>
+	<option value="2024">2024</option>
+	<option value="2023">2023</option>
+	<option value="2022">2022</option>
+	<option value="2021">2021</option>
+	<option value="2020">2020</option>
+	<option value="2019">2019</option>
+	<option value="2018">2018</option>
+	<option value="2017">2017</option>
+	<option value="2016">2016</option>
+	<option value="2015">2015</option>
+	<option value="2014">2014</option>
+	<option value="2013">2013</option>
+	<option value="2012">2012</option>
+	<option value="2011">2011</option>
+	<option value="2010">2010</option>
+	<option value="2009">2009</option>
+	<option value="2008">2008</option>
+	<option value="2007">2007</option>
+	<option value="2006">2006</option>
+	<option value="2005">2005</option>
+	<option value="2004">2004</option>
+	<option value="2003">2003</option>
+	<option value="2002">2002</option>
+	<option value="2001">2001</option>
+	<option value="2000">2000</option>
+	<option value="1999">1999</option>
+	<option value="1998">1998</option>
+	<option value="1997">1997</option>
+	<option value="1996">1996</option>
+	<option value="1995">1995</option>
+	<option value="1994">1994</option>
+	<option value="1993">1993</option>
+
+</select>
+         </div>
+         <div class="inline-div">
+             <select name="ctl00$ContentPlaceHolder1$drpYear" id="ContentPlaceHolder1_drpYear" class="form-control datafield" style="height:35px;">
+	<option selected="selected" value="-1">Year</option>
+	<option value="1992">1992</option>
+	<option value="1993">1993</option>
+	<option value="1994">1994</option>
+	<option value="1995">1995</option>
+	<option value="1996">1996</option>
+	<option value="1997">1997</option>
+	<option value="1998">1998</option>
+	<option value="1999">1999</option>
+	<option value="2000">2000</option>
+	<option value="2001">2001</option>
+	<option value="2002">2002</option>
+	<option value="2003">2003</option>
+	<option value="2004">2004</option>
+	<option value="2005">2005</option>
+	<option value="2006">2006</option>
+	<option value="2007">2007</option>
+	<option value="2008">2008</option>
+	<option value="2009">2009</option>
+	<option value="2010">2010</option>
+	<option value="2011">2011</option>
+	<option value="2012">2012</option>
+	<option value="2013">2013</option>
+	<option value="2014">2014</option>
+	<option value="2015">2015</option>
+	<option value="2016">2016</option>
+	<option value="2017">2017</option>
+	<option value="2018">2018</option>
+	<option value="2019">2019</option>
+	<option value="2020">2020</option>
+	<option value="2021">2021</option>
+	<option value="2022">2022</option>
+	<option value="2023">2023</option>
+	<option value="2024">2024</option>
+	<option value="2025">2025</option>
+
+</select> 
+         </div>
+         <div class="inline-div">
+               <select name="ctl00$ContentPlaceHolder1$drpMonth" id="ContentPlaceHolder1_drpMonth" class="form-control datafield" style="height:35px;">
+	<option selected="selected" value="-1">Month</option>
+	<option value="1">JAN</option>
+	<option value="2">FEB</option>
+	<option value="3">MAR</option>
+	<option value="4">APR</option>
+	<option value="5">MAY</option>
+	<option value="6">JUN</option>
+	<option value="7">JUL</option>
+	<option value="8">AUG</option>
+	<option value="9">SEP</option>
+	<option value="10">OCT</option>
+	<option value="11">NOV</option>
+	<option value="12">DEC</option>
+
+</select>
+         </div>
+         <div class="inline-div">
+             <select name="ctl00$ContentPlaceHolder1$drpCourses" id="ContentPlaceHolder1_drpCourses" class="form-control datafield" style="height:35px;">
+	<option selected="selected" value="0">Courses</option>
+	<option value="1">C language</option>
+	<option value="2">C++</option>
+	<option value="3">C &amp; C++</option>
+	<option value="4">CSHARP.NET</option>
+	<option value="5">ASP.NET</option>
+	<option value="6">SQL SERVER</option>
+	<option value="7">CSHARP.NET,ADO.NET,ASP.NET,SQL SERVER</option>
+	<option value="8">Web Designing</option>
+	<option value="9">SQL SERVER DBA 2012</option>
+	<option value="10">SQL PROG &amp; DBA</option>
+	<option value="11">SSIS</option>
+	<option value="12">SSRS</option>
+	<option value="13">SSAS</option>
+	<option value="14">MSBI</option>
+	<option value="15">WCF</option>
+	<option value="16">WPF &amp; SILVERLIGHT</option>
+	<option value="17">ASP.NET MVC</option>
+	<option value="18">ADVANCE.NET</option>
+	<option value="19">PHP-MYSQL</option>
+	<option value="20">JAVA</option>
+	<option value="21">MANUAL TESTING</option>
+	<option value="22">SELENIUM</option>
+	<option value="23">ADVANCE-JAVA</option>
+	<option value="24">FULL STACK JAVA</option>
+	<option value="25">POWER-BI</option>
+	<option value="26">FULLSTACK.NET</option>
+	<option value="27">SPRING,HIBERNATE</option>
+	<option value="29">DATA ANALYTICS</option>
+	<option value="30">.NET CORE</option>
+
+</select>
+         </div>
+         <div class="inline-div">
+             <input name="ctl00$ContentPlaceHolder1$txtSkills" type="text" id="ContentPlaceHolder1_txtSkills" class="form-control datafield" placeholder="Enter Your Skills" style="height:35px;" />
+         </div>
+         <div class="inline-div">
+                <input type="submit" name="ctl00$ContentPlaceHolder1$btnSearch" value="Search" id="ContentPlaceHolder1_btnSearch" class="form-control btn" />
+         </div>
+    </div>
+     <div class="Filter-info">
+         <div class="Filter-info-items-1">
+              <label class="radio-inline"><input id="ContentPlaceHolder1_chkAll" type="radio" name="ctl00$ContentPlaceHolder1$filter1" value="chkAll" checked="checked" />All Candidates</label>
+         </div>
+         <div class="Filter-info-items-2">
+             <label class="radio-inline"><input id="ContentPlaceHolder1_chkPlacement" type="radio" name="ctl00$ContentPlaceHolder1$filter1" value="chkPlacement" />Filter Candidates Requires Placement</label>
+         </div>
+         <div class="Filter-info-items-3">
+              <label class="radio-inline">Total Number of Candidates Selected = 5</label>
+         </div>
+         <div class="Filter-info-items-4">
+             <a id="btnRDemo" href="#" class="btn btn-primary" data-toggle="modal" data-target="#myModal3" target="_parent"><span class="bx bx-send"></span>&nbsp;&nbsp;&nbsp;ADD STUDENTS</a>
+             <span id="ContentPlaceHolder1_lblError" style="color:Black;background-color:Yellow;">Unable to cast object of type 'System.Web.UI.WebControls.LinkButton' to type 'System.Web.UI.WebControls.ImageButton'.</span>
+         </div>
+     </div>
+    <div class=" gridview-area">
+        <div>
+	<table class="table table-hover table-borderless gridview-table" cellspacing="0" rules="all" border="1" id="ContentPlaceHolder1_grvCandidatesDetail" style="border-style:None;font-size:Small;border-collapse:collapse;">
+		<tr>
+			<th class="gridview-header" scope="col" style="border-style:None;font-weight:bold;">RegNo</th><th class="gridview-header" scope="col" style="border-style:None;font-weight:bold;">Name</th><th class="gridview-header" scope="col" style="border-style:None;font-weight:bold;">Gender</th><th class="gridview-header" scope="col" style="border-style:None;font-weight:bold;">DOB</th><th class="gridview-header" scope="col" style="border-style:None;font-weight:bold;">MobileNo</th><th class="gridview-header" scope="col" style="border-style:None;font-weight:bold;">EmailId</th><th class="gridview-header" scope="col" style="border-style:None;font-weight:bold;">Courses</th><th class="gridview-header" scope="col" style="border-style:None;font-weight:bold;">Company</th><th class="gridview-header" scope="col" style="border-style:None;font-weight:bold;">Resume</th><th class="gridview-header" scope="col" style="border-style:None;font-weight:bold;">TYPE</th><th class="gridview-header" scope="col" style="border-style:None;font-weight:bold;">Edit</th><th class="gridview-header" scope="col" style="border-style:None;font-weight:bold;">Notify</th><th class="gridview-header" scope="col" style="border-style:None;font-weight:bold;">Fees</th><th class="gridview-header" scope="col" style="border-style:None;font-weight:bold;">De Activate</th><th class="gridview-header" scope="col" style="border-style:None;font-weight:bold;">Upgrade</th><th class="gridview-header" scope="col" style="border-style:None;font-weight:bold;">Assessments</th><th class="gridview-header" scope="col" style="border-style:None;font-weight:bold;">Genrate Certificate</th><th class="gridview-header" scope="col" style="border-style:None;font-weight:bold;">Registration Form</th>
+		</tr><tr>
+			<td style="color:Black;border-style:None;"><a class="CANDIDATE_CODE" href="CandidatesReportCard.aspx?Id=10205" style="color:Black;">10205</a></td><td class="FULLNAME" style="border-style:None;">Mmuzammil Patel</td><td style="border-style:None;">Female</td><td style="border-style:None;">18/11/20</td><td style="border-style:None;">7038270031</td><td class="email" style="border-style:None;">muzamilpatl41@gmail.com</td><td class="COURSENAME" style="border-style:None;">DATA ANALYTICS</td><td style="color:Black;border-style:None;">&nbsp;</td><td class="resume" style="border-style:None;">
+                <a id="ContentPlaceHolder1_grvCandidatesDetail_lnkDownload_0" href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$grvCandidatesDetail$ctl02$lnkDownload&#39;,&#39;&#39;)" style="color:black;">Rohit_Raskar.pdf</a>
+            </td><td style="border-style:None;">I</td><td style="border-style:None;">
+                        <input type="image" name="ctl00$ContentPlaceHolder1$grvCandidatesDetail$ctl02$btnEdit" id="ContentPlaceHolder1_grvCandidatesDetail_btnEdit_0" title="Edit" Text="Edit" widht="30" src="img/edit.png" style="height:30px;" />
+
+                    </td><td style="border-style:None;">
+                   
+                        <input type="image" name="ctl00$ContentPlaceHolder1$grvCandidatesDetail$ctl02$btnEmail" id="ContentPlaceHolder1_grvCandidatesDetail_btnEmail_0" title="Email" Text="EMAIL" src="img/email.png" style="height:20px;width:20px;" />
+
+                    </td><td style="border-style:None;">
+                        <input type="image" name="ctl00$ContentPlaceHolder1$grvCandidatesDetail$ctl02$btnFees" id="ContentPlaceHolder1_grvCandidatesDetail_btnFees_0" title="Fees" Text="Fees" src="img/fees.png" style="height:20px;width:20px;" />
+
+                    </td><td style="border-style:None;">
+                        <input type="image" name="ctl00$ContentPlaceHolder1$grvCandidatesDetail$ctl02$btnDeActivate" id="ContentPlaceHolder1_grvCandidatesDetail_btnDeActivate_0" title="Deactivate" Text="DeActivate" src="img/deactive.png" style="height:20px;width:20px;" />
+
+                    </td><td style="border-style:None;">
+                        <input type="image" name="ctl00$ContentPlaceHolder1$grvCandidatesDetail$ctl02$btnUpgrade" id="ContentPlaceHolder1_grvCandidatesDetail_btnUpgrade_0" title="Upgrade" Text="Upgrade" src="/img/upgrade.png" style="height:30px;width:30px;" />
+
+                    </td><td style="border-style:None;">
+                        <input type="image" name="ctl00$ContentPlaceHolder1$grvCandidatesDetail$ctl02$btnAssessments" id="ContentPlaceHolder1_grvCandidatesDetail_btnAssessments_0" title="Assessments" Text="Assessments" src="img/Assessent.png" style="height:20px;width:20px;" />
+
+                    </td><td style="border-style:None;">
+                                   
+                                            <input type="image" name="ctl00$ContentPlaceHolder1$grvCandidatesDetail$ctl02$btncertificate" id="ContentPlaceHolder1_grvCandidatesDetail_btncertificate_0" title="Certificate" Text="Certificate" src="img/certificate_icon.png" style="height:20px;width:20px;" />
+                                            
+                                             
+                                           </td><td style="border-style:None;">
+                                             <input type="image" name="ctl00$ContentPlaceHolder1$grvCandidatesDetail$ctl02$btnviewregform" id="ContentPlaceHolder1_grvCandidatesDetail_btnviewregform_0" title="Registration From" Text="Registration Form" src="img/results.png" style="height:20px;width:20px;" />
+
+                                             
+                                           </td>
+		</tr>
+	</table>
+</div>
+</div>
+        <div class="col-md-12">
+        <div id="EmailModal" class="container-fluid" style="display: none">
+  
+                        <div class="form-horizontal">
+                            <div class="form-group">
+    
+                                <div class="col-xs-12">
+                                    <input name="ctl00$ContentPlaceHolder1$ToEmail" type="text" id="ContentPlaceHolder1_ToEmail" class="form-control my-form-control emailid" placeholder="Mail To" />
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <input name="ctl00$ContentPlaceHolder1$Subjects" type="text" id="ContentPlaceHolder1_Subjects" class="form-control my-form-control" placeholder="Subject" />
+
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <textarea name="ctl00$ContentPlaceHolder1$Body" rows="2" cols="20" id="ContentPlaceHolder1_Body" class="form-control my-form-control" placeholder="Enter Body">
+</textarea>
+
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <div class="col-xs-12">
+
+                                    <input type="file" name="ctl00$ContentPlaceHolder1$fattach" id="ContentPlaceHolder1_fattach" class="form-control my-form-control" placeholder="Attachment" />
+                                    <a id="ContentPlaceHolder1_hykResume" class="file-upl"></a>
+
+                                </div>
+                            </div>
+
+                        </div>
+                  
+                        <input type="submit" name="ctl00$ContentPlaceHolder1$SubEmail" value="Send" onclick="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$ContentPlaceHolder1$SubEmail&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, false))" id="ContentPlaceHolder1_SubEmail" class="btn btn-danger" />
+                        <button type="button" id="btnclose1" class="btn btn-orange " data-dismiss="modal">Cancel</button>
+            </div>
+            </div>
+        <div class="clearfix"></div>
+    <div class="col-md-12">
+        <div id="divcertificate" class="container-fluid" style="display: none">
+  
+                        <div class="form-horizontal">
+                      
+                            <div class="form-group">
+                                    <div class="col-xs-12">
+              
+                                      <input type="hidden" name="ctl00$ContentPlaceHolder1$hdcand_id" id="ContentPlaceHolder1_hdcand_id" />    
+                                    </div>
+                            </div>
+                            <div class="form-group">
+    
+                                <div class="col-xs-12">
+                                    <input name="ctl00$ContentPlaceHolder1$lblsname" type="text" id="ContentPlaceHolder1_lblsname" class="form-control my-form-control" placeholder="Student Name" />
+
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    
+
+                                    <input name="ctl00$ContentPlaceHolder1$txtcourse" type="text" id="ContentPlaceHolder1_txtcourse" class="form-control my-form-control" placeholder="Course" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                   
+                                    <input name="ctl00$ContentPlaceHolder1$txtsdate" type="text" id="ContentPlaceHolder1_txtsdate" class="form-control my-form-control" placeholder="Start Date" />
+
+                 </div>
+                            </div>
+                             <div class="form-group">
+                                <div class="col-xs-12">
+                                   
+                                    <input name="ctl00$ContentPlaceHolder1$txtedate" type="text" id="ContentPlaceHolder1_txtedate" class="form-control my-form-control" placeholder="End Date" />
+                            
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                    <input name="ctl00$ContentPlaceHolder1$txtgrade" type="text" id="ContentPlaceHolder1_txtgrade" class="form-control my-form-control" placeholder="Grade" />
+   
+
+                                </div>
+                            </div>
+
+                        </div>
+                   <input type="submit" name="ctl00$ContentPlaceHolder1$btngenrate" value="Generate Certificate" onclick="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$ContentPlaceHolder1$btngenrate&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, false))" id="ContentPlaceHolder1_btngenrate" class="btn btn-danger" />
+                        
+                        <button type="button" id="btnclose" class="btn btn-orange " data-dismiss="modal">Cancel</button>
+            </div> 
+            </div>
+         <div class="inline-item-2">
+             <div class="items" style="margin-left:0px">
+               <button onclick="__doPostBack('ctl00$ContentPlaceHolder1$btnExcel','')" id="ContentPlaceHolder1_btnExcel" color="#BFCFFF" style="" class="btn btn-primary">
+                    <i>
+                        <img src="Images/icon/excel.png" class="image-item"/></i><span style="font-size: 8px; margin-left: 5px;font-weight:normal;"> Export All Candidates</span>
+              </button>
+           </div>
+           <div class="items">
+               <button onclick="__doPostBack('ctl00$ContentPlaceHolder1$btnSearchedExcel','')" id="ContentPlaceHolder1_btnSearchedExcel" color="#BFCFFF" class="btn btn-primary">
+                    <i>
+                        <img src="Images/icon/excel.png" class="image-item"/></i><span style="font-size: 10px;font-weight:normal;margin-left: 5px;"> Export Candidates</span>
+               </button>
+            </div>
+          <div class="items">
+            <button onclick="__doPostBack('ctl00$ContentPlaceHolder1$btnSearchedResumes','')" id="ContentPlaceHolder1_btnSearchedResumes" class="btn btn-primary">
+                <i>
+                    <img src="img/resume.png" class="image-item" /></i><span style="font-size: 10px; margin-left: 5px;font-weight:normal;"> DownLoad Resumes</span>
+            </button>
+        </div>
+       <div class="items" style="margin-left:8px;width:100px;">
+         <button onclick="__doPostBack('ctl00$ContentPlaceHolder1$btnPrint','')" id="ContentPlaceHolder1_btnPrint" class="btn btn-primary">
+             <i>
+                 <img src="img/print1.png" class="image-item"/></i><span style="font-size: 10px; margin-left: 12px;font-weight:normal;"> Print</span>
+         </button>
+      </div>
+      <div class="items">
+        <button onclick="__doPostBack('ctl00$ContentPlaceHolder1$btnAdmissionAnalysis','')" id="ContentPlaceHolder1_btnAdmissionAnalysis" class="btn btn-primary">
+            <i>
+                <img src="img/admission.png" class="image-item"/></i><span style="font-size: 10px; margin-left: 8px;font-weight:normal;"> Admission Analysis</span>
+        </button>
+     </div>
+    <div class="items">
+         <button onclick="__doPostBack('ctl00$ContentPlaceHolder1$btnFacultyAssessments','')" id="ContentPlaceHolder1_btnFacultyAssessments" class="btn btn-primary">
+             <i>
+                 <img src="img/faculty1.png" class="image-item"/></i><span style="font-size: 10px; margin-left: 8px;font-weight:normal;"> Faculty Assessments</span>
+         </button>
+    </div>
+    <div class="items">
+        <button onclick="__doPostBack('ctl00$ContentPlaceHolder1$btnStudentsResults','')" id="ContentPlaceHolder1_btnStudentsResults" class="btn btn-primary">
+            <i>
+                <img src="img/results.png" class="image-item"/></i><span style="font-size: 10px; margin-left: 8px;font-weight:normal;"> Student Results</span>
+        </button>
+    </div>
+    <div class="items">
+        <button onclick="__doPostBack('ctl00$ContentPlaceHolder1$btnPendingFees','')" id="ContentPlaceHolder1_btnPendingFees" class="btn btn-primary" style="width:150px;">
+            <i>
+                <img src="img/fees.png" class="image-item"/></i><span style="font-size: 10px; margin-left: 8px;font-weight:normal;"> Fees Collected</span>
+        </button>
+    </div>
+         </div>
+         </div>
+
+         <script src="Scripts/ajax-libs-jquery-1.7.2-jquery.min.js"></script>
+    <script src="Scripts/ajax-jquery.ui-1.8.9-query-ui.js"></script>
+    <link href="Scripts/ajax-jquery.ui-1.8.9-themes-start-jquery-ui.css" rel="stylesheet" />
+    <script type="text/javascript">
+        $("[id*=btnModalPopup]").live("click", function () {
+            $("#btngenrate").click(function () {
+
+                $.ajax({
+
+                    type: "POST",
+
+                    url: "SearchCandidate.aspx/btngenrate_Click",
+
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "Json",
+                    success: function (response) {
+
+                        alert("AJAX call Successfully");
+
+                    },
+
+                });
+
+            });
+            $("#modal_dialog").dialog({
+                title: "Certificate Details",
+                buttons: {
+                    Close: function () {
+                        $(this).dialog('close');
+                    }
+                },
+                modal: true
+            });
+            return false;
+
+            // Basic example
+            $(document).ready(function () {
+                $('#grvCandidatesDetail').DataTable({
+                    "pagingType": "simple" // "simple" option for 'Previous' and 'Next' buttons only
+                });
+                $('.dataTables_length').addClass('bs-select');
+            });
+        });
+    </script>
+    <script type="text/javascript" src="./assets/scripts/main.js"></script>
+   
+
+
+<script type="text/javascript">
+    $("[id*=btnEmail]").live("click", function () {
+      
+        var emailid = $(".email", $(this).closest("tr")).html();
+        $("#ContentPlaceHolder1_ToEmail").val(emailid);
+ 
+        $("#EmailModal").dialog({
+
+            title: "Enter Send Email Details",
+            height: 400,
+            width: 500,
+
+            modal: true,
+            open: function (type, data) {
+                $(this).parent().appendTo("form");
+            }
+        });
+        return false;
+    });
+    $("#btnclose1").bind("click", function (event) {
+        $("#EmailModal").dialog("close");
+
+    });
+
+    $("[id*=btncertificate]").live("click", function () {
+
+        var cand_id = $(".CANDIDATE_CODE", $(this).closest("tr")).html();
+
+        var name = $(".FULLNAME", $(this).closest("tr")).html();
+        var course = $(".COURSENAME", $(this).closest("tr")).html();
+      
+        $("#ContentPlaceHolder1_hdcand_id").val(cand_id);
+        $("#ContentPlaceHolder1_lblsname").val(name);
+        $("#ContentPlaceHolder1_txtcourse").val(course);
+        $("#divcertificate").dialog({
+
+            title: "Enter Certificate Details",
+            height: 550,
+            width: 500,
+           
+            modal: true,
+            open: function (type, data) {
+                $(this).parent().appendTo("form");
+            }
+           
+        });
+
+
+            $("#btnclose").bind("click", function (event) {
+                $("#divcertificate").dialog("close");
+
+        });
+
+    
+        return false;
+    });
+
+    $("#ContentPlaceHolder1_txtsdate").datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeMonth: true,
+        changeYear: true,
+        yearRange: '1950:2100'
+
+    });
+    $("#ContentPlaceHolder1_txtedate").datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeMonth: true,
+        changeYear: true,
+        yearRange: '1950:2100'
+
+    });
+    $("[id*=btngenrate]").live("click", function () {
+        var sdate = $("#ContentPlaceHolder1_txtsdate").val();
+        var edate = $("#ContentPlaceHolder1_txtedate").val();
+       
+        var grade = $("#ContentPlaceHolder1_txtgrade").val();
+        var TodayDate = new Date();
+      
+        if (edate == '' || sdate == '' || grade=='') {
+            alert("Please enter all the details");
+            return false;
+        }
+        edate = new Date(edate);
+        sdate = new Date(sdate);
+        if (edate < sdate) {
+            alert("End Date Must be greater than Start Date");
+            return false;
+        }
+        return true;
+     
+    });
+</script>
+   
+    <script src="Scripts/ajax-jquery.ui-1.8.9-jquery-ui.js"></script>
+
+        
+
+                 <span id="lblMessage"></span>
+            </div>
+         
+       <footer>
+           <div class="footer-content">
+               <p>&copy; <span id="copyright-year"></span>Enosis Learning All Rights Reserved 2025</p>
+           </div>
+       </footer>
+
+    
+<script type="text/javascript">
+//<![CDATA[
+var Page_Validators =  new Array(document.getElementById("ContentPlaceHolder1_ctl00"), document.getElementById("ContentPlaceHolder1_ctl01"), document.getElementById("ContentPlaceHolder1_ctl02"), document.getElementById("ContentPlaceHolder1_ctl03"), document.getElementById("ContentPlaceHolder1_ctl04"));
+//]]>
+</script>
+
+<script type="text/javascript">
+//<![CDATA[
+var ContentPlaceHolder1_ctl00 = document.all ? document.all["ContentPlaceHolder1_ctl00"] : document.getElementById("ContentPlaceHolder1_ctl00");
+ContentPlaceHolder1_ctl00.controltovalidate = "ContentPlaceHolder1_txtUserName";
+ContentPlaceHolder1_ctl00.focusOnError = "t";
+ContentPlaceHolder1_ctl00.errormessage = "*";
+ContentPlaceHolder1_ctl00.display = "Dynamic";
+ContentPlaceHolder1_ctl00.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+ContentPlaceHolder1_ctl00.initialvalue = "";
+var ContentPlaceHolder1_ctl01 = document.all ? document.all["ContentPlaceHolder1_ctl01"] : document.getElementById("ContentPlaceHolder1_ctl01");
+ContentPlaceHolder1_ctl01.controltovalidate = "ContentPlaceHolder1_txtEmailId";
+ContentPlaceHolder1_ctl01.focusOnError = "t";
+ContentPlaceHolder1_ctl01.errormessage = "*";
+ContentPlaceHolder1_ctl01.display = "Dynamic";
+ContentPlaceHolder1_ctl01.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+ContentPlaceHolder1_ctl01.initialvalue = "";
+var ContentPlaceHolder1_ctl02 = document.all ? document.all["ContentPlaceHolder1_ctl02"] : document.getElementById("ContentPlaceHolder1_ctl02");
+ContentPlaceHolder1_ctl02.controltovalidate = "ContentPlaceHolder1_txtDob";
+ContentPlaceHolder1_ctl02.focusOnError = "t";
+ContentPlaceHolder1_ctl02.errormessage = "*";
+ContentPlaceHolder1_ctl02.display = "Dynamic";
+ContentPlaceHolder1_ctl02.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+ContentPlaceHolder1_ctl02.initialvalue = "";
+var ContentPlaceHolder1_ctl03 = document.all ? document.all["ContentPlaceHolder1_ctl03"] : document.getElementById("ContentPlaceHolder1_ctl03");
+ContentPlaceHolder1_ctl03.controltovalidate = "ContentPlaceHolder1_txtMobile";
+ContentPlaceHolder1_ctl03.focusOnError = "t";
+ContentPlaceHolder1_ctl03.errormessage = "*";
+ContentPlaceHolder1_ctl03.display = "Dynamic";
+ContentPlaceHolder1_ctl03.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+ContentPlaceHolder1_ctl03.initialvalue = "";
+var ContentPlaceHolder1_ctl04 = document.all ? document.all["ContentPlaceHolder1_ctl04"] : document.getElementById("ContentPlaceHolder1_ctl04");
+ContentPlaceHolder1_ctl04.controltovalidate = "ContentPlaceHolder1_txtFees";
+ContentPlaceHolder1_ctl04.focusOnError = "t";
+ContentPlaceHolder1_ctl04.errormessage = "*";
+ContentPlaceHolder1_ctl04.display = "Dynamic";
+ContentPlaceHolder1_ctl04.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+ContentPlaceHolder1_ctl04.initialvalue = "";
+//]]>
+</script>
+
+
+<script type="text/javascript">
+//<![CDATA[
+
+var Page_ValidationActive = false;
+if (typeof(ValidatorOnLoad) == "function") {
+    ValidatorOnLoad();
+}
+
+function ValidatorOnSubmit() {
+    if (Page_ValidationActive) {
+        return ValidatorCommonOnSubmit();
+    }
+    else {
+        return true;
+    }
+}
+        
+document.getElementById('ContentPlaceHolder1_ctl00').dispose = function() {
+    Array.remove(Page_Validators, document.getElementById('ContentPlaceHolder1_ctl00'));
+}
+
+document.getElementById('ContentPlaceHolder1_ctl01').dispose = function() {
+    Array.remove(Page_Validators, document.getElementById('ContentPlaceHolder1_ctl01'));
+}
+
+document.getElementById('ContentPlaceHolder1_ctl02').dispose = function() {
+    Array.remove(Page_Validators, document.getElementById('ContentPlaceHolder1_ctl02'));
+}
+
+document.getElementById('ContentPlaceHolder1_ctl03').dispose = function() {
+    Array.remove(Page_Validators, document.getElementById('ContentPlaceHolder1_ctl03'));
+}
+
+document.getElementById('ContentPlaceHolder1_ctl04').dispose = function() {
+    Array.remove(Page_Validators, document.getElementById('ContentPlaceHolder1_ctl04'));
+}
+//]]>
+</script>
+</form>
+    <!-- jQuery (Required for Bootstrap Modals) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  
+</body>
+</html>

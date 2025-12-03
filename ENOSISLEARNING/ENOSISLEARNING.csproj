@@ -6342,7 +6342,6 @@
     <Content Include="Files\SoftwareCourses %282%29.xlsx" />
     <Content Include="Files\SoftwareCourses %283%29.xls" />
     <Content Include="Files\SQL Intro.pdf" />
-    <Content Include="WebForm1.aspx" />
     <Content Include="FileUploadHandler.ashx" />
     <None Include="Scripts\jquery-1.4.1-vsdoc.js" />
     <Content Include="RegConfirmation.aspx" />
@@ -9004,13 +9003,6 @@
     </Compile>
     <Compile Include="WebDesigningKnowledgeBase.aspx.designer.cs">
       <DependentUpon>WebDesigningKnowledgeBase.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebForm1.aspx.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebForm1.aspx.designer.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

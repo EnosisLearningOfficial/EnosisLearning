@@ -25,8 +25,8 @@ namespace ENOSISLEARNING
             if (!IsPostBack)
             {
                 LoadUserProfilePicture();
-                int count = GetNotificationCount(); // Fetch count from DB
-                notificationCount.InnerHtml = count.ToString(); // Assign count
+                //int count = GetNotificationCount(); // Fetch count from DB
+                //notificationCount.InnerHtml = count.ToString(); // Assign count
             }
 
             lbltxt.Text = "Welcome " + Session["USERNAME"].ToString();
@@ -148,21 +148,21 @@ namespace ENOSISLEARNING
             }
         }
         //GetPendingRequestCount//
-        private int GetNotificationCount()
-        {
-            int facultyId = Convert.ToInt32(Session["FACULTYID"]); // Ensure Session Exists
-            int count = 0;
+        //private int GetNotificationCount()
+        //{
+        //    int facultyId = Convert.ToInt32(Session["FACULTYID"]); // Ensure Session Exists
+        //    int count = 0;
 
-            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["CONN_ENOSISLEARNING"].ConnectionString))
-            {
-                string query = "SELECT COUNT(*) FROM FacultyCourseApproval WHERE FacultyID = @FacultyID AND ApprovalStatus = 0";
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@FacultyID", facultyId);
+        //    using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["CONN_ENOSISLEARNING"].ConnectionString))
+        //    {
+        //        string query = "SELECT COUNT(*) FROM FacultyCourseApproval WHERE FacultyID = @FacultyID AND ApprovalStatus = 0";
+        //        SqlCommand cmd = new SqlCommand(query, conn);
+        //        cmd.Parameters.AddWithValue("@FacultyID", facultyId);
 
-                conn.Open();
-                count = Convert.ToInt32(cmd.ExecuteScalar());
-            }
-            return count;
-        }
+        //        conn.Open();
+        //        count = Convert.ToInt32(cmd.ExecuteScalar());
+        //    }
+        //    return count;
+        //}
     }
 }

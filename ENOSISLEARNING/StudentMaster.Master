@@ -7,499 +7,375 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>enosis learning</title>
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.ico"/>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Material CDN -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!----===== Boxicons CSS ===== -->
-    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-  <%--  <link rel="stylesheet" href="StudentStyle.css">--%> <!-- Custom CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet" />
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
-        
-/** {
-    margin: 0;
-    padding: 0;
-}
-
-html, body {
-    width: 100%;
-    height: 100%;
-    background-color: #ccc;
-}*/
-
-/* Google Font Import - Poppins */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-}
-
-:root {
-    /* ===== Colors ===== */
-    --body-color: #E4E9F7;
-    --sidebar-color: #FFF;
-   --primary-color: #355c7d;
-    --primary-color-light: #F6F5FF;
-    --toggle-color: #DDD;
-    --text-color: #707070;
-    /* ====== Transition ====== */
-    --tran-03: all 0.2s ease;
-    --tran-03: all 0.3s ease;
-    --tran-04: all 0.3s ease;
-    --tran-05: all 0.3s ease;
-}
-
-body {
-    min-height: 100vh;
-    background-color: white;
-    transition: var(--tran-05);
-}
-
-::selection {
-    background-color: var(--primary-color);
-    color: #fff;
-}
-
-body.dark {
-    --body-color: #18191a;
-    --sidebar-color: #242526;
-    --primary-color: #3a3b3c;
-    --primary-color-light: #3a3b3c;
-    --toggle-color: #fff;
-    --text-color: #ccc;
-}
-/* ===== Sidebar ===== */
-.sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 250px;
-    padding: 10px 14px;
-    background: var(--sidebar-color);
-    transition: var(--tran-05);
-  /*  z-index: 100;*/
-}
-
-    .sidebar.close {
-        width: 88px;
-    }
-    /* ===== Reusable code - Here ===== */
-    .sidebar li {
-        height: 50px;
-        list-style: none;
-        display: flex;
-        align-items: center;
-        margin-top: 10px;
-    }
-
-    .sidebar header .image,
-    .sidebar .icon {
-        min-width: 60px;
-        border-radius: 6px;
-    }
-
-    .sidebar .icon {
-        min-width: 60px;
-        border-radius: 6px;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 20px;
-    }
-
-    .sidebar .text,
-    .sidebar .icon {
-        color: var(--text-color);
-        transition: var(--tran-03);
-    }
-
-    .sidebar .text {
-        font-size: 17px;
-        font-weight: 500;
-        white-space: nowrap;
-        opacity: 1;
-    }
-
-    .sidebar.close .text {
-        opacity: 0;
-    }
-    /* =========================== */
-    .sidebar header {
-        position: relative;
-    }
-
-        .sidebar header .image-text {
-            display: flex;
-            align-items: center;
+         body {
+            overflow-x: hidden;
+            background: white;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         }
 
-        .sidebar header .logo-text {
+        #wrapper {
             display: flex;
             flex-direction: column;
+            height: 100vh;
+
         }
 
-header .image-text .name {
-    margin-top: 2px;
-    font-size: 18px;
-    font-weight: 600;
+        /* TOPBAR */
+        #topbar {
+            height: 64px;
+            border-bottom: 0px solid #000;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-inline: 1rem;
+        }
+
+        /* SIDEBAR / CONTENT */
+        #content-row {
+            flex: 1;
+            display: flex;
+        }
+
+       #sidebar {
+            width: 250px;
+            min-width: 250px;
+            border-right: 0;
+            background: #EEEEEE;
+            border-radius: 0px 8px 8px 0px;     
+            transition: all .3s ease;
+        }
+
+
+
+        #sidebar.collapsed {
+            margin-left: -250px;
+        }
+        /* profile section */
+.sidebar-profile {
+    color: #124170;
 }
 
-header .image-text .profession {
-    font-size: 16px;
-    margin-top: -2px;
-    display: block;
-}
-
-.sidebar header .image {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-    .sidebar header .image img {
-        width: 40px;
-        border-radius: 6px;
-    }
-
-.sidebar header .toggle {
-    position: absolute;
-    top: 50%;
-    right: -25px;
-    transform: translateY(-50%) rotate(180deg);
-    height: 25px;
-    width: 25px;
-    background-color: var(--primary-color);
-    color: var(--sidebar-color);
+.profile-pic {
+    width: 82px;
+    height: 82px;
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 22px;
-    cursor: pointer;
-    transition: var(--tran-05);
+    overflow: hidden;
+    margin: 0 auto;
+    border: 2px solid rgba(255,255,255,0.8);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    background: rgba(255,255,255,0.4);
 }
 
-body.dark .sidebar header .toggle {
-    color: var(--text-color);
-}
-
-.sidebar.close .toggle {
-    transform: translateY(-50%) rotate(0deg);
-}
-
-.sidebar .menu {
-    margin-top: 40px;
-}
-
-.sidebar li.search-box {
-    border-radius: 6px;
-    background-color: var(--primary-color-light);
-    cursor: pointer;
-    transition: var(--tran-05);
-}
-
-    .sidebar li.search-box input {
-        height: 100%;
-        width: 100%;
-        outline: none;
-        border: none;
-        background-color: var(--primary-color-light);
-        color: var(--text-color);
-        border-radius: 6px;
-        font-size: 17px;
-        font-weight: 500;
-        transition: var(--tran-05);
-    }
-
-.sidebar li a {
-    list-style: none;
-    height: 100%;
-    background-color: transparent;
-    display: flex;
-    align-items: center;
-    height: 100%;
+.profile-pic img {
     width: 100%;
-    border-radius: 6px;
-    text-decoration: none;
-    transition: var(--tran-03);
+    height: 100%;
+    object-fit: cover;
 }
 
-    .sidebar li a:hover {
-        background-color: var(--primary-color);
-        width:90%;
-    }
+.candidate-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+}
 
-        .sidebar li a:hover .icon,
-        .sidebar li a:hover .text {
-            color: var(--sidebar-color);
+.candidate-id,
+.candidate-course {
+    font-size: 0.78rem;
+    opacity: 0.8;
+}
+
+/* sidebar menu with icons */
+.sidebar-menu .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #124170;
+    font-size: 0.9rem;
+    border-radius: 6px;
+    padding: 0.4rem 0.6rem;
+}
+
+.sidebar-menu .nav-link:hover {
+    background: rgba(230, 238, 252, 0.9);
+}
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease-in-out;
+}
+
+.nav-link span {
+    font-size: 1.190rem;
+    line-height: 1.3;
+    padding: 10px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.menu-icon {
+    width: 22px;
+    text-align: center;
+    font-size: 1.5rem;
+    transition: transform 0.3s ease-in-out;
+}
+.nav-link:hover .menu-icon {
+    transform: translateX(5px);
+}
+
+.nav-link:hover span {
+    transform: translateX(5px);
+}
+
+.nav-link:hover {
+    transform: translateX(3px);
+}
+
+.sidebar-menu .nav-link i {
+    color: #124170;
+}
+
+
+       #main {
+            flex: 1;
+            padding: 1rem;
         }
 
-body.dark .sidebar li a:hover .icon,
-body.dark .sidebar li a:hover .text {
-    color: var(--text-color);
-}
+        /* FOOTER */
+        #footer {
+            height: 30px;
+            padding-inline: 1rem;
+            display: flex;
+            align-items: center;
+            font-size: 0.95rem;
+            align-self: center;
+            color:white;
+            text-align:center;
+            position:relative;
+            left:40%;
+            right:60%;
+        }
+        #footer a
+        {
+            text-align:center;
+        }
 
-.sidebar .menu-bar {
-    height: calc(100% - 55px);
+        /* LOGO / BRAND */
+        .navbar-brand {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            line-height: 1.15;
+        }
+
+        .navbar-brand span {
+            font-size: 24px;
+            line-height: 1;
+        }
+
+        .brand-slogan {
+            font-size: 0.7rem;
+            letter-spacing: 0.3px;
+            display: block;
+            color: #124170;
+            opacity: .9;
+            line-height: 2;
+        }
+        /* HAMBURGER BUTTON */
+.burger-btn {
+    width: 44px;
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid rgba(18, 65, 112, .12);
+    background: #ffffff;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    overflow-y: scroll;
-}
-
-.menu-bar::-webkit-scrollbar {
-    display: none;
-}
-
-.sidebar .menu-bar .mode {
-    border-radius: 6px;
-    background-color: var(--primary-color-light);
-    position: relative;
-    transition: var(--tran-05);
-}
-
-.menu-bar .mode .sun-moon {
-    height: 50px;
-    width: 60px;
-}
-
-.mode .sun-moon i {
-    position: absolute;
-}
-
-    .mode .sun-moon i.sun {
-        opacity: 0;
-    }
-
-body.dark .mode .sun-moon i.sun {
-    opacity: 1;
-}
-
-body.dark .mode .sun-moon i.moon {
-    opacity: 0;
-}
-
-.menu-bar .bottom-content .toggle-switch {
-    position: absolute;
-    right: 0;
-    height: 100%;
-    min-width: 60px;
-    display: flex;
-    align-items: center;
     justify-content: center;
-    border-radius: 6px;
+    align-items: center;
+    gap: 6px; /* more gap */
+    padding: 6px 6px;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, .12);
     cursor: pointer;
+    transition: all .25s ease;
 }
 
-.toggle-switch .switch {
-    position: relative;
-    height: 22px;
-    width: 40px;
-    border-radius: 25px;
-    background-color: var(--toggle-color);
-    transition: var(--tran-05);
+.burger-line {
+    width: 22px;           /* fixed width, not 100% */
+    height: 3px;           /* bigger, more visible */
+    border-radius: 5px;
+    background: #124170;
+    transition: all .25s ease;
 }
 
-.switch::before {
-    content: '';
-    position: absolute;
-    height: 15px;
-    width: 15px;
-    border-radius: 50%;
-    top: 50%;
-    left: 5px;
-    transform: translateY(-50%);
-    background-color: var(--sidebar-color);
-    transition: var(--tran-04);
+.burger-btn:hover {
+    background: #f0f6ff;
+    transform: translateY(-1px);
 }
 
-body.dark .switch::before {
-    left: 20px;
-}
 
-.home {
-    position: absolute;
-    top: 0;
-    top: 0;
-    left: 250px;
-    height: 100vh;
-    width: calc(100% - 250px);
-    background-color: var(--body-color);
-    transition: var(--tran-05);
-}
+        .burger-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, .18);
+        }
 
-    .home .text {
-        font-size: 30px;
-        font-weight: 500;
-        color: var(--text-color);
-        padding: 12px 60px;
-    }
+        .burger-btn:active .burger-line:nth-child(2) {
+            width: 60%;
+        }
 
-.sidebar.close ~ .home {
-    left: 78px;
-    height: 100vh;
-    width: calc(100% - 78px);
-}
+        /* SIDEBAR LINKS */
+        #sidebar .nav-link {
+            color: #124170;
+            font-size: 0.9rem;
+            border-radius: 4px;
+            padding: .35rem .75rem;
+        }
 
-body.dark .home .text {
-    color: var(--text-color);
-}
-
-.enosislogo {
-    width: 35px;
-    height: 35px;
-    margin-left: -25%;
-    margin-bottom: 10px;
-}
-
-.logoname {
-    padding-left: 10px;
-    padding-bottom: 8px;
-    color:  var(--primary-color);
-    font-family: 'Poppins', sans-serif;
-    font-size: 18px;
-}
-
-    .logoname span {
-        color: #ec7e16;
-        font-family: 'Poppins', sans-serif;
-    }
-/*---------------------------------------------------------------------------------------------*/
-
-.content {
-    margin-left: 250px; /* Offset content to the right */
-    padding: 0px;
-    margin-top: 0px; /* Offset to avoid navbar overlap */
-}
-.footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    color: #3A3B3C; /* Text color */
-    text-align: center;
-    padding: 10px;
-    font-size: 12px;
-}
-
-.footer-content {
-    font-family: Arial, sans-serif;
-}
-
+        #sidebar .nav-link:hover {
+            background: #e6eefc;
+        }
     </style>
      <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
 </head>
 <body>
     <form id="form1" runat="server">
-<%--       <div class="container-fluid">--%>
-           <nav class="sidebar close">
-        <header>
-            <div class="image-text">
-                <span class="image">
-                </span>
-                <div class="text logo-text">
-                    <li class="search-box" style="background-color: transparent;">
-                         <img class="enosislogo" src="images/favicon.ico" alt="">
-                         <h2 class="logoname">enosis&nbsp;<span>learning</span></h2>
-                    </li>
-                </div>
-            </div>
-          <%--  <i class='bx bx-chevron-right toggle'></i>--%>
-        </header>
-        <div class="menu-bar">
-            <div class="menu" style="border-right:1px solid #ccc">         
-                <ul class="menu-links">
-                    <%--<li class="nav-link">
-                        <a href="Dashboard.aspx">
-                            <i class='bx bx-home-alt icon' ></i>
-                            <span class="text nav-text">Dashboard</span>
-                        </a>
-                    </li>--%>
-                    <li class="nav-link">
-                        <a href="Result.aspx">
-                            <i class='bx bx-bar-chart-alt-2 icon' ></i>
-                            <span class="text nav-text">Test Scores</span>
-                        </a>
-                    </li>
-                    <li class="nav-link">
-                        <a href="Fee.aspx">
-                            <i class='bx bx-bell icon'></i>
-                            <span class="text nav-text">Fee</span>
-                        </a>
-                    </li>
-                    <li class="nav-link">
-                        <a href="Attendence.aspx">
-                            <i class='bx bx-pie-chart-alt icon' ></i>
-                            <span class="text nav-text">Course Details</span>
-                        </a>
-                    </li>
-                    <li class="nav-link">
-                        <a href="#">
-                            <i class='bx bx-plus icon' ></i>
-                            <span class="text nav-text">Vacancy</span>
-                        </a>
-                    </li>
-                    <li class="nav-link">
-                        <a href="Logout.aspx" id="logoutBtn" onclick="Confirm();">
-                            <i class='bx bx-user icon' ></i>
-                            <span class="text nav-text">Log-Out</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
+        <div id="wrapper" class="border border-2">
+             <div id="topbar" class="d-flex justify-content-between align-items-center px-3">
+    
+    <!-- Left: Burger + Logo -->
+    <div class="d-flex align-items-center">
+        <button class="burger-btn me-2" type="button" id="btnToggle">
+            <span class="burger-line"></span>
+            <span class="burger-line"></span>
+            <span class="burger-line"></span>
+        </button>
+
+        <a class="navbar-brand m-0 p-0 d-inline-block" href="index.aspx">
+            <span style="color:blue;font-weight:bold;">enosis</span>
+            <span style="color:orange;font-weight:bold;">learning</span>
+            <br />
+            <small class="brand-slogan">Creating Software Professionals</small>
+        </a>
+    </div>
+
+    <!-- RIGHT SIDE MENU -->
+    <div class="d-flex align-items-center gap-3">
+
+        <!-- Notifications -->
+        <a href="#" class="text-dark position-relative fs-5">
+            <i class="fa-solid fa-bell" style="color: blue;"></i>
+            <span class="position-absolute top-0 start-100 translate-middle badge bg-danger rounded-circle" style="font-size: 0.6rem;">3</span>
+        </a>
+        <!-- Profile Dropdown -->
+        <div class="dropdown form-control" style="background-color: orange;">
+            <a class="d-flex align-items-center text-dark" href="#" role="button" data-bs-toggle="dropdown">
+                 <i class="fa-solid fa-wrench" style="color: white;"></i></a>
+            <ul class="dropdown-menu dropdown-menu-end shadow">
+                <li><a class="dropdown-item" href="#"><i class="fa-solid fa-user me-2"></i> My Profile</a></li>
+                <li><a class="dropdown-item" href="#"><i class="fa-solid fa-image me-2"></i> Change Picture</a></li>
+                <li><a class="dropdown-item" href="#"><i class="fa-solid fa-gear me-2"></i> Settings</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item text-danger" href="logout.aspx"><i class="fa-solid fa-right-from-bracket me-2"></i> Logout</a></li>
+            </ul>
         </div>
-    </nav>
-<%--       </div>--%>
-            <div class="content">
+
+    </div>
+</div>
+            <!-- MIDDLE: SIDEBAR + MAIN -->
+        <div id="content-row">
+           <div id="sidebar">
+                    <div class="sidebar-profile text-center pt-3 pb-2 px-3">
+                        <div class="profile-pic">
+                            <asp:Image ID="Profileimg" runat="server" ImageUrl="~/Images/addman.png"/>
+                        </div>
+                        <div class="mt-2">
+                            <div class="candidate-name">
+                              <b>Name:</b> <asp:Label ID="lblName" runat="server" /><br />
+                            </div>
+                            <div class="candidate-id">
+                                <b style="font-weight:900">CANDIDATE ID:</b> Enosis-<asp:Label ID="lblID" runat="server"/><br />
+                            </div>
+                            <div class="candidate-course">
+                                <b style="font-weight:900;font-size:0.910rem">Course:</b> <asp:Label ID="lblCourse" runat="server" /><br />
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="my-2 mx-3" />
+
+                    <ul class="nav flex-column px-2 pb-3 sidebar-menu">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <span class="menu-icon"><i class="fa-solid fa-house"></i></span>
+                                <span>DashBoard</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <span class="menu-icon"><i class="fa-solid fa-user-graduate"></i></span>
+                                <span>Attendence</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <span class="menu-icon"><i class="fa-solid fa-book"></i></span>
+                                <span>Courses</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <span class="menu-icon"><i class="fa-solid fa-coins"></i></span>
+                                <span>Fee Details</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <span class="menu-icon"><i class="fa-solid fa-clipboard-check"></i></span>
+                                <span>Test Scores</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <span class="menu-icon"><i class="fa-solid fa-book"></i></span>
+                                <span>Assignments</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <span class="menu-icon"><i class="fa-solid fa-power-off text-success"></i></span>
+                                <span>Log-out</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                </div>
+            <div class="content" id="main">
                 <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
             </div>
-        <footer class="footer">
-  <div class="footer-content">
-    &copy; 2025 All Rights Reserved By<a href="#"><h2 class="logoname" style="display:inline-block;font-size:15px;">enosis <span>learning</span></h2></a>
-  </div>
-</footer>
+        </div>
+           </div>
+        <!-- FOOTER -->
+        <div id="footer">
+            <a href="Dashboard.aspx" style="text-decoration: none;color: #333;">
+                <span>All &copy; Copyright Reserved By www.<span style="color:blue;font-weight:bold;">enosis</span><span style="color:orange;font-weight:bold;">learning</span>.com 2025</span>
+            </a>
+        </div>
 
-    </form>
- <script>
-     const body = document.querySelector('body'),
-         sidebar = body.querySelector('nav'),
-         toggle = body.querySelector(".toggle"),
-         searchBtn = body.querySelector(".search-box"),
-         modeSwitch = body.querySelector(".toggle-switch"),
-         modeText = body.querySelector(".mode-text");
-
-     // Ensure sidebar is open by default
-     sidebar.classList.remove("close");
-
-     toggle.addEventListener("click", () => {
-         sidebar.classList.toggle("close");
-     });
-
-     searchBtn.addEventListener("click", () => {
-         sidebar.classList.remove("close");
-     });
-
-     modeSwitch.addEventListener("click", () => {
-         body.classList.toggle("dark");
-
-         if (body.classList.contains("dark")) {
-             modeText.innerText = "Light mode";
-         } else {
-             modeText.innerText = "Dark mode";
-         }
-     });
- </script>
+<!-- BOOTSTRAP JS + TOGGLE SCRIPT -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    function Confirm() {
-        confirm("Are You Sure?");
-        return;
-    }
+    document.addEventListener("DOMContentLoaded", function () {
+        var btn = document.getElementById("btnToggle");
+        var sidebar = document.getElementById("sidebar");
+        btn.addEventListener("click", function () {
+            sidebar.classList.toggle("collapsed");
+        });
+    });
 </script>
-     <%--   <script src="StudentScript.js"></script>--%>
+    </form>
 </body>
 </html>
