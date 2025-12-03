@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- List 
+    1.unordered list
+    <ul type="disc">
+        <li>List 1</li>
+        <li>List 1</li>
+        <li>List 1</li>
+    </ul>
+
+    type=disc,square,circle
+    2.ordered list
+    3.data table defination list 
+    -->
+    <ul type="disc">
+        <li>List 1</li>
+        <li>List 1</li>
+        <li>List 1</li>
+    </ul>
+
+    <!-- Ordered list -->
+     <ol type="I">
+        <li>List 1</li>
+        <li>List 1</li>
+        <li>List 1</li>
+     </ol>
+
+     <!-- Data Defination List
+      <dl</dl> Definition List container
+      <dt></dt> Definition Term
+      <dd></dd> Definition Description
+      --->
+      <dl>
+        <dt>Tea</dt>
+        <dd>Milk</dd>
+        <dd>Sugar</dd>
+
+        <dt>Course</dt>
+        <dd>Full Stack .NET</dd>
+      </dl>
+      
+      <!-- Hyper Link 
+       
+      Anchor Tag
+      -->
+      <a href="Contact.html" target="_blank">Contact</a>
+      <a href="Folder/About.html">About</a>
+      <a href="a/a.html">jump to a.html</a>
+      <a href="https://www.google.com">Jump to google</a>
+
+      <a href="tel:9089786756">Call Us..</a>
+
+      <a href="mailto:013roy@gmail.com">Email Us..</a>
+</body>
+</html>

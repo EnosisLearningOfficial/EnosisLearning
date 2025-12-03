@@ -37,7 +37,7 @@ namespace ENOSISLEARNING
                 string password = txtPassword.Text.Trim();
                 string formattedDOB = "";
 
-                // parse DOB (for student login)
+                //parse DOB (for student login)
                 DateTime dob;
                 if (DateTime.TryParseExact(password, "dd/MM/yyyy",
                     CultureInfo.InvariantCulture, DateTimeStyles.None, out dob))
@@ -92,7 +92,7 @@ namespace ENOSISLEARNING
                         {
                             Session["CANDID"] = id;
                             Session["PASSWORD"] = password;
-                            Response.Redirect("~/Attendence.aspx");
+                            Response.Redirect("~/Dashboard.aspx");
                         }
                         else if (role == "Faculty")
                         {
@@ -103,7 +103,7 @@ namespace ENOSISLEARNING
                     }
                     else
                     {
-                        // ✅ Invalid login - clear cookies
+                        //Invalid login - clear cookies
                         Response.Cookies["USERNAME"].Expires = DateTime.Now.AddDays(-1);
                         Response.Cookies["FULLNAME"].Expires = DateTime.Now.AddDays(-1);
                         Response.Cookies["ROLE"].Expires = DateTime.Now.AddDays(-1);

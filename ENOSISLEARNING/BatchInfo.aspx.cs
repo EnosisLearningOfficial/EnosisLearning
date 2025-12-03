@@ -160,7 +160,7 @@ namespace ENOSISLEARNING
                 drpDCourse.DataValueField = "COURSEID";
                 drpDCourse.DataBind();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 //lblmsg.Text = ex.Message;
@@ -185,7 +185,7 @@ namespace ENOSISLEARNING
                 FilterFacultyDrp.DataValueField = "FULLNAME";
                 FilterFacultyDrp.DataBind();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 //lblmsg.Text = ex.Message;
