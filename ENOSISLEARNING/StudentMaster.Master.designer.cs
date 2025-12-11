@@ -33,6 +33,24 @@ namespace ENOSISLEARNING
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
+        /// ProfilePic control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload ProfilePic;
+
+        /// <summary>
+        /// btnHiddenLogout control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnHiddenLogout;
+
+        /// <summary>
         /// Profileimg control.
         /// </summary>
         /// <remarks>
@@ -67,6 +85,15 @@ namespace ENOSISLEARNING
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblCourse;
+
+        /// <summary>
+        /// lblResume control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblResume;
 
         /// <summary>
         /// ContentPlaceHolder1 control.

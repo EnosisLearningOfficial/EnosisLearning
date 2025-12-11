@@ -1,0 +1,64 @@
+--Select into statement
+--Copy data into a NEW table
+
+select * from Candidates
+
+select * into CandidateBackup from Candidates;
+
+select * from CandidateBackup
+
+select * from Candidates
+
+insert into Candidates values(2,'R Ashwin','M','Resume.pdf','email@gmail.com','1993-01-13','10:00',12000.00,23000,32,Getdate());
+
+
+insert into Candidates(Id,Name,Gender,Resume,Email,DOB,BatchTime,Fees,Salary,Age,CreatedDate,Status)values(2,'R Ashwin','M','Resume.pdf','email@gmail.com','1993-01-13','10:00',12000.00,23000,32,Getdate(),0)
+
+select * from Candidates
+
+
+🎯 Question 1: Create a Database + Student Table
+
+Q1. Create a database named AcademyDB.
+Inside it, create a table Students with the following columns:
+
+Column Name	Data Type	Requirement
+StudentID	INT	
+Name	VARCHAR(50)	Not Null
+Age	INT	
+Email	VARCHAR(100)	Unique
+Course	VARCHAR(50)	
+
+After creating the table, insert 5 sample records.
+
+🎯 Question 2: Employee Management System
+
+Create a database called CompanyDB.
+Inside it, create a table Employees:
+
+Column	Type	Requirement
+EmpID	INT	
+FullName	VARCHAR(60)	Not null
+Salary	DECIMAL(10,2)	
+Department	VARCHAR(40)	
+JoinDate	DATE	
+
+Then insert any 3 employee records.
+
+🎯 Question 3: Product Inventory
+
+Create a database ShopDB.
+Create a table Products:
+
+Column	Data Type	Requirement
+ProductID	INT	
+ProductName	VARCHAR(80)	Not Null
+Price	DECIMAL(8,2)	
+Stock	INT	
+Category	VARCHAR(50)	
+
+Insert 5 product records.
+
+
+create database AcademicXYZ
+use AcademicXYZ

@@ -13,43 +13,47 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
       integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
       crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
          body {
             overflow-x: hidden;
             background: white;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            font-family: 'Inter', sans-serif;
         }
 
         #wrapper {
-            display: flex;
+             display: flex;
             flex-direction: column;
-            height: 100vh;
+            min-height: 95vh;
+            overflow-x: hidden;
 
         }
 
         /* TOPBAR */
         #topbar {
             height: 64px;
-            border-bottom: 0px solid #000;
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 12px;
-            padding-inline: 1rem;
+            padding: 0 1rem;
+            flex-shrink: 0;
         }
 
         /* SIDEBAR / CONTENT */
         #content-row {
-            flex: 1;
+             flex: 1;
             display: flex;
+            min-height: 0;
         }
 
        #sidebar {
             width: 250px;
             min-width: 250px;
-            border-right: 0;
-            background: #EEEEEE;
-            border-radius: 0px 8px 8px 0px;     
-            transition: all .3s ease;
+            background: #F8FAFC;
+            border-radius: 0px 8px 8px 0px; 
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+            overflow-y: auto;
         }
 
 
@@ -144,21 +148,20 @@
        #main {
             flex: 1;
             padding: 1rem;
+            min-width: 0; /* prevent horizontal overflow */
+            overflow-x: hidden;
         }
 
         /* FOOTER */
         #footer {
-            height: 30px;
-            padding-inline: 1rem;
+           height: 30px;
+            padding: 0 1rem;
             display: flex;
+            justify-content: center;
             align-items: center;
-            font-size: 0.95rem;
-            align-self: center;
-            color:white;
-            text-align:center;
-            position:relative;
-            left:40%;
-            right:60%;
+            font-size: 0.85rem;
+            text-align: center;
+            background-color: #f0f0f0;
         }
         #footer a
         {
@@ -238,11 +241,121 @@
         #sidebar .nav-link:hover {
             background: #e6eefc;
         }
+        .modal-dialog {
+            margin: auto !important;
+        }
+.glass-card {
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 16px;
+
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+
+    color: #fff;
+}
+
+.modal-backdrop.show {
+    backdrop-filter: blur(4px);
+}
+
+        /* Responsive: Mobile */
+/*@media screen and (max-width: 767px) {*/
+
+    /* Content vertical */
+    /*#content-row {
+        flex-direction: column;
+    }*/
+
+    /* Sidebar default hidden */
+    /*#sidebar {
+        position: fixed;
+        top: 64px;
+        left: -250px;
+        width: 250px;
+        height: calc(100% - 64px);
+        background: #fff;
+        box-shadow: 2px 0 8px rgba(0,0,0,0.15);
+        transition: left 0.3s ease-in-out;
+        z-index: 2000;
+    }*/
+
+    /* Sidebar visible */
+    /*#sidebar.active {
+        left: 0;
+        opacity: 1;*/       /* optional */
+    /*}*/
+
+    /* REMOVE OVERLAY COMPLETELY */
+    /*#sidebar-overlay { display: none; }
+
+    #main {
+        padding: 0.5rem;
+    }
+
+    .burger-btn {
+        width: 36px;
+        height: 32px;
+    }
+
+    #topbar {
+        padding: 0 0.5rem;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    #footer {
+        font-size: 0.8rem;
+        left: 0;
+        right: 0;
+        justify-content: center;
+    }
+}*/
     </style>
      <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
 </head>
 <body>
     <form id="form1" runat="server">
+        <%-- change profile picture popup modal --%>
+        <div class="modal fade" tabindex="-1" id="profilepicModal" aria-labelledby="profilepicModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                 <div class="modal-content glass-card">
+                         <div class="modal-header" style="border:none;">
+                             <h5 class="modal-label" style="color:white;">
+                                  <i class=" fa-solid fa-upload" style="color:#DC3545;"></i>
+                                 Change Profile Picture</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                         </div>
+                         <div class="modal-body">
+                             <asp:FileUpload ID="ProfilePic" runat="server"/>
+                         </div>
+                         <div class="modal-footer" style="border:none;">
+                             <button id="uploadBtn" class="btn" style="background-color:#003C80;color:white;">Upload</button>
+                         </div>
+                 </div>
+            </div>
+        </div>
+        <%-- My profile popup modal --%>
+        <div class="modal fade" tabindex="-1" id="myProfileModal" aria-labelledby="myProfileModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                 <div class="modal-content glass-card">
+                         <div class="modal-header" style="border:none;">
+                             <h5 class="modal-label" style="color:white;">
+                                  <i class=" fa-solid fa-upload" style="color:#DC3545;"></i>
+                                 Change Profile Picture</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                         </div>
+                         <div class="modal-body">
+                             
+                         </div>
+                         <div class="modal-footer" style="border:none;">
+                            
+                         </div>
+                 </div>
+            </div>
+        </div>
         <div id="wrapper" class="border border-2">
              <div id="topbar" class="d-flex justify-content-between align-items-center px-3">
     
@@ -275,11 +388,15 @@
             <a class="d-flex align-items-center text-dark" href="#" role="button" data-bs-toggle="dropdown">
                  <i class="fa-solid fa-wrench" style="color: white;"></i></a>
             <ul class="dropdown-menu dropdown-menu-end shadow">
-                <li><a class="dropdown-item" href="#"><i class="fa-solid fa-user me-2"></i> My Profile</a></li>
-                <li><a class="dropdown-item" href="#"><i class="fa-solid fa-image me-2"></i> Change Picture</a></li>
-                <li><a class="dropdown-item" href="#"><i class="fa-solid fa-gear me-2"></i> Settings</a></li>
+                <li><a class="dropdown-item" href="#" data-bs-target="#myProfileModal" data-bs-toggle="modal"><i class="fa-solid fa-user me-2"></i> My Profile</a></li>
+                <li><a class="dropdown-item" href="#" data-bs-target="#profilepicModal" data-bs-toggle="modal"><i class="fa-solid fa-image me-2"></i> Change Picture</a></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item text-danger" href="logout.aspx"><i class="fa-solid fa-right-from-bracket me-2"></i> Logout</a></li>
+            <li>
+                <a class="dropdown-item text-danger" href="#" onclick="document.getElementById('<%= btnHiddenLogout.ClientID %>').click(); return false;">
+                    <i class="fa-solid fa-right-from-bracket me-2"></i> Logout
+                </a>
+            </li>
+            <asp:Button ID="btnHiddenLogout" runat="server" OnClick="logoutBtn_Click" Style="display:none;" />
             </ul>
         </div>
 
@@ -302,6 +419,9 @@
                             <div class="candidate-course">
                                 <b style="font-weight:900;font-size:0.910rem">Course:</b> <asp:Label ID="lblCourse" runat="server" /><br />
                             </div>
+                            <div class="candidate-course">
+                                <b style="font-weight:900;font-size:0.910rem;">Resume:</b> <asp:Label ID="lblResume" runat="server" /><br />
+                            </div>
                         </div>
                     </div>
 
@@ -309,13 +429,13 @@
 
                     <ul class="nav flex-column px-2 pb-3 sidebar-menu">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="Dashboard.aspx">
                                 <span class="menu-icon"><i class="fa-solid fa-house"></i></span>
                                 <span>DashBoard</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="Attendence.aspx">
                                 <span class="menu-icon"><i class="fa-solid fa-user-graduate"></i></span>
                                 <span>Attendence</span>
                             </a>
@@ -346,7 +466,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">
-                                <span class="menu-icon"><i class="fa-solid fa-power-off text-success"></i></span>
+                                <span class="menu-icon"><i class="fa-solid fa-power-off text-danger"></i></span>
                                 <span>Log-out</span>
                             </a>
                         </li>
@@ -375,6 +495,17 @@
             sidebar.classList.toggle("collapsed");
         });
     });
+
+    function toggleSidebar() {
+        const sidebar = document.getElementById("sidebar");
+
+        if (sidebar.style.left === "0px") {
+            sidebar.style.left = "-250px";
+        }
+        else {
+            sidebar.style.left = "0px";
+        }
+    }
 </script>
     </form>
 </body>
