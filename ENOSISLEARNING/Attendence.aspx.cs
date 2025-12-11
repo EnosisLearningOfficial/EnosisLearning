@@ -71,63 +71,6 @@ namespace ENOSISLEARNING
             return courses;
         }
 
-        //[WebMethod]
-        //public static object GetStudentBatchData(string courseId)
-        //{
-        //    string studentId = HttpContext.Current.Session["CANDID"]?.ToString();
-        //    if (string.IsNullOrEmpty(studentId) || string.IsNullOrEmpty(courseId))
-        //        return null;
-
-        //    List<string> batchIds = new List<string>();
-        //    var data = new
-        //    {
-        //        Attendance = new List<object>(),
-        //        Messages = new List<object>()
-        //    };
-
-        //    using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["CONN_ENOSISLEARNING"].ToString()))
-        //    {
-        //        con.Open();
-
-        //        // 🔵 Step 1: Get BatchIDs for selected CourseID only
-        //        SqlCommand cmd = new SqlCommand(@"
-        //    SELECT BatchID 
-        //    FROM CandidateBatchMapping 
-        //    WHERE CANDIDATE_CODE = @StudentID AND COURSEID = @CourseID", con);
-        //        cmd.Parameters.AddWithValue("@StudentID", studentId);
-        //        cmd.Parameters.AddWithValue("@CourseID", courseId);
-        //        SqlDataReader reader = cmd.ExecuteReader();
-        //        while (reader.Read())
-        //            batchIds.Add(reader["BatchID"].ToString());
-        //        reader.Close();
-
-        //        if (batchIds.Count == 0) return data;
-
-        //        string batchIdList = string.Join(",", batchIds.Select(id => $"'{id}'"));
-
-        //        // 🔵 Step 2: Get Attendance for those batch IDs
-        //        cmd = new SqlCommand($@"
-        //    SELECT Date, ChapterNumber, TopicCovered, Uploads, Status, BatchID 
-        //    FROM enosis.BatchSheetDetails 
-        //    WHERE BatchID IN ({batchIdList})", con);
-        //        reader = cmd.ExecuteReader();
-        //        while (reader.Read())
-        //        {
-        //            data.Attendance.Add(new
-        //            {
-        //                Date = Convert.ToDateTime(reader["Date"]).ToString("dd-MM-yyyy"),
-        //                ChapterNumber = reader["ChapterNumber"].ToString(),
-        //                TopicCovered = reader["TopicCovered"].ToString(),
-        //                Uploads = reader["Uploads"]?.ToString(),
-        //                Status = reader["Status"].ToString(),
-        //                BatchID = reader["BatchID"].ToString()
-        //            });
-        //        }
-        //        reader.Close();
-        //    }
-
-        //    return data;
-        //}
         [WebMethod]
         public static object GetStudentBatchData(string courseId)
         {

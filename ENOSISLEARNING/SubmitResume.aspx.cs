@@ -53,7 +53,7 @@ namespace ENOSISLEARNING
 
 
                     //string query1 = "INSERT INTO profile_jobstatus(CANDIDATEID, STATUSID) VALUES(" + Code + ", 1)";
-                    //dbconnect.ExecuteQuery(query);
+                    //dbconnect.ExecuteQuery(query1);
 
                      url = "EnosisJobs.aspx?Id=" + Code;
                     //Response.Redirect(url);

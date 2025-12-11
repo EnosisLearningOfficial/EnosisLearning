@@ -398,7 +398,7 @@ namespace ENOSISLEARNING
                                 Response.Cookies["USERNAME"].Expires = DateTime.Now.AddDays(15);
                                 Response.Cookies["FULLNAME"].Expires = DateTime.Now.AddDays(15);
                                 Response.Cookies["ROLE"].Expires = DateTime.Now.AddDays(15);
-                                string script = @"alert('Password Updated. Click OK to continue.');window.location='Attendence.aspx';";
+                                string script = @"alert('Password Updated. Click OK to continue.');window.location='Dashboard.aspx';";
                                 ScriptManager.RegisterStartupScript(this, this.GetType(), "redirectWithAlert", script, true);
                             }
                         }

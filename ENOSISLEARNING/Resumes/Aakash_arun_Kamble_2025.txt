@@ -1,0 +1,72 @@
+--Select into statement
+--Copy data into a NEW table
+
+select * from Candidates
+
+select * into CandidateBackup from Candidates;
+
+select * from CandidateBackup
+
+select * from Candidates
+
+insert into Candidates values(3,'R Ashwin','M','Resume.pdf','email@gmail.com','1993-01-13','10:00',12000.00,23000,32,Getdate());
+
+
+insert into Candidates(Id,Name,Gender,Resume,Email,DOB,BatchTime,Fees,Salary,Age,CreatedDate,Status)values(3,'R Ashwin','M','Resume.pdf','email@gmail.com','1993-01-13','10:00',12000.00,23000,32,Getdate(),0)
+
+
+
+
+create database AcademicXYZ
+use AcademicXYZ
+
+select * from Candidates;
+
+select Name,Gender,Resume from Candidates;
+
+select * from Candidates where Name ='R Ashwin';
+
+update Candidates Set Name='Sachin Tendulkar',Email='sachin@gmail.com' where Id=3;
+
+delete Candidates where Id=2;
+
+truncate table Candidates;
+--drop table
+drop table Candidates;
+
+--drop database
+drop database EnosisSolutions
+use EnosisSolutions
+
+select name from sys.tables
+
+select * from StudentRecords
+
+
+--alter
+
+--Add a new column
+alter table StudentRecords ADD Contact varchar(max);
+
+--alter table StudentRecords ADD Contact varchar(max),Location varchar(max);
+
+--Modify/change a column
+alter table StudentRecords alter column Course varchar(50);
+
+--Rename a column
+exec sp_rename 'StudentRecords.Name', 'FullName', 'Column';
+
+--alter table StudentRecords CHANGE Course CandidateCourse varchar(max);
+
+select * from StudentDetails;
+
+--Delete a column
+alter table StudentRecords drop column Contact;
+
+--Rename a table
+exec sp_rename 'StudentRecords', 'StudentDetails';
+
+--Rename table StudentRecords to StudentDetails;
+
+select * from StudentDetails;
+

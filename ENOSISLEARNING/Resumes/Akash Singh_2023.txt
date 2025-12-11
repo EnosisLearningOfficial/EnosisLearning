@@ -1,0 +1,68 @@
+CAluses In SQl : 
+1. SELECT Clause 
+
+select EmapName from Employee
+
+
+2. FROM Clause 
+select * from Employee
+
+3. WHERE Clause
+select * from Employee where DeptId=3
+
+Conditional Operators
+1. = (Equal To)
+select * from CANDIDATES where FULLNAME = 'Pradip'
+2. != or <> (Not Equal To)
+select * from CANDIDATES where SKILLS!='C'
+select * from CANDIDATES where SKILLS<>'C'
+
+3. > (Greater Than)
+
+select FULLNAME,SKILLS,YEARSEXPERIENCE from CANDIDATES where YEARSEXPERIENCE > 5
+
+4. < (Less Than)
+select FULLNAME,SKILLS,YEARSEXPERIENCE from CANDIDATES where YEARSEXPERIENCE < 5
+
+5. >= (Greater Than or Equal To)
+select FULLNAME,SKILLS,YEARSEXPERIENCE from CANDIDATES where YEARSEXPERIENCE >= 5
+6. <= (Less Than or Equal To)
+select FULLNAME,SKILLS,YEARSEXPERIENCE from CANDIDATES where YEARSEXPERIENCE <= 5
+
+7. BETWEEN (Range Selection)
+select FULLNAME,SKILLS,YEARSEXPERIENCE from CANDIDATES where YEARSEXPERIENCE between 0 and 1;
+
+8. IN (Multiple Values Match)
+select FULLNAME,SKILLS,YEARSEXPERIENCE from CANDIDATES where YEARSEXPERIENCE in(2,4,9);
+
+9. NOT IN
+select FULLNAME,SKILLS,YEARSEXPERIENCE from CANDIDATES where YEARSEXPERIENCE not in(2,4,9);
+
+10. LIKE (Pattern Match)
+
+select FULLNAME,SKILLS,YEARSEXPERIENCE from CANDIDATES where FULLNAME like 'S%';
+select FULLNAME,SKILLS,YEARSEXPERIENCE from CANDIDATES where FULLNAME like '%a';
+select FULLNAME,SKILLS,YEARSEXPERIENCE from CANDIDATES where FULLNAME like '_a%';
+
+11. AND Operator
+select FULLNAME,SKILLS,YEARSEXPERIENCE from CANDIDATES where FULLNAME='Jayram' and YEARSEXPERIENCE=4;
+select FULLNAME,SKILLS,YEARSEXPERIENCE from CANDIDATES where FULLNAME='Jayram' or YEARSEXPERIENCE=1;
+
+13. NOT Operator
+select FULLNAME,SKILLS,YEARSEXPERIENCE from CANDIDATES where not  YEARSEXPERIENCE=5;
+
+14. IS NULL / IS NOT NULL
+select FULLNAME,SKILLS,YEARSEXPERIENCE from CANDIDATES where  YEARSEXPERIENCE is null;
+
+15. BETWEEN + AND + Date
+select CREATEDDATE from CANDIDATES where  CREATEDDATE between '2016-03-01' and '2017-12-29';
+
+4. ORDER BY Clause
+select COURSEID,COURSENAME,FEES from COURSES_DETAIL order by FEES desc;
+
+5. GROUP BY Clause
+select EmapName,Count(*) as TotalEmployee from Employee Group by EmapName;
+
+6. HAVING Clause
+select EmapName,Count(*) as Total from Employee group by EmapName having Count(*) >1;
+

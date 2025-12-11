@@ -1,10 +1,13 @@
 using System;
 using System.Collections.Generic;
-using System.Web;
-using System.Web.UI;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.IO;
+using System.Web;
 using System.Web.Services;
+using System.Web.UI;
 
 
 namespace ENOSISLEARNING
@@ -189,10 +192,16 @@ namespace ENOSISLEARNING
         }
         private void BindCoordinator()
         {
+            string con = ConfigurationManager.ConnectionStrings["CONN_ENOSISLEARNING"].ConnectionString.ToString();
             try
             {
-             //   string QUERY = "SELECT COURSEID,COURSENAME FROM COURSES_DETAIL WHERE STATUS='A'";
-                drpCoordinator.DataSource = DBGetData.GetCoordinator();
+                string query = "select USERID,UPPER(USERNAME) AS USERNAME from USERDETAILS WHERE STATUS='ACTIVE'";
+                //drpCoordinator.DataSource = DBGetData.GetCoordinator();
+                //drpCourses.DataSource = dbconnect.GetDataSet(query);
+                SqlDataAdapter sda = new SqlDataAdapter(query, con);
+                DataTable data = new DataTable();
+                sda.Fill(data);
+                drpCoordinator.DataSource = data;
                 drpCoordinator.DataTextField = "USERNAME";
                 drpCoordinator.DataValueField = "USERNAME";
                 drpCoordinator.DataBind();
@@ -383,29 +392,45 @@ namespace ENOSISLEARNING
         private void SaveResume()
         {
             string filename = "";
+            string resumeFolder = Server.MapPath(@"~\Resumes\");
 
-            if (fResume.FileName != null && fResume.FileName != "")
+            if (!Directory.Exists(resumeFolder))
             {
-                string Resume = fResume.FileName;
-                System.IO.FileInfo f = new System.IO.FileInfo(fResume.FileName);
-                filename = txtName.Text + "_" + drpPassingYears.SelectedValue.ToString() + f.Extension.ToString();
+                Directory.CreateDirectory(resumeFolder);
+            }
 
-                string fullpath = Server.MapPath(@"~\Resumes\") + filename;
-                fResume.SaveAs(fullpath);
+            if (fResume.HasFile)
+            {
+                string fileExt = Path.GetExtension(fResume.FileName);
+
+                filename = txtName.Text.Replace(" ", "_") + "_" + drpPassingYears.SelectedValue + fileExt;
+
+                string fullPath = Path.Combine(resumeFolder, filename);
+
+                if (File.Exists(fullPath))
+                {
+                    File.Delete(fullPath);
+                }
+
+                fResume.SaveAs(fullPath);
+
                 hykResume.Text = filename;
                 hykResume.NavigateUrl = "~/Resumes/" + filename;
-            }
-            else
-            {
-                if (ViewState["RESUME"] != null)
-                {
-                    filename = ViewState["RESUME"].ToString();
-                    hykResume.Text = filename;
-                    hykResume.NavigateUrl = "~/Resumes/" + filename;
-                }
-            }
 
+                ViewState["RESUME"] = filename;
+
+                ViewState["FILENAME"] = filename;
+            }
+            else if (ViewState["RESUME"] != null)
+            {
+                filename = ViewState["RESUME"].ToString();
+                hykResume.Text = filename;
+                hykResume.NavigateUrl = "~/Resumes/" + filename;
+
+                ViewState["FILENAME"] = filename;
+            }
         }
+
         protected void updateRegistrationStatus()
         {
             try
@@ -418,7 +443,7 @@ namespace ENOSISLEARNING
                     int i = db.updateRegistrationStatus(name, file);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 lblError.Text = ex.Message;
             }

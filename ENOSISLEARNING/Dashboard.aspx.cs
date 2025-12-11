@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using DocumentFormat.OpenXml.Bibliography;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -24,7 +25,15 @@ namespace ENOSISLEARNING
                 if (Session["CANDID"] != null)
                 {
                     string candidateCode = Session["CANDID"].ToString();
+                    hfCandidateID.Value = candidateCode.ToString();
                     DataTable dt = GetCandidateBatchDetails(candidateCode);
+                    //DataTable dtCourse = GetCandidateDefaultCourse(candidateCode);
+
+                    //if (dtCourse.Rows.Count > 0)
+                    //{
+                    //    string defaultCourseId = dtCourse.Rows[0]["CourseID"].ToString();
+                    //    hfCourseID.Value = defaultCourseId;
+                    //}
 
                     if (dt.Rows.Count > 0)
                     {
@@ -58,78 +67,185 @@ namespace ENOSISLEARNING
                 }
             }
         }
+        //public DataTable GetCandidateDefaultCourse(string candidateId)
+        //{
+        //    DataTable dt = new DataTable();
+        //    string constr = ConfigurationManager.ConnectionStrings["CONN_ENOSISLEARNING"].ConnectionString;
+
+        //    using (SqlConnection con = new SqlConnection(constr))
+        //    {
+        //        string query = @"
+        //    SELECT TOP 1 COURSEID 
+        //    FROM enosis.CandidateBatchMapping
+        //    WHERE CANDIDATE_CODE = @CandidateID
+        //    ORDER BY BatchID ASC";
+
+        //SqlCommand cmd = new SqlCommand(query, con);
+        //        cmd.Parameters.AddWithValue("@CandidateID", candidateId);
+
+        //        SqlDataAdapter da = new SqlDataAdapter(cmd);
+        //        da.Fill(dt);
+        //    }
+
+        //    return dt;
+        //}
+        [WebMethod]
+        public static object GetAISummary(string candidateId, string courseId)
+        {
+            string constr = ConfigurationManager.ConnectionStrings["CONN_ENOSISLEARNING"].ConnectionString;
+
+            int weekAttendance = 0;
+            int totalTopics = 0;
+            int completedTopics = 0;
+            double speedPercent = 0;
+            string estimatedFinish = "";
+            string estimatedRemark = "";
+
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                con.Open();
+
+                // STEP 1 — Find BatchID for this candidate + course
+                SqlCommand cmd = new SqlCommand(@"
+            SELECT TOP 1 BatchID
+            FROM enosis.CandidateBatchMapping
+            WHERE CANDIDATE_CODE = @CandidateID
+              AND CourseID = @CourseID
+            ORDER BY BatchID ASC", con);
+
+                cmd.Parameters.AddWithValue("@CandidateID", candidateId);
+                cmd.Parameters.AddWithValue("@CourseID", courseId);
+
+                object batchObj = cmd.ExecuteScalar();
+                if (batchObj == null)
+                {
+                    return new { error = "No batch found" };
+                }
+                string batchId = batchObj.ToString();
+
+                // STEP 2 — Attendance in last 7 days
+                cmd = new SqlCommand(@"
+            SELECT COUNT(*)
+            FROM enosis.BatchSheetDetails
+            WHERE BatchID = @BatchID
+              AND Date >= DATEADD(day, -7, GETDATE())
+              AND Status = 'Present'", con);
+
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@BatchID", batchId);
+
+                weekAttendance = Convert.ToInt32(cmd.ExecuteScalar());
+
+                // STEP 3 — Total Topics and Completed Topics
+                cmd = new SqlCommand(@"
+            SELECT 
+                COUNT(*) AS TotalTopics,
+                SUM(CASE WHEN Status = 'Completed' THEN 1 ELSE 0 END) AS CompletedTopics
+            FROM enosis.BatchSheetDetails
+            WHERE BatchID = @BatchID", con);
+
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@BatchID", batchId);
+
+                SqlDataReader r = cmd.ExecuteReader();
+                if (r.Read())
+                {
+                    totalTopics = Convert.ToInt32(r["TotalTopics"]);
+                    completedTopics = Convert.ToInt32(r["TopicCovered"]);
+                }
+                r.Close();
+
+                // STEP 4 — Learning Speed (%)
+                if (totalTopics > 0)
+                {
+                    speedPercent = Math.Round((completedTopics * 100.0) / totalTopics, 2);
+                }
+
+                // STEP 5 — Estimated Finish Date
+                double remaining = totalTopics - completedTopics;
+
+                // average topics per week
+                double avgWeekly = weekAttendance > 0 ? weekAttendance : 1; // avoid divide by zero  
+                double weeksNeeded = remaining / avgWeekly;
+
+                DateTime finishDate = DateTime.Now.AddDays(weeksNeeded * 7);
+                estimatedFinish = finishDate.ToString("dd MMM yyyy");
+
+                estimatedRemark = remaining > 0
+                    ? $"You may finish in approx {Math.Ceiling(weeksNeeded)} weeks."
+                    : "Congratulations! You have completed the course.";
+            }
+
+            return new
+            {
+                WeekAttendance = weekAttendance,
+                WeekAttendanceRemark = weekAttendance >= 4 ? "Excellent consistency!" : "Try improving your weekly attendance.",
+
+                TopicSpeed = speedPercent,
+                TopicSpeedRemark = speedPercent >= 60 ? "Great topic completion pace!" : "Try to speed up your topics.",
+
+                EstimatedFinish = estimatedFinish,
+                EstimatedRemark = estimatedRemark
+            };
+        }
+
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public static object GetAttendanceData(string candidateCode)
+        public static List<AttendanceRecord> GetAttendanceData(string candidateId, string courseId)
         {
-            DataTable dt = new DataTable();
+            List<AttendanceRecord> attendanceList = new List<AttendanceRecord>();
+            List<string> batchIds = new List<string>();
+
             string constr = ConfigurationManager.ConnectionStrings["CONN_ENOSISLEARNING"].ConnectionString;
 
-            using (SqlConnection conn = new SqlConnection(constr))
+            using (SqlConnection con = new SqlConnection(constr))
             {
-                string query = @"
-            SELECT 
-                BSD.Date,
-                BSD.ChapterNumber,
-                BSD.TopicCovered,
-                BSD.StudentID,
-                BSD.Status
-            FROM enosis.BatchSheetDetails BSD
-            INNER JOIN enosis.CandidateBatchMapping CBM
-                ON BSD.BatchID = CBM.BATCHID
-            WHERE CBM.CANDIDATE_CODE = @CandidateCode
-            ORDER BY BSD.Date";
+                con.Open();
 
-                using (SqlCommand cmd = new SqlCommand(query, conn))
+                // STEP 1: Get BatchIDs only for this candidate + course
+                SqlCommand cmd = new SqlCommand(@"
+            SELECT BatchID 
+            FROM CandidateBatchMapping
+            WHERE CANDIDATE_CODE = @CandidateID AND COURSEID = @CourseID
+            ORDER BY BatchID ASC", con);
+
+                cmd.Parameters.AddWithValue("@CandidateID", candidateId);
+                cmd.Parameters.AddWithValue("@CourseID", courseId);
+
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                    batchIds.Add(reader["BatchID"].ToString());
+                reader.Close();
+
+                if (batchIds.Count == 0)
+                    return attendanceList;
+
+                string batchList = string.Join(",", batchIds.Select(id => $"'{id}'"));
+
+                // STEP 2: Fetch attendance from all batches
+                cmd = new SqlCommand($@"
+            SELECT Date, ChapterNumber, TopicCovered, Status, BatchID
+            FROM enosis.BatchSheetDetails
+            WHERE BatchID IN ({batchList})
+            ORDER BY Date ASC", con);
+
+                reader = cmd.ExecuteReader();
+
+                while (reader.Read())
                 {
-                    cmd.Parameters.AddWithValue("@CandidateCode", candidateCode);
-                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    attendanceList.Add(new AttendanceRecord
                     {
-                        da.Fill(dt);
-                    }
+                        Date = Convert.ToDateTime(reader["Date"]).ToString("dd-MM-yyyy"),
+                        ChapterNumber = reader["ChapterNumber"].ToString(),
+                        TopicCovered = reader["TopicCovered"].ToString(),
+                        Status = reader["Status"].ToString(),
+                        BatchID = reader["BatchID"].ToString()
+                    });
                 }
+                reader.Close();
             }
 
-            //Convert DataTable to list of objects for JSON
-            var list = dt.AsEnumerable().Select(r => new
-            {
-                Date = Convert.ToDateTime(r["Date"]).ToString("dd-MMM-yyyy"),
-                Chapter = r["ChapterNumber"],
-                Topic = r["TopicCovered"],
-                Student = r["StudentID"],
-                Status = r["Status"]
-            }).ToList();
-
-            return list;  
-        }
-        public DataTable GetMonthlyAttendance(string candidateCode)
-        {
-            string constr = ConfigurationManager.ConnectionStrings["CONN_ENOSISLEARNING"].ConnectionString;
-
-            using (SqlConnection conn = new SqlConnection(constr))
-            {
-                string query = @"
-SELECT 
-    COUNT(CASE WHEN BSD.Status = 'Present' THEN 1 END) AS PresentDays,
-    COUNT(CASE WHEN BSD.Status = 'Absent' THEN 1 END) AS AbsentDays
-FROM enosis.BatchSheetDetails BSD
-INNER JOIN enosis.CandidateBatchMapping CBM
-    ON BSD.BatchID = CBM.BATCHID
-WHERE CBM.CANDIDATE_CODE = @CandidateCode
-  AND CBM.Status = 'Active'";
-
-                using (SqlCommand cmd = new SqlCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue("@CandidateCode", candidateCode);
-
-                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
-                    {
-                        DataTable dt = new DataTable();
-                        da.Fill(dt);
-                        return dt;
-                    }
-                }
-            }
+            return attendanceList;
         }
         public DataTable GetCandidateBatchDetails(string candidateCode)
         {
@@ -175,106 +291,149 @@ WHERE cbm.CANDIDATE_CODE = @CandidateCode
             }
         }
 
-        // Bind Course Dropdown// 
-        [WebMethod]
-        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public static List<Course> GetCourses()
-        {
-            List<Course> courses = new List<Course>();
-            string query = "SELECT COURSEID, COURSENAME FROM COURSES_DETAIL WHERE STATUS = 'A'";
-
-            using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["CONN_ENOSISLEARNING"].ConnectionString.ToString()))
-            {
-                SqlCommand cmd = new SqlCommand(query, con);
-                con.Open();
-                SqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    courses.Add(new Course
-                    {
-                        CourseID = reader["COURSEID"].ToString(),
-                        CourseName = reader["COURSENAME"].ToString()
-                    });
-                }
-            }
-
-            return courses;
-        }
-
         public class Course
         {
             public string CourseID { get; set; }
             public string CourseName { get; set; }
         }
+        public class AttendanceRecord
+        {
+            public string ChapterNumber { get; set; }
+            public string TopicCovered { get; set; }
+            public string Date { get; set; }
+            public string Uploads { get; set; }
+            public string Status { get; set; }
 
-        // Bind Course Dropdown// 
-        // Bind Faculty Dropdown// 
+            public string BatchID { get; set; }
+        }
+        [WebMethod]
+        public static List<Course> GetCourses(int candidateId)
+        {
+            List<Course> courses = new List<Course>();
+            string connStr = ConfigurationManager.ConnectionStrings["CONN_ENOSISLEARNING"].ConnectionString;
+
+            using (SqlConnection con = new SqlConnection(connStr))
+            {
+                string query = @"
+                SELECT CBM.CourseID, CD.COURSENAME 
+                FROM CandidateBatchMapping CBM
+                INNER JOIN COURSES_DETAIL CD ON CBM.CourseID = CD.COURSEID
+                WHERE CBM.CANDIDATE_CODE = @CandidateID
+                ORDER BY CBM.CourseID DESC
+                ";
+
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    cmd.Parameters.AddWithValue("@CandidateID", candidateId);
+                    con.Open();
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            courses.Add(new Course
+                            {
+                                CourseID = dr["CourseID"].ToString(),
+                                CourseName = dr["COURSENAME"].ToString()
+                            });
+                        }
+                    }
+                }
+            }
+            return courses;
+        }
+        //Get Candidate Overall Score Summary
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public static List<Faculty> GetFaculty()
+        public static object GetCandidateScoreData(int candidateId)
         {
-            List<Faculty> faculty = new List<Faculty>();
-            string query = "SELECT USERID, FULLNAME FROM USERDETAILS WHERE (STATUS = 'ACTIVE' OR STATUS = '1') AND FULLNAME IS NOT NULL ORDER BY FULLNAME ASC";
+            string constr = ConfigurationManager.ConnectionStrings["CONN_ENOSISLEARNING"].ConnectionString;
 
-            using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["CONN_ENOSISLEARNING"].ConnectionString.ToString()))
+            DataTable dt = new DataTable();
+
+            string query = @"
+        SELECT 
+            DateOfTest AS TestDate,
+            Score,
+            OutOf,
+            CourseID,
+            'Test' AS SourceType
+        FROM CANDIDATE_TESTRESULTS
+        WHERE CandidateID = @CandidateID
+
+        UNION ALL
+
+        SELECT 
+            DateOfInterview AS TestDate,
+            Score,
+            OutOf,
+            CourseID,
+            'Interview' AS SourceType
+        FROM CANDIDATE_INTERVIEWRESULTS
+        WHERE CandidateID = @CandidateID
+
+        ORDER BY TestDate;
+    ";
+
+            using (SqlConnection con = new SqlConnection(constr))
+            using (SqlCommand cmd = new SqlCommand(query, con))
             {
-                SqlCommand cmd = new SqlCommand(query, con);
-                con.Open();
-                SqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    faculty.Add(new Faculty
-                    {
-                        UserId = reader["USERID"].ToString(),
-                        UserName = reader["FULLNAME"].ToString()
-                    });
-                }
+                cmd.Parameters.AddWithValue("@CandidateID", candidateId);
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dt);
             }
 
-            return faculty;
-        }
+            // Add Percentage directly in result
+            var result = dt.AsEnumerable().Select(row => new
+            {
+                TestDate = Convert.ToDateTime(row["TestDate"]).ToString("yyyy-MM-dd"),
 
-        public class Faculty
-        {
-            public string UserId { get; set; }
-            public string UserName { get; set; }
+                // Raw score
+                Score = Convert.ToDecimal(row["Score"]),
+                OutOf = Convert.ToDecimal(row["OutOf"]),
+
+                // ⭐ Percentage value (Final used in graph)
+                Percentage = Math.Round(
+                                (Convert.ToDecimal(row["Score"]) /
+                                 Convert.ToDecimal(row["OutOf"])) * 100,
+                                2),
+
+                CourseID = Convert.ToInt32(row["CourseID"]),
+                SourceType = row["SourceType"].ToString()
+            }).ToList();
+            return result;
         }
-        // Bind Faculty Dropdown// 
-        // Request For Batch Enrollment//
         [WebMethod]
-        public static string SaveEnrollment(int facultyID, int candidateID, int courseID, string approvedBy)
+        public static object GetCourseProgress(string candidateId, string courseId)
         {
-            string connString = ConfigurationManager.ConnectionStrings["CONN_ENOSISLEARNING"].ConnectionString;
-
-            using (SqlConnection con = new SqlConnection(connString))
+            DataTable dt = new DataTable();
+            using (SqlConnection con = new SqlConnection(
+                ConfigurationManager.ConnectionStrings["CONN_ENOSISLEARNING"].ToString()))
             {
-                con.Open();
+                SqlCommand cmd = new SqlCommand(@"
+            SELECT 
+                TotalDays,
+                CompletedDays,
+                (CompletedDays * 100 / TotalDays) AS ProgressPercent
+            FROM BatchProgress
+            WHERE CandidateID = @CID AND CourseID = @CourseID", con);
 
-                //Check if the candidate is already enrolled
-                string checkQuery = "SELECT COUNT(*) FROM CandidateBatchMapping WHERE CANDIDATE_CODE = @CandidateID AND COURSEID = @CourseID";
-                SqlCommand checkCmd = new SqlCommand(checkQuery, con);
-                checkCmd.Parameters.AddWithValue("@CandidateID", candidateID);
-                checkCmd.Parameters.AddWithValue("@CourseID", courseID);
+                cmd.Parameters.AddWithValue("@CID", candidateId);
+                cmd.Parameters.AddWithValue("@CourseID", courseId);
 
-                int count = (int)checkCmd.ExecuteScalar();
-
-                if (count > 0)
-                {
-                    return "AlreadyEnrolled"; // Return message if user is already enrolled
-                }
-                //If not enrolled, insert new enrollment
-                string insertQuery = @"INSERT INTO FacultyCourseApproval (FacultyID, CandidateID, CourseID, ApprovalStatus, ApprovedBy, RequestedDate)
-                               VALUES (@FacultyID, @CandidateID, @CourseID, 0, @ApprovedBy, GETDATE())";
-                SqlCommand cmd = new SqlCommand(insertQuery, con);
-                cmd.Parameters.AddWithValue("@FacultyID", facultyID);
-                cmd.Parameters.AddWithValue("@CandidateID", candidateID);
-                cmd.Parameters.AddWithValue("@CourseID", courseID);
-                cmd.Parameters.AddWithValue("@ApprovedBy", approvedBy);
-
-                int result = cmd.ExecuteNonQuery();
-                return result > 0 ? "Success" : "Error";
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dt);
             }
+
+            if (dt.Rows.Count == 0) return null;
+
+            return new
+            {
+                Total = dt.Rows[0]["TotalDays"],
+                Done = dt.Rows[0]["CompletedDays"],
+                Percent = dt.Rows[0]["ProgressPercent"]
+            };
         }
-        // Request For Batch Enrollment// 
+
     }
 }

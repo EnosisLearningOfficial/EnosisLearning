@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -57,5 +58,30 @@ namespace ENOSISLEARNING
                 }
             }
         }
+        //Student Logout Method
+        protected void btnLogout_Click(object sender, EventArgs e)
+        {
+            Session.Clear();
+            Session.Abandon();
+
+            if (Request.Cookies["LoginInfo"] != null)
+            {
+                HttpCookie ck = new HttpCookie("LoginInfo");
+                ck.Expires = DateTime.Now.AddDays(-1);
+                Response.Cookies.Add(ck);
+            }
+
+            Response.Redirect("Login.aspx");
+        }
+
+        protected void logoutBtn_Click(object sender, EventArgs e)
+        {
+            // Clear Session
+            Session.Clear();
+            Session.Abandon();
+            // Redirect to Login page
+            Response.Redirect("~/Login.aspx");
+        }
+
     }
 }
