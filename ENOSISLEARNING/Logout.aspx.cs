@@ -11,13 +11,23 @@ namespace ENOSISLEARNING
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Clear session and cookies
+            // Destroy session completely
             Session.Clear();
             Session.Abandon();
-            Response.Cookies["ASP.NET_SessionId"].Expires = DateTime.Now.AddDays(-1);
 
-            // Redirect to login page
-            Response.Redirect("Login.aspx");
+            // Clear Session Cookies
+            if (Request.Cookies["ASP.NET_SessionId"] != null)
+            {
+                Response.Cookies["ASP.NET_SessionId"].Expires = DateTime.Now.AddDays(-1);
+            }
+
+            // Clear custom login cookie
+            if (Request.Cookies["LoginInfo"] != null)
+            {
+                HttpCookie ck = new HttpCookie("LoginInfo");
+                ck.Expires = DateTime.Now.AddDays(-1);
+                Response.Cookies.Add(ck);
+            }
         }
     }
 }

@@ -26,6 +26,22 @@
 .ai-card small {
     font-size: 12px;
 }
+.dashboard-title {
+    font-weight: 600;
+    color: #2c3e50;
+}
+.dashboard-title i {
+    font-size: 1.8rem;
+    color: #0d6efd; /* Bootstrap primary */
+}
+@keyframes jump {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+ .bi-speedometer2 {
+   animation: jump 1s infinite;
+ }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -33,8 +49,9 @@
         <div class="container-fluid my-3">
         <!-- Row: Header + Month Filter -->
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <h4 class="mb-0">Attendance Dashboard</h4>
-
+           <h4 class="mb-0 d-flex align-items-center dashboard-title">
+                <i class="bi bi-speedometer2 me-2"></i> Dashboard
+            </h4>
             <div class="d-flex align-items-center gap-2">
                 <label class="mb-0 me-2">Courses</label>
                  <asp:HiddenField ID="hfCandidateID" runat="server" />
@@ -57,7 +74,7 @@
                                 <small class="text-muted">Total Days</small>
                                 <h5 class="mb-0">
                                     <!-- server label -->
-                                    <asp:Label ID="lblTotalDays" runat="server" Text="0"></asp:Label>
+                                    <asp:Label ID="lblTotalDays" runat="server" Text="0" ClientIDMode="Static"></asp:Label>
                                 </h5>
                             </div>
                         </div>
@@ -75,7 +92,7 @@
                             <div>
                                 <small class="text-muted">Completed Days</small>
                                 <h5 class="mb-0">
-                                    <asp:Label ID="lblCompletedDays" runat="server" Text="0"></asp:Label>
+                                    <asp:Label ID="lblCompletedDays" runat="server" Text="0" ClientIDMode="Static"></asp:Label>
                                 </h5>
                             </div>
                         </div>
@@ -93,7 +110,7 @@
                             <div>
                                 <small class="text-muted">Pending Days</small>
                                 <h5 class="mb-0">
-                                    <asp:Label ID="lblPendingDays" runat="server" Text="0"></asp:Label>
+                                    <asp:Label ID="lblPendingDays" runat="server" Text="0" ClientIDMode="Static"></asp:Label>
                                 </h5>
                             </div>
                         </div>
@@ -112,7 +129,7 @@
                                          aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                                 <div style="min-width:60px; text-align:right;">
-                                    <asp:Label ID="lblProgress" runat="server" Text="0%"></asp:Label>
+                                    <asp:Label ID="lblProgress" runat="server" Text="0%" ClientIDMode="Static"></asp:Label>
                                 </div>
                         </div>
                     </div>
@@ -337,27 +354,46 @@
     </script>
 <%-- Dynamic binding in onchange --%>
     <script>
-        $("#ddlCourse").change(function () {
-            var candidateId = $("#<%= hfCandidateID.ClientID %>").val();
-            var courseId = $(this).val();
-            console.log(candidateId);
-            console.log(courseId);
-            loadAISummary(candidateId, courseId);
-        });
+        $(document).ready(function () {
 
+            // 🔹 On Course Change
+            $("#ddlCourse").on("change", function () {
+                var candidateId = $("#<%= hfCandidateID.ClientID %>").val();
+        var courseId = $(this).val();
+
+        if (courseId !== "0") {
+            loadAISummary(candidateId, courseId);
+            loadCourseSummary(candidateId, courseId);
+        }
+    });
+
+});
+
+        /* ================= AI SUMMARY ================= */
         function loadAISummary(candidateId, courseId) {
-            if (!candidateId || !courseId || candidateId.trim() === "" || courseId.trim() === "") {
-                console.warn("CandidateId or CourseId missing!");
+
+            if (!candidateId || !courseId || courseId === "0") {
+                console.warn("Invalid CandidateId or CourseId");
                 return;
             }
 
             $.ajax({
                 type: "POST",
                 url: "Dashboard.aspx/GetAISummary",
-                data: JSON.stringify({ candidateId: candidateId, courseId: courseId }),
+                data: JSON.stringify({
+                    candidateId: candidateId,
+                    courseId: courseId
+                }),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
+
                 success: function (response) {
+
+                    if (!response.d || response.d.error) {
+                        console.warn("AI Summary not available");
+                        return;
+                    }
+
                     var data = response.d;
 
                     $("#weekAttendance").text(data.WeekAttendance);
@@ -369,8 +405,44 @@
                     $("#estimatedDate").text(data.EstimatedFinish);
                     $("#estimatedDateRemark").text(data.EstimatedRemark);
                 },
+
                 error: function (err) {
-                    console.error(err);
+                    console.error("AI Summary Error:", err);
+                }
+            });
+        }
+
+        /* ================= COURSE SUMMARY ================= */
+        function loadCourseSummary(candidateId, courseId) {
+
+            $.ajax({
+                type: "POST",
+                url: "Dashboard.aspx/GetCourseSummary",
+                data: JSON.stringify({
+                    candidateCode: candidateId,
+                    courseId: courseId
+                }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+
+                success: function (response) {
+
+                    if (!response.d) return;
+
+                    $("#lblTotalDays").text(response.d.TotalDays);
+                    $("#lblCompletedDays").text(response.d.CompletedDays);
+                    $("#lblPendingDays").text(response.d.PendingDays);
+                    $("#lblProgress").text(response.d.Progress + "%");
+
+                    // 🔹 Animate Progress Bar
+                    var bar = document.getElementById("divProgress");
+                    bar.style.transition = "width 0.8s ease-in-out";
+                    bar.style.width = response.d.Progress + "%";
+                    bar.setAttribute("aria-valuenow", response.d.Progress);
+                },
+
+                error: function (err) {
+                    console.error("Course Summary Error:", err);
                 }
             });
         }

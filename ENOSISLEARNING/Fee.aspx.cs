@@ -18,7 +18,7 @@ namespace ENOSISLEARNING
         {
             if (Session["USERNAME"] != null && Session["CANDID"] != null)
             {
-                lbltxt.Text = "Welcome " + Session["USERNAME"].ToString();
+                //lbltxt.Text = "Welcome " + Session["USERNAME"].ToString();
             }
             else
             {

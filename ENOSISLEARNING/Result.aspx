@@ -5,217 +5,139 @@
         /* Google Font Import - Poppins */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-        :root {
-            /* ===== Colors ===== */
-            --body-color: #E4E9F7;
-            --sidebar-color: #FFF;
-            --primary-color: #355c7d;
-            --primary-color-light: #F6F5FF;
-            --toggle-color: #DDD;
-            --text-color: #707070;
-            /* ====== Transition ====== */
-            --tran-03: all 0.2s ease;
-            --tran-03: all 0.3s ease;
-            --tran-04: all 0.3s ease;
-            --tran-05: all 0.3s ease;
-        }
-       .main
-       {
-           width:100%;
-           height:100%;
-           background-color:transparent;
-           margin:auto;
-           padding:10px;
-           border:0px solid grey;
-       }
-       .navbar
-       {
-           width:1060px;
-           height:50px;
-           border:0px solid grey;
-           margin:auto;
-           border-radius:3px;
-           background-color:var(--primary-color);
-       }
-       .profile-pic
-       {
-           width:45px;
-           height:100%;
-           background-color:transparent;
-           border-radius:50%;
-           position:relative;
-           left:1000px;
-           cursor:pointer;
-       }
-       .picture
-       {
-           width:45px;
-           height:100%;
-       }
-       .username
-       {
-           position:relative;
-           right:87%;
-       }
-       .uname
-       {
-           color:white;
-           font-family: 'Poppins', sans-serif;
-           position:relative;
-           left:50%;
-           top:3px;
-       }
-       .main-body
-        {
-            width:1060px;
-            height: 80vh;
-            display: flex;
-            border:1px solid transparent;
-            padding:10px;
-            margin:auto;
-            margin-top:10px;
-        }
-       .table-responsive
-       {
-           position:relative;
-           top:-30px;
-       }
-       /* Overall table styles */
-    table.dataTable {
-        border-collapse: collapse !important;
-        width: 1060px;
-    }
-
-    /* Table header */
-    table.dataTable thead th {
-        background-color: #685b7b;
-        color: white;
-        font-size: 16px;
-        text-align: center;
-        font-weight: bold;
-        padding: 12px;
-    }
-
-    /* Table body */
-    table.dataTable tbody td {
-        background-color: #FFF;
-        padding: 12px;
-        font-size: 14px;
-        text-align: center;
-    }
-    /* Set white background color for the first column (body cells) */
-table.dataTable td:first-child {
-    background-color: #ffffff !important; /* White background for the first column */
+      
+.attendance-wrapper {
+    padding: 15px;
+    background: white;
+    min-height: 95vh;
 }
 
-    /* Alternating row colors for better readability */
-    table.dataTable tbody tr:nth-child(even) {
-        background-color: #f1f1f1;
+/* Header */
+.page-header {
+    margin-bottom: 15px;
+}
+
+.page-header h4 {
+    font-weight: 600;
+    color: #2c3e50;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.page-header i {
+    color: #0d6efd;
+}
+
+/* Filter Card */
+.filter-card {
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    margin-bottom: 15px;
+    max-width: 420px;
+}
+
+.filter-label {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #495057;
+}
+
+/* Table Card */
+.table-card {
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
+/* Table Styling */
+#ResultGrv thead th {
+    font-weight: 600;
+    font-size: 14px;
+    color: #495057;
+    white-space: nowrap;
+}
+
+#ResultGrv tbody td {
+    font-size: 14px;
+    vertical-align: middle;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .filter-card {
+        max-width: 100%;
     }
 
-    table.dataTable tbody tr:nth-child(odd) {
-        background-color: #f1f1f1;
+    .page-header h4 {
+        font-size: 18px;
     }
+}
+@keyframes jump {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
 
-    /* Hover effect for rows */
-    table.dataTable tbody tr:hover {
-        background-color: #f1f1f1;
-    }
-
-    /* Styling pagination controls */
-    .dataTables_wrapper .dataTables_paginate .paginate_button {
-        background-color: #685b7b;
-        color: white;
-        border: none;
-        padding: 8px 15px;
-        margin: 0 5px;
-        font-size: 14px;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-
-    .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
-        background-color: #ccc;
-    }
-
-    /* Styling search box */
-    .dataTables_filter input {
-        padding: 8px;
-        font-size: 14px;
-        border: 1px solid #FFF;
-        border-radius: 5px;
-    }
-
-    /* Add a border to the table */
-    table.dataTable {
-        border: 1px solid #ddd;
-        border-radius: 8px;
-    }
-
-    /* Styling the table container */
-    .table-responsive {
-        margin-top: 30px;
-        overflow-x: auto;
-    }
-
-    /* Table container shadow */
-    .table-responsive table {
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    }
-        .drparea
-    {
-        width:1030px;
-        height:50px;
-        margin:auto;
-        margin-top:10px;
-        border:1px solid transparent;
-
-    }
-    .drp
-    {
-        width:140px;
-        height:33px;
-        margin: 15px 0px;
-        border-radius:2px;
-        float:left;
-        border:1px solid #aaa;
-    }
-    .drop
-    {
-        border:none;
-        text-align:center;
-        height:100%;
-    }
-  </style>
+.fa-trophy {
+  animation: jump 1s infinite;
+}
+  </style>    
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="main">
-    <div class="navbar" style="position:fixed">
-        <div class="profile-pic">
-            <img class="picture" src="Images/add.png" alt="" style="width:45px"/>
-        </div>
-        <div class="username">
-             <asp:Label ID="lbltxt" Text="Welcome User" runat="server" CssClass="uname" style="padding-left:22px;"/>
+<div class="container-fluid attendance-wrapper">
+    <!-- Page Header -->
+    <div class="page-header">
+        <h4>
+           <i class="fa-solid fa-trophy" style="color:#fff64b"></i>
+            Test Score Details
+        </h4>
+    </div>
+
+    <!-- Filter Section -->
+    <div class="filter-card">
+      <asp:HiddenField ID="hfCandidateID" runat="server" />
+
+        <label class="filter-label">
+           <i class="fa-solid fa-clipboard-check"></i>
+            Select Course
+        </label>
+
+        <select id="DropDownListCourse" class="form-select drop">
+        <option value="0">Select Course</option>
+        </select>
+    </div>
+
+    <!-- Table Section -->
+    <div class="table-card">
+        <div class="table-responsive">
+            <table id="ResultGrv" class="table table-hover align-middle w-100">
+                <thead>
+                    <tr>
+                        <th>Student Name</th>
+                        <th>Date</th>
+                        <th>Score</th>
+                        <th>Out Of</th>
+                        <th>Faculty</th>
+                        <th>Test Type</th>
+                        <th>Feedback</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
         </div>
     </div>
-         <div class="main-body">
-              <div class="table-responsive">
-                   <div class="drparea" style="margin-top:65px;">
-                           <div class="drp">
-                               <asp:HiddenField ID="hfCandidateID" runat="server" />
-                                 <select id="DropDownListCourse" class="form-control drop">
-                                        <option value="0">Select Course</option>
-                                 </select>
-                          </div>
-                    </div>
-                 <table id="ResultGrv" class="display table table-borderless" style="width:1030px;background-color:white;margin-top:10px;">
-                 </table>
-             </div>
-         </div>
-        <asp:Label ID="Errorlbl" runat="server" />
-   </div>
+    <asp:Label ID="Errorlbl" runat="server" CssClass="text-danger mt-2 d-block" />
+</div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 <script>
     $(document).ready(function () {
         var candidateId = $("#<%= hfCandidateID.ClientID %>").val(); // Get Candidate ID from HiddenField
@@ -239,13 +161,13 @@ table.dataTable td:first-child {
         "autoWidth": false,
         "data": [], // Initially empty data
         "columns": [
-            { title: "Student Name", data: "FULLNAME" },
-            { title: "Date", data: "UPDATEDDATE" },
-            { title: "Score", data: "SCORE" },
-            { title: "Out Of", data: "OUTOF" },
-            { title: "Faculty", data: "UPDATEDBY" },
-            { title: "Test Type", data: "ASSESSMENTTYPE" },
-            { title: "Feedback", data: "FEEDBACK" }
+            { data: "FULLNAME" },
+            { data: "UPDATEDDATE" },
+            { data: "SCORE" },
+            {  data: "OUTOF" },
+            { data: "UPDATEDBY" },
+            { data: "ASSESSMENTTYPE" },
+            { data: "FEEDBACK" }
         ]
     });
 

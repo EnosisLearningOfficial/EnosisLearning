@@ -27,14 +27,7 @@ namespace ENOSISLEARNING
                     string candidateCode = Session["CANDID"].ToString();
                     hfCandidateID.Value = candidateCode.ToString();
                     DataTable dt = GetCandidateBatchDetails(candidateCode);
-                    //DataTable dtCourse = GetCandidateDefaultCourse(candidateCode);
-
-                    //if (dtCourse.Rows.Count > 0)
-                    //{
-                    //    string defaultCourseId = dtCourse.Rows[0]["CourseID"].ToString();
-                    //    hfCourseID.Value = defaultCourseId;
-                    //}
-
+                   
                     if (dt.Rows.Count > 0)
                     {
                         // Bind labels
@@ -67,28 +60,6 @@ namespace ENOSISLEARNING
                 }
             }
         }
-        //public DataTable GetCandidateDefaultCourse(string candidateId)
-        //{
-        //    DataTable dt = new DataTable();
-        //    string constr = ConfigurationManager.ConnectionStrings["CONN_ENOSISLEARNING"].ConnectionString;
-
-        //    using (SqlConnection con = new SqlConnection(constr))
-        //    {
-        //        string query = @"
-        //    SELECT TOP 1 COURSEID 
-        //    FROM enosis.CandidateBatchMapping
-        //    WHERE CANDIDATE_CODE = @CandidateID
-        //    ORDER BY BatchID ASC";
-
-        //SqlCommand cmd = new SqlCommand(query, con);
-        //        cmd.Parameters.AddWithValue("@CandidateID", candidateId);
-
-        //        SqlDataAdapter da = new SqlDataAdapter(cmd);
-        //        da.Fill(dt);
-        //    }
-
-        //    return dt;
-        //}
         [WebMethod]
         public static object GetAISummary(string candidateId, string courseId)
         {
@@ -105,13 +76,14 @@ namespace ENOSISLEARNING
             {
                 con.Open();
 
-                // STEP 1 — Find BatchID for this candidate + course
+                //for live server enosis.Candidatebatchmapping
                 SqlCommand cmd = new SqlCommand(@"
-            SELECT TOP 1 BatchID
-            FROM enosis.CandidateBatchMapping
-            WHERE CANDIDATE_CODE = @CandidateID
-              AND CourseID = @CourseID
-            ORDER BY BatchID ASC", con);
+                SELECT TOP 1 BatchID
+                FROM enosis.CandidateBatchMapping
+                WHERE CANDIDATE_CODE = @CandidateID
+                  AND CourseID = @CourseID
+                ORDER BY BatchID ASC", con);
+
 
                 cmd.Parameters.AddWithValue("@CandidateID", candidateId);
                 cmd.Parameters.AddWithValue("@CourseID", courseId);
@@ -123,7 +95,6 @@ namespace ENOSISLEARNING
                 }
                 string batchId = batchObj.ToString();
 
-                // STEP 2 — Attendance in last 7 days
                 cmd = new SqlCommand(@"
             SELECT COUNT(*)
             FROM enosis.BatchSheetDetails
@@ -136,7 +107,6 @@ namespace ENOSISLEARNING
 
                 weekAttendance = Convert.ToInt32(cmd.ExecuteScalar());
 
-                // STEP 3 — Total Topics and Completed Topics
                 cmd = new SqlCommand(@"
             SELECT 
                 COUNT(*) AS TotalTopics,
@@ -151,21 +121,18 @@ namespace ENOSISLEARNING
                 if (r.Read())
                 {
                     totalTopics = Convert.ToInt32(r["TotalTopics"]);
-                    completedTopics = Convert.ToInt32(r["TopicCovered"]);
+                    completedTopics = Convert.ToInt32(r["CompletedTopics"]);
                 }
                 r.Close();
 
-                // STEP 4 — Learning Speed (%)
                 if (totalTopics > 0)
                 {
                     speedPercent = Math.Round((completedTopics * 100.0) / totalTopics, 2);
                 }
 
-                // STEP 5 — Estimated Finish Date
                 double remaining = totalTopics - completedTopics;
 
-                // average topics per week
-                double avgWeekly = weekAttendance > 0 ? weekAttendance : 1; // avoid divide by zero  
+                double avgWeekly = weekAttendance > 0 ? weekAttendance : 1; 
                 double weeksNeeded = remaining / avgWeekly;
 
                 DateTime finishDate = DateTime.Now.AddDays(weeksNeeded * 7);
@@ -202,7 +169,6 @@ namespace ENOSISLEARNING
             {
                 con.Open();
 
-                // STEP 1: Get BatchIDs only for this candidate + course
                 SqlCommand cmd = new SqlCommand(@"
             SELECT BatchID 
             FROM CandidateBatchMapping
@@ -222,7 +188,7 @@ namespace ENOSISLEARNING
 
                 string batchList = string.Join(",", batchIds.Select(id => $"'{id}'"));
 
-                // STEP 2: Fetch attendance from all batches
+
                 cmd = new SqlCommand($@"
             SELECT Date, ChapterNumber, TopicCovered, Status, BatchID
             FROM enosis.BatchSheetDetails
@@ -263,7 +229,7 @@ SELECT
             NULLIF((DATEDIFF(DAY, bi.StartDate, bi.EndDate) + 1), 0),
         0) AS INT
     ) AS ProgressPercent
-FROM enosis.CandidateBatchMapping cbm
+FROM CandidateBatchMapping cbm
 INNER JOIN enosis.BatchesInfo bi
     ON cbm.BATCHID = bi.BatchID
     AND cbm.COURSEID = bi.CourseID
@@ -433,6 +399,64 @@ WHERE cbm.CANDIDATE_CODE = @CandidateCode
                 Done = dt.Rows[0]["CompletedDays"],
                 Percent = dt.Rows[0]["ProgressPercent"]
             };
+        }
+        [WebMethod]
+        public static object GetCourseSummary(string candidateCode, string courseId)
+        {
+            string constr = ConfigurationManager.ConnectionStrings["CONN_ENOSISLEARNING"].ConnectionString;
+
+            using (SqlConnection conn = new SqlConnection(constr))
+            {
+                string query = @"
+SELECT    
+    DATEDIFF(DAY, bi.StartDate, bi.EndDate) + 1 AS TotalDays,
+    COUNT(bsd.Date) AS CompletedDays,
+
+    CAST(
+        ROUND(
+            (COUNT(bsd.Date) * 100.0) / 
+            NULLIF((DATEDIFF(DAY, bi.StartDate, bi.EndDate) + 1), 0),
+        0) AS INT
+    ) AS ProgressPercent
+
+FROM CandidateBatchMapping cbm
+
+INNER JOIN enosis.BatchesInfo bi
+    ON cbm.BATCHID = bi.BatchID
+
+LEFT JOIN enosis.BatchSheetDetails bsd
+    ON bsd.BatchID = cbm.BATCHID
+   
+
+WHERE cbm.CANDIDATE_CODE = @CandidateCode
+  AND cbm.CourseID = @CourseID
+  AND cbm.Status = 'Active'
+
+GROUP BY bi.StartDate, bi.EndDate
+";
+
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@CandidateCode", candidateCode);
+                cmd.Parameters.AddWithValue("@CourseID", courseId);
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                if (dt.Rows.Count == 0)
+                    return null;
+
+                int totalDays = Convert.ToInt32(dt.Rows[0]["TotalDays"]);
+                int completedDays = Convert.ToInt32(dt.Rows[0]["CompletedDays"]);
+
+                return new
+                {
+                    TotalDays = totalDays,
+                    CompletedDays = completedDays,
+                    PendingDays = totalDays - completedDays,
+                    Progress = Convert.ToInt32(dt.Rows[0]["ProgressPercent"])
+                };
+            }
         }
 
     }

@@ -11,7 +11,7 @@ namespace ENOSISLEARNING
 {
 
 
-    public partial class Result
+    public partial class CandidateAssignments
     {
 
         /// <summary>
@@ -24,12 +24,21 @@ namespace ENOSISLEARNING
         protected global::System.Web.UI.WebControls.HiddenField hfCandidateID;
 
         /// <summary>
-        /// Errorlbl control.
+        /// hfCourseID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Errorlbl;
+        protected global::System.Web.UI.WebControls.HiddenField hfCourseID;
+
+        /// <summary>
+        /// ddlCourse control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlCourse;
     }
 }

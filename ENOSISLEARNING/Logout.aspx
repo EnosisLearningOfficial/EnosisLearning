@@ -4,7 +4,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <script>
         setTimeout(function () {
-            window.location.href = "Login.aspx"; // Redirect to login page
+            window.location.href = "Login.aspx";
         }, 2000);
     </script>
     <h2>Logging out, please wait...</h2>

@@ -9,11 +9,12 @@
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.ico"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
           rel="stylesheet" />
-    <link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
       integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
       crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
          body {
             overflow-x: hidden;
@@ -260,102 +261,259 @@
 .modal-backdrop.show {
     backdrop-filter: blur(4px);
 }
+/* Glass Popup */
+.glass-logout {
+    backdrop-filter: blur(12px);
+    border-radius: 16px;
+    animation: zoomIn 0.3s ease;
+}
 
-        /* Responsive: Mobile */
-/*@media screen and (max-width: 767px) {*/
+/* Confirm Button */
+        .logout-ok-btn {
+            background: linear-gradient(135deg, #ff4d4d, #d60000);
+            color: white !important;
+            padding: 8px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            border: none;
+            box-shadow: 0 0 12px rgba(255, 0, 0, 0.5);
+            transition: 0.2s;
+            margin-right: 10px;
+        }
+.logout-ok-btn:hover {
+    transform: scale(1.07);
+    box-shadow: 0 0 18px rgba(255, 0, 0, 0.7);
+}
 
-    /* Content vertical */
-    /*#content-row {
-        flex-direction: column;
-    }*/
+/* Cancel Button */
+.logout-cancel-btn {
+    background: #eee;
+    color: #333 !important;
+    padding: 8px 20px;
+    border-radius: 8px;
+    border: none;
+    font-weight: bold;
+    transition: 0.2s;
+}
+.logout-cancel-btn:hover {
+    transform: scale(1.07);
+}
 
-    /* Sidebar default hidden */
-    /*#sidebar {
-        position: fixed;
-        top: 64px;
-        left: -250px;
-        width: 250px;
-        height: calc(100% - 64px);
-        background: #fff;
-        box-shadow: 2px 0 8px rgba(0,0,0,0.15);
-        transition: left 0.3s ease-in-out;
-        z-index: 2000;
-    }*/
+/* Animation */
+@keyframes zoomIn {
+    0% { transform: scale(0.65); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+.profile-glass {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+}
 
-    /* Sidebar visible */
-    /*#sidebar.active {
-        left: 0;
-        opacity: 1;*/       /* optional */
-    /*}*/
+.profile-avatar-glow {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 18px rgba(255, 255, 255, 0.4),
+                0 0 35px rgba(0, 185, 255, 0.45);
+}
 
-    /* REMOVE OVERLAY COMPLETELY */
-    /*#sidebar-overlay { display: none; }
+.info-box {
+    background: rgba(255, 255, 255, 0.12);
+    padding: 15px 18px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+}
 
-    #main {
-        padding: 0.5rem;
-    }
+.info-label {
+    font-size: 12px;
+    color: #D1D5DB;
+    display: block;
+}
 
-    .burger-btn {
-        width: 36px;
-        height: 32px;
-    }
+.info-value {
+    font-size: 18px;
+    font-weight: 600;
+    color: #F8FAFC;
+}
+.resume-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(6px);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+}
 
-    #topbar {
-        padding: 0 0.5rem;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-    }
+.resume-header {
+    height: 55px;
+    padding: 0 20px;
+    color: #fff;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255,255,255,0.08);
+}
 
-    #footer {
-        font-size: 0.8rem;
-        left: 0;
-        right: 0;
-        justify-content: center;
-    }
-}*/
+.resume-header button {
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.resume-frame {
+    flex: 1;
+    width: 100%;
+    border: none;
+    background: #111;
+}
+.resume-link.disabled {
+    color: #aaa !important;
+    cursor: not-allowed;
+    text-decoration: none;
+}
+
+.resume-link.disabled:hover {
+    text-decoration: none;
+}
     </style>
      <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
 </head>
 <body>
     <form id="form1" runat="server">
         <%-- change profile picture popup modal --%>
-        <div class="modal fade" tabindex="-1" id="profilepicModal" aria-labelledby="profilepicModalLabel" aria-hidden="true">
+       <div class="modal fade" tabindex="-1" id="profilepicModal">
             <div class="modal-dialog modal-dialog-centered">
-                 <div class="modal-content glass-card">
-                         <div class="modal-header" style="border:none;">
-                             <h5 class="modal-label" style="color:white;">
-                                  <i class=" fa-solid fa-upload" style="color:#DC3545;"></i>
-                                 Change Profile Picture</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                         </div>
-                         <div class="modal-body">
-                             <asp:FileUpload ID="ProfilePic" runat="server"/>
-                         </div>
-                         <div class="modal-footer" style="border:none;">
-                             <button id="uploadBtn" class="btn" style="background-color:#003C80;color:white;">Upload</button>
-                         </div>
-                 </div>
+                <div class="modal-content glass-card">
+
+                    <div class="modal-header border-0">
+                        <h5 class="text-white">
+                            <i class="fa-solid fa-upload text-danger"></i> Change Profile Picture
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <input type="file" id="profilePicFile" class="form-control"
+                               accept=".jpg,.jpeg,.png" />
+                        <small class="text-muted">JPG / PNG only (max 2MB)</small>
+                    </div>
+
+                    <div class="modal-footer border-0">
+                        <button id="uploadBtn" type="button" class="btn btn-primary">
+                            Upload
+                        </button>
+                    </div>
+
+                </div>
             </div>
         </div>
-        <%-- My profile popup modal --%>
-        <div class="modal fade" tabindex="-1" id="myProfileModal" aria-labelledby="myProfileModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                 <div class="modal-content glass-card">
-                         <div class="modal-header" style="border:none;">
-                             <h5 class="modal-label" style="color:white;">
-                                  <i class=" fa-solid fa-upload" style="color:#DC3545;"></i>
-                                 Change Profile Picture</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                         </div>
-                         <div class="modal-body">
-                             
-                         </div>
-                         <div class="modal-footer" style="border:none;">
-                            
-                         </div>
-                 </div>
+        <%-- My Profile Modal --%>
+        <div class="modal fade" id="myProfileModal" tabindex="-1" aria-labelledby="myProfileModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content profile-glass">
+
+            <!-- Header -->
+            <div class="modal-header border-0" style="height:35px;">
+                <h5 class="modal-title text-light d-flex align-items-center">
+                    <i class="fa-solid fa-user me-2"></i> 
+                    <asp:Label ID="ProfileNamelbl" runat="server" />
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
+
+            <!-- Avatar -->
+            <div class="text-center mt-1">
+                <asp:Image ID="ProfilePic" ImageUrl="Images/addman.png" runat="server" class="profile-avatar-glow" alt="Profile Picture"/>
+            </div>
+            <!-- Body -->
+            <div class="modal-body text-light">
+
+                <div class="row g-4 mt-1">
+
+                    <div class="col-md-6">
+                        <div class="info-box">
+                            <span class="info-label">Email</span>
+                             <asp:Label ID="Emaillbl" runat="server" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="info-box">
+                            <span class="info-label">Mobile</span>
+                            <asp:Label ID="Mobilelbl" runat="server" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="info-box">
+                            <span class="info-label">Course</span>
+                             <asp:Label ID="courselbl" runat="server" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="info-box">
+                            <span class="info-label">Course Fee</span>
+                             <asp:Label ID="Feelbl" runat="server" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="info-box">
+                            <span class="info-label">Date Of Registration</span>
+                            <asp:Label ID="DORlbl" runat="server" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="info-box">
+                            <span class="info-label">Course Description</span>
+                            <asp:Label ID="courseDesclbl" runat="server" />
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="info-box d-flex justify-content-between align-items-center">
+                            <div>
+                                <span class="info-label">Resume</span><br />
+                                <asp:Label ID="Resumelbl" runat="server" />
+                            </div>
+                            <!-- Upload Trigger -->
+                            <label class="btn btn-outline-light btn-sm rounded-pill" style="background-color:#1975FD;">
+                                Update
+                                <input type="file" id="resumeFile" hidden accept=".pdf,.doc,.docx" />
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="info-box">
+                            <span class="info-label">Address</span>
+                             <asp:Label ID="Addresslbl" runat="server" />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Footer -->
+          <%--  <div class="modal-footer border-0 d-flex">
+                <button type="button" class="btn btn-light rounded-pill px-4 ms-2"
+                        data-bs-dismiss="modal">
+                    Close
+                </button>
+            </div>--%>
+
+
         </div>
+    </div>
+</div>
         <div id="wrapper" class="border border-2">
              <div id="topbar" class="d-flex justify-content-between align-items-center px-3">
     
@@ -391,12 +549,11 @@
                 <li><a class="dropdown-item" href="#" data-bs-target="#myProfileModal" data-bs-toggle="modal"><i class="fa-solid fa-user me-2"></i> My Profile</a></li>
                 <li><a class="dropdown-item" href="#" data-bs-target="#profilepicModal" data-bs-toggle="modal"><i class="fa-solid fa-image me-2"></i> Change Picture</a></li>
                 <li><hr class="dropdown-divider"></li>
-            <li>
-                <a class="dropdown-item text-danger" href="#" onclick="document.getElementById('<%= btnHiddenLogout.ClientID %>').click(); return false;">
-                    <i class="fa-solid fa-right-from-bracket me-2"></i> Logout
-                </a>
-            </li>
-            <asp:Button ID="btnHiddenLogout" runat="server" OnClick="logoutBtn_Click" Style="display:none;" />
+                <li>
+                    <a class="dropdown-item text-danger" href="#" onclick="logoutConfirm(); return false;">
+                        <i class="fa-solid fa-right-from-bracket me-2"></i> Logout
+                    </a>
+                </li>
             </ul>
         </div>
 
@@ -420,8 +577,23 @@
                                 <b style="font-weight:900;font-size:0.910rem">Course:</b> <asp:Label ID="lblCourse" runat="server" /><br />
                             </div>
                             <div class="candidate-course">
-                                <b style="font-weight:900;font-size:0.910rem;">Resume:</b> <asp:Label ID="lblResume" runat="server" /><br />
+                                <b style="font-weight:900;font-size:0.910rem;">Resume:</b>
+                                <asp:LinkButton 
+                                    ID="lnkResume" 
+                                    runat="server" 
+                                    CssClass="resume-link"
+                                    OnClientClick="return showResumePreview(this);">
+                                </asp:LinkButton>
                             </div>
+                           <div id="resumeOverlay" class="resume-overlay" style="display:none;"> 
+                            <div class="resume-header">
+                                <span>Resume Preview</span>
+                                <button type="button" onclick="closeResumePreview()">✖</button>
+                            </div>
+                            <iframe id="resumeFrame"
+                                class="resume-frame">
+                            </iframe>
+                        </div>
                         </div>
                     </div>
 
@@ -440,34 +612,28 @@
                                 <span>Attendence</span>
                             </a>
                         </li>
+                         <li class="nav-item">
+                             <a class="nav-link" href="Result.aspx">
+                                 <span class="menu-icon"><i class="fa-solid fa-clipboard-check"></i></span>
+                                 <span>Test Scores</span>
+                             </a>
+                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span class="menu-icon"><i class="fa-solid fa-book"></i></span>
-                                <span>Courses</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="Fee.aspx">
                                 <span class="menu-icon"><i class="fa-solid fa-coins"></i></span>
                                 <span>Fee Details</span>
                             </a>
                         </li>
+                         <li class="nav-item">
+                             <a class="nav-link" href="#">
+                                 <span class="menu-icon"><i class="fa-solid fa-book"></i></span>
+                                 <span>Courses</span>
+                             </a>
+                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span class="menu-icon"><i class="fa-solid fa-clipboard-check"></i></span>
-                                <span>Test Scores</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="CandidateAssignments.aspx">
                                 <span class="menu-icon"><i class="fa-solid fa-book"></i></span>
                                 <span>Assignments</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span class="menu-icon"><i class="fa-solid fa-power-off text-danger"></i></span>
-                                <span>Log-out</span>
                             </a>
                         </li>
                     </ul>
@@ -487,6 +653,7 @@
 
 <!-- BOOTSTRAP JS + TOGGLE SCRIPT -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<%-- Sidebar Toggle --%>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         var btn = document.getElementById("btnToggle");
@@ -507,6 +674,155 @@
         }
     }
 </script>
+<%-- Logout --%>
+<script>
+    function logoutConfirm() {
+        Swal.fire({
+            title: "Logout?",
+            text: "Really Want To Logout?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Yes, Logout",
+            cancelButtonText: "Cancel",
+
+            background: "rgba(255, 255, 255, 0.15)",
+           
+
+            customClass: {
+                popup: 'glass-logout',
+                confirmButton: 'logout-ok-btn',
+                cancelButton: 'logout-cancel-btn'
+            },
+            buttonsStyling: false,
+
+            // Important settings
+            allowOutsideClick: true,
+            allowEscapeKey: true
+        }).then((result) => {
+
+            // YES → Logout
+            if (result.isConfirmed) {
+                window.location.href = "Logout.aspx";
+            }
+
+            // CANCEL → Force close everything
+            if (result.dismiss === Swal.DismissReason.cancel) {
+
+                // Popup close
+                Swal.close();
+
+                // Backdrop clean
+                $(".swal2-container").remove();
+                $(".swal2-backdrop").remove();   // Extra cleanup
+            }
+        });
+    }
+</script>
+<%-- //Preview Resume File// --%>
+<script>
+    function showResumePreview(el) {
+        var resumeUrl = el.dataset.resume;
+
+        if (!resumeUrl || resumeUrl.trim() === "") {
+            var profileModal = new bootstrap.Modal(document.getElementById('myProfileModal'), {
+                keyboard: false
+            });
+            profileModal.show();
+            return false; 
+        }
+        document.getElementById("resumeFrame").src = resumeUrl;
+        document.getElementById("resumeOverlay").style.display = "flex";
+        return false; // prevent postback
+    }
+
+    function closeResumePreview() {
+        document.getElementById("resumeOverlay").style.display = "none";
+        document.getElementById("resumeFrame").src = "";
+    }
+</script>
+<%-- Profile picture upload --%>
+<script>
+    $("#uploadBtn").click(function () {
+
+        var fileInput = document.getElementById("profilePicFile");
+
+        if (!fileInput || fileInput.files.length === 0) {
+            Swal.fire("Select image first");
+            return;
+        }
+
+        var file = fileInput.files[0];
+
+        if (file.size > 2 * 1024 * 1024) {
+            Swal.fire("Max 2MB allowed");
+            return;
+        }
+
+        var formData = new FormData();
+        formData.append("file", file);
+
+        $.ajax({
+            url: "../UploadProfilePic.ashx",
+            type: "POST",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (path) {
+
+                if (path) {
+                    $("#Profileimg").attr("src", path + "?t=" + new Date().getTime());
+                    $("#ProfilePic").attr("src", path + "?t=" + new Date().getTime());
+                }
+                fileInput.value = "";
+                $('#profilepicModal').modal('hide');
+                Swal.fire("Uploaded!", "Profile picture updated", "success");
+            },
+            error: function () {
+                Swal.fire("Upload failed");
+            }
+        });
+    });
+</script>
+<%-- Update Resume --%>
+<script>
+    $("#resumeFile").on("change", function () {
+
+        var file = this.files[0];
+        if (!file) return;
+
+        var ext = file.name.split('.').pop().toLowerCase();
+        if (ext !== "pdf" && ext !== "doc" && ext !== "docx") {
+            Swal.fire("Invalid File", "Upload PDF / DOC / DOCX only", "warning");
+            this.value = "";
+            return;
+        }
+
+        var formData = new FormData();
+        formData.append("resume", file);
+
+        $.ajax({
+            url: "../UploadCandidateResume.ashx",
+            type: "POST",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (fileName) {
+
+                if (fileName) {
+                    $("#<%= Resumelbl.ClientID %>").text(fileName);
+                    $("#<%= lnkResume.ClientID %>").text(fileName);
+                    Swal.fire("Updated", "Resume updated successfully", "success");
+                }
+
+                $("#resumeFile").val("");
+            },
+            error: function () {
+                Swal.fire("Error", "Resume upload failed", "error");
+            }
+        });
+    });
+</script>
+
     </form>
 </body>
 </html>

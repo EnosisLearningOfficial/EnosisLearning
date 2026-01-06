@@ -220,6 +220,7 @@
     <Content Include="Asp.NetKnowledgeBase.aspx" />
     <Content Include="Asp.NetMVCKnowledgeBase.aspx" />
     <Content Include="AssessmentDetails.aspx" />
+    <Content Include="AssignmentUpload.aspx" />
     <Content Include="Attendence.aspx" />
     <Content Include="BatchApproval.aspx" />
     <Content Include="BatchesDetails.aspx" />
@@ -305,6 +306,7 @@
     <Content Include="c-plus-plus-training-in-pune.aspx" />
     <Content Include="C++ProgrammingBook.aspx" />
     <Content Include="c-training-in-pune.aspx" />
+    <Content Include="CandidateAssignments.aspx" />
     <Content Include="CompanyStyles\css\jquery-ui.min.css" />
     <Content Include="CompanyStyles\css\roboto-font.css" />
     <Content Include="CompanyStyles\css\style.css" />
@@ -8224,6 +8226,8 @@
     <Content Include="Tutorials\Designing\1. WEBDESIGNING_NOTES_FINAL.pdf" />
     <Content Include="Tutorials\CSHARP\0. C#_ADO.Net_Notes_Final_Prints.pdf" />
     <Content Include="StudentMaster.Master" />
+    <Content Include="UploadProfilePic.ashx" />
+    <Content Include="UploadCandidateResume.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -8320,6 +8324,13 @@
     <Compile Include="AssessmentDetails.aspx.designer.cs">
       <DependentUpon>AssessmentDetails.aspx</DependentUpon>
     </Compile>
+    <Compile Include="AssignmentUpload.aspx.cs">
+      <DependentUpon>AssignmentUpload.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AssignmentUpload.aspx.designer.cs">
+      <DependentUpon>AssignmentUpload.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Attendence.aspx.cs">
       <DependentUpon>Attendence.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -8375,6 +8386,13 @@
     </Compile>
     <Compile Include="c-training-in-pune.aspx.designer.cs">
       <DependentUpon>c-training-in-pune.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CandidateAssignments.aspx.cs">
+      <DependentUpon>CandidateAssignments.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CandidateAssignments.aspx.designer.cs">
+      <DependentUpon>CandidateAssignments.aspx</DependentUpon>
     </Compile>
     <Compile Include="ContactManager.aspx.cs">
       <DependentUpon>ContactManager.aspx</DependentUpon>
@@ -8948,6 +8966,12 @@
     </Compile>
     <Compile Include="UPIpay.aspx.designer.cs">
       <DependentUpon>UPIpay.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UploadCandidateResume.ashx.cs">
+      <DependentUpon>UploadCandidateResume.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="UploadProfilePic.ashx.cs">
+      <DependentUpon>UploadProfilePic.ashx</DependentUpon>
     </Compile>
     <Compile Include="UserDetails.aspx.cs">
       <DependentUpon>UserDetails.aspx</DependentUpon>

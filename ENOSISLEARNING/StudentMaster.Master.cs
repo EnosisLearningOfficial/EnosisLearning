@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
@@ -20,11 +21,47 @@ namespace ENOSISLEARNING
                 {
                     string candId = Session["CANDID"].ToString();
                     LoadStudentDetails(candId);
+                    LoadProfilePhoto();
                 }
                 else
                 {
                     Response.Redirect("~/Login.aspx");
                 }
+            }
+        }
+        //upload profile picture of candidate on page load
+        private void LoadProfilePhoto()
+        {
+            if (Session["CANDID"] == null)
+                return;
+
+            string candidateId = Session["CANDID"].ToString();
+            string photoPath = null;
+
+            using (SqlConnection con = new SqlConnection(
+                ConfigurationManager.ConnectionStrings["CONN_ENOSISLEARNING"].ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand(
+                    "SELECT ProfilePhotoPath FROM CANDIDATES WHERE CANDIDATE_CODE = @CID", con);
+
+                cmd.Parameters.AddWithValue("@CID", candidateId);
+
+                con.Open();
+                object result = cmd.ExecuteScalar();
+
+                if (result != null && result != DBNull.Value)
+                    photoPath = result.ToString();
+            }
+
+            if (!string.IsNullOrEmpty(photoPath))
+            {
+                Profileimg.ImageUrl = photoPath;
+                ProfilePic.ImageUrl = photoPath;
+            }
+            else
+            {
+                Profileimg.ImageUrl = "~/Images/addman.png";
+                ProfilePic.ImageUrl = "~/Images/addman.png";
             }
         }
         private void LoadStudentDetails(string candId)
@@ -35,8 +72,7 @@ namespace ENOSISLEARNING
             {
                 string query = @"
             SELECT 
-                C.CANDIDATE_CODE,
-                C.FULLNAME,
+                *,
                 CS.COURSENAME
             FROM CANDIDATES C
             LEFT JOIN COURSES_DETAIL CS ON C.COURSEID = CS.COURSEID
@@ -51,37 +87,93 @@ namespace ENOSISLEARNING
 
                     if (dr.Read())
                     {
-                        lblID.Text = dr["CANDIDATE_CODE"].ToString();     // ID
-                        lblName.Text = dr["FULLNAME"].ToString();      // Full Name
-                        lblCourse.Text = dr["COURSENAME"].ToString();  // Course
+                        lblID.Text = dr["CANDIDATE_CODE"].ToString();     
+                        lblName.Text = dr["FULLNAME"].ToString();      
+                        ProfileNamelbl.Text = dr["FULLNAME"].ToString();     
+                        lblCourse.Text = dr["COURSENAME"].ToString();
+                        Emaillbl.Text = dr["EMAIL"].ToString();
+                        Mobilelbl.Text = dr["MOBILENO"].ToString();
+                        courselbl.Text = dr["COURSENAME"].ToString();
+                        DORlbl.Text = Convert.ToDateTime(dr["DateOfRegistration"]).ToString("dd/MM/yyyy");
+                        courseDesclbl.Text = dr["COURSEDESC"].ToString();
+                        Addresslbl.Text = dr["ADDRESS"].ToString();
+                        Feelbl.Text = dr["FEES"].ToString();
+                        string ResumePath = dr["RESUME"] == DBNull.Value ? "" : dr["RESUME"].ToString();
+
+                        if (!string.IsNullOrEmpty(ResumePath))
+                        {
+                            Resumelbl.Text = Path.GetFileName(ResumePath);
+
+                            Resumelbl.Attributes["data-resume"] = ResolveUrl(ResumePath);
+                        }
+                        else
+                        {
+                            Resumelbl.Text = "Not Uploaded";
+                            Resumelbl.CssClass = "text-muted";
+                        }
+
+                        string resumePath = dr["RESUME"] == DBNull.Value ? "" : dr["RESUME"].ToString();
+
+                        if (!string.IsNullOrEmpty(resumePath))
+                        {
+                            lnkResume.Text = Path.GetFileName(resumePath);
+                            lnkResume.Attributes["data-resume"] = ResolveUrl("~/Resumes/" + resumePath);
+                            lnkResume.CssClass = "resume-link";
+                        }
+                        else
+                        {
+                            lnkResume.Text = "Upload Your Resume";
+                            lnkResume.Attributes.Remove("data-resume");
+                        }
                     }
                 }
             }
         }
-        //Student Logout Method
-        protected void btnLogout_Click(object sender, EventArgs e)
-        {
-            Session.Clear();
-            Session.Abandon();
+        //Upload profile picture
+        //[System.Web.Services.WebMethod(EnableSession = true)]
+        //public static string UploadProfilePic()
+        //{
+        //    HttpContext context = HttpContext.Current;
 
-            if (Request.Cookies["LoginInfo"] != null)
-            {
-                HttpCookie ck = new HttpCookie("LoginInfo");
-                ck.Expires = DateTime.Now.AddDays(-1);
-                Response.Cookies.Add(ck);
-            }
+        //    if (context.Request.Files.Count == 0)
+        //        return "";
 
-            Response.Redirect("Login.aspx");
-        }
+        //    HttpPostedFile file = context.Request.Files[0];
+        //    string candidateId = context.Session["CANDID"]?.ToString();
 
-        protected void logoutBtn_Click(object sender, EventArgs e)
-        {
-            // Clear Session
-            Session.Clear();
-            Session.Abandon();
-            // Redirect to Login page
-            Response.Redirect("~/Login.aspx");
-        }
+        //    if (file == null || string.IsNullOrEmpty(candidateId))
+        //        return "";
 
+        //    string ext = Path.GetExtension(file.FileName).ToLower();
+
+        //    if (ext != ".jpg" && ext != ".jpeg" && ext != ".png")
+        //        return "";
+
+        //    string folderPath = context.Server.MapPath("~/Uploads/");
+        //    if (!Directory.Exists(folderPath))
+        //        Directory.CreateDirectory(folderPath);
+
+        //    string fileName = candidateId + ext;
+        //    string savePath = Path.Combine(folderPath, fileName);
+        //    file.SaveAs(savePath);
+
+        //    string dbPath = "/Uploads/" + fileName;
+
+        //    using (SqlConnection con = new SqlConnection(
+        //        ConfigurationManager.ConnectionStrings["CONN_ENOSISLEARNING"].ConnectionString))
+        //    {
+        //        SqlCommand cmd = new SqlCommand(
+        //            "UPDATE CANDIDATES SET ProfilePhotoPath=@P WHERE CANDIDATE_CODE=@CID", con);
+
+        //        cmd.Parameters.AddWithValue("@P", dbPath);
+        //        cmd.Parameters.AddWithValue("@CID", candidateId);
+
+        //        con.Open();
+        //        cmd.ExecuteNonQuery();
+        //    }
+
+        //    // ✅ VERY IMPORTANT
+        //    return dbPath;
+        //}
     }
 }

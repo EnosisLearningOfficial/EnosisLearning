@@ -33,22 +33,94 @@ namespace ENOSISLEARNING
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
+        /// ProfileNamelbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label ProfileNamelbl;
+
+        /// <summary>
         /// ProfilePic control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload ProfilePic;
+        protected global::System.Web.UI.WebControls.Image ProfilePic;
 
         /// <summary>
-        /// btnHiddenLogout control.
+        /// Emaillbl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnHiddenLogout;
+        protected global::System.Web.UI.WebControls.Label Emaillbl;
+
+        /// <summary>
+        /// Mobilelbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Mobilelbl;
+
+        /// <summary>
+        /// courselbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label courselbl;
+
+        /// <summary>
+        /// Feelbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Feelbl;
+
+        /// <summary>
+        /// DORlbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label DORlbl;
+
+        /// <summary>
+        /// courseDesclbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label courseDesclbl;
+
+        /// <summary>
+        /// Resumelbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Resumelbl;
+
+        /// <summary>
+        /// Addresslbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Addresslbl;
 
         /// <summary>
         /// Profileimg control.
@@ -87,13 +159,13 @@ namespace ENOSISLEARNING
         protected global::System.Web.UI.WebControls.Label lblCourse;
 
         /// <summary>
-        /// lblResume control.
+        /// lnkResume control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblResume;
+        protected global::System.Web.UI.WebControls.LinkButton lnkResume;
 
         /// <summary>
         /// ContentPlaceHolder1 control.
